@@ -108,7 +108,7 @@ section {
   display: block;
 }
 body {
-  font-family: var(--font-noto), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 1.4rem;
 }
 ol,
@@ -123,7 +123,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -132,19 +132,19 @@ table {
 }
 
 button,
-input[type="text"],
-input[type="date"],
-input[type="month"],
+input[type='text'],
+input[type='date'],
+input[type='month'],
 textarea {
   all: unset;
 }
 
-input[type="text"] {
+input[type='text'] {
   height: 4rem;
   text-indent: 1rem;
 }
 
-input[type="text"],
+input[type='text'],
 textarea {
   width: 100%;
   border-radius: 1.2rem;
@@ -152,13 +152,13 @@ textarea {
   box-sizing: border-box;
 }
 
-input[type="text"]::placeholder,
+input[type='text']::placeholder,
 textarea::placeholder {
   color: var(--color-gray-30);
   font-family: unset;
 }
 
-input[type="text"]:focus,
+input[type='text']:focus,
 textarea:focus {
   border-color: var(--color-primary);
 }
