@@ -1,0 +1,87 @@
+@import '../../../../styles/mixin';
+
+.signup_wrapper {
+  position: relative;
+  max-width: 36rem;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 auto 3rem;
+  @include flex-vertical(5rem);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  flex-grow: 1;
+  padding: 0 2.4rem;
+  box-sizing: border-box;
+
+  form {
+    width: 100%;
+    @include flex-vertical(3rem);
+    align-items: center;
+
+    h2 {
+      font-size: 2.4rem;
+      font-weight: var(--font-bold);
+      color: var(--color-primary);
+    }
+
+    .file_container {
+      width: 100%;
+      @include flex-vertical(0.5rem);
+      align-items: center;
+
+      h3 {
+        text-align: left;
+        margin-right: auto;
+        margin-bottom: 0.5rem;
+        color: var(--color-black);
+        font-weight: var(--font-semibold);
+        font-size: 1.6rem;
+      }
+    }
+
+    .input_container {
+      width: 100%;
+      @include flex-vertical(0.5rem);
+
+      label {
+        margin-bottom: 0.5rem;
+        color: var(--color-black);
+        font-weight: var(--font-semibold);
+        font-size: 1.6rem;
+
+        span {
+          color: var(--color-error);
+        }
+      }
+
+      p {
+        color: var(--color-error);
+        font-weight: var(--font-semibold);
+      }
+    }
+
+    .button {
+      width: 100%;
+      padding: 10px 14px;
+      box-sizing: border-box;
+      border-radius: 0.6rem;
+      text-align: center;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+  }
+
+  .photoAdd {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #d5e1de;
+    background-image: url(../../../../../public/images/PhotoAddIcon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 3.2rem;
+  }
+}

@@ -131,6 +131,10 @@ table {
   border-spacing: 0;
 }
 
+input[type='file'] {
+  display: none;
+}
+
 button,
 input[type='text'],
 input[type='date'],
