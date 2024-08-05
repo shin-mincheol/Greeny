@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './Plant.module.scss';
-import PlantImg1 from '@/../../public/images/PlantImg1.png';
+import PlantImg1 from '@images/PlantImg1.png';
+import Link from 'next/link';
 
 export default async function Plant() {
   return (
@@ -9,17 +10,17 @@ export default async function Plant() {
         <h2>My Plant</h2>
 
         <div className={styles.btn_box}>
-          <button className={styles.button_line}>
-            <span className={styles.hidden}>삭제</span>
-          </button>
-          <button className={styles.button_fill}>
-            <span className={styles.hidden}>추가</span>
-          </button>
+          <Link href="/plant/delete" className={styles.button_line}>
+            <span className="hidden">삭제</span>
+          </Link>
+          <Link href="/plant/add" className={styles.button_fill}>
+            <span className="hidden">추가</span>
+          </Link>
         </div>
       </div>
 
       <div className={styles.contents_main}>
-        <div className={styles.contents_item}>
+        <Link href="/plant/detail" className={styles.contents_item}>
           <div className={styles.item_cover}>
             <Image src={PlantImg1} alt="식물 사진" />
           </div>
@@ -30,8 +31,8 @@ export default async function Plant() {
 
             <span>20일째</span>
           </div>
-        </div>
-        <div className={styles.contents_item}>
+        </Link>
+        <Link href="/plant/detail" className={styles.contents_item}>
           <div className={styles.item_cover}>
             <Image src={PlantImg1} alt="식물 사진" />
           </div>
@@ -42,8 +43,8 @@ export default async function Plant() {
 
             <span>20일째</span>
           </div>
-        </div>
-        <div className={styles.contents_item}>
+        </Link>
+        <Link href="/plant/detail" className={styles.contents_item}>
           <div className={styles.item_cover}>
             <Image src={PlantImg1} alt="식물 사진" />
           </div>
@@ -54,7 +55,7 @@ export default async function Plant() {
 
             <span>20일째</span>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

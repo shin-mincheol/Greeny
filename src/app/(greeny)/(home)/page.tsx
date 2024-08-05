@@ -1,11 +1,11 @@
 import styles from './home.module.scss';
-import banner from '@/../public/images/MainPhoto.png';
-import PlantImg1 from '@/../public/images/PlantImg1.png';
-import PlantImg2 from '@/../public/images/PlantImg2.png';
-import PlantImg3 from '@/../public/images/PlantImg3.png';
-import like from '@/../public/images/LikeIcon.svg';
-import comment from '@/../public/images/CommentIcon.svg';
-import view from '@/../public/images/ViewIcon.svg';
+import banner from '@images/MainPhoto.png';
+import PlantImg1 from '@images/PlantImg1.png';
+import PlantImg2 from '@images/PlantImg2.png';
+import PlantImg3 from '@images/PlantImg3.png';
+import like from '@images/LikeIcon.svg';
+import comment from '@images/CommentIcon.svg';
+import view from '@images/ViewIcon.svg';
 import Image from 'next/image';
 
 export default function Home() {

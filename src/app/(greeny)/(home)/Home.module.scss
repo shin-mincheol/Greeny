@@ -1,13 +1,12 @@
-@import '../../../styles/mixin';
+@import '@styles/mixin';
 
 .main_wrapper {
   @include flex-vertical(4rem);
-  width: 100%;
   max-width: 36rem;
+  width: 100%;
   overflow: hidden;
-  margin: 0 auto 3rem;
-  justify-content: center;
-  border: 1px solid #000;
+  margin: auto;
+  border: 0.1rem solid #000;
 
   .main_banner {
     max-width: 36rem;
@@ -62,16 +61,16 @@
       }
       .contentsList {
         margin: 0 -2.4rem;
-        border-bottom: 1px solid var(--color-gray-30);
+        border-bottom: 0.1rem solid var(--color-gray-30);
 
         .contents_item:nth-child(1) {
-          border-top: 1px solid var(--color-gray-50);
+          border-top: 0.1rem solid var(--color-gray-50);
         }
 
         .contents_item {
           padding: 2rem 2.4rem;
           box-sizing: border-box;
-          border-bottom: 1px solid var(--color-gray-50);
+          border-bottom: 0.1rem solid var(--color-gray-50);
           @include flex-vertical(1rem);
 
           .contents_main {

@@ -1,8 +1,8 @@
 import styles from './Signup.module.scss';
-import Logo from '@/../public/images/Logo.svg';
-import git from '@/../public/images/Social_Github.svg';
-import google from '@/../public/images/Social_Google.svg';
-import kakao from '@/../public/images/Social_KaKao.svg';
+import Logo from '@images/Logo.svg';
+import git from '@images/Social_Github.svg';
+import google from '@images/Social_Google.svg';
+import kakao from '@images/Social_KaKao.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,7 +20,7 @@ export default function Signup() {
         </div>
 
         <div className={styles.input_container}>
-          <label htmlFor="names">
+          <label htmlFor="name">
             이름<span>*</span>
           </label>
           <input type="text" id="name" placeholder="이름을 입력하세요." />

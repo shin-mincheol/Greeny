@@ -1,0 +1,115 @@
+@import '@styles/mixin';
+
+.plantDetail_wrapper {
+  max-width: 36rem;
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  border: 0.1rem solid #000;
+
+  .plant_photo {
+    @include flex-horizontal(0);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30rem;
+    overflow: hidden;
+  }
+
+  .plant_name {
+    @include flex-vertical(0.5rem);
+    box-sizing: border-box;
+    padding: 3rem 2.4rem;
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: var(--font-semibold);
+    }
+
+    span {
+      color: var(--color-gray-10);
+    }
+
+    p {
+      margin-top: 1rem;
+      color: var(--color-white);
+      text-align: center;
+      padding: 1.4rem 0;
+      border-radius: 1rem;
+      background-color: #a7c4a0;
+      box-sizing: border-box;
+    }
+  }
+
+  .plant_tabMenu {
+    .plant_info,
+    .plant_diary {
+      width: 50%;
+      height: 4rem;
+      background-color: var(--color-white);
+      box-shadow: inset 0 -0.1rem 0 var(--color-primary);
+      background-image: url('../../../../../public/images/MyPlantIcon.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .plant_diary {
+      background-image: url('../../../../../public/images/MyPostIcon.svg');
+    }
+
+    .plant_info.is_active,
+    .plant_diary.is_active {
+      box-shadow: inset 0 -2px 0 var(--color-primary);
+    }
+  }
+
+  .layout_wrapper {
+    @include flex-vertical(3rem);
+    padding: 3rem 2.4rem;
+    box-sizing: border-box;
+    // 식물 정보 css
+    .plant_gardening {
+      @include flex-vertical(1rem);
+      ul {
+        padding: 1.6rem 2rem;
+        box-sizing: border-box;
+        border-radius: 1rem;
+        background-color: var(--color-secondary-light);
+        @include flex-vertical(1.6rem);
+        li {
+          @include flex-horizontal(1rem);
+          span {
+            width: 5rem;
+            font-weight: var(--font-semibold);
+          }
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+
+    h3 {
+      font-size: 1.6rem;
+      font-weight: var(--font-semibold);
+    }
+    .plant_tips {
+      @include flex-vertical(1rem);
+
+      pre {
+        line-height: 2rem;
+        font-size: 1.2rem;
+        padding: 1.6rem;
+        box-sizing: border-box;
+        border-radius: 1rem;
+        background-color: #ffffe0;
+      }
+    }
+
+    //식물 다이어리 css
+  }
+}
