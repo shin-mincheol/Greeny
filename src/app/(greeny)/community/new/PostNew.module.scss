@@ -1,0 +1,56 @@
+.heading {
+  margin-bottom: 35px;
+  text-align: center;
+  color: var(--color-primary);
+  font: {
+    size: 20px;
+    weight: var(--font-bold);
+  }
+}
+
+.input_form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  input,
+  .description {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  input[type='file'] {
+    display: block;
+  }
+
+  input[name='title'] {
+    padding-left: 8px;
+  }
+
+  label {
+    font-weight: var(--font-bold);
+
+    .required_mark {
+      margin-left: 4px;
+      color: var(--color-error);
+      font-size: 16px;
+      font-weight: var(--font-regular);
+      vertical-align: middle;
+    }
+  }
+
+  .description {
+    padding: 10px 18px;
+    word-break: break-all;
+  }
+
+  .btn_submit {
+    padding: 11.5px 0;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid var(--color-primary);
+    color: #ffffff;
+    background-color: var(--color-primary);
+  }
+}
