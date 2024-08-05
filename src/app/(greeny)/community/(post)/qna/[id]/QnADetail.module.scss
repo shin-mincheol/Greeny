@@ -1,0 +1,18 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  gap: 20px;
+
+  .title {
+    font: {
+      size: 18px;
+      weight: var(--font-semibold);
+    }
+  }
+
+  .info {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-gray-50);
+  }
+}
