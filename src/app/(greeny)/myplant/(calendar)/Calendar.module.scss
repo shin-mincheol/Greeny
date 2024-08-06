@@ -1,4 +1,13 @@
 @import '@styles/mixin';
 
 .calendar_wrapper {
+  width: 100%;
+  @include flex-vertical(0);
+  .calendar_head {
+    @include flex-horizontal(1rem);
+    .calendar_tit {
+      @include flex-horizontal(0.6rem);
+      margin-right: auto;
+    }
+  }
 }
