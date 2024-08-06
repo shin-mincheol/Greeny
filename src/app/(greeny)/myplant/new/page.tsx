@@ -1,10 +1,10 @@
 'use client';
-import styles from './PlantAdd.module.scss';
+import styles from './MyPlantNew.module.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 
-export default function PlantAdd() {
+export default function MyPlantNew() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   return (
     <div className={styles.plantAdd_wrapper}>

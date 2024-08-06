@@ -1,13 +1,5 @@
 @import '@styles/mixin';
 
-.hidden {
-  position: absolute !important;
-  width: 0.1rem;
-  height: 0.1rem;
-  overflow: hidden;
-  clip: rect(0.1rem 0.1rem 0.1rem 0.1rem);
-}
-
 .plant_wrapper {
   max-width: 36rem;
   width: 100%;

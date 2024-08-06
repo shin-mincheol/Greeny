@@ -1,0 +1,31 @@
+@import '@styles/mixin';
+
+.footer {
+  position: sticky;
+  max-width: 36rem;
+  top: -240px;
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+  border-left: 0.1rem solid #000;
+  border-right: 0.1rem solid #000;
+  box-sizing: border-box;
+  background-color: var(--color-secondary-dark);
+
+  .nav {
+    @include flex-horizontal(0);
+
+    li {
+      padding: 1rem 1.2rem;
+      box-sizing: border-box;
+      width: 20%;
+    }
+    .nav_item {
+      @include flex-vertical(0.6rem);
+      align-items: center;
+      color: var(--color-gray-10);
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+}

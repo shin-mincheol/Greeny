@@ -1,8 +1,10 @@
+import localFont from 'next/font/local';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import type { Metadata } from 'next';
 import '@/styles/reset.css';
 import '@/styles/common.css';
 import '@/styles/variable.css';
-import localFont from 'next/font/local';
 
 const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
@@ -28,7 +30,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Greeny</title>
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

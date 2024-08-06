@@ -69,17 +69,21 @@
 
   .layout_wrapper {
     @include flex-vertical(3rem);
+    align-items: center;
     padding: 3rem 2.4rem;
     box-sizing: border-box;
     // 식물 정보 css
     .plant_gardening {
+      width: 100%;
       @include flex-vertical(1rem);
       ul {
+        width: 100%;
         padding: 1.6rem 2rem;
         box-sizing: border-box;
         border-radius: 1rem;
         background-color: var(--color-secondary-light);
         @include flex-vertical(1.6rem);
+
         li {
           @include flex-horizontal(1rem);
           span {
@@ -111,5 +115,73 @@
     }
 
     //식물 다이어리 css
+    .diary_head {
+      @include flex-horizontal(0);
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      .diary_add {
+        display: inline-block;
+        width: 4rem;
+        height: 3rem;
+        border-radius: 1rem;
+        background-color: var(--color-primary);
+        background-image: url('../../../../../public/images/DiaryAddIcon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+
+    .diary_list {
+      width: 100%;
+      @include flex-vertical(2rem);
+      align-items: center;
+
+      li {
+        background-color: var(--color-secondary-light);
+        border: 1px solid var(--color-secondary-dark);
+        padding: 2rem;
+        box-sizing: border-box;
+        width: 100%;
+        border-radius: 2rem;
+        .diary_item {
+          @include flex-vertical(3rem);
+          align-items: center;
+
+          .item_head {
+            width: 100%;
+            @include flex-vertical(1rem);
+
+            .item_info {
+              @include flex-horizontal(1rem);
+
+              span {
+                font-weight: var(--font-semibold);
+              }
+            }
+          }
+
+          .item_cover {
+            @include flex-horizontal(0);
+            align-items: center;
+            width: 25rem;
+            height: 20rem;
+            border-radius: 1rem;
+            overflow: hidden;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+
+          .item_desc {
+            width: 100%;
+            line-height: 1.6rem;
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
   }
 }

@@ -1,13 +1,13 @@
 'use client';
 import Image from 'next/image';
-import styles from './PlantDetail.module.scss';
+import styles from './MyPlantDiary.module.scss';
 import plant from '@images/PlantImg1.png';
 import { useState } from 'react';
 import PlantInfo from './PlantInfo';
 import PlantDiray from './PlantDiary';
 
-export default function PlantDetail() {
-  const [tabMenun, setTabMenu] = useState(true);
+export default function MyPlantDiary() {
+  const [tabMenun, setTabMenu] = useState(false);
   const handleTab = (tabClick: string) => {
     if (tabClick === 'info') {
       return setTabMenu(true);

@@ -1,4 +1,4 @@
-import styles from './PlantDetail.module.scss';
+import styles from './MyPlantDiary.module.scss';
 
 export default function PlantInfo() {
   return (
