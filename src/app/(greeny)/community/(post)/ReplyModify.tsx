@@ -1,4 +1,4 @@
-import styles from './Community.module.scss';
+import styles from '@greeny/community/Community.module.scss';
 
 export default function ReplyModify() {
   return (

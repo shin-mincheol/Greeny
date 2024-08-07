@@ -1,19 +1,19 @@
 import diaryDetail from './DiaryDetail.module.scss';
-import IconAndNumber from '@/app/(greeny)/community/IconAndNumber';
-import UserProfile from '@/components/UserProfile';
+import IconAndNumber from '@greeny/community/IconAndNumber';
+import UserProfile from '@components/UserProfile';
+import Like from '@greeny/community/Like';
 
 export default function DiaryDetail() {
   return (
     <>
       <div className={diaryDetail.info}>
         <UserProfile
-          fontSize={14}
-          fontWeight="var(--font-semibold)"
+          fontStyle="md_semibold"
           component={
             <>
               <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>12시간 전</p>
               <div style={{ marginLeft: 'auto' }}>
-                <IconAndNumber src="/images/LikeIcon.svg" alt="좋아요" iconSize={18} number={10} fontSize={12} />
+                <Like number={10} />
               </div>
             </>
           }

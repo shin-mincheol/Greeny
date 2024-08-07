@@ -1,7 +1,7 @@
 import diary from './Diary.module.scss';
 import Link from 'next/link';
-import UserProfile from '@/components/UserProfile';
-import IconAndNumber from '@/app/(greeny)/community/IconAndNumber';
+import UserProfile from '@components/UserProfile';
+import Like from '@greeny/community/Like';
 
 export default function DiaryItem() {
   return (
@@ -13,13 +13,12 @@ export default function DiaryItem() {
       {/* 프로필, 올린 시간, 좋아요 */}
       <div className={diary.info}>
         <UserProfile
-          fontSize={14}
-          fontWeight="var(--font-semibold)"
+          fontStyle="md_semibold"
           component={
             <>
               <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>12시간 전</p>
               <div style={{ marginLeft: 'auto' }}>
-                <IconAndNumber src="/images/LikeIcon.svg" alt="좋아요" iconSize={18} number={10} fontSize={12} />
+                <Like number={11} />
               </div>
             </>
           }

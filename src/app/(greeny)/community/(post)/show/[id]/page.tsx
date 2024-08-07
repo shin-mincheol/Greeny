@@ -5,16 +5,16 @@ import qnaDetail from './QnADetail.module.scss';
 import ReplyList from '@greeny/community/(post)/ReplyList';
 import ReplyInput from '@greeny/community/(post)/ReplyInput';
 import styles from '@greeny/community/Community.module.scss';
-import DropDown from '../../DropDown';
-import ImageModal from '../../ImageModal';
+import DropDown from '@greeny/community/(post)/DropDown';
+import ImageModal from '@greeny/community/(post)/ImageModal';
 
-export default function QnADetail() {
+export default function ShowDetail() {
   return (
     <>
       {/* {id === '123' && <ImageModal />} */}
       <article className={qnaDetail.detail_container}>
         <section className={qnaDetail.content}>
-          <h1 className={qnaDetail.title}>베란다에 이정도 그늘에서 키워도 되나요?</h1>
+          <h1 className={qnaDetail.title}>자랑합니다.</h1>
           {/* 다른 사용자 게시글일 때*/}
           <div className={qnaDetail.info}>
             {/* <UserProfile
