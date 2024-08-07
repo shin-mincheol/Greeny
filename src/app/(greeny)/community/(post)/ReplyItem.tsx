@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import UserProfile from '@/components/UserProfile';
-import styles from './Community.module.scss';
+import UserProfile from '@components/UserProfile';
+import styles from '@greeny/community/Community.module.scss';
 import ReplyModify from '@/app/(greeny)/community/(post)/ReplyModify';
 
 export default function ReplyItem() {
@@ -16,8 +16,7 @@ export default function ReplyItem() {
       /> */}
       {/* 내 댓글일 때 */}
       <UserProfile
-        fontSize={12}
-        fontWeight="var(--font-regular)"
+        fontStyle="sm_regular"
         component={
           <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
             <div style={{ color: 'var(--color-gray-10)', fontSize: 10, marginRight: 10 }}>5분 전</div>

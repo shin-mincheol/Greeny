@@ -1,17 +1,19 @@
 import styles from './Community.module.scss';
-import PostList from '@/app/(greeny)/community/PostList';
-import SectionHeader from '@/app/(greeny)/community/SectionHeader';
+import SectionHeader from '@greeny/community/SectionHeader';
 
 type Props = {
-  title: string;
-  url: string;
+  sectionInfo: {
+    title: string;
+    url: string;
+  };
+  children: React.ReactNode;
 };
 
-export default function CommunitySection(sectionInfo: Props) {
+export default function CommunitySection({ sectionInfo, children }: Props) {
   return (
     <section className={styles.section}>
       <SectionHeader {...sectionInfo} />
-      <PostList />
+      {children}
     </section>
   );
 }

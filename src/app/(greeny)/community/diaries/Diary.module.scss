@@ -1,48 +1,19 @@
+.search_container {
+  margin-bottom: 2rem;
+}
+
 .post_list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 3rem;
 }
 
 .item {
   overflow: hidden;
-  border: 1px solid var(--color-gray-50);
-  border-radius: 10px;
+  border: 0.1rem solid var(--color-gray-50);
+  border-radius: 1rem;
 }
 
 .info {
-  padding: 14px 12px;
+  padding: 1.4rem 1.2rem;
 }
-
-//
-// .info {
-//   display: flex;
-//   // justify-content: space-between;
-//   align-items: center;
-//   padding: 14px 12px;
-
-//   .basic {
-//     display: flex;
-//     align-items: center;
-//     color: var(--color-black);
-
-//     .profileImage {
-//       width: 32px;
-//       height: 32px;
-//       margin-right: 10px;
-//       border-radius: 100%;
-//       overflow: hidden;
-//     }
-
-//     .name {
-//       margin-right: 6px;
-//       font-size: 14px;
-//       font-weight: var(--font-semibold);
-//     }
-//   }
-//   .time {
-//     color: var(--color-gray-10);
-//     font-size: 12px;
-//     font-weight: var(--font-regular);
-//   }
-// }

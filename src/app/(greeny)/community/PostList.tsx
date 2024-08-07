@@ -1,4 +1,4 @@
-import PostItem from '@/app/(greeny)/community/PostItem';
+import PostItem from '@greeny/community/PostItem';
 import styles from './Community.module.scss';
 
 export default function PostList() {

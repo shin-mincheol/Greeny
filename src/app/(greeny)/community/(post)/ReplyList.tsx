@@ -1,5 +1,5 @@
-import styles from './Community.module.scss';
-import ReplyItem from '@/app/(greeny)/community/(post)/ReplyItem';
+import styles from '@greeny/community/Community.module.scss';
+import ReplyItem from '@greeny/community/(post)/ReplyItem';
 
 export default function ReplyList() {
   return (

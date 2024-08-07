@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from './Community.module.scss';
-import IconAndNumber from '@/app/(greeny)/community/IconAndNumber';
+import IconAndNumber from '@greeny/community/IconAndNumber';
 import Link from 'next/link';
 
 // 페치 데이터 보고 정해야할 듯
@@ -20,8 +20,8 @@ export default function PostItem({ item: { title, description, image } }: Item) 
   return (
     <li>
       <article className={styles.post_item_container}>
-        <Link href="/" className={styles.content}>
-          <div style={{ flex: 1 }}>
+        <Link href="/community/qna/123" className={styles.content}>
+          <div className={styles.title} style={{ overflow: 'hidden' }}>
             <h3 className={styles.title}>{title}</h3>
             <p className={styles.description}>{description}</p>
           </div>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './Community.module.scss';
+import styles from '@greeny/community/Community.module.scss';
 
 export default function ReplyInput() {
   return (
