@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import styles from '@/app/(greeny)/(home)/Home.module.scss';
 import type { Metadata } from 'next';
 import '@/styles/reset.css';
 import '@/styles/common.css';
@@ -32,7 +33,7 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        {children}
+        <main className={styles.main}>{children}</main>
         <Footer />
       </body>
     </html>

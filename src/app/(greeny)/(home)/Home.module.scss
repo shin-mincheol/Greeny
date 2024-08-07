@@ -1,12 +1,15 @@
 @import '@styles/mixin';
 
-.main_wrapper {
+.main {
   @include flex-vertical(4rem);
+  padding: 5rem 2.4rem 6rem 2.4rem;
+  box-sizing: border-box;
   max-width: 36rem;
   width: 100%;
   overflow: hidden;
+  border-left: 0.1rem solid #000;
+  border-right: 0.1rem solid #000;
   margin: auto;
-  border: 0.1rem solid #000;
 
   .main_banner {
     max-width: 36rem;
