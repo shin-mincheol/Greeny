@@ -1,8 +1,8 @@
 import styles from './Login.module.scss';
-import Logo from '@/../public/images/Logo.svg';
-import git from '@/../public/images/Social_Github.svg';
-import google from '@/../public/images/Social_Google.svg';
-import kakao from '@/../public/images/Social_KaKao.svg';
+import Logo from '@images/Logo.svg';
+import git from '@images/Social_Github.svg';
+import google from '@images/Social_Google.svg';
+import kakao from '@images/Social_KaKao.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 
