@@ -1,0 +1,73 @@
+@import '../../../styles/_mixin';
+
+.main_wrapper {
+  @include flex-vertical(1rem);
+  max-width: 36rem;
+  border: 1px solid;
+  margin: 0 auto;
+  height: 100vh;
+  padding: 0 2rem;
+
+  .main_search {
+    @include flex-horizontal(2rem);
+    justify-content: space-between;
+    padding: 1rem;
+
+    input {
+      flex-grow: 1;
+    }
+  }
+
+  .content {
+    .content_list {
+      @include flex-vertical(1rem);
+    }
+  }
+}
+
+.item_wrapper {
+  @include flex-horizontal(2rem);
+  align-items: center;
+
+  .item_image_wrapper {
+    .item_image {
+      border-radius: 2rem;
+    }
+  }
+  .item_content {
+    @include flex-vertical(1rem);
+    justify-content: space-between;
+    align-items: flex-start;
+
+    p {
+      font-weight: var(--font-semibold);
+      font-size: 1.4rem;
+    }
+    span {
+      font-weight: var(--font-medium);
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.modal_wrapper {
+  // background: var(--color-white);
+  background: #eee;
+  border-radius: 2rem;
+  padding: 3rem 2rem 2rem;
+  width: 30rem;
+  height: 40rem;
+  margin: 0 auto;
+  .plant_type {
+    height: 8.5rem;
+  }
+  .plant_props {
+    height: 36.6rem;
+  }
+}
+
+.inputs_wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}

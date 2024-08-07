@@ -10,7 +10,7 @@
   .main_search {
     @include flex-horizontal(2rem);
     justify-content: space-between;
-    margin: 2rem;
+    padding: 1rem;
 
     input {
       flex-grow: 1;
