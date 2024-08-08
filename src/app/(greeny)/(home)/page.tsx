@@ -1,4 +1,4 @@
-import styles from './home.module.scss';
+import styles from './Home.module.scss';
 import banner from '@images/MainPhoto.png';
 import PlantImg1 from '@images/PlantImg1.png';
 import PlantImg2 from '@images/PlantImg2.png';
@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className={styles.main_wrapper}>
+    <div className={styles.home_wrapper}>
       <ul className={styles.main_banner}>
         <li>
           <Image src={banner} alt="배너" width={360} />
