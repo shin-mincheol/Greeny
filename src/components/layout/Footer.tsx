@@ -22,15 +22,15 @@ export default function Footer() {
       <ul className={styles.nav}>
         <li>
           <Link href="/book" className={styles.nav_item}>
-            {pathname === '/book' ? <Image src={book_sel} alt="식물 백과" width={16} height={16} /> : <Image src={book_nor} alt="식물 백과" width={16} height={16} />}
+            {pathname.includes('/book') ? <Image src={book_sel} alt="식물 백과" width={16} height={16} /> : <Image src={book_nor} alt="식물 백과" width={16} height={16} />}
 
-            <p className={`${pathname === '/book' ? `${styles.is_active}` : ''}`}>식물 백과</p>
+            <p className={`${pathname.includes('/book') ? `${styles.is_active}` : ''}`}>식물 백과</p>
           </Link>
         </li>
         <li>
           <Link href="/community" className={styles.nav_item}>
-            {pathname === '/community' ? <Image src={community_sel} alt="식물 이야기" width={16} height={16} /> : <Image src={community_nor} alt="식물 이야기" width={16} height={16} />}
-            <p className={`${pathname === '/community' ? `${styles.is_active}` : ''}`}>식물 이야기</p>
+            {pathname.includes('/community') ? <Image src={community_sel} alt="식물 이야기" width={16} height={16} /> : <Image src={community_nor} alt="식물 이야기" width={16} height={16} />}
+            <p className={`${pathname.includes('/community') ? `${styles.is_active}` : ''}`}>식물 이야기</p>
           </Link>
         </li>
         <li>
@@ -42,15 +42,15 @@ export default function Footer() {
         </li>
         <li>
           <Link href="/myplant" className={styles.nav_item}>
-            {pathname === '/myplant' ? <Image src={diary_sel} alt="나의 식물" width={16} height={16} /> : <Image src={diary_nor} alt="나의 식물" width={16} height={16} />}
+            {pathname.includes('/myplant') ? <Image src={diary_sel} alt="나의 식물" width={16} height={16} /> : <Image src={diary_nor} alt="나의 식물" width={16} height={16} />}
 
-            <p className={`${pathname === '/myplant' ? `${styles.is_active}` : ''}`}>나의 식물</p>
+            <p className={`${pathname.includes('/myplant') ? `${styles.is_active}` : ''}`}>나의 식물</p>
           </Link>
         </li>
         <li>
           <Link href="/profile" className={styles.nav_item}>
-            {pathname === '/profile' ? <Image src={mypage_sel} alt="마이페이지" width={16} height={16} /> : <Image src={mypage_nor} alt="마이페이지" width={16} height={16} />}
-            <p className={`${pathname === '/profile' ? `${styles.is_active}` : ''}`}>마이페이지</p>
+            {pathname.includes('/profile') ? <Image src={mypage_sel} alt="마이페이지" width={16} height={16} /> : <Image src={mypage_nor} alt="마이페이지" width={16} height={16} />}
+            <p className={`${pathname.includes('/profile') ? `${styles.is_active}` : ''}`}>마이페이지</p>
           </Link>
         </li>
       </ul>

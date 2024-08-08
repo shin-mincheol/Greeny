@@ -9,7 +9,9 @@ import Link from 'next/link';
 export default function Login() {
   return (
     <div className={styles.login_wrapper}>
-      <Image className={styles.logo} src={Logo} alt="greeny" width={150} />
+      <Link href="/">
+        <Image className={styles.logo} src={Logo} alt="greeny" width={150} />
+      </Link>
 
       <form>
         <div className={styles.input_container}>
