@@ -1,16 +1,10 @@
 @import '@styles/mixin';
 
-.plantAdd_wrapper {
-  max-width: 36rem;
+.plantNew_wrapper {
   width: 100%;
-  overflow: hidden;
-  margin: auto;
-  @include flex-vertical(5rem);
+  @include flex-vertical();
   align-items: center;
   justify-content: center;
-  border: 0.1rem solid #000;
-  padding: 3rem 2.4rem;
-  box-sizing: border-box;
 
   form {
     width: 100%;

@@ -1,6 +1,4 @@
 import localFont from 'next/font/local';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import styles from '@/app/(greeny)/(home)/Home.module.scss';
 import type { Metadata } from 'next';
 import '@/styles/reset.css';
@@ -8,7 +6,7 @@ import '@/styles/common.css';
 import '@/styles/variable.css';
 
 const pretendard = localFont({
-  src: '../../public/fonts/PretendardVariable.woff2',
+  src: '../../../public/fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
   variable: '--font-pretendard',
@@ -32,9 +30,9 @@ export default function RootLayout({
         <title>Greeny</title>
       </head>
       <body>
-        <Header />
-        <main className={styles.main}>{children}</main>
-        <Footer />
+        <div className={styles.root}>
+          <main className={styles.main}>{children}</main>
+        </div>
       </body>
     </html>
   );

@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function MyPlantNew() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   return (
-    <div className={styles.plantAdd_wrapper}>
+    <div className={styles.plantNew_wrapper}>
       <form>
         <h2>나의 식물 등록</h2>
 
