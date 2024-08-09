@@ -1,38 +1,60 @@
 @import '../../../styles/_mixin';
 
-.main_wrapper {
-  @include flex-vertical(1rem);
-  max-width: 36rem;
-  border: 1px solid;
-  margin: 0 auto;
-  height: 100vh;
-  padding: 0 2rem;
-
+.layout_main_search {
+  margin: 2rem 0;
   .main_search {
-    @include flex-horizontal(2rem);
+    @include flex-horizontal(1.2rem);
     justify-content: space-between;
-    padding: 1rem;
 
     input {
       flex-grow: 1;
+      border-radius: 0.6rem;
+      height: 4rem;
+      // padding: 0.8rem 1.8rem;
+      font-weight: var(--font-reqular);
+      color: var(--color-gray-30);
+      font-size: 1.2rem;
     }
-  }
-
-  .content {
-    .content_list {
-      @include flex-vertical(1rem);
+    .btn_group {
+      @include flex-horizontal(0.6rem);
+      .btn_submit {
+        @include flex-horizontal(0);
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 4rem;
+        background: var(--color-primary);
+        border-radius: 1rem;
+        cursor: pointer;
+      }
+      .btn_btn {
+        @include flex-horizontal(0);
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 4rem;
+        background: var(--color-white);
+        border-radius: 1rem;
+        border: 0.1rem solid var(--color-primary);
+        box-sizing: border-box;
+        cursor: pointer;
+      }
     }
   }
 }
+// }
+.content_list {
+  @include flex-vertical(2rem);
+}
 
 .item_wrapper {
-  @include flex-horizontal(2rem);
+  @include flex-horizontal(1.8rem);
   align-items: center;
 
   .item_image_wrapper {
-    .item_image {
-      border-radius: 2rem;
-    }
+    width: 9rem;
+    height: 9rem;
+    border-radius: 2rem;
   }
   .item_content {
     @include flex-vertical(1rem);
@@ -51,18 +73,131 @@
 }
 
 .modal_wrapper {
+  @include flex-vertical(3rem);
+  justify-content: space-between;
   // background: var(--color-white);
   background: #eee;
   border-radius: 2rem;
   padding: 3rem 2rem 2rem;
   width: 30rem;
   height: 40rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 1rem;
+  }
   margin: 0 auto;
   .plant_type {
+    @include flex-vertical(1rem);
+    justify-content: space-between;
+    align-items: flex-start;
     height: 8.5rem;
+    p {
+      font-weight: var(--font-semibold);
+      font-size: 1.4rem;
+    }
+    .label_wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      place-items: start start;
+    }
   }
-  .plant_props {
-    height: 36.6rem;
+  .plant_props_wrapper {
+    .plant_props {
+      @include flex-vertical(2rem);
+      justify-content: space-between;
+      align-items: flex-start;
+      p {
+        font-weight: var(--font-semibold);
+        font-size: 1.4rem;
+      }
+      .flower_color {
+        @include flex-vertical(1rem);
+        justify-content: space-between;
+        align-items: flex-start;
+        p {
+          font-weight: var(--font-semibold);
+          font-size: 1.4rem;
+        }
+        .label_wrapper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          place-items: start start;
+          font-weight: var(--font-reqular);
+          font-size: 1.2rem;
+        }
+      }
+      .fruite_color {
+        @include flex-vertical(1rem);
+        justify-content: space-between;
+        align-items: flex-start;
+        p {
+          font-weight: var(--font-semibold);
+          font-size: 1.4rem;
+        }
+        .label_wrapper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          place-items: start start;
+          font-weight: var(--font-reqular);
+          font-size: 1.2rem;
+        }
+      }
+      .leaf_pattern {
+        @include flex-vertical(1rem);
+        justify-content: space-between;
+        align-items: flex-start;
+        p {
+          font-weight: var(--font-semibold);
+          font-size: 1.4rem;
+        }
+        .label_wrapper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          place-items: start start;
+          font-weight: var(--font-reqular);
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .light_quantity {
+    @include flex-vertical(1rem);
+    justify-content: space-between;
+    align-items: flex-start;
+    // height: 5.3rem;
+    p {
+      font-weight: var(--font-semibold);
+      font-size: 1.4rem;
+    }
+    .label_wrapper {
+      @include flex-horizontal(1rem);
+      justify-content: space-around;
+      align-items: center;
+      height: 1.6rem;
+    }
+  }
+  .water_frequency {
+    @include flex-vertical(2rem);
+    justify-content: space-between;
+    height: 1.49rem;
+    p {
+      font-weight: var(--font-semibold);
+      font-size: 1.4rem;
+    }
+    .label_wrapper {
+      @include flex-vertical(1rem);
+      justify-content: space-between;
+      align-items: flex-start;
+    }
   }
 }
 
@@ -70,4 +205,28 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+
+.custom_checkbox {
+  @include flex-horizontal(1rem);
+  & > input {
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+    // width, height 1.6rem 시 4글자 이상이 두 줄로 바뀜
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.35rem;
+    background-image: url('../../../../public/images/CheckBox_nor.svg');
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+
+    &:checked {
+      background-image: url('../../../../public/images/CheckBox_sel.svg');
+    }
+    & + span {
+      cursor: pointer;
+    }
+  }
 }
