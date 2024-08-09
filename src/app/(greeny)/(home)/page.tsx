@@ -1,3 +1,4 @@
+'use client';
 import styles from './Home.module.scss';
 import banner from '@images/MainPhoto.png';
 import PlantImg1 from '@images/PlantImg1.png';
@@ -7,8 +8,27 @@ import like from '@images/LikeIcon.svg';
 import comment from '@images/CommentIcon.svg';
 import view from '@images/ViewIcon.svg';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import plant from '@/app/data/plantList.json';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [plantInfo, setPlantInfo] = useState<{ plantImg: string; plantName: string }[]>();
+
+  const randomPlantImgUrl: { plantImg: string; plantName: string }[] = (() => {
+    const ImgUrl = [];
+    for (let i = 1; i <= 5; i++) {
+      const randomNum = Math.floor(Math.random() * 216);
+      ImgUrl.push({ plantImg: plant[randomNum].rtnFileUrl, plantName: plant[randomNum].cntntsSj });
+    }
+    return ImgUrl;
+  })();
+
+  useEffect(() => {
+    return setPlantInfo(randomPlantImgUrl);
+  }, []);
+
   return (
     <div className={styles.home_wrapper}>
       <ul className={styles.main_banner}>
@@ -21,17 +41,28 @@ export default function Home() {
         <div className={styles.list_item}>
           <h2 className={styles.list_title}>오늘의 식물 추천!</h2>
 
-          <ul className={styles.swiperList}>
-            <li className={styles.swiper_item}>
-              <Image src={PlantImg1} alt="식물 사진" />
-            </li>
-            <li className={styles.swiper_item}>
-              <Image src={PlantImg2} alt="식물 사진" />
-            </li>
-            <li className={styles.swiper_item}>
-              <Image src={PlantImg3} alt="식물 사진" />
-            </li>
-          </ul>
+          <Swiper className={styles.swiperList} slidesPerView={2.3} spaceBetween={20}>
+            <SwiperSlide className={styles.swiper_item}>
+              <div className={styles.swiper_cover}>{plantInfo && <Image src={plantInfo[0].plantImg} alt="식물 사진" width={0} height={0} sizes="15rem" fill />}</div>
+              <p>{plantInfo && plantInfo[0].plantName}</p>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiper_item}>
+              <div className={styles.swiper_cover}>{plantInfo && <Image src={plantInfo[1].plantImg} alt="식물 사진" width={0} height={0} sizes="15rem" fill />}</div>
+              <p>{plantInfo && plantInfo[1].plantName}</p>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiper_item}>
+              <div className={styles.swiper_cover}>{plantInfo && <Image src={plantInfo[2].plantImg} alt="식물 사진" width={0} height={0} sizes="15rem" fill />}</div>
+              <p>{plantInfo && plantInfo[2].plantName}</p>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiper_item}>
+              <div className={styles.swiper_cover}>{plantInfo && <Image src={plantInfo[3].plantImg} alt="식물 사진" width={0} height={0} sizes="15rem" fill />}</div>
+              <p>{plantInfo && plantInfo[3].plantName}</p>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiper_item}>
+              <div className={styles.swiper_cover}>{plantInfo && <Image src={plantInfo[4].plantImg} alt="식물 사진" width={0} height={0} sizes="15rem" fill />}</div>
+              <p>{plantInfo && plantInfo[4].plantName}</p>
+            </SwiperSlide>
+          </Swiper>
         </div>
 
         <div className={styles.list_item}>

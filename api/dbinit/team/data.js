@@ -6,10 +6,7 @@ function getDay(day = 0) {
   return moment().add(day, 'days').format('YYYY.MM.DD');
 }
 function getTime(day = 0, second = 0) {
-  return moment()
-    .add(day, 'days')
-    .add(second, 'seconds')
-    .format('YYYY.MM.DD HH:mm:ss');
+  return moment().add(day, 'days').add(second, 'seconds').format('YYYY.MM.DD HH:mm:ss');
 }
 
 export const initData = async (clientId, nextSeq) => {
@@ -19,8 +16,7 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'p1@plant.com',
-        password:
-          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '칼라디움',
         phone: '01012345678',
         address: '경기도 남양주시 진접읍',
@@ -32,8 +28,7 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'p2@plant.com',
-        password:
-          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '선인장',
         phone: '01022334455',
         address: '경상북도 구미시',
@@ -45,8 +40,7 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'p3@plant.com',
-        password:
-          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '금전수 장인',
         phone: '01033337777',
         address: '서울시 강동구 성내동',
@@ -58,8 +52,7 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'p4@plant.com',
-        password:
-          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '식집사2',
         phone: '01022223333',
         address: '서울시 강남구 삼성동 456',
@@ -71,8 +64,7 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'p5@plant.com',
-        password:
-          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '식집사3',
         phone: '01022224444',
         address: '서울시 강남구 삼성동 456',
@@ -636,8 +628,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '오늘의 할일!',
-        content:
-          '우리 관세음보살이 몸이 안좋은거같다... \n그래서 영양을 듬뿍해줬다!! \n건강하게 자라렴!',
+        content: '우리 관세음보살이 몸이 안좋은거같다... \n그래서 영양을 듬뿍해줬다!! \n건강하게 자라렴!',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -715,8 +706,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '전수야 잘가,,,',
-        content:
-          '우리 전수가 내가 관리를 잘못해서 가버렸다,,, \n전수야 너랑 행복했어...',
+        content: '우리 전수가 내가 관리를 잘못해서 가버렸다,,, \n전수야 너랑 행복했어...',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -916,8 +906,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '알로에의 새싹이 피었다.',
-        content:
-          '너무 작고 귀엽다 ㅎㅎ \n쑥쑥 잘 크면 좋겠네 \n열심히 키워야지~~',
+        content: '너무 작고 귀엽다 ㅎㅎ \n쑥쑥 잘 크면 좋겠네 \n열심히 키워야지~~',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -947,8 +936,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '로에가 너무 잘 큰다!!',
-        content:
-          '원래 화분이 너무 작은 것 같아서 분갈이를 해줬다. \n새 집에서 잘 크자!',
+        content: '원래 화분이 너무 작은 것 같아서 분갈이를 해줬다. \n새 집에서 잘 크자!',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1004,8 +992,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '드디어 개화!!',
-        content:
-          '관심 준 만큼 예쁘게 잘 자라나서 아주 기분이 좋다. \n 완전히 개화될 때면 팔아야지',
+        content: '관심 준 만큼 예쁘게 잘 자라나서 아주 기분이 좋다. \n 완전히 개화될 때면 팔아야지',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1031,8 +1018,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '왜 아픈 건지 모르겠음',
-        content:
-          '똑같은 다른 금전수는 잘 자라는데 \n 이 아이만 비실대서 \n 혹이 토양이 안 맞는가 싶어서 \n 분갈이를 했다.',
+        content: '똑같은 다른 금전수는 잘 자라는데 \n 이 아이만 비실대서 \n 혹이 토양이 안 맞는가 싶어서 \n 분갈이를 했다.',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1112,8 +1098,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         title: '영양제 투입 - 빨리 자라길...',
-        content:
-          '가지가 돋아나고 있어서 \n 영양이 많이 필요한 것 같아\n 영양제를 꽂아줬다.',
+        content: '가지가 돋아나고 있어서 \n 영양이 많이 필요한 것 같아\n 영양제를 꽂아줬다.',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1121,10 +1106,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'qna',
         title: '물을 하루에 한 번 주는데 너무 많이 주는 걸까요?',
-        content:
-          '난데없이 지인한테 식물을 선물받아서 난생 처음으로 식물을 키워봅니다. \n 죽이기는 싫어서 키워보려는데 모르는 게 많아서 도움을 요청합니다.',
+        content: '난데없이 지인한테 식물을 선물받아서 난생 처음으로 식물을 키워봅니다. \n 죽이기는 싫어서 키워보려는데 모르는 게 많아서 도움을 요청합니다.',
         repliesCount: 2,
         replies: [
           {
@@ -1134,8 +1117,7 @@ export const initData = async (clientId, nextSeq) => {
               name: '선인장',
               image: 'user-neo.webp',
             },
-            content:
-              '물은 하루에 한 번 주는 것이 좋습니다. \n 하지만 식물마다 다르니 식물의 특성에 맞게 주세요.',
+            content: '물은 하루에 한 번 주는 것이 좋습니다. \n 하지만 식물마다 다르니 식물의 특성에 맞게 주세요.',
             createdAt: getTime(-2, -60 * 60 * 1),
             updatedAt: getTime(-1, -60 * 60 * 20),
           },
@@ -1169,14 +1151,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
+        extra: {
+          category: 'qna',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'qna',
-        title: '선인장에 꽃 폈어요!!',
-        content:
-          '키우면서 몇 년 동안 꽃을 보지 못했는데\n갑자기 꽃이 올라왔어요. 넘 신기해서 올립니다!\n야호~',
+        title: '이거 혹시 병 걸린걸까요?ㅜ',
+        content: '며칠 전 부터 이상해지더니\n오늘 보니까 이렇게 됐는데\n병 걸린걸까요?\n어떻게 해야할까요?ㅜㅜ',
         repliesCount: 0,
         replies: [],
         views: 0,
@@ -1197,14 +1180,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'qna',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'qna',
         title: '서울에서 영양제 제일 싼 곳 없나요?',
-        content:
-          '식물이 좀 빨리 자라면 좋을 것 같아서 영양제를 무더기로 사려는데\n 제일 싼 곳 좀 정보 공유받고 싶어요.',
+        content: '식물이 좀 빨리 자라면 좋을 것 같아서 영양제를 무더기로 사려는데\n 제일 싼 곳 좀 정보 공유받고 싶어요.',
         repliesCount: 1,
         replies: [
           {
@@ -1214,8 +1198,7 @@ export const initData = async (clientId, nextSeq) => {
               name: '칼라디움',
               image: '/files/03-Greeny/user-muzi.webp',
             },
-            content:
-              '영양제 가격 다 비슷비슷합니다. 그냥 근처 화원 가서 구매하세요.',
+            content: '영양제 가격 다 비슷비슷합니다. 그냥 근처 화원 가서 구매하세요.',
             createdAt: getTime(-2, -60 * 60 * 1),
             updatedAt: getTime(-1, -60 * 60 * 20),
           },
@@ -1238,11 +1221,13 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'qna',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'qna',
         title: '식물 키우는 분들끼리 정모나 벙개 있나요?',
         content: '정모나 벙개에 참여하고 싶은데 혹시 그런 모임이 있을까요?',
         repliesCount: 1,
@@ -1254,8 +1239,7 @@ export const initData = async (clientId, nextSeq) => {
               name: '칼라디움',
               image: '/files/03-Greeny/user-muzi.webp',
             },
-            content:
-              '영양제 가격 다 비슷비슷합니다. 그냥 근처 화원 가서 구매하세요.',
+            content: '영양제 가격 다 비슷비슷합니다. 그냥 근처 화원 가서 구매하세요.',
             createdAt: getTime(-2, -60 * 60 * 1),
             updatedAt: getTime(-1, -60 * 60 * 20),
           },
@@ -1269,11 +1253,13 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'qna',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'qna',
         title: '이 꽃의 이름이 뭔가요?',
         content: '어디서 선물받았는데 무슨 꽃인지 잊어버렸어요...',
         repliesCount: 0,
@@ -1292,14 +1278,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'qna',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'qna',
         title: '식물 분양 받으실 분 계신가요?',
-        content:
-          '키우던 식물(커피나무)이 잘 자라서 열매가 많이 맺혔는데, 너무 많은 것 같아서요\n 가져가셔서 겸사겸사 커피도 드시고 키우실 분 계신가요? ',
+        content: '키우던 식물(커피나무)이 잘 자라서 열매가 많이 맺혔는데, 너무 많은 것 같아서요\n 가져가셔서 겸사겸사 커피도 드시고 키우실 분 계신가요? ',
         repliesCount: 1,
         replies: [
           {
@@ -1328,14 +1315,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'qna',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'free',
         title: '오늘의 관세음보살이!',
-        content:
-          '제 관세음보살이 구경하고가세요~! \n벌써 입양한지 20일째입니다요~',
+        content: '제 관세음보살이 구경하고가세요~! \n벌써 입양한지 20일째입니다요~',
         repliesCount: 0,
         views: 30,
         mainImages: [
@@ -1355,14 +1343,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
+        extra: {
+          category: 'free',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'free',
         title: '식린이 2일차...',
-        content:
-          '친구의 선물로 급작스럽게 식집사가된 식린이입니다...!! \n아직 부족하지만 그래도 제 식물 자랑하고 싶어 한번 올려봐요!',
+        content: '친구의 선물로 급작스럽게 식집사가된 식린이입니다...!! \n아직 부족하지만 그래도 제 식물 자랑하고 싶어 한번 올려봐요!',
         repliesCount: 1,
         replies: [
           {
@@ -1391,14 +1380,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'free',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'free',
         title: '안녕하세요!',
-        content:
-          '식물을 키우진않지만 키우고싶어하는 식집사입니다! \n입양전에 한번 인사드릴려고 글한번 작성해봐여! \n다들 친하게 친해요!',
+        content: '식물을 키우진않지만 키우고싶어하는 식집사입니다! \n입양전에 한번 인사드릴려고 글한번 작성해봐여! \n다들 친하게 친해요!',
         repliesCount: 2,
         replies: [
           {
@@ -1433,14 +1423,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
+        extra: {
+          category: 'free',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'free',
         title: '집에 가고싶어요..',
-        content:
-          '우리 식물 전수씨 보고싶어서 얼른 퇴근하고싶어요,, \n기다려라 전수씨!! 내가 금방 갈게!!',
+        content: '우리 식물 전수씨 보고싶어서 얼른 퇴근하고싶어요,, \n기다려라 전수씨!! 내가 금방 갈게!!',
         replies: [
           {
             _id: 1,
@@ -1468,11 +1459,13 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'free',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'planterior',
         title: '베란다 이렇게 꾸며봤어요~',
         content: '이렇게 하니까 너무 이쁘네요.\n자연에 있는 것 같아요 ㅎㅎ',
         repliesCount: 1,
@@ -1507,14 +1500,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'planterior',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'planterior',
         title: '현관에 이렇게 하니까 엄청 마음에 들어요 ㅎㅎ',
-        content:
-          '현관쪽이 너무 허전해서 항상 꾸미고 싶었는데\n이렇게 꾸미니까 딱 맘에 들어요!',
+        content: '현관쪽이 너무 허전해서 항상 꾸미고 싶었는데\n이렇게 꾸미니까 딱 맘에 들어요!',
         repliesCount: 2,
         replies: [
           {
@@ -1562,14 +1556,15 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'planterior',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'planterior',
         title: '이렇게 꾸며보는 것 어떨까요?',
-        content:
-          '거실 한 쪽 면이 허전해서 이렇게 꾸며볼까 하는데\n조언해주실 수 있으실까요?',
+        content: '거실 한 쪽 면이 허전해서 이렇게 꾸며볼까 하는데\n조언해주실 수 있으실까요?',
         views: 0,
         mainImage: [],
         user: {
@@ -1579,11 +1574,13 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'planterior',
+        },
       },
       {
         _id: await nextSeq('post'),
         type: 'post',
-        tag: 'planterior',
         title: '화장실 좀 꾸며봤어요',
         content: '인테리어 겸 공기 정화하게 이렇게 뒀습니다!\n이쁘죠~',
         repliesCount: 1,
@@ -1595,8 +1592,7 @@ export const initData = async (clientId, nextSeq) => {
               name: '식집사2',
               image: '/files/03-Greeny/user-muzi.webp',
             },
-            content:
-              '이렇게 꾸며놓으니까 깔끔하면서도 이쁘네요.\n좋은 플랜테리어 감사합니다!',
+            content: '이렇게 꾸며놓으니까 깔끔하면서도 이쁘네요.\n좋은 플랜테리어 감사합니다!',
             createdAt: getTime(-2, -60 * 60 * 20),
             updatedAt: getTime(-2, -60 * 60 * 2),
           },
@@ -1615,6 +1611,9 @@ export const initData = async (clientId, nextSeq) => {
         },
         createdAt: '2024.08.08 11:06:06',
         updatedAt: '2024.08.08 11:06:06',
+        extra: {
+          category: 'planterior',
+        },
       },
     ],
     // 코드
