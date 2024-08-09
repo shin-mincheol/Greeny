@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from '@greeny/community/Community.module.scss';
+import styles from '@greeny/story/Community.module.scss';
 import Link from 'next/link';
 
 type Props = { fontStyle: 'sm_regular' | 'sm_medium' | 'md_semibold'; component?: React.ReactNode };
