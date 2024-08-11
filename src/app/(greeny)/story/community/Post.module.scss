@@ -68,3 +68,23 @@
     background-color: red;
   }
 }
+
+.category_container {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+
+  .category {
+    cursor: pointer;
+    display: block;
+    padding: 0.6rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--color-secondary-dark);
+  }
+
+  .selected {
+    color: var(--color-white);
+    background-color: var(--color-primary);
+  }
+}
