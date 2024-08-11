@@ -1,5 +1,5 @@
-import postDetail from '@greeny/story/community/PostDetail.module.scss';
 import styles from '@greeny/story/Community.module.scss';
+import post from './Post.module.scss';
 import Image from 'next/image';
 import UserProfile from '@components/UserProfile';
 import PostInfo from '@greeny/story/PostInfo';
@@ -10,11 +10,11 @@ import ReplyInput from '@greeny/story/community/ReplyInput';
 export default function PostDetail() {
   return (
     <>
-      <article className={postDetail.detail_container}>
-        <section className={postDetail.content}>
-          <h1 className={postDetail.title}>베란다에 이정도 그늘에서 키워도 되나요?</h1>
+      <article className={post.detail_container}>
+        <section className={post.content}>
+          <h1 className={post.title}>베란다에 이정도 그늘에서 키워도 되나요?</h1>
           {/* 다른 사용자 게시글일 때*/}
-          <div className={postDetail.info}>
+          <div className={post.info}>
             {/* <UserProfile
             fontStyle="sm_medium"
             component={
