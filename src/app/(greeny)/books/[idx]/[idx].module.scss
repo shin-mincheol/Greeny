@@ -1,16 +1,18 @@
-@import '../../../../styles/_mixin';
+@import '@styles/mixin';
 
 .main_wrapper {
   @include flex-vertical(2rem);
   max-width: 36rem;
   border: 1px solid;
   margin: 0 auto;
-  height: 100vh;
 
   .image_wrapper {
     position: relative;
     width: 100%;
     height: 30rem;
+    .img {
+      object-fit: cover;
+    }
   }
 
   .content_wrapper {

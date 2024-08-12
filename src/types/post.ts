@@ -1,10 +1,11 @@
-import { ImageRes } from './image';
+
 import { PlantSimple } from './plant';
-import { UserData, UserSimple } from './user';
+import { UserSimple } from './user';
+
 
 export interface PostComment {
   _id: number;
-  user: UserData;
+  user: UserSimple;
   content: string;
   createdAt: string;
   updatedAt: string;
@@ -13,7 +14,6 @@ export interface PostComment {
 export interface PostRes {
   _id: number;
   type: 'post';
-  tag: 'free' | 'qna' | 'planterior';
   title: string;
   content: string;
   views: number;
@@ -25,6 +25,9 @@ export interface PostRes {
   createdAt: string;
   updatedAt: string;
   product?: { image: null };
+  extra?: {
+    category: 'free' | 'qna' | 'planterior';
+  };
 }
 
 export interface PostForm {
