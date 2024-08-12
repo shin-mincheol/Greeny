@@ -92,7 +92,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
@@ -117,7 +117,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg2.png`,
             name: 'PlantImg2.png',
@@ -142,7 +142,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -167,7 +167,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
@@ -192,7 +192,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
@@ -217,7 +217,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg2.png`,
             name: 'PlantImg2.png',
@@ -242,7 +242,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -267,7 +267,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -292,7 +292,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -317,7 +317,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg4.png`,
             name: 'PlantImg4.png',
@@ -342,7 +342,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg4.png`,
             name: 'PlantImg4.png',
@@ -607,17 +607,15 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 11,
         seller_id: 1,
-        views: 50,
-        plantState: '아픔',
-        action: '영양',
-        actionDate: '2024-08-27',
-        like: 10,
-        user: {
-          _id: 1,
-          name: '칼라디움',
-          image: 'user-muzi.webp',
+        views: 23,
+        title: '오늘의 할일!',
+        content: '우리 관세음보살이 몸이 안좋은거같다... \n그래서 영양을 듬뿍해줬다!! \n건강하게 자라렴!',
+        extra: {
+          plantState: '아픔',
+          action: '영양',
+          actionDate: '2024-08-27',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
@@ -627,8 +625,12 @@ export const initData = async (clientId, nextSeq) => {
             name: 'PlantImg2.png',
           },
         ],
-        title: '오늘의 할일!',
-        content: '우리 관세음보살이 몸이 안좋은거같다... \n그래서 영양을 듬뿍해줬다!! \n건강하게 자라렴!',
+
+        user: {
+          _id: 1,
+          name: '칼라디움',
+          image: 'user-muzi.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -637,24 +639,26 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 11,
         seller_id: 1,
-        views: 50,
-        plantState: '좋음',
-        action: '관찰',
-        actionDate: '2024-09-10',
-        like: 5,
-        user: {
-          _id: 1,
-          name: '칼라디움',
-          image: 'user-muzi.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg3.png`,
-            name: 'PlantImg3.png',
-          },
-        ],
+        views: 10,
         title: '관찰하기~',
         content: '우리 관세음보살이! \n아주 이쁘게자라렴!',
+        extra: {
+          plantState: '좋음',
+          action: '관찰',
+          actionDate: '2024-09-10',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg3.png`,
+            name: 'PlantImg3.png',
+          },
+        ],
+        user: {
+          _id: 1,
+          name: '칼라디움',
+          image: 'user-muzi.webp',
+        },
+
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -663,24 +667,26 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 4,
         seller_id: 1,
-        views: 50,
-        plantState: '새싹',
-        action: '관찰',
-        actionDate: '2024-08-16',
-        like: 20,
-        user: {
-          _id: 1,
-          name: '칼라디움',
-          image: 'user-muzi.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg1.png`,
-            name: 'PlantImg1.png',
-          },
-        ],
+        views: 20,
         title: '관찰일지!',
         content: '우리 전수씨!! 새싹이 자라구 있구나!?!',
+        extra: {
+          plantState: '새싹',
+          action: '관찰',
+          actionDate: '2024-08-16',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg1.png`,
+            name: 'PlantImg1.png',
+          },
+        ],
+        user: {
+          _id: 1,
+          name: '칼라디움',
+          image: 'user-muzi.webp',
+        },
+
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -689,24 +695,25 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 4,
         seller_id: 1,
-        views: 50,
-        plantState: '죽음',
-        action: '관찰',
-        actionDate: '2024-08-16',
-        like: 10,
-        user: {
-          _id: 1,
-          name: '칼라디움',
-          image: 'user-muzi.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg4.png`,
-            name: 'PlantImg4.png',
-          },
-        ],
+        views: 40,
         title: '전수야 잘가,,,',
         content: '우리 전수가 내가 관리를 잘못해서 가버렸다,,, \n전수야 너랑 행복했어...',
+        extra: {
+          plantState: '죽음',
+          action: '관찰',
+          actionDate: '2024-08-16',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg4.png`,
+            name: 'PlantImg4.png',
+          },
+        ],
+        user: {
+          _id: 1,
+          name: '칼라디움',
+          image: 'user-muzi.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -715,23 +722,25 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 8,
         seller_id: 1,
-        views: 50,
-        plantState: '개화',
-        action: '햇빛',
-        actionDate: '2024-08-26',
-        user: {
-          _id: 1,
-          name: '칼라디움',
-          image: 'user-muzi.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg3.png`,
-            name: 'PlantImg3.png',
-          },
-        ],
+        views: 10,
         title: '우리 개굴이!',
         content: '개굴아!! 드뎌 꽃이 폈구나!? \n역시 너무 이뻐~',
+        extra: {
+          plantState: '개화',
+          action: '햇빛',
+          actionDate: '2024-08-26',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg3.png`,
+            name: 'PlantImg3.png',
+          },
+        ],
+        user: {
+          _id: 1,
+          name: '칼라디움',
+          image: 'user-muzi.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -740,27 +749,30 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 8,
         seller_id: 1,
-        views: 50,
-        plantState: '좋음',
-        action: '물주기',
-        actionDate: '2024-08-21',
+        views: 30,
+        title: '우리 개굴이~',
+        content: '개굴아!! 오늘은 무난 무난 하구나~',
+        extra: {
+          plantState: '좋음',
+          action: '물주기',
+          actionDate: '2024-08-21',
+        },
+
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg3.png`,
+            name: 'PlantImg3.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg1.png`,
+            name: 'PlantImg1.png',
+          },
+        ],
         user: {
           _id: 1,
           name: '칼라디움',
           image: 'user-muzi.webp',
         },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg3.png`,
-            name: 'PlantImg3.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg1.png`,
-            name: 'PlantImg1.png',
-          },
-        ],
-        title: '우리 개굴이~',
-        content: '개굴아!! 오늘은 무난 무난 하구나~',
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -769,28 +781,29 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 1,
         seller_id: 2,
-        views: 50,
-        plantState: '좋음',
-        action: '물주기',
-        actionDate: '2024-08-11',
-        like: 10,
-        user: {
-          _id: 2,
-          name: '선인장',
-          image: 'user-neo.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg1.png`,
-            name: 'PlantImg1.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
-          },
-        ],
+        views: 4,
         title: '우리 디움이 이쁘죠',
         content: '디움아 무럭무럭 자라나라~',
+        extra: {
+          plantState: '좋음',
+          action: '물주기',
+          actionDate: '2024-08-11',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg1.png`,
+            name: 'PlantImg1.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+        user: {
+          _id: 2,
+          name: '선인장',
+          image: 'user-neo.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -799,24 +812,25 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 1,
         seller_id: 2,
-        views: 50,
-        plantState: '아픔',
-        action: '영양',
-        actionDate: '2024-08-20',
-        like: 10,
-        user: {
-          _id: 2,
-          name: '선인장',
-          image: 'user-neo.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
-          },
-        ],
+        views: 7,
         title: '디움이가 아파요 ㅜㅜ',
         content: '디움아 영양제 잘 먹고 건강해져야해 ㅜㅜ',
+        extra: {
+          plantState: '아픔',
+          action: '영양',
+          actionDate: '2024-08-20',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+        user: {
+          _id: 2,
+          name: '선인장',
+          image: 'user-neo.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -826,31 +840,32 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 2,
         seller_id: 2,
         views: 50,
-        plantState: '개화',
-        action: '햇빛',
-        actionDate: '2024-08-14',
-        like: 10,
-        user: {
-          _id: 2,
-          name: '선인장',
-          image: 'user-neo.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg3.png`,
-            name: 'PlantImg3.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg4.png`,
-            name: 'PlantImg4.png',
-          },
-        ],
         title: '게발이가 게화했다',
         content: '너무 예쁘다 ㅜㅜㅜ \n 정성스레 키운 보람이 있네',
+        extra: {
+          plantState: '개화',
+          action: '햇빛',
+          actionDate: '2024-08-14',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg3.png`,
+            name: 'PlantImg3.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg4.png`,
+            name: 'PlantImg4.png',
+          },
+        ],
+        user: {
+          _id: 2,
+          name: '선인장',
+          image: 'user-neo.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -860,23 +875,24 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 2,
         seller_id: 2,
         views: 50,
-        plantState: '죽음',
-        action: '관찰',
-        actionDate: '2024-10-01',
-        like: 10,
-        user: {
-          _id: 2,
-          name: '선인장',
-          image: 'user-neo.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
-          },
-        ],
         title: '게발이가 죽었다...',
         content: '마음이 아프다. 더 잘 돌봐줬어야 하는데..',
+        extra: {
+          plantState: '죽음',
+          action: '관찰',
+          actionDate: '2024-10-01',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+        user: {
+          _id: 2,
+          name: '선인장',
+          image: 'user-neo.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -885,28 +901,29 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 3,
         seller_id: 2,
-        views: 50,
-        plantState: '새싹',
-        action: '관찰',
-        actionDate: '2024-10-05',
-        like: 10,
-        user: {
-          _id: 2,
-          name: '선인장',
-          image: 'user-neo.webp',
-        },
-        mainImages: [
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg1.png`,
-            name: 'PlantImg1.png',
-          },
-        ],
+        views: 20,
         title: '알로에의 새싹이 피었다.',
         content: '너무 작고 귀엽다 ㅎㅎ \n쑥쑥 잘 크면 좋겠네 \n열심히 키워야지~~',
+        extra: {
+          plantState: '새싹',
+          action: '관찰',
+          actionDate: '2024-10-05',
+        },
+        user: {
+          _id: 2,
+          name: '선인장',
+          image: 'user-neo.webp',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg1.png`,
+            name: 'PlantImg1.png',
+          },
+        ],
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -915,17 +932,15 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 3,
         seller_id: 2,
-        views: 50,
-        plantState: '좋음',
-        action: '분갈이',
-        actionDate: '2024-11-04',
-        like: 10,
-        user: {
-          _id: 2,
-          name: '선인장',
-          image: 'user-neo.webp',
+        views: 5,
+        title: '로에가 너무 잘 큰다!!',
+        content: '원래 화분이 너무 작은 것 같아서 분갈이를 해줬다. \n새 집에서 잘 크자!',
+        extra: {
+          plantState: '좋음',
+          action: '분갈이',
+          actionDate: '2024-11-04',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -935,8 +950,11 @@ export const initData = async (clientId, nextSeq) => {
             name: 'PlantImg1.png',
           },
         ],
-        title: '로에가 너무 잘 큰다!!',
-        content: '원래 화분이 너무 작은 것 같아서 분갈이를 해줬다. \n새 집에서 잘 크자!',
+        user: {
+          _id: 2,
+          name: '선인장',
+          image: 'user-neo.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -945,17 +963,15 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 5,
         seller_id: 3,
-        views: 50,
-        plantState: '좋음',
-        action: '물주기',
-        actionDate: '2024-08-27',
-        like: 10,
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: 'zamiifolia.webp',
+        views: 10,
+        title: '자라나라 새싹새싹',
+        content: '새싹아 돋아나라!! \n 이번 주 안에 새싹을 피웠으면...',
+        extra: {
+          plantState: '좋음',
+          action: '물주기',
+          actionDate: '2024-08-27',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
@@ -965,8 +981,11 @@ export const initData = async (clientId, nextSeq) => {
             name: 'PlantImg2.png',
           },
         ],
-        title: '자라나라 새싹새싹',
-        content: '새싹아 돋아나라!! \n 이번 주 안에 새싹을 피웠으면...',
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: 'zamiifolia.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -976,23 +995,24 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 5,
         seller_id: 3,
         views: 50,
-        plantState: '개화',
-        action: '관찰',
-        actionDate: '2024-08-28',
-        like: 5,
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: 'zamiifolia.webp',
+        title: '드디어 개화!!',
+        content: '관심 준 만큼 예쁘게 잘 자라나서 아주 기분이 좋다. \n 완전히 개화될 때면 팔아야지',
+        extra: {
+          plantState: '개화',
+          action: '관찰',
+          actionDate: '2024-08-28',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
           },
         ],
-        title: '드디어 개화!!',
-        content: '관심 준 만큼 예쁘게 잘 자라나서 아주 기분이 좋다. \n 완전히 개화될 때면 팔아야지',
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: 'zamiifolia.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1001,24 +1021,25 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 6,
         seller_id: 3,
-        views: 50,
-        plantState: '아픔',
-        action: '분갈이',
-        actionDate: '2024-08-27',
-        like: 20,
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: 'zamiifolia.webp',
+        views: 2,
+        title: '왜 아픈 건지 모르겠음',
+        content: '똑같은 다른 금전수는 잘 자라는데 \n 이 아이만 비실대서 \n 혹이 토양이 안 맞는가 싶어서 \n 분갈이를 했다.',
+        extra: {
+          plantState: '아픔',
+          action: '분갈이',
+          actionDate: '2024-08-27',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
           },
         ],
-        title: '왜 아픈 건지 모르겠음',
-        content: '똑같은 다른 금전수는 잘 자라는데 \n 이 아이만 비실대서 \n 혹이 토양이 안 맞는가 싶어서 \n 분갈이를 했다.',
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: 'zamiifolia.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1028,23 +1049,24 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 6,
         seller_id: 3,
         views: 50,
-        plantState: '아픔',
-        action: '영양',
-        actionDate: '2024-08-28',
-        like: 10,
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: 'zamiifolia.webp',
+        title: '분갈이 후 영양제 스팀팩 주사',
+        content: '반드시 살리리라!\n 넌 할 수 있어! \n 살아나라 전수전수',
+        extra: {
+          plantState: '아픔',
+          action: '영양',
+          actionDate: '2024-08-28',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg4.png`,
             name: 'PlantImg4.png',
           },
         ],
-        title: '분갈이 후 영양제 스팀팩 주사',
-        content: '반드시 살리리라!\n 넌 할 수 있어! \n 살아나라 전수전수',
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: 'zamiifolia.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1053,23 +1075,25 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 7,
         seller_id: 3,
-        views: 50,
-        plantState: '좋음',
-        action: '가지',
-        actionDate: '2024-08-27',
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: 'zamiifolia.webp',
+        views: 20,
+        title: '좋음',
+        content: '드디어 가지가 돋았다. \n 기분 좋아라 랄랄라',
+        extra: {
+          plantState: '좋음',
+          action: '가지',
+          actionDate: '2024-08-27',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
           },
         ],
-        title: '좋음',
-        content: '드디어 가지가 돋았다. \n 기분 좋아라 랄랄라',
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: 'zamiifolia.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1079,15 +1103,14 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 7,
         seller_id: 3,
         views: 50,
-        plantState: '좋음',
-        action: '영양',
-        actionDate: '2024-08-28',
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: 'zamiifolia.webp',
+        title: '영양제 투입 - 빨리 자라길...',
+        content: '가지가 돋아나고 있어서 \n 영양이 많이 필요한 것 같아\n 영양제를 꽂아줬다.',
+        extra: {
+          plantState: '좋음',
+          action: '영양',
+          actionDate: '2024-08-28',
         },
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1097,8 +1120,11 @@ export const initData = async (clientId, nextSeq) => {
             name: 'PlantImg1.png',
           },
         ],
-        title: '영양제 투입 - 빨리 자라길...',
-        content: '가지가 돋아나고 있어서 \n 영양이 많이 필요한 것 같아\n 영양제를 꽂아줬다.',
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: 'zamiifolia.webp',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -1134,7 +1160,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 1000,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1163,7 +1189,7 @@ export const initData = async (clientId, nextSeq) => {
         repliesCount: 0,
         replies: [],
         views: 0,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1204,7 +1230,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 13,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
@@ -1245,7 +1271,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 7,
-        mainImages: [],
+        image: [],
         user: {
           _id: 3,
           name: '금전수 장인',
@@ -1265,7 +1291,7 @@ export const initData = async (clientId, nextSeq) => {
         repliesCount: 0,
         replies: [],
         views: 23,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg4.png`,
             name: 'PlantImg4.png',
@@ -1302,7 +1328,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 23,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg4.png`,
             name: 'PlantImg4.png',
@@ -1326,7 +1352,7 @@ export const initData = async (clientId, nextSeq) => {
         content: '제 관세음보살이 구경하고가세요~! \n벌써 입양한지 20일째입니다요~',
         repliesCount: 0,
         views: 30,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1367,7 +1393,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 0,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg2.png`,
             name: 'PlantImg2.png',
@@ -1415,7 +1441,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 30,
-        mainImages: [],
+        image: [],
         user: {
           _id: 5,
           name: '식집사3',
@@ -1446,7 +1472,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 0,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1483,7 +1509,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 0,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1535,7 +1561,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 0,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
@@ -1598,7 +1624,7 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
         views: 0,
-        mainImages: [
+        image: [
           {
             path: `/files/${clientId}/PlantImg3.png`,
             name: 'PlantImg3.png',
