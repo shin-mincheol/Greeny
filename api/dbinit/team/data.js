@@ -1523,7 +1523,7 @@ export const initData = async (clientId, nextSeq) => {
             updatedAt: getTime(-2, -60 * 60 * 2),
           },
           {
-            _id: 2,
+            _id: 1,
             user: {
               _id: 4,
               name: '식집사2',

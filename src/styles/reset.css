@@ -210,7 +210,3 @@ input[type='password']:focus,
 textarea:focus {
   border: 2px solid var(--color-primary);
 }
-
-button {
-  cursor: pointer;
-}

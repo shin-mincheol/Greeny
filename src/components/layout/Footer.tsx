@@ -28,9 +28,9 @@ export default function Footer() {
           </Link>
         </li>
         <li>
-          <Link href="/story" className={styles.nav_item}>
-            {pathname.includes('/story') ? <Image src={community_sel} alt="식물 이야기" width={16} height={16} /> : <Image src={community_nor} alt="식물 이야기" width={16} height={16} />}
-            <p className={`${pathname.includes('/story') ? `${styles.is_active}` : ''}`}>식물 이야기</p>
+          <Link href="/community" className={styles.nav_item}>
+            {pathname.includes('/community') ? <Image src={community_sel} alt="식물 이야기" width={16} height={16} /> : <Image src={community_nor} alt="식물 이야기" width={16} height={16} />}
+            <p className={`${pathname.includes('/community') ? `${styles.is_active}` : ''}`}>식물 이야기</p>
           </Link>
         </li>
         <li>
