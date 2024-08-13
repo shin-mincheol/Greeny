@@ -7,12 +7,14 @@ import Banner from './(section)/Banner';
 import TodayPlant from './(section)/TodayPlant';
 import TodayDiary from './(section)/TodayDiary';
 import { fetchPosts } from '@/app/data/fetch/postFetch';
-
+import { DiaryRes, PostRes } from '@/types/post';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function Home() {
-  const data = await fetchPosts('post');
-  const list = data.map((item) => {
+  const dataPost = await fetchPosts<PostRes>('post');
+  const dataDiary = await fetchPosts<DiaryRes>('diary');
+
+  const list = dataPost.map((item) => {
     return (
       <li className={styles.contents_item} key={item._id}>
         <div className={styles.contents_main}>
@@ -20,7 +22,7 @@ export default async function Home() {
             <h3>{item.title}</h3>
             <p>{item.content}</p>
           </div>
-          <div className={styles.contents_cover}>{item.image && <Image src={`${item.image[0].path}`} alt="식물 사진" width={0} height={0} sizes="100%" fill />}</div>
+          <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image[0].path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
         </div>
 
         <div className={styles.contents_footer}>
@@ -57,7 +59,7 @@ export default async function Home() {
 
         <div className={styles.list_item}>
           <h2 className={styles.list_title}>식집사들의 식물을 구경해봐요!</h2>
-          <TodayDiary />
+          <TodayDiary data={dataDiary} />
         </div>
 
         <div className={styles.list_item}>

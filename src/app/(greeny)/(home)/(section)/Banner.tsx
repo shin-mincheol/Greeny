@@ -16,7 +16,7 @@ export default function Banner() {
     <Swiper className={styles.bannerList} slidesPerView={1} spaceBetween={0} modules={[Autoplay]} autoplay={{ delay: 5000, disableOnInteraction: false }}>
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
-          <Image src={banner1} alt="식물 사진" layout="fill" objectFit="cover" sizes="100%" />
+          <Image src={banner1} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.banner_info}>
@@ -37,7 +37,7 @@ export default function Banner() {
 
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
-          <Image src={banner2} alt="식물 사진" layout="fill" objectFit="cover" sizes="100%" />
+          <Image src={banner2} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.banner_info}>
@@ -56,7 +56,7 @@ export default function Banner() {
       </SwiperSlide>
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
-          <Image src={banner3} alt="식물 사진" layout="fill" objectFit="cover" sizes="100%" />
+          <Image src={banner3} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.banner_info}>
@@ -75,7 +75,7 @@ export default function Banner() {
       </SwiperSlide>
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
-          <Image src={banner4} alt="식물 사진" layout="fill" objectFit="cover" sizes="100%" />
+          <Image src={banner4} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.banner_info}>
