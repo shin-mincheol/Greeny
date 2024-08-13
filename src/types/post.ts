@@ -1,7 +1,6 @@
-
+import { ImageRes } from './image';
 import { PlantSimple } from './plant';
 import { UserSimple } from './user';
-
 
 export interface PostComment {
   _id: number;
