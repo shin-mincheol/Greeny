@@ -21,10 +21,10 @@ export default function Footer() {
     <footer className={styles.layout_wrapper}>
       <ul className={styles.nav}>
         <li>
-          <Link href="/book" className={styles.nav_item}>
+          <Link href="/books" className={styles.nav_item}>
             {pathname.includes('/book') ? <Image src={book_sel} alt="식물 백과" width={16} height={16} /> : <Image src={book_nor} alt="식물 백과" width={16} height={16} />}
 
-            <p className={`${pathname.includes('/book') ? `${styles.is_active}` : ''}`}>식물 백과</p>
+            <p className={`${pathname.includes('/books') ? `${styles.is_active}` : ''}`}>식물 백과</p>
           </Link>
         </li>
         <li>
