@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import plantList from '@/app/data/plantList.json';
 import Link from 'next/link';
-import Modal from '@/components/modal/Modal';
+import Modal from '@/app/(greeny)/books/Modal';
 interface FormData {
   keyword: string;
 }
