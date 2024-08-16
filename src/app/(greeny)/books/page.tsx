@@ -197,129 +197,129 @@ function Filter({ onClose, onSubmit }: { onClose: () => void; onSubmit: (data: F
               ))}
             </div>
           </div>
-          <div className={styles.plant_props_wrapper}>
-            <div className={styles.plant_props}>
-              <p>식물의 잎무늬, 꽃 색, 열매 색을 선택해주세요.</p>
-              <div className={styles.flower_color}>
-                <p>꽃 색</p>
-                <div className={styles.label_wrapper}>
-                  {[
-                    { flclrCode: '071001', flclrCodeNm: '파랑색' },
-                    { flclrCode: '071002', flclrCodeNm: '보라색' },
-                    { flclrCode: '071003', flclrCodeNm: '분홍색' },
-                    { flclrCode: '071004', flclrCodeNm: '빨강색' },
-                    { flclrCode: '071005', flclrCodeNm: '오렌지색' },
-                    { flclrCode: '071006', flclrCodeNm: '노랑색' },
-                    { flclrCode: '071007', flclrCodeNm: '흰색' },
-                    { flclrCode: '071008', flclrCodeNm: '혼합색' },
-                    { flclrCode: '071009', flclrCodeNm: '기타' },
-                  ].map((type) => (
-                    <label key={type.flclrCode} htmlFor={type.flclrCode} className={styles.custom_checkbox}>
-                      <Controller
-                        name="flclrCodes"
-                        control={control}
-                        render={({ field }) => (
-                          <input
-                            type="checkbox"
-                            id={type.flclrCode}
-                            value={type.flclrCode}
-                            checked={field.value.includes(type.flclrCode)}
-                            onChange={(e) => {
-                              const checked = e.target.checked;
-                              const value = e.target.value;
-                              if (checked) {
-                                field.onChange([...field.value, value]);
-                              } else {
-                                field.onChange(field.value.filter((item) => item !== value));
-                              }
-                            }}
-                          />
-                        )}
-                      />
-                      <span>{type.flclrCodeNm}</span>
-                    </label>
-                  ))}
-                </div>
+
+          <div className={styles.plant_props}>
+            <p>식물의 잎무늬, 꽃 색, 열매 색을 선택해주세요.</p>
+            <div className={styles.flower_color}>
+              <p>꽃 색</p>
+              <div className={styles.label_wrapper}>
+                {[
+                  { flclrCode: '071001', flclrCodeNm: '파랑색' },
+                  { flclrCode: '071002', flclrCodeNm: '보라색' },
+                  { flclrCode: '071003', flclrCodeNm: '분홍색' },
+                  { flclrCode: '071004', flclrCodeNm: '빨강색' },
+                  { flclrCode: '071005', flclrCodeNm: '오렌지색' },
+                  { flclrCode: '071006', flclrCodeNm: '노랑색' },
+                  { flclrCode: '071007', flclrCodeNm: '흰색' },
+                  { flclrCode: '071008', flclrCodeNm: '혼합색' },
+                  { flclrCode: '071009', flclrCodeNm: '기타' },
+                ].map((type) => (
+                  <label key={type.flclrCode} htmlFor={type.flclrCode} className={styles.custom_checkbox}>
+                    <Controller
+                      name="flclrCodes"
+                      control={control}
+                      render={({ field }) => (
+                        <input
+                          type="checkbox"
+                          id={type.flclrCode}
+                          value={type.flclrCode}
+                          checked={field.value.includes(type.flclrCode)}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            const value = e.target.value;
+                            if (checked) {
+                              field.onChange([...field.value, value]);
+                            } else {
+                              field.onChange(field.value.filter((item) => item !== value));
+                            }
+                          }}
+                        />
+                      )}
+                    />
+                    <span>{type.flclrCodeNm}</span>
+                  </label>
+                ))}
               </div>
-              <div className={styles.fruit_color}>
-                <p>열매 색</p>
-                <div className={styles.label_wrapper}>
-                  {[
-                    { fmldecolrCode: '081001', fmldecolrCodeNm: '파랑색' },
-                    { fmldecolrCode: '081002', fmldecolrCodeNm: '보라색' },
-                    { fmldecolrCode: '081003', fmldecolrCodeNm: '분홍색' },
-                    { fmldecolrCode: '081004', fmldecolrCodeNm: '빨강색' },
-                    { fmldecolrCode: '081005', fmldecolrCodeNm: '오렌지색' },
-                    { fmldecolrCode: '081006', fmldecolrCodeNm: '노랑색' },
-                    { fmldecolrCode: '081007', fmldecolrCodeNm: '흰색' },
-                    { fmldecolrCode: '081008', fmldecolrCodeNm: '혼합색' },
-                    { fmldecolrCode: '081009', fmldecolrCodeNm: '기타' },
-                  ].map((type) => (
-                    <label key={type.fmldecolrCode} htmlFor={type.fmldecolrCode} className={styles.custom_checkbox}>
-                      <Controller
-                        name="fmldecolrCodes"
-                        control={control}
-                        render={({ field }) => (
-                          <input
-                            type="checkbox"
-                            id={type.fmldecolrCode}
-                            value={type.fmldecolrCode}
-                            checked={field.value.includes(type.fmldecolrCode)}
-                            onChange={(e) => {
-                              const checked = e.target.checked;
-                              const value = e.target.value;
-                              if (checked) {
-                                field.onChange([...field.value, value]);
-                              } else {
-                                field.onChange(field.value.filter((item) => item !== value));
-                              }
-                            }}
-                          />
-                        )}
-                      />
-                      <span>{type.fmldecolrCodeNm}</span>
-                    </label>
-                  ))}
-                </div>
+            </div>
+            <div className={styles.fruit_color}>
+              <p>열매 색</p>
+              <div className={styles.label_wrapper}>
+                {[
+                  { fmldecolrCode: '081001', fmldecolrCodeNm: '파랑색' },
+                  { fmldecolrCode: '081002', fmldecolrCodeNm: '보라색' },
+                  { fmldecolrCode: '081003', fmldecolrCodeNm: '분홍색' },
+                  { fmldecolrCode: '081004', fmldecolrCodeNm: '빨강색' },
+                  { fmldecolrCode: '081005', fmldecolrCodeNm: '오렌지색' },
+                  { fmldecolrCode: '081006', fmldecolrCodeNm: '노랑색' },
+                  { fmldecolrCode: '081007', fmldecolrCodeNm: '흰색' },
+                  { fmldecolrCode: '081008', fmldecolrCodeNm: '혼합색' },
+                  { fmldecolrCode: '081009', fmldecolrCodeNm: '기타' },
+                ].map((type) => (
+                  <label key={type.fmldecolrCode} htmlFor={type.fmldecolrCode} className={styles.custom_checkbox}>
+                    <Controller
+                      name="fmldecolrCodes"
+                      control={control}
+                      render={({ field }) => (
+                        <input
+                          type="checkbox"
+                          id={type.fmldecolrCode}
+                          value={type.fmldecolrCode}
+                          checked={field.value.includes(type.fmldecolrCode)}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            const value = e.target.value;
+                            if (checked) {
+                              field.onChange([...field.value, value]);
+                            } else {
+                              field.onChange(field.value.filter((item) => item !== value));
+                            }
+                          }}
+                        />
+                      )}
+                    />
+                    <span>{type.fmldecolrCodeNm}</span>
+                  </label>
+                ))}
               </div>
-              <div className={styles.leaf_pattern}>
-                <p>잎무늬</p>
-                <div className={styles.label_wrapper}>
-                  {[
-                    { lefmrkCode: '070001', lefmrkCodeNm: '줄무늬' },
-                    { lefmrkCode: '070002', lefmrkCodeNm: '점무늬' },
-                    { lefmrkCode: '070003', lefmrkCodeNm: '잎 가장자리 무늬' },
-                    { lefmrkCode: '070004', lefmrkCodeNm: '기타(무늬없음 등)' },
-                  ].map((type) => (
-                    <label key={type.lefmrkCode} htmlFor={type.lefmrkCode} className={styles.custom_checkbox}>
-                      <Controller
-                        name="lefmrkCodes"
-                        control={control}
-                        render={({ field }) => (
-                          <input
-                            type="checkbox"
-                            id={type.lefmrkCode}
-                            value={type.lefmrkCode}
-                            checked={field.value.includes(type.lefmrkCode)}
-                            onChange={(e) => {
-                              const checked = e.target.checked;
-                              const value = e.target.value;
-                              if (checked) {
-                                field.onChange([...field.value, value]);
-                              } else {
-                                field.onChange(field.value.filter((item) => item !== value));
-                              }
-                            }}
-                          />
-                        )}
-                      />
-                      <span>{type.lefmrkCodeNm}</span>
-                    </label>
-                  ))}
-                </div>
+            </div>
+            <div className={styles.leaf_pattern}>
+              <p>잎무늬</p>
+              <div className={styles.label_wrapper}>
+                {[
+                  { lefmrkCode: '070001', lefmrkCodeNm: '줄무늬' },
+                  { lefmrkCode: '070002', lefmrkCodeNm: '점무늬' },
+                  { lefmrkCode: '070003', lefmrkCodeNm: '잎 가장자리 무늬' },
+                  { lefmrkCode: '070004', lefmrkCodeNm: '기타(무늬없음 등)' },
+                ].map((type) => (
+                  <label key={type.lefmrkCode} htmlFor={type.lefmrkCode} className={styles.custom_checkbox}>
+                    <Controller
+                      name="lefmrkCodes"
+                      control={control}
+                      render={({ field }) => (
+                        <input
+                          type="checkbox"
+                          id={type.lefmrkCode}
+                          value={type.lefmrkCode}
+                          checked={field.value.includes(type.lefmrkCode)}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            const value = e.target.value;
+                            if (checked) {
+                              field.onChange([...field.value, value]);
+                            } else {
+                              field.onChange(field.value.filter((item) => item !== value));
+                            }
+                          }}
+                        />
+                      )}
+                    />
+                    <span>{type.lefmrkCodeNm}</span>
+                  </label>
+                ))}
               </div>
             </div>
           </div>
+
           <div className={styles.light_quantity}>
             <p>식물이 필요한 햇빛의 양을 선택해주세요.</p>
             <div className={styles.label_wrapper}>
