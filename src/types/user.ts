@@ -34,7 +34,6 @@ export type UserForm = {
   password: string;
   phone: string;
   address: string;
-  //이미지 이슈 해결후 확인하기
-  attach?: string | string[];
-  profileImage?: string;
+  attach?: FileList;
+  image?: string;
 };

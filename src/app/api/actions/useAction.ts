@@ -1,34 +1,44 @@
+// 서버 액션 정의
 'use server';
 
-import { ApiResWithValidation, SingleItem } from '@/types/response';
+import { FileRes } from '@/types/image';
+import { ApiResWithValidation, MultiItem, SingleItem } from '@/types/response';
 import { UserData, UserForm } from '@/types/user';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-export async function signup(formData: UserForm) {
-  // 이미지 업로드
-  if (formData.attach !== undefined && formData.attach.length > 0) {
-    const body = new FormData();
-    body.append('attach', formData.attach[0]);
+export async function signup(formData: FormData): Promise<ApiResWithValidation<SingleItem<UserData>, UserForm>> {
+  const userObj = {
+    type: formData.get('type') || 'seller',
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    phone: formData.get('phone'),
+    address: formData.get('address'),
+    image: '',
+  };
 
+  const attach = formData.get('attach') as File;
+
+  if (attach?.size > 0) {
     const fileRes = await fetch(`${SERVER}/files`, {
       method: 'POST',
       headers: {
         'client-id': `${DBNAME}`,
       },
-      body,
+      body: formData,
     });
 
-    const fileJSON = await fileRes.json();
+    if (!fileRes.ok) {
+      throw new Error('파일 업로드 실패');
+    }
+    const fileData: MultiItem<FileRes> = await fileRes.json();
 
-    if (!fileJSON.ok) throw new Error('파일 업로드 실패!');
+    console.log(fileData);
 
-    formData.profileImage = fileJSON.item[0].path;
+    userObj.image = fileData.item[0].path;
   }
-
-  delete formData.attach;
-  formData.type = 'seller';
 
   const res = await fetch(`${SERVER}/users`, {
     method: 'POST',
@@ -36,10 +46,8 @@ export async function signup(formData: UserForm) {
       'client-id': `${DBNAME}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(userObj),
   });
 
-  const resData: ApiResWithValidation<SingleItem<UserData>, UserForm> = await res.json();
-
-  return resData;
+  return res.json();
 }
