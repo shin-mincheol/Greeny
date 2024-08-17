@@ -2,9 +2,6 @@
 'use server';
 import { signIn } from '@/auth';
 
-const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
-const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
-
 // email/password 로그인
 export async function signInWithCredentials(formData: FormData) {
   try {
