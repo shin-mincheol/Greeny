@@ -401,3 +401,24 @@
     vertical-align: top;
   }
 }
+
+// ImageSlider
+.image_swiper {
+  width: 110%;
+
+  .slider {
+    width: 11.7rem;
+  }
+
+  button {
+    display: inline-block;
+    position: relative;
+    width: 14rem;
+    height: 11rem;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+    }
+  }
+}

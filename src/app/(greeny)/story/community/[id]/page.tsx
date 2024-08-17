@@ -11,7 +11,7 @@ import { PostRes } from '@/types/post';
 // import SubMenu from '../SubMenu';
 import { useQuery } from '@tanstack/react-query';
 import { CoreErrorRes, SingleItem } from '@/types/response';
-// import ImageSlider from '@greeny/story/ImageSlider';
+import ImageSlider from '@greeny/story/ImageSlider';
 
 async function getPost(id: string): Promise<SingleItem<PostRes> | CoreErrorRes> {
   const url = `https://api.fesp.shop/posts/${id}`;
@@ -49,13 +49,12 @@ export default function PostDetail({ params: { id } }: { params: { id: string } 
               /> */}
           </div>
           <pre>{data.item.content}</pre>
-          {/* 사진 */}
-          {/* <ImageSlider /> */}
+          {data.item.image.length > 0 && <ImageSlider images={data.item.image} />}
           <PostInfo createdAt={data.item.createdAt} views={data.item.views} />
         </section>
         <section className={styles.reply}>
           <ReplyList postId={id} />
-          <ReplyInput postId={id} />
+          <ReplyInput />
         </section>
       </article>
     )
