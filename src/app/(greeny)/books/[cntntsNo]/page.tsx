@@ -1,28 +1,22 @@
 import Image from 'next/image';
-import styles from './[idx].module.scss';
+import styles from './[cntntsNo].module.scss';
 import plantList from '@/app/data/plantList.json';
 import { Plant } from '../page';
 
-export default async function Page({ params }: { params: { idx: string } }) {
-  // const filteredPlants: Plant[] = plantList.filter((item: Plant) => item[Number(params.idx)]);
-  const plant = plantList[Number(params.idx)];
+export default function Page({ params }: { params: { cntntsNo: string } }) {
+  const plant: Plant = plantList.filter((plant) => plant.cntntsNo === params.cntntsNo)[0];
 
-  // if (!filteredPlants[0]) return <div>데이터가 없습니다.</div>;
+  if (!plant) return <div>데이터가 없습니다.</div>;
 
-  // const plant = filteredPlants[0];
-
-  type ProcessedPlant = {
-    [K in keyof Plant]: string;
-  };
-
-  const processedPlant: ProcessedPlant = Object.entries(plant).reduce((acc, entry) => {
-    const [key, value] = entry as [keyof ProcessedPlant, string | {}];
-    acc[key] = typeof value === 'object' ? '없음' : (value as string);
+  // plant를 받아 키값이 ""인 경우 '없음'으로 바꿈
+  const processedPlant: Plant = Object.entries(plant).reduce((acc, entry) => {
+    const [key, value] = entry as [keyof Plant, string];
+    acc[key] = value === '' ? '없음' : value;
     return acc;
-  }, {} as ProcessedPlant);
+  }, {} as Plant);
 
   return (
-    <div className={styles.main_wrapper}>
+    <>
       <div className={styles.image_wrapper}>
         <Image src={processedPlant.rtnFileUrl} alt="식물 이미지" className={styles.img} fill />
       </div>
@@ -103,17 +97,6 @@ export default async function Page({ params }: { params: { idx: string } }) {
           </table>
         </div>
       </div>
-    </div>
-  );
-}
-
-function Item({ title = '', content = '' }) {
-  return (
-    <ul className={styles.list}>
-      <li className={styles.item_container}>
-        <p className={styles.item_title}>{title}</p>
-        <span className={styles.item_content}>{content}</span>
-      </li>
-    </ul>
+    </>
   );
 }
