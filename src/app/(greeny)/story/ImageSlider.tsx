@@ -9,16 +9,24 @@ import ImageItem from './ImageItem';
 import { useState } from 'react';
 
 export default function ImageSlider({ images }: { images: ImageRes[] }) {
+  const [selectedImage, setSelectedImage] = useState<ImageRes | null>();
+  const openModal = (image: ImageRes) => {
+    setSelectedImage(image);
+  };
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <>
       <Swiper spaceBetween={10} slidesPerView={2.3} className={styles.image_swiper}>
         {images.map((image) => (
           <SwiperSlide key={image.path} className={styles.slider}>
-            <ImageItem image={image} />
+            <ImageItem image={image} onClick={() => openModal(image)} />
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* <ImageModal /> */}
+      {selectedImage && <ImageModal closeModal={closeModal} image={selectedImage} />}
     </>
   );
 }
