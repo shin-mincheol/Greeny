@@ -1,11 +1,13 @@
+import { ImageRes } from './image';
+
 export interface UserData {
   _id: number;
   email: string;
   name: string;
   phone: string;
   address: string;
-  type: "seller";
-  image?: string;
+  type: 'seller';
+  image?: ImageRes[];
   token?: {
     accessToken: string;
     refreshToken: string;
@@ -20,14 +22,18 @@ export type UserSimple = {
   image: string;
 };
 
+export type UserLoginForm = {
+  email: string;
+  password: string;
+};
+
 export type UserForm = {
-  type: "seller";
+  type: 'seller';
   name: string;
   email: string;
   password: string;
   phone: string;
   address: string;
-  //이미지 이슈 해결후 확인하기
-  attach?: string | string[];
-  profileImage?: string;
+  attach?: FileList;
+  image?: string;
 };
