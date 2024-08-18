@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import styles from './MyPlant.module.scss';
-import PlantImg1 from '@images/PlantImg1.png';
 import Link from 'next/link';
 import { fetchPlants } from '@/app/api/fetch/plantFetch';
 import { PlantRes } from '@/types/plant';
@@ -12,24 +11,22 @@ export default async function MyPlant() {
   const session = await auth();
   const data = await fetchPlants<PlantRes>(session?.accessToken);
 
-  const myPlantList = data?.map((item) => {
-    console.log(item);
-
+  const myPlantList = data?.map((item: PlantRes) => {
     const currentDay = item.adoptionDate;
     const toDay = new Date();
     const diffDays = differenceInDays(toDay, currentDay);
 
     return (
-      <Link href="/myplant/diary" className={styles.contents_item} key={item._id}>
+      <Link href={`/myplant/${item._id}`} className={styles.contents_item} key={item._id}>
         <div className={styles.item_cover}>
-          <Image src={`${item.image.length > 0 ? `${SERVER}${item.image[0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
+          <Image src={`${item.image!.length > 0 ? `${SERVER}${item.image![0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.item_info}>
           <h3>{item.nickName}</h3>
           <p>{item.name}</p>
 
-          <span>{diffDays}일째</span>
+          <span>{diffDays} 일째</span>
         </div>
       </Link>
     );
