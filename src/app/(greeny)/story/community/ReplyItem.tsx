@@ -6,18 +6,28 @@ import { PostComment } from '@/types/post';
 import { formatAgo } from '@/utils/date';
 import SubMenu from '@greeny/story/community/SubMenu';
 
-export default function ReplyItem({ reply }: { reply: PostComment }) {
+export default async function ReplyItem({ reply }: { reply: PostComment }) {
   return (
     <li>
-      {/* 다른 사용자 댓글일 때 */}
       {/* <UserProfile
+        user={reply.user}
+        fontStyle="sm_regular"
         component={
-          <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
-            <div style={{ color: 'var(--color-gray-10)', fontSize: 10, marginRight: 10 }}>5분 전</div>
-          </div>
+          Number(session?.user?.id) == reply.user._id ? (
+            <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
+              <div style={{ color: 'var(--color-gray-10)', fontSize: 10 }}>{formatAgo(reply.createdAt)}</div>
+              <div style={{ marginLeft: '0.6rem' }}>
+                <SubMenu />
+              </div>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
+              <div style={{ color: 'var(--color-gray-10)', fontSize: 10, marginRight: 10 }}>{formatAgo(reply.createdAt)}</div>
+            </div>
+          )
         }
       /> */}
-      {/* 내 댓글일 때 */}
+
       <UserProfile
         user={reply.user}
         fontStyle="sm_regular"
@@ -30,6 +40,7 @@ export default function ReplyItem({ reply }: { reply: PostComment }) {
           </div>
         }
       />
+      {/* 내 댓글일 때 */}
 
       <div className={styles.reply_item_content_container}>
         <pre className={styles.reply_item_content}>{reply.content}</pre>

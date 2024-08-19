@@ -1,23 +1,69 @@
-.info {
-  padding: 1.4rem 0;
+.user_info {
+  padding-top: 1.4rem;
   margin-bottom: 2rem;
-  border-bottom: 0.1rem solid var(--color-gray-50);
+  // border-bottom: 0.1rem solid var(--color-gray-50);
 }
 
-.image {
-  margin-bottom: 2rem;
+.user_info::after {
+  content: '';
+  display: block;
+  margin-top: 1.4rem;
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--color-gray-50);
 }
 
-.text {
-  font-size: 1.2rem;
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: var(--color-gray-10);
 
-  .plant_info {
-    padding-bottom: 2rem;
-    color: var(--color-gray-10);
-    border-bottom: 0.1rem solid var(--color-gray-50);
+  .heading {
+    font-weight: var(--font-medium);
   }
 
-  .description {
-    padding-top: 2rem;
+  .text {
+    font-size: 1.2rem;
+
+    .plant_info {
+      padding-bottom: 2rem;
+      :not(:last-child) {
+        margin-bottom: 0.6rem;
+      }
+    }
+
+    .plant_info::after {
+      content: '';
+      display: block;
+      margin-top: 2rem;
+      width: 100%;
+      height: 0.1rem;
+      background-color: var(--color-gray-50);
+    }
+
+    .description {
+      white-space: pre-wrap;
+      line-height: 2.4rem;
+      color: var(--color-black);
+    }
+  }
+}
+
+// DiaryImageSlider
+.image_swiper {
+  width: 100%;
+
+  .slide {
+    width: 31.2rem;
+    height: 31.2rem;
+  }
+
+  button {
+    width: 100%;
+    height: 100%;
+    img {
+      object-fit: cover;
+    }
   }
 }

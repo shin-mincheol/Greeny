@@ -3,7 +3,7 @@ import CommunitySection from '@greeny/story/CommunitySection';
 import PostList from '@greeny/story/PostList';
 import DiarySlider from '@greeny/story/DiarySlider';
 
-export default async function Community() {
+export default async function Story({ searchParams }: { searchParams: { category: string } }) {
   return (
     <>
       <h1 className={styles.sr_only}>Community</h1>
@@ -11,7 +11,7 @@ export default async function Community() {
         <DiarySlider />
       </CommunitySection>
       <CommunitySection sectionInfo={{ title: '커뮤니티', url: '/story/community' }}>
-        <PostList />
+        <PostList searchParams={searchParams} />
       </CommunitySection>
     </>
   );
