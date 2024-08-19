@@ -395,9 +395,50 @@
 
 // SubMenu
 .sub_menu {
+  position: relative;
   display: block;
   height: 1.4rem;
   .sub_menu_icon {
     vertical-align: top;
+  }
+}
+
+// ImageSlider
+.image_swiper {
+  width: 110%;
+
+  .slider {
+    width: 14rem;
+    height: 11rem;
+  }
+  button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+// DiarySwiper
+.diary_swiper {
+  width: 110%;
+  .slider {
+    width: 14rem;
+    height: 11rem;
+  }
+  a {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0.2rem;
+    img {
+      object-fit: cover;
+    }
   }
 }
