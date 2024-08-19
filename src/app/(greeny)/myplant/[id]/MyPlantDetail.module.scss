@@ -5,11 +5,15 @@
 
   .plant_photo {
     @include flex-horizontal(0);
+    position: relative;
     margin: -2.4rem -2.4rem 0;
     align-items: center;
     justify-content: center;
     height: 30rem;
     overflow: hidden;
+    img {
+      object-fit: cover;
+    }
   }
 
   .plant_name {
@@ -96,8 +100,10 @@
     }
     .plant_tips {
       @include flex-vertical(1rem);
+      width: 100%;
 
       pre {
+        width: 100%;
         line-height: 2rem;
         font-size: 1.2rem;
         padding: 1.6rem;
@@ -156,6 +162,7 @@
 
           .item_cover {
             @include flex-horizontal(0);
+            position: relative;
             align-items: center;
             width: 25rem;
             height: 20rem;
@@ -163,8 +170,7 @@
             overflow: hidden;
 
             img {
-              width: 100%;
-              height: auto;
+              object-fit: cover;
             }
           }
 
