@@ -10,6 +10,7 @@ export interface PlantForm {
   waterCycle: number;
   adoptionDate: string;
   light: string;
+  feature: string;
   price: number;
   shippingFees: number;
   quantity: number;

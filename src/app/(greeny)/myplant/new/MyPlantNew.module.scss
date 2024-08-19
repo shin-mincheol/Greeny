@@ -11,7 +11,7 @@
     @include flex-vertical(3rem);
     align-items: center;
 
-    h2 {
+    h1 {
       font-size: 2rem;
       font-weight: var(--font-bold);
       color: var(--color-primary);
@@ -56,10 +56,21 @@
         box-sizing: border-box;
         border-radius: 1rem;
         background-color: var(--color-secondary-light);
-        .readInput {
-          // box-shadow: inset 0 0 10px saddlebrown;
-          background-color: none;
-          border: none;
+
+        .infoItem {
+          @include flex-horizontal(1rem);
+          align-items: center;
+          h4 {
+            width: 5rem;
+            font-size: 1.4rem;
+            font-weight: var(--font-semibold);
+            flex-shrink: 0;
+          }
+          .readInput {
+            // box-shadow: inset 0 0 10px saddlebrown;
+            background-color: transparent;
+            border: none;
+          }
         }
       }
 

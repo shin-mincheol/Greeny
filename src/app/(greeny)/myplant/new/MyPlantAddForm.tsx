@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '@/components/button/Button';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import photoAdd from '@images/PhotoAddIcon.svg';
@@ -21,6 +21,7 @@ export default function MyPlantAddForm() {
     setValue,
     watch,
   } = useForm<PlantForm>();
+
   //식물 사진 미리보기
   const [imagePreview, setImagePreview] = useState<string>('');
   const image = watch('attach');
@@ -50,9 +51,13 @@ export default function MyPlantAddForm() {
     </option>
   ));
 
+  const onAddPlant = (formData: PlantForm) => {
+    console.log(formData);
+  };
+
   return (
-    <form>
-      <h2>나의 식물 등록</h2>
+    <form onSubmit={handleSubmit(onAddPlant)}>
+      <h1>나의 식물 등록</h1>
 
       <div className={styles.file_container}>
         <h3>
@@ -68,13 +73,13 @@ export default function MyPlantAddForm() {
 
       <div className={styles.input_container}>
         <label htmlFor="name">
-          식물명<span>*</span>
+          식물<span>*</span>
         </label>
 
         <div className={styles.selectBox}>
           <select className={styles.select} {...register('name')} defaultValue="placeholder">
             <option disabled value="placeholder">
-              식물 이름을 선택해주세요.
+              식물을 선택해주세요.
             </option>
             {plantOptions}
           </select>
@@ -86,8 +91,16 @@ export default function MyPlantAddForm() {
         <label htmlFor="info">가드닝 정보</label>
         <div className={styles.infoBox}>
           <div className={styles.infoItem}>
-            <h4>습도</h4>
+            <h4>습도 |</h4>
             <input readOnly className={styles.readInput} type="text" {...register('humidity')} />
+          </div>
+          <div className={styles.infoItem}>
+            <h4>온도 |</h4>
+            <input readOnly className={styles.readInput} type="text" {...register('grwhTp')} />
+          </div>
+          <div className={styles.infoItem}>
+            <h4>일조량 |</h4>
+            <input readOnly className={styles.readInput} type="text" {...register('light')} />
           </div>
         </div>
       </div>
@@ -108,7 +121,7 @@ export default function MyPlantAddForm() {
             },
           })}
         />
-        <p>2글자 이상 입력해주세요.</p>
+        {errors.nickName && <p>{errors.nickName?.message}</p>}
       </div>
 
       <div className={styles.input_container}>
@@ -116,14 +129,23 @@ export default function MyPlantAddForm() {
           식물 입양일<span>*</span>
         </label>
 
-        <DatePicker
-          className={styles.datePicker}
-          dateFormat="yyyy.MM.dd" // 날짜 형태
-          shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          name="adoptionDate"
-        />
+        {/* <Controller
+          control={control}
+          name="date"
+          format={dateFormat}
+          defaultValue={date}
+          render={({ onChange }) => (
+            <DatePicker
+              className={styles.datePicker}
+              dateFormat="yyyy.MM.dd" // 날짜 형태
+              shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
+              selected={selectedDate}
+              onChange={(value, dateString) => onChange(dateString)}
+              {...register('adoptionDate')}
+            />
+          )}
+        /> */}
+
         <p>입양 날짜를 선택해주세요.</p>
       </div>
 
@@ -132,16 +154,37 @@ export default function MyPlantAddForm() {
           물주기<span>*</span>
         </label>
         <div className={styles.sub_container}>
-          <input type="number" id="waterCycle" placeholder="물주기를 선택해주세요." {...register('waterCycle')} />
+          <input
+            type="number"
+            id="waterCycle"
+            placeholder="물주기를 선택해주세요."
+            {...register('waterCycle', {
+              required: '물주기를 입력하세요.',
+              pattern: {
+                value: /^[0-9]*$/,
+                message: '숫자만 입력 가능합니다.',
+              },
+            })}
+          />
           <span>일에 한번씩</span>
         </div>
-        <p>물주기를 입력해주세요.</p>
+        {errors.waterCycle && <p>{errors.waterCycle.message}</p>}
       </div>
 
       <div className={styles.input_container}>
         <label htmlFor="feature">특징</label>
-        <textarea id="feature" placeholder="물주기를 선택해주세요." />
-        <p>2글자 이상 입력해주세요.</p>
+        <textarea
+          id="feature"
+          placeholder="식물의 특징을 적어주세요."
+          {...register('feature', {
+            required: '식물의 특징을 적어주세요.',
+            minLength: {
+              value: 2,
+              message: '특징을 2글자 이상 입력하세요.',
+            },
+          })}
+        />
+        {errors.feature && <p>{errors.feature.message}</p>}
       </div>
 
       <Button type="submit" bgColor="fill" btnSize="lg">
