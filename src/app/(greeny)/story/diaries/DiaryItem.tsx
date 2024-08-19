@@ -1,22 +1,28 @@
-import diary from './Diary.module.scss';
+import diaryStyles from './Diary.module.scss';
 import Link from 'next/link';
 import UserProfile from '@components/UserProfile';
 import Like from '@greeny/story/Like';
+import { DiaryRes } from '@/types/post';
+import { formatAgo } from '@/utils/date';
+import Image from 'next/image';
 
-export default function DiaryItem() {
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
+export default function DiaryItem({ diary }: { diary: DiaryRes }) {
   return (
-    <div className={diary.item}>
-      <Link href="/story/diaries/123">
-        {/* <Image height={}/> */}
-        <div style={{ width: '100%', height: 246, backgroundColor: '#DDD' }}></div>
+    <div className={diaryStyles.item}>
+      <Link href={`/story/diaries/${diary._id}`}>
+        <div className={diaryStyles.thumbnail}>
+          <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} fill />
+        </div>
       </Link>
-      {/* 프로필, 올린 시간, 좋아요 */}
-      <div className={diary.info}>
+      <div className={diaryStyles.info}>
         <UserProfile
+          user={diary.user}
           fontStyle="md_semibold"
           component={
             <>
-              <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>12시간 전</p>
+              <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
                 <Like number={11} />
               </div>

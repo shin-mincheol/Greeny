@@ -1,16 +1,22 @@
-import diaryDetail from './DiaryDetail.module.scss';
+import diaryDetailStyles from './DiaryDetail.module.scss';
+import { fetchDiary } from '@/app/api/fetch/postFetch';
 import UserProfile from '@components/UserProfile';
 import Like from '@greeny/story/Like';
+import { formatAgo } from '@/utils/date';
+import DiaryImageSlider from './DiaryImageSlider';
 
-export default function DiaryDetail() {
+export default async function DiaryDetail({ params: { id } }: { params: { id: string } }) {
+  const diary = await fetchDiary(id);
+
   return (
     <>
-      <div className={diaryDetail.info}>
+      <div className={diaryDetailStyles.user_info}>
         <UserProfile
+          user={diary.user}
           fontStyle="md_semibold"
           component={
             <>
-              <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>12시간 전</p>
+              <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
                 <Like number={10} />
               </div>
@@ -18,19 +24,28 @@ export default function DiaryDetail() {
           }
         />
       </div>
-      {/* 구분선 */}
-      <article>
-        {/* swiper */}
-        <div className={diaryDetail.image} style={{ height: 312, backgroundColor: '#DDD' }}></div>
-        <div className={diaryDetail.text}>
-          <div className={diaryDetail.plant_info}>
-            <div>식물 상태: 좋음</div>
-            <div>반려 식물을 위한 활동: 물 주기</div>
-            <div>활동 날짜: 2024-07-31</div>
+      <article className={diaryDetailStyles.article}>
+        <h2>
+          <span className={diaryDetailStyles.heading}>제목: </span>
+          {diary.title}
+        </h2>
+        <DiaryImageSlider images={diary.image} />
+        <div className={diaryDetailStyles.text}>
+          <div className={diaryDetailStyles.plant_info}>
+            <div>
+              <span className={diaryDetailStyles.heading}>식물 상태: </span>
+              {diary.extra.plantState}
+            </div>
+            <div>
+              <span className={diaryDetailStyles.heading}>반려 식물을 위한 활동: </span>
+              {diary.extra.action}
+            </div>
+            <div>
+              <span className={diaryDetailStyles.heading}>활동 날짜: </span>
+              {diary.extra.actionDate}
+            </div>
           </div>
-          {/* 구분선 */}
-          <div></div>
-          <p className={diaryDetail.description}>오늘 베리베리가 너무 시들시들 해서 영양제를 줬다.. 시들지 않고 오래가자 베리야</p>
+          <pre className={diaryDetailStyles.description}>{diary.content}</pre>
         </div>
       </article>
     </>

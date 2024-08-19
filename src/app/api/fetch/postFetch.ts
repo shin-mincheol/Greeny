@@ -44,6 +44,17 @@ export async function fetchPost(id: string) {
   return resJson.item;
 }
 
+export async function fetchDiary(id: string) {
+  const url = `${SERVER}/posts/${id}?type=diary`;
+  const res = await fetch(url, {
+    headers: { 'client-id': `${DBNAME}` },
+  });
+  const resJson: SingleItem<DiaryRes> | CoreErrorRes = await res.json();
+  if (!resJson.ok) throw new Error(resJson.message);
+
+  return resJson.item;
+}
+
 export async function fetchReply(id: string) {
   const url = `${SERVER}/posts/${id}/replies`;
   const res = await fetch(url, {

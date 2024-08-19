@@ -1,7 +1,7 @@
 import diary from './Diary.module.scss';
-import DiaryItem from '@greeny/story/diaries/DiaryItem';
 import PageHeading from '@greeny/story/PageHeading';
 import Search from '@greeny/story/Search';
+import DiaryList from '@greeny/story/diaries/DiaryList';
 
 export default function Diaries() {
   return (
@@ -10,12 +10,7 @@ export default function Diaries() {
       <div className={diary.search_container}>
         <Search />
       </div>
-      <div className={diary.post_list}>
-        <DiaryItem />
-        <DiaryItem />
-        <DiaryItem />
-        <DiaryItem />
-      </div>
+      <DiaryList />
     </>
   );
 }
