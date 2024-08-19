@@ -50,6 +50,19 @@
         }
       }
 
+      .infoBox {
+        width: 100%;
+        padding: 1.6rem 2rem;
+        box-sizing: border-box;
+        border-radius: 1rem;
+        background-color: var(--color-secondary-light);
+        .readInput {
+          // box-shadow: inset 0 0 10px saddlebrown;
+          background-color: none;
+          border: none;
+        }
+      }
+
       p {
         color: var(--color-error);
         font-weight: var(--font-semibold);
@@ -63,28 +76,17 @@
         }
       }
     }
-
-    .button {
-      width: 100%;
-      padding: 1rem 1.4rem;
-      box-sizing: border-box;
-      border-radius: 0.6rem;
-      text-align: center;
-      background-color: var(--color-primary);
-      color: var(--color-white);
-    }
   }
-
-  .photoAdd {
-    display: inline-block;
+  .photo_cover {
+    position: relative;
     width: 12rem;
     height: 12rem;
+    overflow: hidden;
     border-radius: 2rem;
-    background-color: #d5e1de;
-    background-image: url('../../../../../public/images/PhotoAddIcon.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 3.2rem;
+    border: 0.1rem solid var(--color-secondary-dark);
+    img {
+      object-fit: cover;
+    }
   }
 }
 
@@ -123,5 +125,10 @@
     padding: 0 1rem;
     position: relative;
     z-index: 3; // select가 위로 올라와야 함
+  }
+
+  option {
+    color: var(--color-gray-30);
+    font-family: unset;
   }
 }

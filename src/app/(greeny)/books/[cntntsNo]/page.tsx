@@ -1,19 +1,19 @@
 import Image from 'next/image';
 import styles from './[cntntsNo].module.scss';
-import plantList from '@/app/data/plantList.json';
-import { Plant } from '../page';
+import plantList from '@/app/data/plantList';
+import { PlantJson } from '@/types/plant';
 
 export default function Page({ params }: { params: { cntntsNo: string } }) {
-  const plant: Plant = plantList.filter((plant) => plant.cntntsNo === params.cntntsNo)[0];
+  const plant: PlantJson = plantList.filter((plant) => plant.cntntsNo === params.cntntsNo)[0];
 
   if (!plant) return <div>데이터가 없습니다.</div>;
 
   // plant를 받아 키값이 ""인 경우 '없음'으로 바꿈
-  const processedPlant: Plant = Object.entries(plant).reduce((acc, entry) => {
-    const [key, value] = entry as [keyof Plant, string];
+  const processedPlant: PlantJson = Object.entries(plant).reduce((acc, entry) => {
+    const [key, value] = entry as [keyof PlantJson, string];
     acc[key] = value === '' ? '없음' : value;
     return acc;
-  }, {} as Plant);
+  }, {} as PlantJson);
 
   return (
     <>

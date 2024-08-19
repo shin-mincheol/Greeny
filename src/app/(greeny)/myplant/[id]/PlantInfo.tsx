@@ -1,5 +1,5 @@
 import { PlantRes } from '@/types/plant';
-import styles from '../MyPlantDetail.module.scss';
+import styles from './MyPlantDetail.module.scss';
 
 export default function PlantInfo({ item }: { item: PlantRes }) {
   return (

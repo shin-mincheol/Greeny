@@ -3,9 +3,10 @@ import Image from 'next/image';
 import styles from './Books.module.scss';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import plantList from '@/app/data/plantList.json';
+import plantList from '@/app/data/plantList';
 import Link from 'next/link';
 import Modal from '@/app/(greeny)/books/Modal';
+import { PlantJson } from '@/types/plant';
 interface FormData {
   keyword: string;
 }
@@ -17,51 +18,13 @@ interface FilterValues {
   lighttdemanddoCodes: string[];
   waterCycleCode: string;
 }
-export interface Plant {
-  cntntsNo: string;
-  cntntsSj: string;
-  dlthtsCodeNm: string;
-  eclgyCodeNm: string;
-  flclrCodeNm: string;
-  fmldeSeasonCodeNm: string;
-  fmldecolrCodeNm: string;
-  fncltyInfo: string;
-  frtlzrInfo: string;
-  grwhTpCodeNm: string;
-  grwhstleCodeNm: string;
-  hdCodeNm: string;
-  indoorpsncpacompositionCodeNm: string;
-  lefStleInfo: string;
-  lefcolrCodeNm: string;
-  lefmrkCodeNm: string;
-  lighttdemanddoCodeNm: string;
-  managedemanddoCodeNm: string;
-  managelevelCodeNm: string;
-  orgplceInfo: string;
-  plntbneNm: string;
-  postngplaceCodeNm: string;
-  prpgtEraInfo: string;
-  prpgtmthCodeNm: string;
-  soilInfo: string;
-  waterCycle: string;
-  rtnOrginlFileNm: string;
-  rtnStreFileNm: string;
-  rtnThumbFileNm: string;
-  rtnFileUrl: string;
-  grwhstleCode: string;
-  flclrCode: string;
-  fmldecolrCode: string;
-  lefmrkCode: string;
-  lighttdemanddoCode: string;
-  waterCycleCode: string;
-}
 
 // export default function Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
 export default function Page() {
   // console.log(searchParams);
 
-  // const [plants, setPlants] = useState<Plant[]>(searchParams.keyword ? plantList.filter((item) => item.cntntsSj.includes(searchParams.keyword as string)) : plantList);
-  const [plants, setPlants] = useState<Plant[]>(plantList);
+  // const [plants, setPlants] = useState<PlantJsonlant[]>(searchParams.keyword ? plantList.filter((item) => item.cntntsSj.includes(searchParams.keyword as string)) : plantList);
+  const [plants, setPlants] = useState<PlantJson[]>(plantList);
   const { register, handleSubmit } = useForm<FormData>();
   const submitHandler = (values: FormData) => {
     const result = plantList.filter((item) => item.cntntsSj.includes(values.keyword));
@@ -113,7 +76,7 @@ export default function Page() {
     </>
   );
 }
-function List({ list }: { list: Plant[] }) {
+function List({ list }: { list: PlantJson[] }) {
   return (
     <ul className={styles.content_list}>
       {list.map((item, idx) => (
@@ -123,7 +86,7 @@ function List({ list }: { list: Plant[] }) {
   );
 }
 
-function Item({ item }: { item: Plant }) {
+function Item({ item }: { item: PlantJson }) {
   return (
     <li>
       <Link href={`/books/${item.cntntsNo}`}>

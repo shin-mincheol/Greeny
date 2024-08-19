@@ -1,14 +1,12 @@
-'use client';
 import Image from 'next/image';
 import styles from './MyPlantDiaryAdd.module.scss';
 import PlantImg1 from '@images/PlantImg1.png';
-import Link from 'next/link';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 
 export default function MyPlantDiaryAdd() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   return (
     <div className={styles.diaryAdd_wrapper}>
       <form>
@@ -74,13 +72,13 @@ export default function MyPlantDiaryAdd() {
             활동 날짜<span>*</span>
           </label>
 
-          <DatePicker
+          {/* <DatePicker
             className={styles.datePicker}
             dateFormat="yyyy.MM.dd" // 날짜 형태
             shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
-          />
+          /> */}
           <p>활동 날짜를 선택해주세요.</p>
         </div>
 
