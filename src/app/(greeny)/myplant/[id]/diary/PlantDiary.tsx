@@ -1,17 +1,29 @@
+'use client';
 import Link from 'next/link';
 import styles from '../MyPlantDetail.module.scss';
 import Image from 'next/image';
 import Calenadar from '../../(calendar)/Calendar';
 import { fetchPlantsDiary } from '@/app/api/fetch/plantFetch';
 import { PlantDetailRes, PlantRes } from '@/types/plant';
-import { auth } from '@/auth';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default async function PlantDiray({ id }: { id: number }) {
-  const session = await auth();
-  const data = await fetchPlantsDiary<PlantRes>(session?.user?.id, id);
+export default function PlantDiray({ id }: { id: number }) {
+  const { data: session } = useSession();
+  const [item, setItem] = useState<PlantDetailRes[]>();
+  useEffect(() => {
+    const data = async () => {
+      const res = await fetchPlantsDiary<PlantRes>(session?.user?.id, id);
+      setItem(res);
+    };
 
-  const diaryList = data.item.map((item: PlantDetailRes) => {
+    data();
+  }, []);
+
+  console.log(item);
+
+  const diaryList = item?.item?.map((item: PlantDetailRes) => {
     console.log(item);
     return (
       <li key={item._id}>
