@@ -6,13 +6,12 @@ import Image from 'next/image';
 import Banner from './(section)/Banner';
 import TodayPlant from './(section)/TodayPlant';
 import TodayDiary from './(section)/TodayDiary';
-import { DiaryRes, PostRes } from '@/types/post';
-import { fetchPosts } from '@/app/api/fetch/postFetch';
+import { fetchDiaries, fetchPosts } from '@/app/api/fetch/postFetch';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function Home() {
-  const dataPost = await fetchPosts<PostRes>('post');
-  const dataDiary = await fetchPosts<DiaryRes>('diary');
+  const dataPost = await fetchPosts();
+  const dataDiary = await fetchDiaries();
 
   const list = dataPost.map((item) => {
     return (
