@@ -21,6 +21,7 @@
       "@/*": ["./src/*"],
       "@styles/*": ["./src/styles/*"],
       "@images/*": ["./public/images/*"],
+      "@loading/*": ["./public/loading/*"],
       "@components/*": ["./src/components/*"],
       "@greeny/*": ["./src/app/(greeny)/*"]
     }
