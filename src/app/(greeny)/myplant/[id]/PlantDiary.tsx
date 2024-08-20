@@ -69,7 +69,7 @@ export default function PlantDiray({ id }: { id: number }) {
           <span className="hidden">식물 일지 추가</span>
         </Link>
       </div>
-      <Calendar value={currentDate} onChange={(date) => setCurrentDate(date as Date)} formatDay={(value) => format(value, 'd')} calendarType="gregory" />
+      {/* <Calendar value={currentDate} onChange={(date) => setCurrentDate(date as Date)} formatDay={(value) => format(value, 'd')} calendarType="gregory" /> */}
 
       {/* <ul className={styles.diary_list}>{diaryList}</ul> */}
     </div>
