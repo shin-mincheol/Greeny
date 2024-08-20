@@ -87,3 +87,20 @@ export interface PlantJson {
   lighttdemanddoCode: string;
   waterCycleCode: string;
 }
+
+// 2-1 식물 목록 조회
+export interface PlantListRes extends Omit<PlantRes, 'mainImages'> {
+  seller: {
+    _id: number;
+    email: string;
+    name: string;
+    phone: string;
+    address: string;
+    image: string;
+  };
+  replies: number;
+  bookmarks: number;
+  options: number;
+  orders: number;
+  ordersQuantity: number;
+}
