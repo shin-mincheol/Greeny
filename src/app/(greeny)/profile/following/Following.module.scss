@@ -3,18 +3,9 @@
 .main_wrapper {
   @include flex-vertical(3rem);
   max-width: 36rem;
-  // border: 1px solid;
   margin: 0 auto;
   height: 100vh;
 
-  // .main_search {
-  //   @include flex-horizontal(2rem);
-  //   justify-content: space-between;
-  //   padding: 1rem;
-
-  // input {
-  //   flex-grow: 1;
-  // }
   .search_form {
     display: flex;
     gap: 1.2rem;
@@ -51,7 +42,6 @@
       }
     }
   }
-  // }
 
   .follow_list {
     @include flex-vertical();
@@ -83,24 +73,19 @@
     }
 
     .user_data {
-      @include flex-vertical(1rem);
-      justify-content: space-between;
+      @include flex-vertical(0rem);
+      justify-content: space-evenly;
       align-items: flex-start;
       p {
-        font-weight: var(--font-semibold);
+        font-weight: var(--font-bold);
+        font-size: 1.4rem;
+      }
+      span {
         font-size: 1.2rem;
+        color: var(--color-gray-10);
       }
     }
 
-    .button_fill {
-      width: 2.8rem;
-      height: 2.8rem;
-      background-repeat: no-repeat;
-      background-position: center;
-      border: 1px solid var(--color-primary);
-      border-radius: 1rem;
-      background-image: url('/images/FollowerDelete.svg');
-      background-color: var(--color-primary);
-    }
+    // 있던 자리
   }
 }
