@@ -3,10 +3,8 @@ import styles from './MyPlantDiaryAdd.module.scss';
 import PlantImg1 from '@images/PlantImg1.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
 
 export default function MyPlantDiaryAdd() {
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   return (
     <div className={styles.diaryAdd_wrapper}>
       <form>
