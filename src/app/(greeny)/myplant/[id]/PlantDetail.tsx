@@ -1,11 +1,11 @@
 'use client';
-import styles from '../MyPlantDetail.module.scss';
+import styles from './MyPlantDetail.module.scss';
 import { useState } from 'react';
+import { PlantRes } from '@/types/plant';
 import PlantInfo from './PlantInfo';
 import PlantDiray from './PlantDiary';
-import { PlantRes } from '@/types/plant';
 
-export default function MyPlantInfo({ item }: { item: PlantRes }) {
+export default function MyPlantDetail({ item }: { item: PlantRes }) {
   const [tabMenun, setTabMenu] = useState(true);
   const handleTab = (tabClick: string) => {
     if (tabClick === 'info') {

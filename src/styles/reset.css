@@ -157,6 +157,7 @@ select::-ms-expand {
 option {
   background: var(--color-white);
   color: var(--color-black);
+  font-family: unset;
   padding: 1rem 0;
 }
 

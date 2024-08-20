@@ -1,5 +1,5 @@
 import { PlantRes } from '@/types/plant';
-import styles from '../MyPlantDetail.module.scss';
+import styles from './MyPlantDetail.module.scss';
 
 export default function PlantInfo({ item }: { item: PlantRes }) {
   return (
@@ -12,19 +12,22 @@ export default function PlantInfo({ item }: { item: PlantRes }) {
             <p>{item.grwhTp}</p>
           </li>
           <li>
+            <span>습도</span>
+            <p>{item.humidity}</p>
+          </li>
+          <li>
             <span>물주기</span>
             <p>{item.waterCycle}일에 한번씩</p>
           </li>
           <li>
             <span>일조량</span>
             <p>{item.light}</p>
-            <p></p>
           </li>
         </ul>
       </div>
       <div className={styles.plant_tips}>
         <h3>특징</h3>
-        <pre>{item.feature}</pre>
+        <pre>{item.content}</pre>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { UserForm } from '@/types/user';
 import { signup } from '@/app/api/actions/useAction';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/button/Button';
 
 export default function SignupForm() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function SignupForm() {
   } = useForm<UserForm>();
 
   //프로필 미리보기
-  const [imagePreview, setImagePreview] = useState<string>('');
+  const [imagePreview, setImagePreview] = useState<string>();
   const image = watch('attach');
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function SignupForm() {
 
     const resData = await signup(userForm);
     if (resData.ok) {
-      alert(`안녕하세요${resData.item.name}님:) \n 회원가입을 환영합니다.`);
+      alert(`안녕하세요${resData.item.name}님:) \n회원가입을 환영합니다.`);
       router.push('/');
     } else {
       if ('errors' in resData) {
@@ -159,9 +160,9 @@ export default function SignupForm() {
         {errors.address && <p>{errors.address.message}</p>}
       </div>
 
-      <button type="submit" className={styles.button}>
+      <Button bgColor="fill" btnSize="lg" type="submit">
         회원가입
-      </button>
+      </Button>
     </form>
   );
 }

@@ -1,15 +1,13 @@
 import Image from 'next/image';
 import styles from './MyPlantDetail.module.scss';
-import MyPlantInfo from './diary/page';
 import { fetchPlantsDetail } from '@/app/api/fetch/plantFetch';
 import { PlantRes } from '@/types/plant';
 import { differenceInDays } from 'date-fns';
+import MyPlantDetail from './PlantDetail';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default async function MyPlantDetail({ params }: { params: { id: string } }) {
+export default async function MyPlantItem({ params }: { params: { id: string } }) {
   const item = await fetchPlantsDetail<PlantRes>(params.id);
-
-  console.log(item);
 
   const currentDay = item.adoptionDate;
   const toDay = new Date();
@@ -28,7 +26,7 @@ export default async function MyPlantDetail({ params }: { params: { id: string }
           `{item.nickName}`와 함께한지 {diffDays}일째에요!
         </p>
       </div>
-      <MyPlantInfo item={item} />
+      <MyPlantDetail item={item} />
     </div>
   );
 }

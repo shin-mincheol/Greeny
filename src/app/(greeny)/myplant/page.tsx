@@ -9,12 +9,15 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function MyPlant() {
   const session = await auth();
+
   const data = await fetchPlants<PlantRes>(session?.accessToken);
 
+  console.log(data);
+
   const myPlantList = data?.map((item: PlantRes) => {
-    const currentDay = item.adoptionDate;
-    const toDay = new Date();
-    const diffDays = differenceInDays(toDay, currentDay);
+    const currentDay: Date | null = item.adoptionDate;
+    const toDay: Date = new Date();
+    const diffDays = currentDay && differenceInDays(toDay, currentDay);
 
     return (
       <Link href={`/myplant/${item._id}`} className={styles.contents_item} key={item._id}>
@@ -26,7 +29,7 @@ export default async function MyPlant() {
           <h3>{item.nickName}</h3>
           <p>{item.name}</p>
 
-          <span>{diffDays} 일째</span>
+          {currentDay && <span>{diffDays} 일째</span>}
         </div>
       </Link>
     );

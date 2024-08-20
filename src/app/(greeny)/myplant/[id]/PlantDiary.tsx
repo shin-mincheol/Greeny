@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
-import styles from '../MyPlantDetail.module.scss';
+import styles from './MyPlantDetail.module.scss';
 import Image from 'next/image';
-import Calenadar from '../../(calendar)/Calendar';
+import Calenadar from '../(calendar)/Calendar';
 import { fetchPlantsDiary } from '@/app/api/fetch/plantFetch';
 import { PlantDetailRes, PlantRes } from '@/types/plant';
 import { useSession } from 'next-auth/react';
@@ -11,19 +11,17 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default function PlantDiray({ id }: { id: number }) {
   const { data: session } = useSession();
-  const [item, setItem] = useState<PlantDetailRes[]>();
+  const [data, setData] = useState<PlantDetailRes[]>();
   useEffect(() => {
     const data = async () => {
-      const res = await fetchPlantsDiary<PlantRes>(session?.user?.id, id);
-      setItem(res);
+      const resData = await fetchPlantsDiary<PlantRes>(session?.user?.id, id);
+      setData(resData);
     };
 
     data();
   }, []);
 
-  console.log(item);
-
-  const diaryList = item?.item?.map((item: PlantDetailRes) => {
+  const diaryList = data?.map((item: PlantDetailRes) => {
     console.log(item);
     return (
       <li key={item._id}>
@@ -58,7 +56,7 @@ export default function PlantDiray({ id }: { id: number }) {
     <div className={styles.layout_wrapper}>
       <div className={styles.diary_head}>
         <h3>식물 일지</h3>
-        <Link href="/myplant/diary/add" className={styles.diary_add}>
+        <Link href={`/myplant/${id}/diaryAdd`} className={styles.diary_add}>
           <span className="hidden">식물 일지 추가</span>
         </Link>
       </div>
