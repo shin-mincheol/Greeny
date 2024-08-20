@@ -157,11 +157,13 @@ select::-ms-expand {
 option {
   background: var(--color-white);
   color: var(--color-black);
+  font-family: unset;
   padding: 1rem 0;
 }
 
 button,
 input[type='text'],
+input[type='email'],
 input[type='date'],
 input[type='month'],
 input[type='number'],
@@ -171,6 +173,7 @@ textarea {
 }
 
 input[type='text'],
+input[type='email'],
 input[type='date'],
 input[type='number'],
 input[type='password'] {
@@ -189,6 +192,7 @@ textarea {
 }
 
 input[type='text'],
+input[type='email'],
 input[type='number'],
 input[type='password'],
 textarea {
@@ -205,6 +209,7 @@ textarea::placeholder {
 }
 
 input[type='text']:focus,
+input[type='email']:focus,
 input[type='number']:focus,
 input[type='password']:focus,
 textarea:focus {

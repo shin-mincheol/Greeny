@@ -1,21 +1,57 @@
-@import '../../../../styles/mixin';
+@import '@styles/mixin';
 
 .main_wrapper {
-  @include flex-vertical(1rem);
+  @include flex-vertical(3rem);
   max-width: 36rem;
-  border: 1px solid;
+  // border: 1px solid;
   margin: 0 auto;
   height: 100vh;
 
-  .main_search {
-    @include flex-horizontal(2rem);
-    justify-content: space-between;
-    padding: 1rem;
+  // .main_search {
+  //   @include flex-horizontal(2rem);
+  //   justify-content: space-between;
+  //   padding: 1rem;
 
-    input {
+  // input {
+  //   flex-grow: 1;
+  // }
+  .search_form {
+    display: flex;
+    gap: 1.2rem;
+
+    div {
+      position: relative;
       flex-grow: 1;
     }
+
+    input {
+      border-radius: 0.6rem;
+      font-size: 1.2rem;
+    }
+
+    .btn_reset {
+      height: 1.3rem;
+      position: absolute;
+      top: 50%;
+      right: 1.2rem;
+      transform: translateY(-50%);
+
+      img {
+        vertical-align: top;
+      }
+    }
+
+    .btn_submit {
+      padding: 1.1rem;
+      border-radius: 1rem;
+      background-color: var(--color-primary);
+
+      img {
+        vertical-align: top;
+      }
+    }
   }
+  // }
 
   .follow_list {
     @include flex-vertical();
@@ -44,15 +80,27 @@
         border-radius: 50%;
         background-color: #d5e1de;
       }
-      .user_data {
-        @include flex-vertical(1rem);
-        justify-content: space-between;
-        align-items: flex-start;
-        p {
-          font-weight: var(--font-semibold);
-          font-size: 1.2rem;
-        }
+    }
+
+    .user_data {
+      @include flex-vertical(1rem);
+      justify-content: space-between;
+      align-items: flex-start;
+      p {
+        font-weight: var(--font-semibold);
+        font-size: 1.2rem;
       }
+    }
+
+    .button_fill {
+      width: 2.8rem;
+      height: 2.8rem;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 1px solid var(--color-primary);
+      border-radius: 1rem;
+      background-image: url('/images/FollowerDelete.svg');
+      background-color: var(--color-primary);
     }
   }
 }

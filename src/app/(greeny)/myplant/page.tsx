@@ -1,9 +1,40 @@
 import Image from 'next/image';
 import styles from './MyPlant.module.scss';
-import PlantImg1 from '@images/PlantImg1.png';
 import Link from 'next/link';
+import { fetchPlants } from '@/app/api/fetch/plantFetch';
+import { PlantRes } from '@/types/plant';
+import { auth } from '@/auth';
+import { differenceInDays } from 'date-fns';
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function MyPlant() {
+  const session = await auth();
+
+  const data = await fetchPlants<PlantRes>(session?.accessToken);
+
+  console.log(data);
+
+  const myPlantList = data?.map((item: PlantRes) => {
+    const currentDay: Date | null = item.adoptionDate;
+    const toDay: Date = new Date();
+    const diffDays = currentDay && differenceInDays(toDay, currentDay);
+
+    return (
+      <Link href={`/myplant/${item._id}`} className={styles.contents_item} key={item._id}>
+        <div className={styles.item_cover}>
+          <Image src={`${item.image!.length > 0 ? `${SERVER}${item.image![0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
+        </div>
+
+        <div className={styles.item_info}>
+          <h3>{item.nickName}</h3>
+          <p>{item.name}</p>
+
+          {currentDay && <span>{diffDays} 일째</span>}
+        </div>
+      </Link>
+    );
+  });
+
   return (
     <div className={styles.plant_wrapper}>
       <div className={styles.contents_head}>
@@ -19,44 +50,7 @@ export default async function MyPlant() {
         </div>
       </div>
 
-      <div className={styles.contents_main}>
-        <Link href="/myplant/diary" className={styles.contents_item}>
-          <div className={styles.item_cover}>
-            <Image src={PlantImg1} alt="식물 사진" />
-          </div>
-
-          <div className={styles.item_info}>
-            <h3>식물 닉네임</h3>
-            <p>식물 실제이름</p>
-
-            <span>20일째</span>
-          </div>
-        </Link>
-        <Link href="/myplant/diary" className={styles.contents_item}>
-          <div className={styles.item_cover}>
-            <Image src={PlantImg1} alt="식물 사진" />
-          </div>
-
-          <div className={styles.item_info}>
-            <h3>식물 닉네임</h3>
-            <p>식물 실제이름</p>
-
-            <span>20일째</span>
-          </div>
-        </Link>
-        <Link href="/myplant/diary" className={styles.contents_item}>
-          <div className={styles.item_cover}>
-            <Image src={PlantImg1} alt="식물 사진" />
-          </div>
-
-          <div className={styles.item_info}>
-            <h3>식물 닉네임</h3>
-            <p>식물 실제이름</p>
-
-            <span>20일째</span>
-          </div>
-        </Link>
-      </div>
+      <div className={styles.contents_main}>{myPlantList}</div>
     </div>
   );
 }

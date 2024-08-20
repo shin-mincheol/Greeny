@@ -11,6 +11,7 @@
 
   /* colors */
   --color-primary: #20604f;
+  --color-primary-disabled: rgba(32, 96, 79, 0.5);
   --color-secondary-light: #fffdf6;
   --color-secondary-dark: #f7f4e9;
 

@@ -36,16 +36,6 @@
         font-weight: var(--font-semibold);
       }
     }
-
-    .button {
-      width: 100%;
-      padding: 1rem 1.4rem;
-      box-sizing: border-box;
-      border-radius: 0.6rem;
-      text-align: center;
-      background-color: var(--color-primary);
-      color: var(--color-white);
-    }
   }
 
   .socail {
@@ -57,6 +47,7 @@
       @include flex-horizontal(1rem);
       justify-content: center;
       align-items: center;
+      color: var(--color-gray-10);
     }
 
     p::after,
@@ -78,7 +69,7 @@
   display: block;
   position: absolute;
   inset: 0;
-  background-image: url('../../../../public/images/LoginBackground.png');
+  background-image: url('/images/LoginBackground.png');
   background-repeat: no-repeat;
   opacity: 0.2;
   z-index: -1;

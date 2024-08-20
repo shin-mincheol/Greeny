@@ -8,6 +8,7 @@ import '@/styles/common.css';
 import '@/styles/variable.css';
 import RecoilRootWrapper from '@/RecoilWrapper';
 import QueryProvider from '@/QueryProvider';
+import { SessionProvider } from 'next-auth/react';
 
 const pretendard = localFont({
   src: '../../../public/fonts/PretendardVariable.woff2',
@@ -37,9 +38,11 @@ export default function RootLayout({
         <div className={styles.root}>
           <RecoilRootWrapper>
             <QueryProvider>
-              <Header />
-              <main className={styles.main}>{children}</main>
-              <Footer />
+              <SessionProvider>
+                <Header />
+                <main className={styles.main}>{children}</main>
+                <Footer />
+              </SessionProvider>
             </QueryProvider>
           </RecoilRootWrapper>
         </div>
