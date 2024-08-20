@@ -394,12 +394,14 @@
 }
 
 // SubMenu
-.sub_menu {
+.sub_menu_container {
   position: relative;
-  display: block;
-  height: 1.4rem;
-  .sub_menu_icon {
-    vertical-align: top;
+  .sub_menu {
+    display: block;
+    height: 1.4rem;
+    .sub_menu_icon {
+      vertical-align: top;
+    }
   }
 }
 
@@ -440,5 +442,41 @@
     img {
       object-fit: cover;
     }
+  }
+}
+
+// DropDown
+.dropdown_container {
+  position: absolute;
+  width: max-content;
+  z-index: 10;
+  top: 2rem;
+  right: 0;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--color-gray-50);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
+  background-color: var(--color-white);
+
+  .dropdown_option {
+    button {
+      padding: 0.8rem 1.15rem;
+    }
+    font: {
+      size: 1rem;
+      weight: var(--font-semibold);
+    }
+  }
+
+  .dropdown_option:not(:last-child)::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0.1rem;
+    background-color: var(--color-gray-50);
+  }
+
+  .dropdown_option_red {
+    color: var(--color-error);
   }
 }
