@@ -9,15 +9,20 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import photoAdd from '@images/PhotoAddIcon.svg';
 import plantData from '@/app/data/plantList';
-import { PlantForm, PlantJson } from '@/types/plant';
+import { PlantForm } from '@/types/plant';
+import { format } from 'date-fns';
+import { fetchAddPlant } from '@/app/api/fetch/plantFetch';
+import { useSession } from 'next-auth/react';
 
 export default function MyPlantAddForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const { data: session } = useSession();
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
     setValue,
     watch,
   } = useForm<PlantForm>();
@@ -51,8 +56,27 @@ export default function MyPlantAddForm() {
     </option>
   ));
 
-  const onAddPlant = (formData: PlantForm) => {
-    console.log(formData);
+  const onAddPlant = async (formData: PlantForm) => {
+    try {
+      const plantForm = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key !== 'attach') {
+          plantForm.append(key, value as string);
+        }
+      });
+      if (formData.attach) {
+        plantForm.append('attach', formData.attach[0]);
+      }
+
+      const res = await fetchAddPlant(plantForm, session?.accessToken);
+      // console.log(res);
+      if (res.ok) {
+        alert(`${res.item.nickName}이(가) 우리 가족에 합류했어요! `);
+        // router.push('/myplant');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -91,15 +115,24 @@ export default function MyPlantAddForm() {
         <label htmlFor="info">가드닝 정보</label>
         <div className={styles.infoBox}>
           <div className={styles.infoItem}>
-            <h4>습도 |</h4>
+            <div className={styles.infoTit}>
+              <h4>습도</h4>
+              <span>|</span>
+            </div>
             <input readOnly className={styles.readInput} type="text" {...register('humidity')} />
           </div>
           <div className={styles.infoItem}>
-            <h4>온도 |</h4>
+            <div className={styles.infoTit}>
+              <h4>온도</h4>
+              <span>|</span>
+            </div>
             <input readOnly className={styles.readInput} type="text" {...register('grwhTp')} />
           </div>
           <div className={styles.infoItem}>
-            <h4>일조량 |</h4>
+            <div className={styles.infoTit}>
+              <h4>일조량</h4>
+              <span>|</span>
+            </div>
             <input readOnly className={styles.readInput} type="text" {...register('light')} />
           </div>
         </div>
@@ -129,24 +162,23 @@ export default function MyPlantAddForm() {
           식물 입양일<span>*</span>
         </label>
 
-        {/* <Controller
+        <Controller
           control={control}
-          name="date"
-          format={dateFormat}
-          defaultValue={date}
-          render={({ onChange }) => (
+          name="adoptionDate"
+          rules={{ required: '입양 날짜를 선택해주세요.' }}
+          render={({ field: { onChange } }) => (
             <DatePicker
-              className={styles.datePicker}
-              dateFormat="yyyy.MM.dd" // 날짜 형태
-              shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
               selected={selectedDate}
-              onChange={(value, dateString) => onChange(dateString)}
-              {...register('adoptionDate')}
+              dateFormat="yyyy.MM.dd"
+              onChange={(date) => {
+                setSelectedDate(date);
+                onChange(date ? format(date, 'yyyy-MM-dd') : '');
+              }}
             />
           )}
-        /> */}
+        />
 
-        <p>입양 날짜를 선택해주세요.</p>
+        {errors.adoptionDate && <p>{errors.adoptionDate.message}</p>}
       </div>
 
       <div className={styles.input_container}>
@@ -176,7 +208,7 @@ export default function MyPlantAddForm() {
         <textarea
           id="feature"
           placeholder="식물의 특징을 적어주세요."
-          {...register('feature', {
+          {...register('content', {
             required: '식물의 특징을 적어주세요.',
             minLength: {
               value: 2,
@@ -184,7 +216,7 @@ export default function MyPlantAddForm() {
             },
           })}
         />
-        {errors.feature && <p>{errors.feature.message}</p>}
+        {errors.content && <p>{errors.content.message}</p>}
       </div>
 
       <Button type="submit" bgColor="fill" btnSize="lg">

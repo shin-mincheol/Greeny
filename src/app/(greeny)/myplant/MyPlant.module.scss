@@ -22,7 +22,7 @@
       .button_fill {
         width: 5rem;
         height: 3rem;
-        background-image: url('../../../../public/images/DeleteIcon.svg');
+        background-image: url('/images/DeleteIcon.svg');
         background-repeat: no-repeat;
         background-position: center;
         border: 0.1rem solid var(--color-primary);
@@ -30,7 +30,7 @@
       }
 
       .button_fill {
-        background-image: url('../../../../public/images/PlantAddIcon.svg');
+        background-image: url('/images/PlantAddIcon.svg');
         background-color: var(--color-primary);
       }
     }

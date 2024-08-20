@@ -9,7 +9,11 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function MyPlant() {
   const session = await auth();
+  console.log(session);
+
   const data = await fetchPlants<PlantRes>(session?.accessToken);
+
+  console.log(data);
 
   const myPlantList = data?.map((item: PlantRes) => {
     const currentDay = item.adoptionDate;

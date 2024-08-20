@@ -8,11 +8,10 @@ export interface PlantForm {
   grwhTp: string;
   humidity: string;
   waterCycle: number;
-  adoptionDate: string;
+  adoptionDate: Date | null;
   light: string;
-  feature: string;
+  content: string;
   price: number;
-  shippingFees: number;
   quantity: number;
 }
 
@@ -30,6 +29,7 @@ export interface PlantRes extends PlantForm {
   buyQuantity: number;
   createdAt: string;
   updatedAt: string;
+  image: ImageRes[];
 }
 export interface PlantDetailRes {
   _id: number;

@@ -49,13 +49,13 @@
       height: 4rem;
       background-color: var(--color-white);
       box-shadow: inset 0 -0.1rem 0 var(--color-primary);
-      background-image: url('../../../../../public/images/MyPlantIcon.svg');
+      background-image: url('/images/MyPlantIcon.svg');
       background-position: center;
       background-repeat: no-repeat;
     }
 
     .plant_diary {
-      background-image: url('../../../../../public/images/MyPostIcon.svg');
+      background-image: url('/images/MyPostIcon.svg');
     }
 
     .plant_info.is_active,
@@ -125,7 +125,7 @@
         height: 3rem;
         border-radius: 1rem;
         background-color: var(--color-primary);
-        background-image: url('../../../../../public/images/DiaryAddIcon.svg');
+        background-image: url('/images/DiaryAddIcon.svg');
         background-repeat: no-repeat;
         background-position: center;
       }

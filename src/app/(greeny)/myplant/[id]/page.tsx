@@ -9,8 +9,6 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 export default async function MyPlantItem({ params }: { params: { id: string } }) {
   const item = await fetchPlantsDetail<PlantRes>(params.id);
 
-  console.log(item);
-
   const currentDay = item.adoptionDate;
   const toDay = new Date();
   const diffDays = differenceInDays(toDay, currentDay);

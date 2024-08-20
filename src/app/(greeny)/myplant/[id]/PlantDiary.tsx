@@ -21,7 +21,7 @@ export default function PlantDiray({ id }: { id: number }) {
     data();
   }, []);
 
-  const diaryList = data?.item?.map((item: PlantDetailRes) => {
+  const diaryList = data?.map((item: PlantDetailRes) => {
     console.log(item);
     return (
       <li key={item._id}>
