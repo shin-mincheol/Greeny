@@ -1,0 +1,89 @@
+@import '@styles/mixin';
+
+//캘린더 전체
+.react-calendar {
+  background-color: var(--color-white);
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+  width: 100%;
+  border: none !important;
+  @include flex-vertical(0);
+}
+
+.react-calendar__navigation {
+  background-color: transparent;
+  margin-bottom: 0;
+}
+
+//year: prev,next none
+.react-calendar__navigation__arrow.react-calendar__navigation__prev2-button {
+  display: none;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+//year,month text
+.react-calendar__navigation__label {
+  text-align: center;
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+}
+
+//month nav
+.react-calendar__navigation__arrow.react-calendar__navigation__prev-button,
+.react-calendar__navigation__arrow.react-calendar__navigation__next-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 2rem;
+}
+
+//week text
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+//day text
+.react-calendar__tile.react-calendar__month-view__days__day {
+  color: var(--color-black);
+}
+
+// 오늘 날짜
+.react-calendar__tile {
+  background: none !important;
+  min-height: 4.2rem;
+  @include flex-vertical(0.5rem);
+  justify-content: flex-start;
+  transition: all 0.2s;
+}
+
+.react-calendar__tile--now {
+  position: relative;
+
+  background-color: rgba(32, 96, 79, 0.3) !important;
+  border-radius: 0.5rem;
+  abbr {
+    color: var(--color-white);
+    font-weight: var(--font-semibold);
+  }
+}
+
+.react-calendar__month-view__weekdays__weekday--weekend abbr[title='일요일'] {
+  color: var(--color-error);
+}
+
+// 선택한 날짜 스타일 적용
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  // background-color: var(--color-primary);
+  border: 0.2rem solid var(--color-primary);
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+}

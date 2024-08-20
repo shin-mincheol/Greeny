@@ -12,8 +12,6 @@ export default async function MyPlant() {
 
   const data = await fetchPlants<PlantRes>(session?.accessToken);
 
-  console.log(data);
-
   const myPlantList = data?.map((item: PlantRes) => {
     const currentDay: Date | null = item.adoptionDate;
     const toDay: Date = new Date();
