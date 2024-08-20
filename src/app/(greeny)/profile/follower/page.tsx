@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import styles from './Follower.module.scss';
 import NormalProfile from '@images/NormalProfile.svg';
+import Input from '@/components/Input';
 
 export default function Follower() {
   return (
     <div className={styles.main_wrapper}>
-      {/* TODO: 검색 컴포넌트 사용 */}
-      <form className={styles.main_search}>
-        <input type="search" name="search" id="search" placeholder="식물명, 질문을 검색해주세요" />
-        <button>돋보기</button>
+      <form className={styles.search_form}>
+        <Input type="search" name="search" id="search" placeholder="식물명, 질문을 검색해주세요." />
+        <button className={styles.btn_submit}>
+          <Image src="/images/SearchIcon.svg" width={18} height={18} alt="search" />
+        </button>
       </form>
 
       <ul className={styles.follow_list}>
@@ -19,6 +21,7 @@ export default function Follower() {
     </div>
   );
 }
+
 function User() {
   return (
     <li className={styles.item_wrapper}>
@@ -30,8 +33,6 @@ function User() {
             <span>u1@market.com</span>
           </div>
         </div>
-
-        <button type="button" className={styles.button_fill} />
       </div>
     </li>
   );
