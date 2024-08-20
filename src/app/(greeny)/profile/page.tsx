@@ -1,35 +1,47 @@
 import Image from 'next/image';
 import NormalProfile from '@images/NormalProfile.svg';
-import MyPlantIcon from '@images/MyPlantIcon.svg';
-import MyPostIcon from '@images/MyPostIcon.svg';
-import PlantImg1 from '@images/PlantImg1.png';
-import PlantImg2 from '@images/PlantImg2.png';
-import PlantImg3 from '@images/PlantImg3.png';
-import PlantImg4 from '@images/PlantImg4.png';
+
 import ProfileEditIcon from '@images/ProfileEditIcon.svg';
-import Bookmark from '@images/Bookmark.svg';
-import LogOutIcon from '@images/LogOutIcon.svg';
+// import Bookmark from '@images/Bookmark.svg';
+// import LogOutIcon from '@images/LogOutIcon.svg';
 
 import styles from './Profile.module.scss';
+import Tab from './Tab';
+import { auth } from '@/auth';
+import { Following } from '@/types/follow';
+import { MultiItem } from '@/types/response';
+import Link from 'next/link';
 
-export default async function Profile() {
-  const isFrofile = true;
+export type FollowingListRes = Omit<MultiItem<Following>, 'pagination'>;
+
+export default async function Page() {
+  const session = await auth();
+  if (!session) return '로그인 만료';
+  const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + '/bookmarks/user', {
+    headers: {
+      'client-id': '03-Greeny',
+      Authorization: `Bearer ${session.accessToken}`,
+    },
+  });
+  const followingListRes = (await response.json()) as FollowingListRes;
 
   return (
-    <div className={styles.main_wrapper}>
+    <>
       <div className={styles.top}>
         <div className={styles.profile_panel}>
-          <Follow cnt={12} title="팔로워" />
+          <Follow href="/profile/follower" cnt={12} title="팔로워" />
           <div className={styles.thumbnail}>
-            <Image src={NormalProfile} alt="썸네일 이미지" />
-            <p className="2/3">식집사</p>
-            <span className="3/3">greeny@plant.com</span>
+            <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" width={90} height={90} />
+            <p>{session.user?.name}</p>
+            <span>{session.user?.email}</span>
           </div>
-          <Follow cnt={30} title="팔로잉" />
+          <Follow href="/profile/following" cnt={followingListRes.ok && followingListRes.item.length} title="팔로잉" />
         </div>
       </div>
-      <div className={styles.bottom}>
-        {isFrofile ? (
+      <div className={styles.gap}></div>
+      <Tab />
+
+      {/* {isProfile ? (
           <ul className={styles.option_list}>
             <li>
               <Option image={ProfileEditIcon} title="프로필 수정" />
@@ -43,52 +55,19 @@ export default async function Profile() {
           </ul>
         ) : (
           <Tab />
-        )}
-      </div>
-    </div>
-  );
-}
-
-function Follow({ cnt = 0, title = '' }) {
-  return (
-    <div className={styles.follow}>
-      <p>{cnt}</p>
-      <span>{title}</span>
-    </div>
-  );
-}
-
-function Tab() {
-  const idx = 0;
-  return (
-    <>
-      <ul className={styles.tab_menu}>
-        <li>
-          <Image src={MyPlantIcon} alt="내 식물" />
-        </li>
-        <li>
-          <Image src={MyPostIcon} alt="내 글" />
-        </li>
-      </ul>
-      {idx === 0 ? (
-        <ul className={styles.tab_item_plant_container}>
-          <li>
-            <Image src={PlantImg1} alt="식물 썸네일" />
-          </li>
-          <li>
-            <Image src={PlantImg2} alt="식물 썸네일" />
-          </li>
-          <li>
-            <Image src={PlantImg3} alt="식물 썸네일" />
-          </li>
-          <li>
-            <Image src={PlantImg4} alt="식물 썸네일" />
-          </li>
-        </ul>
-      ) : (
-        <div></div>
-      )}
+        )} */}
     </>
+  );
+}
+
+function Follow({ href = '/', cnt = 0, title = '' }) {
+  return (
+    <Link href={href} className={styles.follow_wrapper}>
+      <div className={styles.follow}>
+        <p>{cnt}</p>
+        <span>{title}</span>
+      </div>
+    </Link>
   );
 }
 
