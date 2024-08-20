@@ -1,16 +1,24 @@
 import Image from 'next/image';
 import styles from './MyPlant.module.scss';
 import Link from 'next/link';
-import { fetchPlants } from '@/app/api/fetch/plantFetch';
 import { PlantRes } from '@/types/plant';
 import { auth } from '@/auth';
 import { differenceInDays } from 'date-fns';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export default async function MyPlant() {
   const session = await auth();
 
-  const data = await fetchPlants<PlantRes>(session?.accessToken);
+  if (!session) return '로그인 만료';
+  const res = await fetch(`${SERVER}/seller/products`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  });
+  const resJson = await res.json();
+  const data = resJson && resJson.item;
 
   const myPlantList = data?.map((item: PlantRes) => {
     const currentDay: Date | null = item.adoptionDate;

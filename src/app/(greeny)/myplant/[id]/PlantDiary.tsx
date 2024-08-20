@@ -15,26 +15,28 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 export default function PlantDiray({ id }: { id: number }) {
   const { data: session } = useSession();
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const selectDay = format(currentDate, 'yy-MM-dd');
+  console.log(selectDay);
 
-  console.log(currentDate);
+  const [data, setData] = useState<PlantDetailRes[]>();
 
-  // const [data, setData] = useState<PlantDetailRes[]>();
   // useEffect(() => {
   //   const data = async () => {
-  //     const resData = await fetchPlantsDiary<PlantRes>(session?.user?.id, id);
+  //     const resData = await fetchPlantsDiary<PlantRes>(session?.user?.id, id, selectDay);
   //     setData(resData);
   //   };
 
   //   data();
-  // }, []);
+  // }, [setCurrentDate]);
 
   // console.log(data);
 
   // const diaryList = data?.map((item: PlantDetailRes) => {
   //   console.log(item);
+
   //   return (
   //     <li key={item._id}>
-  //       <Link href="/myplant/diary/" className={styles.diary_item}>
+  //       <Link href={`/story/diaries/${id}`} className={styles.diary_item}>
   //         <div className={styles.item_head}>
   //           <div className={styles.item_info}>
   //             <span>식물 상태 :</span>
@@ -69,7 +71,7 @@ export default function PlantDiray({ id }: { id: number }) {
           <span className="hidden">식물 일지 추가</span>
         </Link>
       </div>
-      {/* <Calendar value={currentDate} onChange={(date) => setCurrentDate(date as Date)} formatDay={(value) => format(value, 'd')} calendarType="gregory" /> */}
+      <Calendar formatDay={(_, date: Date) => format(date, 'd')} value={currentDate} onChange={(date) => setCurrentDate(date as Date)} calendarType="gregory" />
 
       {/* <ul className={styles.diary_list}>{diaryList}</ul> */}
     </div>
