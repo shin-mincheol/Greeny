@@ -38,7 +38,7 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
       </section>
       <section className={styles.reply}>
         <ReplyList postId={id} />
-        <ReplyInput />
+        <ReplyInput postId={id} />
       </section>
     </article>
   );
