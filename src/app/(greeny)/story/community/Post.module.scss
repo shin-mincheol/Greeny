@@ -109,7 +109,7 @@
   }
 }
 
-.input_form {
+.post_form {
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -137,6 +137,33 @@
       font-size: 1.6rem;
       font-weight: var(--font-regular);
       vertical-align: middle;
+    }
+  }
+
+  .category {
+    legend {
+      margin-bottom: 1rem;
+      font-weight: var(--font-bold);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.2rem;
+
+      .tab {
+        display: block;
+        font-weight: var(--font-regular);
+        cursor: pointer;
+        padding: 0.6rem 1rem;
+        border-radius: 1rem;
+        background-color: var(--color-secondary-dark);
+      }
+
+      .selected {
+        color: var(--color-white);
+        background-color: var(--color-primary);
+      }
     }
   }
 

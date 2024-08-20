@@ -31,7 +31,7 @@ export interface PostRes {
 
 export interface PostForm {
   type: 'post';
-  tag: 'free' | 'qna' | 'planterior';
+  category: 'free' | 'qna' | 'planterior';
   title: string;
   content: string;
   //이미지 부분 나중에 추가
