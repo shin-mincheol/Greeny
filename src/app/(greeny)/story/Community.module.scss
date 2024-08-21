@@ -175,6 +175,8 @@
 
   .description {
     color: var(--color-gray-10);
+    text-wrap: nowrap;
+
     font: {
       size: 1.6rem;
       weight: var(--font-regular);

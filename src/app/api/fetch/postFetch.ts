@@ -19,10 +19,10 @@ export async function fetchPosts(params?: { page?: string; keyword?: string; cat
   return resJson.item;
 }
 
-export async function fetchDiaries(page?: string, keyword?: string) {
+export async function fetchDiaries(params?: { page?: string; keyword?: string }) {
   const searchParams = new URLSearchParams();
-  page && searchParams.set('page', page);
-  keyword && searchParams.set('keyword', keyword);
+  params?.page && searchParams.set('page', params.page);
+  params?.keyword && searchParams.set('keyword', params.keyword);
   const url = `${SERVER}/posts?type=diary&limit=${LIMIT}&${searchParams.toString()}`;
   const res = await fetch(url, {
     headers: { 'client-id': `${DBNAME}` },
@@ -45,7 +45,7 @@ export async function fetchPost(id: string) {
 }
 
 export async function fetchDiary(id: string) {
-  const url = `${SERVER}/posts/${id}?type=diary`;
+  const url = `${SERVER}/posts/${id}`;
   const res = await fetch(url, {
     headers: { 'client-id': `${DBNAME}` },
   });
