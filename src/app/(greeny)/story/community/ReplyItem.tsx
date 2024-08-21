@@ -1,23 +1,51 @@
+'use client';
+
 import styles from '@greeny/story/Community.module.scss';
-import Image from 'next/image';
 import UserProfile from '@components/UserProfile';
 import ReplyModify from '@greeny/story/community/ReplyModify';
 import { PostComment } from '@/types/post';
 import { formatAgo } from '@/utils/date';
 import SubMenu from '@greeny/story/community/SubMenu';
+import DropDown, { DropDownOption, DropDownOptionRed } from './DropDown';
+import { useState } from 'react';
 
-export default async function ReplyItem({ reply }: { reply: PostComment }) {
+export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: PostComment; isWriter: boolean; deleteAction: () => void }) {
+  const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
+  const [isModifying, setIsModifying] = useState<boolean>(false);
+  const startModifying = () => setIsModifying(true);
+  const cancelModifying = () => setIsModifying(false);
+
   return (
     <li>
-      {/* <UserProfile
+      <UserProfile
         user={reply.user}
         fontStyle="sm_regular"
         component={
-          Number(session?.user?.id) == reply.user._id ? (
+          isWriter ? (
             <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
               <div style={{ color: 'var(--color-gray-10)', fontSize: 10 }}>{formatAgo(reply.createdAt)}</div>
               <div style={{ marginLeft: '0.6rem' }}>
-                <SubMenu />
+                <SubMenu isMenuOpened={isMenuOpened} toggleMenu={() => setIsMenuOpened((o) => !o)}>
+                  {/* <DropDown replyId={reply._id} /> */}
+                  <DropDown>
+                    <DropDownOption>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          startModifying();
+                          setIsMenuOpened(false);
+                        }}
+                      >
+                        댓글 수정
+                      </button>
+                    </DropDownOption>
+                    <DropDownOptionRed>
+                      <form action={deleteAction}>
+                        <button type="submit">댓글 삭제</button>
+                      </form>
+                    </DropDownOptionRed>
+                  </DropDown>
+                </SubMenu>
               </div>
             </div>
           ) : (
@@ -26,25 +54,10 @@ export default async function ReplyItem({ reply }: { reply: PostComment }) {
             </div>
           )
         }
-      /> */}
-
-      <UserProfile
-        user={reply.user}
-        fontStyle="sm_regular"
-        component={
-          <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
-            <div style={{ color: 'var(--color-gray-10)', fontSize: 10 }}>{formatAgo(reply.createdAt)}</div>
-            <div style={{ marginLeft: '0.6rem' }}>
-              <SubMenu />
-            </div>
-          </div>
-        }
       />
-      {/* 내 댓글일 때 */}
 
       <div className={styles.reply_item_content_container}>
-        <pre className={styles.reply_item_content}>{reply.content}</pre>
-        {/* <ReplyModify /> */}
+        {isModifying ? <ReplyModify currentReply={reply} cancel={cancelModifying} /> : <pre className={styles.reply_item_content}>{reply.content}</pre>}
       </div>
     </li>
   );
