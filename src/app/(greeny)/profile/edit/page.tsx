@@ -14,7 +14,7 @@ export default async function Page() {
   }
   const res = await fetch(`${SERVER}/users/${session.user?.id}`, {
     headers: {
-      'client-id': DBNAME,
+      'client-id': `${DBNAME}`,
       Authorization: `Bearer ${session.accessToken}`,
     },
   });
