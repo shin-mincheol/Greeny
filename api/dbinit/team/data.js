@@ -121,7 +121,7 @@ export const initData = async (clientId, nextSeq) => {
         buyQuantity: 310,
         mainImages: [
           {
-            path: `/files/${clientId}clivia.jpg`,
+            path: `/files/${clientId}/clivia.jpg`,
             name: 'clivia.jpg',
           },
         ],
