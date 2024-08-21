@@ -23,8 +23,6 @@ export default function EditForm({ user }: { user: UserInfo }) {
   //프로필 미리보기
   const [imagePreview, setImagePreview] = useState<string>();
   const image = watch('attach');
-  console.log('~!~!~!~!~');
-  console.log(imagePreview);
   useEffect(() => {
     if (image && image.length > 0) {
       const file = image[0];

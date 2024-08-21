@@ -27,17 +27,19 @@ export default async function Page() {
     <>
       <div className={styles.top}>
         <div className={styles.profile_panel}>
-          <Follow href="/profile/follower" cnt={12} title="팔로워" />
+          <Follow href="/profile/follower" cnt={12} title="식물" />
 
           <Link href={`/profile/detail`}>
             <div className={styles.thumbnail}>
-              <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" width={90} height={90} />
+              <div>
+                <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" fill sizes="100%" />
+              </div>
               <p>{session.user?.name}</p>
               <span>{session.user?.email}</span>
             </div>
           </Link>
 
-          <Follow href="/profile/following" cnt={followingListRes.ok && followingListRes.item.length} title="팔로잉" />
+          <Follow href="/profile/following" cnt={followingListRes.ok && followingListRes.item.length} title="식집사" />
         </div>
       </div>
 
