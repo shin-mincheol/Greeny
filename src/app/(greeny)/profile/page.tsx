@@ -8,6 +8,8 @@ import Tab from './Tab';
 import Follow from './Follow';
 import Link from 'next/link';
 
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
 export type FollowingListRes = Omit<MultiItem<Following>, 'pagination'>;
 
 export default async function Page() {
@@ -15,7 +17,7 @@ export default async function Page() {
   if (!session) return '로그인 만료';
   const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + '/bookmarks/user', {
     headers: {
-      'client-id': '03-Greeny',
+      'client-id': `${DBNAME}`,
       Authorization: `Bearer ${session.accessToken}`,
     },
   });

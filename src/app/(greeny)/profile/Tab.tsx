@@ -10,11 +10,14 @@ import { useSession } from 'next-auth/react';
 import { CoreErrorRes, MultiItem, SingleItem } from '@/types/response';
 import { PlantListRes } from '@/types/plant';
 import Link from 'next/link';
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 async function fetchDiary(id: string) {
   try {
     const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + `/posts/users/${id}?type=diary`, {
-      headers: { 'client-id': '03-Greeny' },
+      headers: {
+        'client-id': `${DBNAME}`,
+      },
     });
     const data = await response.json();
     return data;
@@ -27,7 +30,7 @@ async function fetchPlant(accessToken: string) {
   try {
     const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + `/seller/products`, {
       headers: {
-        'client-id': '03-Greeny',
+        'client-id': `${DBNAME}`,
         Authorization: `Bearer ${accessToken}`,
       },
     });
