@@ -1,0 +1,19 @@
+@import '@styles/mixin';
+
+.follow_wrapper {
+  @include flex-horizontal(0rem);
+
+  .follow {
+    @include flex-vertical(0.8rem);
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 1.4rem;
+      font-weight: var(--font-medium);
+    }
+    span {
+      font-size: 1.2rem;
+      font-weight: var(--font-regular);
+    }
+  }
+}

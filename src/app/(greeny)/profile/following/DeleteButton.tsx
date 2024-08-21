@@ -1,25 +1,19 @@
 'use client';
-
-import { deleteFollow } from '@/app/api/actions/followAction';
 import { useTransition } from 'react';
+import { deleteFollow } from '@/app/api/actions/followAction';
 
-export default function ClientButton({ _id }: { _id: number }) {
+export default function DeleteButton({ _id }: { _id: number }) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = async () => {
     startTransition(async () => {
-      // await new Promise<void>((resolve) => {
-      //   setTimeout(() => {
-      //     resolve();
-      //   }, 500);
-      // });
       const resData = await deleteFollow(_id);
       if (!resData.ok) {
-        // console.log('성공'); // 브라우저 콘솔에 출력
         alert('삭제 실패');
       }
     });
   };
+
   const style = {
     width: '2.8rem',
     height: '2.8rem',
