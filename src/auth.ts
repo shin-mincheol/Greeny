@@ -11,6 +11,7 @@ const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
+  debug: true,
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
