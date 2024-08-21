@@ -20,8 +20,8 @@ export default async function MyPlantItem({ params }: { params: { id: string } }
       </div>
 
       <div className={styles.plant_name}>
-        <h2>{item.nickName}</h2>
-        <span>{item.name}</span>
+        <h2>{item.name}</h2>
+        <span>{item.scientificName}</span>
         <p className={styles.plant_with}>
           `{item.name}`와 함께한지 {diffDays}일째에요!
         </p>
