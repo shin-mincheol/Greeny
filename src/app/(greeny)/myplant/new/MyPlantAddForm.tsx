@@ -71,8 +71,8 @@ export default function MyPlantAddForm() {
       const res = await fetchAddPlant(plantForm, session?.accessToken);
       // console.log(res);
       if (res.ok) {
-        alert(`${res.item.nickName}이(가) 우리 가족에 합류했어요! `);
-        // router.push('/myplant');
+        alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
+        router.push('/myplant');
       }
     } catch (err) {
       console.log(err);
@@ -101,14 +101,14 @@ export default function MyPlantAddForm() {
         </label>
 
         <div className={styles.selectBox}>
-          <select className={styles.select} {...register('name')} defaultValue="placeholder">
+          <select className={styles.select} {...register('scientificName')} defaultValue="placeholder">
             <option disabled value="placeholder">
               식물을 선택해주세요.
             </option>
             {plantOptions}
           </select>
         </div>
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.scientificName && <p>{errors.scientificName.message}</p>}
       </div>
 
       <div className={styles.input_container}>
@@ -146,7 +146,7 @@ export default function MyPlantAddForm() {
           type="text"
           id="nickName"
           placeholder="식물 애칭을 입력하세요."
-          {...register('nickName', {
+          {...register('name', {
             required: '식물 애칭을 입력하세요.',
             minLength: {
               value: 2,
@@ -154,11 +154,11 @@ export default function MyPlantAddForm() {
             },
           })}
         />
-        {errors.nickName && <p>{errors.nickName?.message}</p>}
+        {errors.name && <p>{errors.name?.message}</p>}
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="date">
+        <label htmlFor="adoptionDate">
           식물 입양일<span>*</span>
         </label>
 

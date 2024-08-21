@@ -1,18 +1,24 @@
 import Image from 'next/image';
 import styles from './MyPlant.module.scss';
 import Link from 'next/link';
-import { fetchPlants } from '@/app/api/fetch/plantFetch';
 import { PlantRes } from '@/types/plant';
 import { auth } from '@/auth';
 import { differenceInDays } from 'date-fns';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export default async function MyPlant() {
   const session = await auth();
 
-  const data = await fetchPlants<PlantRes>(session?.accessToken);
-
-  console.log(data);
+  if (!session) return '로그인 만료';
+  const res = await fetch(`${SERVER}/seller/products`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  });
+  const resJson = await res.json();
+  const data = resJson && resJson.item;
 
   const myPlantList = data?.map((item: PlantRes) => {
     const currentDay: Date | null = item.adoptionDate;
@@ -22,11 +28,11 @@ export default async function MyPlant() {
     return (
       <Link href={`/myplant/${item._id}`} className={styles.contents_item} key={item._id}>
         <div className={styles.item_cover}>
-          <Image src={`${item.image!.length > 0 ? `${SERVER}${item.image![0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
+          <Image src={`${item.mainImages!.length > 0 ? `${SERVER}${item.mainImages![0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.item_info}>
-          <h3>{item.nickName}</h3>
+          <h3>{item.name}</h3>
           <p>{item.name}</p>
 
           {currentDay && <span>{diffDays} 일째</span>}

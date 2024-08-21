@@ -5,33 +5,8 @@ import { ApiResWithValidation, MultiItem, SingleItem } from '@/types/response';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-export async function fetchPlants<T>(accessToken: string | undefined) {
-  const url = `${SERVER}/seller/products`;
-  const res = await fetch(url, {
-    headers: {
-      'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  const resJson = await res.json();
-
-  return resJson.item;
-}
-
 export async function fetchPlantsDetail<T>(id: string | undefined) {
   const url = `${SERVER}/products/${id}`;
-  const res = await fetch(url, {
-    headers: {
-      'client-id': `${DBNAME}`,
-    },
-  });
-  const resJson = await res.json();
-
-  return resJson.item;
-}
-
-export async function fetchPlantsDiary<T>(userId: string | undefined, productId: number | undefined) {
-  const url = `${SERVER}/posts/seller/${userId}?type=diary&product_id=${productId}`;
   const res = await fetch(url, {
     headers: {
       'client-id': `${DBNAME}`,
@@ -54,7 +29,7 @@ export async function fetchAddPlant(formData: FormData, accessToken: string | un
     adoptionDate: formData.get('adoptionDate'),
     waterCycle: formData.get('waterCycle'),
     content: formData.get('content'),
-    image: [{ path: '', name: '' }],
+    mainImages: [{ path: '', name: '' }],
   };
   const attach = formData.get('attach') as File;
 
@@ -74,8 +49,7 @@ export async function fetchAddPlant(formData: FormData, accessToken: string | un
 
     console.log(fileData);
 
-    // plantObj.image = fileData.item[0];
-    plantObj.image = [
+    plantObj.mainImages = [
       {
         path: fileData.item[0].path,
         name: fileData.item[0].name,
