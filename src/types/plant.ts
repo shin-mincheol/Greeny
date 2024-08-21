@@ -89,7 +89,7 @@ export interface PlantJson {
 }
 
 // 2-1 식물 목록 조회
-export interface PlantListRes extends Omit<PlantRes, 'mainImages'> {
+export interface PlantListRes extends PlantRes {
   mainImages: ImageRes[];
   seller: {
     _id: number;
