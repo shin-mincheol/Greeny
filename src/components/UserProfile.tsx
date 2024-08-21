@@ -11,19 +11,16 @@ type Props = {
 
 export default function UserProfile({ user, fontStyle, component }: Props) {
   return (
-    user && (
-      <div className={styles.user_profile}>
-        <Link href="/">
-          <div className={styles.basic}>
-            <div className={styles.profile_image}>
-              {/* <Image src="/images/NormalProfile.svg" width={32} height={32} alt="프로필" /> */}
-              <Image src={user.image ? 'https://api.fesp.shop' + user.image : '/images/NormalProfile.svg'} width={32} height={32} alt="프로필" />
-            </div>
-            <p className={styles[fontStyle]}>{user.name}</p>
+    <div className={styles.user_profile}>
+      <Link href={`/profile/${user._id}`}>
+        <div className={styles.basic}>
+          <div className={styles.profile_image}>
+            <Image src={user.image ? 'https://api.fesp.shop' + user.image : '/images/NormalProfile.svg'} width={32} height={32} alt="프로필" />
           </div>
-        </Link>
-        {component}
-      </div>
-    )
+          <p className={styles[fontStyle]}>{user.name}</p>
+        </div>
+      </Link>
+      {component}
+    </div>
   );
 }

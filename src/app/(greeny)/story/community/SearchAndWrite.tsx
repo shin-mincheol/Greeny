@@ -1,6 +1,7 @@
 import Search from '@greeny/story/Search';
 import post from './Post.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function SearchAndWrite() {
   return (
@@ -8,9 +9,9 @@ export default function SearchAndWrite() {
       <div>
         <Search />
       </div>
-      <button type="button" className={post.btn_write}>
+      <Link href="/story/community/new" className={post.btn_write}>
         <Image src="/images/PostAddIcon.svg" width={18} height={18} alt="write" />
-      </button>
+      </Link>
     </div>
   );
 }
