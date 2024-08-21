@@ -17,19 +17,6 @@ export async function fetchPlantsDetail<T>(id: string | undefined) {
   return resJson.item;
 }
 
-//데이터 찾아보기
-export async function fetchPlantsDiary<T>(userId: string | undefined, productId: number | undefined, selectDay: string) {
-  const url = `${SERVER}/posts/${userId}?type=diary&product_id=${productId}&custom={"extra":{"actionDate":"${selectDay}"}}`;
-  const res = await fetch(url, {
-    headers: {
-      'client-id': `${DBNAME}`,
-    },
-  });
-  const resJson = await res.json();
-
-  return resJson.item;
-}
-
 export async function fetchAddPlant(formData: FormData, accessToken: string | undefined): Promise<ApiResWithValidation<SingleItem<PlantRes>, PlantForm>> {
   const plantObj = {
     price: 999,
@@ -42,7 +29,7 @@ export async function fetchAddPlant(formData: FormData, accessToken: string | un
     adoptionDate: formData.get('adoptionDate'),
     waterCycle: formData.get('waterCycle'),
     content: formData.get('content'),
-    image: [{ path: '', name: '' }],
+    mainImages: [{ path: '', name: '' }],
   };
   const attach = formData.get('attach') as File;
 
@@ -62,8 +49,7 @@ export async function fetchAddPlant(formData: FormData, accessToken: string | un
 
     console.log(fileData);
 
-    // plantObj.image = fileData.item[0];
-    plantObj.image = [
+    plantObj.mainImages = [
       {
         path: fileData.item[0].path,
         name: fileData.item[0].name,

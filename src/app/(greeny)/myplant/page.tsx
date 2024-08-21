@@ -28,11 +28,11 @@ export default async function MyPlant() {
     return (
       <Link href={`/myplant/${item._id}`} className={styles.contents_item} key={item._id}>
         <div className={styles.item_cover}>
-          <Image src={`${item.image!.length > 0 ? `${SERVER}${item.image![0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
+          <Image src={`${item.mainImages!.length > 0 ? `${SERVER}${item.mainImages![0].path}` : ''}`} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.item_info}>
-          <h3>{item.nickName}</h3>
+          <h3>{item.name}</h3>
           <p>{item.name}</p>
 
           {currentDay && <span>{diffDays} 일째</span>}
