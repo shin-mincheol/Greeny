@@ -79,8 +79,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 1,
-        name: '칼리디움',
-        nickName: '베리베리',
+        scientificName: '칼리디움',
+        name: '베리베리',
         grwhTp: '16~20℃',
         waterCycle: 3,
         humidity: '40 ~ 70%',
@@ -93,7 +93,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/caladium.jpg`,
             name: 'caladium.jpg',
@@ -105,8 +105,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 2,
-        name: '군자란',
-        nickName: '란장이',
+        scientificName: '군자란',
+        name: '란장이',
         grwhTp: '16~20℃',
         humidity: '40 ~ 70%',
         waterCycle: 15,
@@ -119,7 +119,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}clivia.jpg`,
             name: 'clivia.jpg',
@@ -131,8 +131,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 2,
-        name: '알로카시아 쿠쿨라타',
-        nickName: '카시아',
+        scientificName: '알로카시아 쿠쿨라타',
+        name: '카시아',
         grwhTp: '16~20℃',
         humidity: '40 ~ 70%',
         waterCycle: 15,
@@ -145,7 +145,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/alocasia.webp`,
             name: 'alocasia.webp',
@@ -157,8 +157,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 1,
-        name: '금전수',
-        nickName: '돈들어와라',
+        scientificName: '금전수',
+        name: '돈들어와라',
         grwhTp: '16~20℃',
         humidity: '40 ~ 70%',
         waterCycle: 9,
@@ -171,7 +171,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/zamiya.jpg`,
             name: 'zamiya.jpg',
@@ -183,8 +183,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 3,
-        name: '동백',
-        nickName: '동백이',
+        scientificName: '동백',
+        name: '동백이',
         grwhTp: '16~20℃',
         humidity: '40 ~ 70%',
         waterCycle: 9,
@@ -197,7 +197,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/camellia.webp`,
             name: 'camellia.webp',
@@ -209,8 +209,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 3,
-        name: '디지고데카',
-        nickName: '데카링',
+        scientificName: '디지고데카',
+        name: '데카링',
         grwhTp: '16~20℃',
         humidity: '40 ~ 70%',
         waterCycle: 3,
@@ -223,7 +223,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/dizygotheca.webp`,
             name: 'dizygotheca.webp',
@@ -235,8 +235,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 3,
-        name: '만년청',
-        nickName: '청이',
+        scientificName: '만년청',
+        name: '청이',
         grwhTp: '	21~25℃',
         humidity: '40 ~ 70%',
         waterCycle: 3,
@@ -249,7 +249,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/rohdea.jpg`,
             name: 'rohdea.jpg',
@@ -261,8 +261,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 1,
-        name: '개운죽',
-        nickName: '개굴개굴',
+        scientificName: '개운죽',
+        name: '개굴개굴',
         grwhTp: '16~20℃',
         humidity: '40 ~ 70%',
         waterCycle: 3,
@@ -275,7 +275,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/dracaena.webp`,
             name: 'dracaena.webp',
@@ -287,8 +287,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 4,
-        name: '산세베리아',
-        nickName: '산세',
+        scientificName: '산세베리아',
+        name: '산세',
         grwhTp: '	21~25℃',
         humidity: '40 ~ 70%',
         waterCycle: 9,
@@ -301,7 +301,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}sansevieria.jpg`,
             name: 'sansevieria.jpg',
@@ -313,8 +313,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('product'),
         seller_id: 5,
-        name: '싱고니움',
-        nickName: '싱글이',
+        scientificName: '싱고니움',
+        name: '싱글이',
         grwhTp: '21~25℃',
         humidity: '40 ~ 70%',
         waterCycle: 15,
@@ -327,7 +327,7 @@ export const initData = async (clientId, nextSeq) => {
         active: true,
         quantity: 320,
         buyQuantity: 310,
-        image: [
+        mainImages: [
           {
             path: `/files/${clientId}/syngonium.jpg`,
             name: 'syngonium.jpg',
@@ -348,57 +348,57 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('bookmark'),
         user_id: 1,
-        type: 'post',
-        target_id: 10,
+        type: 'product',
+        target_id: 9,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 1,
-        type: 'post',
-        target_id: 13,
+        type: 'product',
+        target_id: 10,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 2,
-        type: 'post',
-        target_id: 2,
+        type: 'product',
+        target_id: 9,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 2,
-        type: 'post',
-        target_id: 18,
+        type: 'product',
+        target_id: 10,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 3,
-        type: 'post',
-        target_id: 4,
+        type: 'product',
+        target_id: 9,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 3,
-        type: 'post',
-        target_id: 7,
+        type: 'product',
+        target_id: 10,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 4,
-        type: 'post',
-        target_id: 11,
+        type: 'product',
+        target_id: 1,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
         _id: await nextSeq('bookmark'),
         user_id: 5,
-        type: 'post',
-        target_id: 17,
+        type: 'product',
+        target_id: 4,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
       {
@@ -590,11 +590,75 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 11,
+        product_id: 1,
+        seller_id: 1,
+        views: 10,
+        title: '베리베리~',
+        content: '베리베리가 있어서 그런지 집들어오는게 기대된다! \n 좋아~',
+        extra: {
+          plantState: '좋음',
+          action: '관찰',
+          actionDate: '2024-08-16',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/caladium.jpg`,
+            name: 'PlantImg1.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+
+        user: {
+          _id: 1,
+          name: '쑥쑤루쑥',
+          image: '/files/03-Greeny/leeBadcuk.jpg',
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 1,
+        seller_id: 1,
+        views: 22,
+        title: '오늘의 베리!',
+        content: '우리 베리베리가 잘자라고 있다 \n 좋아~',
+        extra: {
+          plantState: '좋음',
+          action: '물주기',
+          actionDate: '2024-08-10',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/caladium.jpg`,
+            name: 'PlantImg1.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+
+        user: {
+          _id: 1,
+          name: '쑥쑤루쑥',
+          image: '/files/03-Greeny/leeBadcuk.jpg',
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 1,
         seller_id: 1,
         views: 23,
         title: '오늘의 할일!',
-        content: '우리 관세음보살이 몸이 안좋은거같다... \n그래서 영양을 듬뿍해줬다!! \n건강하게 자라렴!',
+        content: '우리 베리베리가 몸이 안좋은거같다... \n그래서 영양을 듬뿍해줬다!! \n건강하게 자라렴!',
         extra: {
           plantState: '아픔',
           action: '영양',
@@ -622,11 +686,11 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 11,
+        product_id: 1,
         seller_id: 1,
         views: 10,
         title: '관찰하기~',
-        content: '우리 관세음보살이! \n아주 이쁘게자라렴!',
+        content: '우리 베리베리 \n아주 이쁘게자라렴!',
         extra: {
           plantState: '좋음',
           action: '관찰',
@@ -658,7 +722,7 @@ export const initData = async (clientId, nextSeq) => {
         extra: {
           plantState: '새싹',
           action: '관찰',
-          actionDate: '2024-08-16',
+          actionDate: '2024-08-20',
         },
         image: [
           {
@@ -686,7 +750,7 @@ export const initData = async (clientId, nextSeq) => {
         extra: {
           plantState: '죽음',
           action: '관찰',
-          actionDate: '2024-08-16',
+          actionDate: '2024-08-26',
         },
         image: [
           {
@@ -736,7 +800,7 @@ export const initData = async (clientId, nextSeq) => {
         seller_id: 1,
         views: 30,
         title: '우리 개굴이~',
-        content: '개굴아!! 오늘은 무난 무난 하구나~',
+        content: '개굴아!! 오늘도 이쁘구나~',
         extra: {
           plantState: '좋음',
           action: '물주기',
@@ -764,11 +828,11 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 1,
+        product_id: 2,
         seller_id: 2,
         views: 4,
-        title: '우리 디움이 이쁘죠',
-        content: '디움아 무럭무럭 자라나라~',
+        title: '우리 란장이 이쁘죠?',
+        content: '란장아 무럭무럭 자라나라~',
         extra: {
           plantState: '좋음',
           action: '물주기',
@@ -795,11 +859,11 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 1,
+        product_id: 2,
         seller_id: 2,
         views: 7,
-        title: '디움이가 아파요 ㅜㅜ',
-        content: '디움아 영양제 잘 먹고 건강해져야해 ㅜㅜ',
+        title: '란장이가 아파요 ㅜㅜ',
+        content: '란장아 영양제 잘 먹고 건강해져야해 ㅜㅜ',
         extra: {
           plantState: '아픔',
           action: '영양',
@@ -822,15 +886,15 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 2,
+        product_id: 3,
         seller_id: 2,
         views: 50,
-        title: '게발이가 게화했다',
+        title: '카시아가 개화했다',
         content: '너무 예쁘다 ㅜㅜㅜ \n 정성스레 키운 보람이 있네',
         extra: {
           plantState: '개화',
           action: '햇빛',
-          actionDate: '2024-08-14',
+          actionDate: '2024-08-12',
         },
         image: [
           {
@@ -857,15 +921,15 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 2,
+        product_id: 3,
         seller_id: 2,
         views: 50,
-        title: '게발이가 죽었다...',
+        title: '카시아가 죽었다...',
         content: '마음이 아프다. 더 잘 돌봐줬어야 하는데..',
         extra: {
           plantState: '죽음',
           action: '관찰',
-          actionDate: '2024-10-01',
+          actionDate: '2024-08-19',
         },
         image: [
           {
@@ -884,20 +948,15 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 3,
+        product_id: 2,
         seller_id: 2,
         views: 20,
-        title: '알로에의 새싹이 피었다.',
+        title: '란장이 새싹이 피었다.',
         content: '너무 작고 귀엽다 ㅎㅎ \n쑥쑥 잘 크면 좋겠네 \n열심히 키워야지~~',
         extra: {
           plantState: '새싹',
           action: '관찰',
           actionDate: '2024-10-05',
-        },
-        user: {
-          _id: 2,
-          name: '선장',
-          image: '/files/03-Greeny/mincheol.jpg',
         },
         image: [
           {
@@ -909,6 +968,11 @@ export const initData = async (clientId, nextSeq) => {
             name: 'PlantImg1.png',
           },
         ],
+        user: {
+          _id: 2,
+          name: '선장',
+          image: '/files/03-Greeny/mincheol.jpg',
+        },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -918,12 +982,12 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 3,
         seller_id: 2,
         views: 5,
-        title: '로에가 너무 잘 큰다!!',
-        content: '원래 화분이 너무 작은 것 같아서 분갈이를 해줬다. \n새 집에서 잘 크자!',
+        title: '카시아가 걱정된다..',
+        content: '요즘 많이 시들시들해서 조금 걱정이다..',
         extra: {
-          plantState: '좋음',
-          action: '분갈이',
-          actionDate: '2024-11-04',
+          plantState: '아픔',
+          action: '영양제',
+          actionDate: '2024-08-04',
         },
         image: [
           {
@@ -954,7 +1018,7 @@ export const initData = async (clientId, nextSeq) => {
         extra: {
           plantState: '좋음',
           action: '물주기',
-          actionDate: '2024-08-27',
+          actionDate: '2024-08-10',
         },
         image: [
           {
@@ -985,7 +1049,7 @@ export const initData = async (clientId, nextSeq) => {
         extra: {
           plantState: '개화',
           action: '관찰',
-          actionDate: '2024-08-28',
+          actionDate: '2024-08-19',
         },
         image: [
           {
@@ -1008,7 +1072,7 @@ export const initData = async (clientId, nextSeq) => {
         seller_id: 3,
         views: 2,
         title: '왜 아픈 건지 모르겠음',
-        content: '똑같은 다른 금전수는 잘 자라는데 \n 이 아이만 비실대서 \n 혹이 토양이 안 맞는가 싶어서 \n 분갈이를 했다.',
+        content: '똑같은 다른 디지고데카 잘 자라는데 \n 이 아이만 비실대서 \n 혹이 토양이 안 맞는가 싶어서 \n 분갈이를 했다.',
         extra: {
           plantState: '아픔',
           action: '분갈이',
@@ -1035,7 +1099,7 @@ export const initData = async (clientId, nextSeq) => {
         seller_id: 3,
         views: 50,
         title: '분갈이 후 영양제 스팀팩 주사',
-        content: '반드시 살리리라!\n 넌 할 수 있어! \n 살아나라 전수전수',
+        content: '반드시 살리리라!\n 넌 할 수 있어! \n 살아나라 데카링!',
         extra: {
           plantState: '아픔',
           action: '영양',

@@ -69,7 +69,7 @@ export default function Tab() {
             plantData.item.map((item) => (
               <li key={item._id}>
                 <Link href={`/myplant/${item._id}`}>
-                  <Image src={`${process.env.NEXT_PUBLIC_API_SERVER}${item.image?.[0].path}`} alt="식물 썸네일" width={117} height={100} />
+                  <Image src={`${process.env.NEXT_PUBLIC_API_SERVER}${item.mainImages?.[0].path}`} alt="식물 썸네일" width={117} height={100} />
                 </Link>
               </li>
             ))}
