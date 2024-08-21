@@ -6,7 +6,7 @@ import PlantInfo from './PlantInfo';
 import PlantDiray from './PlantDiary';
 
 export default function MyPlantDetail({ item }: { item: PlantRes }) {
-  const [tabMenun, setTabMenu] = useState(true);
+  const [tabMenun, setTabMenu] = useState(false);
   const handleTab = (tabClick: string) => {
     if (tabClick === 'info') {
       return setTabMenu(true);
@@ -14,6 +14,7 @@ export default function MyPlantDetail({ item }: { item: PlantRes }) {
       return setTabMenu(false);
     }
   };
+
   return (
     <>
       <div className={styles.plant_tabMenu}>
@@ -24,7 +25,7 @@ export default function MyPlantDetail({ item }: { item: PlantRes }) {
           <span className="hidden">일기</span>
         </button>
       </div>
-      {tabMenun ? <PlantInfo item={item} /> : <PlantDiray id={item._id} />}
+      {tabMenun ? <PlantInfo item={item} /> : <PlantDiray id={item._id} name={item.name} />}
     </>
   );
 }

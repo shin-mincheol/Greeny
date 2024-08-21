@@ -3,7 +3,7 @@ import { UserSimple } from './user';
 
 export interface PlantForm {
   name: string;
-  nickName: string;
+  scientificName: string;
   attach: File[];
   grwhTp: string;
   humidity: string;
@@ -17,7 +17,7 @@ export interface PlantForm {
 
 export interface PlantSimple {
   name: string;
-  image: ImageRes;
+  mainImages: ImageRes;
 }
 
 export interface PlantRes extends PlantForm {
@@ -29,7 +29,7 @@ export interface PlantRes extends PlantForm {
   buyQuantity: number;
   createdAt: string;
   updatedAt: string;
-  image: ImageRes[];
+  mainImages: ImageRes[];
 }
 export interface PlantDetailRes {
   _id: number;
@@ -44,7 +44,7 @@ export interface PlantDetailRes {
   user: UserSimple;
   createdAt: string;
   updatedAt: string;
-  product: { name: string; image: null };
+  product: { name: string; mainImages: null };
   repliesCount: 0;
 }
 
@@ -89,14 +89,15 @@ export interface PlantJson {
 }
 
 // 2-1 식물 목록 조회
-export interface PlantListRes extends Omit<PlantRes, 'mainImages'> {
+export interface PlantListRes extends PlantRes {
+  mainImages: ImageRes[];
   seller: {
     _id: number;
     email: string;
     name: string;
     phone: string;
     address: string;
-    image: string;
+    mainImages: string;
   };
   replies: number;
   bookmarks: number;
