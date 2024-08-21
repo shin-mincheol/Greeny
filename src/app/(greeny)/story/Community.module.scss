@@ -459,7 +459,9 @@
   background-color: var(--color-white);
 
   .dropdown_option {
-    button {
+    button,
+    a {
+      display: inline-block;
       padding: 0.8rem 1.15rem;
     }
     font: {

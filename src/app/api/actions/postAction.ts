@@ -64,6 +64,23 @@ export async function addPost(formData: FormData) {
   redirect('/story/community');
 }
 
+export async function deletePost(postId: string) {
+  const session = await auth();
+  try {
+    await fetch(`${SERVER}/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+  } catch (error) {
+    throw new Error('network error');
+  }
+  revalidatePath(`/story/community`);
+  redirect('/story/community');
+}
+
 export async function addReply(postId: string, formData: FormData): Promise<SingleItem<PostComment> | CoreErrorRes> {
   const session = await auth();
   const data = {

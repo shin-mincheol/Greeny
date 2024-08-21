@@ -1,36 +1,27 @@
 import styles from '@greeny/story/Community.module.scss';
 import postStyles from '@greeny/story/community/Post.module.scss';
-// import Image from 'next/image';
 import UserProfile from '@components/UserProfile';
 import PostInfo from '@greeny/story/PostInfo';
 import ReplyList from '@greeny/story/community/ReplyList';
 import ReplyInput from '@greeny/story/community/ReplyInput';
-// import SubMenu from '../SubMenu';
 import ImageSlider from '@greeny/story/ImageSlider';
 import { fetchPost } from '@/app/api/fetch/postFetch';
+import SubMenuContainer from './SubMenuContainer';
+import { auth } from '@/auth';
 
 export const revalidate = 0;
 
 export default async function PostDetail({ params: { id } }: { params: { id: string } }) {
   const post = await fetchPost(id);
+  const session = await auth();
+  const isWriter = Number(session?.user?.id) === post.user._id;
 
   return (
     <article className={postStyles.detail_container}>
       <section className={postStyles.content}>
         <h1 className={postStyles.title}>{post.title}</h1>
         <div className={postStyles.info}>
-          {/* 다른 사용자 게시글일 때*/}
-          <UserProfile user={post.user} fontStyle="sm_medium" />
-          {/* 내 게시글일 때 */}
-          {/* <UserProfile
-                user={post.user}
-                fontStyle="sm_medium"
-                component={
-                  <div style={{ marginLeft: 'auto' }}>
-                    <SubMenu />
-                  </div>
-                }
-              /> */}
+          {isWriter ? <UserProfile user={post.user} fontStyle="sm_medium" component={<SubMenuContainer />} /> : <UserProfile user={post.user} fontStyle="sm_medium" />}
         </div>
         <pre>{post.content}</pre>
         {post.image.length > 0 && <ImageSlider images={post.image} />}
