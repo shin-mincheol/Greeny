@@ -69,3 +69,52 @@ export async function fetchAddPlant(formData: FormData, accessToken: string | un
   const resJson = await res.json();
   return resJson;
 }
+
+export async function fetchAddDiary(formData: FormData, accessToken: string | undefined): Promise<ApiResWithValidation<SingleItem<PlantRes>, PlantForm>> {
+  const diaryObj = {
+    type: formData.get('type') || 'diary',
+    title: formData.get('title'),
+    content: formData.get('content'),
+    plantState: formData.get('plantState'),
+    action: formData.get('action'),
+    actionDate: formData.get('actionDate'),
+    image: [{ path: '', name: '' }],
+  };
+  const attach = formData.get('attach') as File;
+
+  if (attach?.size > 0) {
+    const fileRes = await fetch(`${SERVER}/files`, {
+      method: 'POST',
+      headers: {
+        'client-id': `${DBNAME}`,
+      },
+      body: formData,
+    });
+
+    if (!fileRes.ok) {
+      throw new Error('파일 업로드 실패');
+    }
+    const fileData: MultiItem<FileRes> = await fileRes.json();
+
+    console.log(fileData);
+
+    diaryObj.image = [
+      {
+        path: fileData.item[0].path,
+        name: fileData.item[0].name,
+      },
+    ];
+  }
+
+  const res = await fetch(`${SERVER}/posts`, {
+    method: 'POST',
+    headers: {
+      'client-id': `${DBNAME}`,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(diaryObj),
+  });
+  const resJson = await res.json();
+  return resJson;
+}
