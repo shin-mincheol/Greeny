@@ -1,7 +1,7 @@
 'use client';
 
 import post from './Post.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 const categories = [
@@ -16,15 +16,19 @@ export default function Categories() {
   const category = searchParams.get('category') ?? 'all';
   const [selected, setSelected] = useState(category);
   const router = useRouter();
+  useEffect(() => setSelected(category), [category]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetName = e.currentTarget.name;
-    if (targetName === 'all') {
-      router.push('/story/community');
-    } else {
-      router.push(`/story/community?category=${targetName}`);
-    }
     setSelected(targetName);
+    const params = new URLSearchParams(searchParams);
+    if (targetName === 'all') {
+      params.delete('category');
+    } else {
+      params.set('category', targetName);
+    }
+
+    router.push(`/story/community?${params.toString()}`);
   };
 
   return (
