@@ -219,3 +219,21 @@ textarea:focus {
 button {
   cursor: pointer;
 }
+
+/* 스크롤바 커스텀 시작 */
+::-webkit-scrollbar {
+  overflow: hidden;
+  width: 0.6rem;
+  padding-right: 1.2rem;
+}
+
+/* 스크롤바 핸들 */
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 1.2rem;
+}
+
+/* 스크롤바 배경 */
+::-webkit-scrollbar-track {
+  border-radius: 1.2rem;
+}
