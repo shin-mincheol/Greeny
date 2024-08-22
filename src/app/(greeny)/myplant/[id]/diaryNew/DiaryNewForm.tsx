@@ -11,15 +11,18 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import Button from '@/components/button/Button';
+import { DiaryNew } from '@/app/api/actions/plantAction';
+import { useRouter } from 'next/navigation';
 
-export default function DiaryNewForm() {
+export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-    setValue,
     watch,
   } = useForm<DiaryForm>();
 
@@ -64,13 +67,34 @@ export default function DiaryNewForm() {
     </SwiperSlide>
   ));
 
-  const onNewDiary = (formData: DiaryForm) => {
-    console.log(formData);
+  const onNewDiary = async (formData: DiaryForm) => {
+    try {
+      const plantForm = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key !== 'attach') {
+          plantForm.append(key, value as string);
+        }
+      });
+      if (formData.attach) {
+        Array.from(formData.attach).forEach((file) => {
+          plantForm.append('attach', file);
+        });
+      }
+
+      const res = await DiaryNew(plantForm, id);
+      console.log(res);
+      if (res.ok) {
+        alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
+        router.push(`/myplant/${id}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onNewDiary)}>
-      <h2>식물 일기 등록</h2>
+      <h1>식물 일기 등록</h1>
       <div className={styles.file_container}>
         <div className={styles.file_head}>
           <h3>식물 이미지</h3>
@@ -97,7 +121,10 @@ export default function DiaryNewForm() {
         </label>
 
         <div className={styles.selectBox}>
-          <select className={styles.select} {...register('plantState')}>
+          <select className={styles.select} defaultValue="placeholder" {...register('plantState')}>
+            <option disabled value="placeholder">
+              식물의 상태를 선택해주세요.
+            </option>
             <option value="좋음">좋음</option>
             <option value="새싹">새싹</option>
             <option value="개화">개화</option>
@@ -105,7 +132,7 @@ export default function DiaryNewForm() {
             <option value="죽음">죽음</option>
           </select>
         </div>
-        <p>식물 상태를 선택해주세요.</p>
+        {errors.plantState && <p>{errors.plantState.message}</p>}
       </div>
       <div className={styles.input_container}>
         <label htmlFor="action">
@@ -113,7 +140,10 @@ export default function DiaryNewForm() {
         </label>
 
         <div className={styles.selectBox}>
-          <select className={styles.select} {...register('action')}>
+          <select className={styles.select} defaultValue="placeholder" {...register('action')}>
+            <option disabled value="placeholder">
+              활동을 선택해주세요.
+            </option>
             <option value="물주기">물주기</option>
             <option value="햇빛">햇빛</option>
             <option value="분갈이">분갈이</option>
@@ -122,8 +152,9 @@ export default function DiaryNewForm() {
             <option value="관찰">관찰</option>
           </select>
         </div>
-        <p>온도를 선택해주세요.</p>
+        {errors.action && <p>{errors.action.message}</p>}
       </div>
+
       <div className={styles.input_container}>
         <label htmlFor="actionDate">
           활동 날짜<span>*</span>
@@ -144,7 +175,7 @@ export default function DiaryNewForm() {
             />
           )}
         />
-        <p>활동 날짜를 선택해주세요.</p>
+        {errors.actionDate && <p>{errors.actionDate.message}</p>}
       </div>
 
       <div className={styles.input_container}>
@@ -152,7 +183,7 @@ export default function DiaryNewForm() {
           제목<span>*</span>
         </label>
         <input type="text" id="title" placeholder="제목을 입력해주세요." {...register('title')} />
-        <p>2글자 이상 입력해주세요.</p>
+        {errors.title && <p>{errors.title.message}</p>}
       </div>
 
       <div className={styles.input_container}>
@@ -160,12 +191,12 @@ export default function DiaryNewForm() {
           내용<span>*</span>
         </label>
         <textarea id="content" placeholder="물주기를 선택해주세요." {...register('content')} />
-        <p>2글자 이상 입력해주세요.</p>
+        {errors.content && <p>{errors.content.message}</p>}
       </div>
 
-      <button type="submit" className={styles.button}>
+      <Button type="submit" bgColor="fill" btnSize="lg">
         일기 등록
-      </button>
+      </Button>
     </form>
   );
 }
