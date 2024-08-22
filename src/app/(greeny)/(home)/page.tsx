@@ -1,5 +1,5 @@
 import styles from './Home.module.scss';
-import like from '@images/LikeIcon.svg';
+import like from '@images/LikeIcon_nor.svg';
 import comment from '@images/CommentIcon.svg';
 import view from '@images/ViewIcon.svg';
 import Image from 'next/image';
