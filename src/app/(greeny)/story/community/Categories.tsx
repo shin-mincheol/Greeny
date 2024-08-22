@@ -22,6 +22,7 @@ export default function Categories() {
     const targetName = e.currentTarget.name;
     setSelected(targetName);
     const params = new URLSearchParams(searchParams);
+    params.delete('page');
     if (targetName === 'all') {
       params.delete('category');
     } else {

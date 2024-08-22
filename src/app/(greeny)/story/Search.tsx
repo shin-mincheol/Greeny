@@ -14,10 +14,12 @@ export default function Search() {
   const { push } = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const param = new URLSearchParams(searchParams);
     const trimedQuery = query.trim();
     if (trimedQuery.length === 0) return inputRef.current!.focus();
+
+    const param = new URLSearchParams(searchParams);
     param.set('keyword', trimedQuery);
+    param.delete('page');
     push(`${pathname}?${param.toString()}`);
   };
   useEffect(() => setQuery(keyword ?? ''), [keyword]);

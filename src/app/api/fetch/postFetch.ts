@@ -15,8 +15,7 @@ export async function fetchPosts(params?: { page?: string; keyword?: string; cat
   });
   const resJson: MultiItem<PostRes> | CoreErrorRes = await res.json();
   if (!resJson.ok) throw new Error(resJson.message);
-
-  return resJson.item;
+  return resJson;
 }
 
 export async function fetchDiaries(params?: { page?: string; keyword?: string }) {
