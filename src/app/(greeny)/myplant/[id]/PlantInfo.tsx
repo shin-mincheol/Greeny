@@ -4,6 +4,7 @@ import { PlantRes } from '@/types/plant';
 import { useState } from 'react';
 import { plantsDelete } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function PlantInfo({ item }: { item: PlantRes }) {
   const [menu, setMenu] = useState(false);
@@ -30,9 +31,9 @@ export default function PlantInfo({ item }: { item: PlantRes }) {
           </button>
           {menu && (
             <div className={styles.subMenuBox}>
-              <button type="button" className={styles.subMenuItem}>
+              <Link href={`/myplant/${item._id}/edit`} className={styles.subMenuItem}>
                 식물 수정
-              </button>
+              </Link>
               <hr />
               <button type="button" onClick={handleDelete} className={`${styles.subMenuItem} ${styles.delete}`}>
                 식물 삭제
