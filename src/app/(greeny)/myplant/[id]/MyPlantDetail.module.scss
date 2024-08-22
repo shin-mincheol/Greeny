@@ -17,7 +17,8 @@
   }
 
   .plant_name {
-    @include flex-vertical(0.5rem);
+    @include flex-vertical(1rem);
+    align-items: center;
     box-sizing: border-box;
     text-align: center;
 
@@ -31,13 +32,18 @@
     }
 
     p {
-      margin-top: 1rem;
+      width: 100%;
       color: var(--color-white);
       text-align: center;
       padding: 1.4rem 0;
       border-radius: 1rem;
       background-color: #a7c4a0;
       box-sizing: border-box;
+    }
+
+    .plant_with,
+    button {
+      margin-top: 1.3rem;
     }
   }
 

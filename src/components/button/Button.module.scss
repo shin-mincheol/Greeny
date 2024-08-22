@@ -1,8 +1,14 @@
 .button {
   padding: 1rem 0;
   box-sizing: border-box;
-  border-radius: 0.6rem;
   text-align: center;
+}
+.button.round {
+  border-radius: 10rem;
+}
+
+.button.curve {
+  border-radius: 0.6rem;
 }
 
 .button.fill {
@@ -15,8 +21,16 @@
   color: var(--color-primary);
 }
 
+.button.xs {
+  padding: 0.6rem 1.6rem;
+}
+
 .button.sm {
-  padding: 1rem 1.4rem;
+  padding: 1rem 2rem;
+}
+
+.button.md {
+  padding: 1rem 4rem;
 }
 
 .button.lg {
