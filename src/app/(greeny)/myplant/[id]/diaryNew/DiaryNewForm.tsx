@@ -82,7 +82,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
       }
 
       const res = await DiaryNew(plantForm, id);
-      console.log(res);
+      // console.log(res);
       if (res.ok) {
         alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
         router.push(`/myplant/${id}`);

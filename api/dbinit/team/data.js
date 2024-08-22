@@ -592,6 +592,38 @@ export const initData = async (clientId, nextSeq) => {
         type: 'diary',
         product_id: 1,
         seller_id: 1,
+        views: 10,
+        title: '베리베리~',
+        content: '베리베리가 있어서 그런지 집들어오는게 기대된다! \n 좋아~',
+        extra: {
+          plantState: '좋음',
+          action: '관찰',
+          actionDate: '2024-08-16',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/caladium.jpg`,
+            name: 'PlantImg1.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+
+        user: {
+          _id: 1,
+          name: '쑥쑤루쑥',
+          image: '/files/03-Greeny/leeBadcuk.jpg',
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 1,
+        seller_id: 1,
         views: 22,
         title: '오늘의 베리!',
         content: '우리 베리베리가 잘자라고 있다 \n 좋아~',
@@ -616,34 +648,6 @@ export const initData = async (clientId, nextSeq) => {
           name: '쑥쑤루쑥',
           image: '/files/03-Greeny/leeBadcuk.jpg',
         },
-        createdAt: getTime(-2, -60 * 60 * 1),
-        updatedAt: getTime(-1, -60 * 60 * 20),
-      },
-      {
-        _id: await nextSeq('post'),
-        type: 'diary',
-        product_id: 4,
-        seller_id: 1,
-        views: 20,
-        title: '관찰일지!',
-        content: '우리 전수씨!! 새싹이 자라구 있구나!?!',
-        extra: {
-          plantState: '새싹',
-          action: '관찰',
-          actionDate: '2024-08-20',
-        },
-        image: [
-          {
-            path: `/files/${clientId}/PlantImg1.png`,
-            name: 'PlantImg1.png',
-          },
-        ],
-        user: {
-          _id: 1,
-          name: '쑥쑤루쑥',
-          image: '/files/03-Greeny/leeBadcuk.jpg',
-        },
-
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
@@ -685,65 +689,6 @@ export const initData = async (clientId, nextSeq) => {
         product_id: 1,
         seller_id: 1,
         views: 10,
-        title: '베리베리~',
-        content: '베리베리가 있어서 그런지 집들어오는게 기대된다! \n 좋아~',
-        extra: {
-          plantState: '좋음',
-          action: '관찰',
-          actionDate: '2024-08-16',
-        },
-        image: [
-          {
-            path: `/files/${clientId}/caladium.jpg`,
-            name: 'PlantImg1.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
-          },
-        ],
-
-        user: {
-          _id: 1,
-          name: '쑥쑤루쑥',
-          image: '/files/03-Greeny/leeBadcuk.jpg',
-        },
-        createdAt: getTime(-2, -60 * 60 * 1),
-        updatedAt: getTime(-1, -60 * 60 * 20),
-      },
-      {
-        _id: await nextSeq('post'),
-        type: 'diary',
-        product_id: 5,
-        seller_id: 3,
-        views: 50,
-        title: '드디어 개화!!',
-        content: '관심 준 만큼 예쁘게 잘 자라나서 아주 기분이 좋다. \n 완전히 개화될 때면 팔아야지',
-        extra: {
-          plantState: '개화',
-          action: '관찰',
-          actionDate: '2024-08-19',
-        },
-        image: [
-          {
-            path: `/files/${clientId}/PlantImg3.png`,
-            name: 'PlantImg3.png',
-          },
-        ],
-        user: {
-          _id: 3,
-          name: '금전수 장인',
-          image: '/files/03-Greeny/jiwon.jpeg',
-        },
-        createdAt: getTime(-2, -60 * 60 * 1),
-        updatedAt: getTime(-1, -60 * 60 * 20),
-      },
-      {
-        _id: await nextSeq('post'),
-        type: 'diary',
-        product_id: 1,
-        seller_id: 1,
-        views: 10,
         title: '관찰하기~',
         content: '우리 베리베리 \n아주 이쁘게자라렴!',
         extra: {
@@ -766,7 +711,34 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 4,
+        seller_id: 1,
+        views: 20,
+        title: '관찰일지!',
+        content: '우리 전수씨!! 새싹이 자라구 있구나!?!',
+        extra: {
+          plantState: '새싹',
+          action: '관찰',
+          actionDate: '2024-08-20',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg1.png`,
+            name: 'PlantImg1.png',
+          },
+        ],
+        user: {
+          _id: 1,
+          name: '쑥쑤루쑥',
+          image: '/files/03-Greeny/leeBadcuk.jpg',
+        },
 
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -821,7 +793,38 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 8,
+        seller_id: 1,
+        views: 30,
+        title: '우리 개굴이~',
+        content: '개굴아!! 오늘도 이쁘구나~',
+        extra: {
+          plantState: '좋음',
+          action: '물주기',
+          actionDate: '2024-08-21',
+        },
 
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg3.png`,
+            name: 'PlantImg3.png',
+          },
+          {
+            path: `/files/${clientId}/PlantImg1.png`,
+            name: 'PlantImg1.png',
+          },
+        ],
+        user: {
+          _id: 1,
+          name: '쑥쑤루쑥',
+          image: '/files/03-Greeny/leeBadcuk.jpg',
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -883,38 +886,6 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 8,
-        seller_id: 1,
-        views: 30,
-        title: '우리 개굴이~',
-        content: '개굴아!! 오늘도 이쁘구나~',
-        extra: {
-          plantState: '좋음',
-          action: '물주기',
-          actionDate: '2024-08-21',
-        },
-
-        image: [
-          {
-            path: `/files/${clientId}/PlantImg3.png`,
-            name: 'PlantImg3.png',
-          },
-          {
-            path: `/files/${clientId}/PlantImg1.png`,
-            name: 'PlantImg1.png',
-          },
-        ],
-        user: {
-          _id: 1,
-          name: '쑥쑤루쑥',
-          image: '/files/03-Greeny/leeBadcuk.jpg',
-        },
-        createdAt: getTime(-2, -60 * 60 * 1),
-        updatedAt: getTime(-1, -60 * 60 * 20),
-      },
-      {
-        _id: await nextSeq('post'),
-        type: 'diary',
         product_id: 3,
         seller_id: 2,
         views: 50,
@@ -947,7 +918,33 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
-
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 3,
+        seller_id: 2,
+        views: 50,
+        title: '카시아가 죽었다...',
+        content: '마음이 아프다. 더 잘 돌봐줬어야 하는데..',
+        extra: {
+          plantState: '죽음',
+          action: '관찰',
+          actionDate: '2024-08-19',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg2.png`,
+            name: 'PlantImg2.png',
+          },
+        ],
+        user: {
+          _id: 2,
+          name: '선장',
+          image: '/files/03-Greeny/mincheol.jpg',
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -969,33 +966,6 @@ export const initData = async (clientId, nextSeq) => {
           {
             path: `/files/${clientId}/PlantImg1.png`,
             name: 'PlantImg1.png',
-          },
-        ],
-        user: {
-          _id: 2,
-          name: '선장',
-          image: '/files/03-Greeny/mincheol.jpg',
-        },
-        createdAt: getTime(-2, -60 * 60 * 1),
-        updatedAt: getTime(-1, -60 * 60 * 20),
-      },
-      {
-        _id: await nextSeq('post'),
-        type: 'diary',
-        product_id: 3,
-        seller_id: 2,
-        views: 50,
-        title: '카시아가 죽었다...',
-        content: '마음이 아프다. 더 잘 돌봐줬어야 하는데..',
-        extra: {
-          plantState: '죽음',
-          action: '관찰',
-          actionDate: '2024-08-19',
-        },
-        image: [
-          {
-            path: `/files/${clientId}/PlantImg2.png`,
-            name: 'PlantImg2.png',
           },
         ],
         user: {
@@ -1068,7 +1038,33 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
-
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
+        product_id: 5,
+        seller_id: 3,
+        views: 50,
+        title: '드디어 개화!!',
+        content: '관심 준 만큼 예쁘게 잘 자라나서 아주 기분이 좋다. \n 완전히 개화될 때면 팔아야지',
+        extra: {
+          plantState: '개화',
+          action: '관찰',
+          actionDate: '2024-08-19',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/PlantImg3.png`,
+            name: 'PlantImg3.png',
+          },
+        ],
+        user: {
+          _id: 3,
+          name: '금전수 장인',
+          image: '/files/03-Greeny/jiwon.jpeg',
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -1257,8 +1253,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '선장',
           image: '/files/03-Greeny/mincheol.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1298,8 +1294,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '쑥쑤루쑥',
           image: '/files/03-Greeny/leeBadcuk.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1330,8 +1326,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '금전수 장인',
           image: '/files/03-Greeny/jiwon.jpeg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1355,8 +1351,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '금전수 장인',
           image: '/files/03-Greeny/jiwon.jpeg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1392,8 +1388,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '금전수 장인',
           image: '/files/03-Greeny/jiwon.jpeg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1457,8 +1453,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '식집사',
           image: '/files/03-Greeny/plant1.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'free',
         },
@@ -1536,8 +1532,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '쑥쑤루쑥',
           image: '/files/03-Greeny/leeBadcuk.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'free',
         },
@@ -1573,8 +1569,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '선장',
           image: '/files/03-Greeny/mincheol.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
@@ -1629,8 +1625,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '선장',
           image: '/files/03-Greeny/mincheol.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
@@ -1652,8 +1648,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '식집사',
           image: '/files/03-Greeny/plant1.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
@@ -1689,8 +1685,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '식물고수',
           image: '/files/03-Greeny/plant2.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
