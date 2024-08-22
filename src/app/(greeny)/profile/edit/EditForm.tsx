@@ -10,8 +10,6 @@ import { editUser } from '@/app/api/actions/useAction';
 import { signOut } from 'next-auth/react';
 
 export default function EditForm({ user }: { user: UserInfo }) {
-  console.log('------------------');
-  console.log(user);
   const {
     register,
     handleSubmit,

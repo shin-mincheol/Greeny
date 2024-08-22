@@ -55,5 +55,8 @@ export type UserInfo = {
     users: number;
     posts: number;
   };
+  bookmarkedBy: {
+    users: number;
+  };
   postViews: number;
 };

@@ -1,33 +1,32 @@
 import styles from './Profile.module.scss';
 import Image from 'next/image';
 import { auth } from '@/auth';
-import { Following } from '@/types/follow';
-import { MultiItem } from '@/types/response';
+import { CoreErrorRes, MultiItem, SingleItem } from '@/types/response';
 import NormalProfile from '@images/NormalProfile.svg';
 import Tab from './Tab';
 import Follow from './Follow';
 import Link from 'next/link';
+import { UserInfo } from '@/types/user';
 
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
-
-export type FollowingListRes = Omit<MultiItem<Following>, 'pagination'>;
 
 export default async function Page() {
   const session = await auth();
   if (!session) return '로그인 만료';
-  const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + '/bookmarks/user', {
+
+  const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + `/users/${session.user?.id}`, {
     headers: {
       'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${session.accessToken}`,
     },
   });
-  const followingListRes = (await response.json()) as FollowingListRes;
+  const resData: SingleItem<UserInfo> | CoreErrorRes = await response.json();
+  console.log('🚀 ~ Page ~ resData:', resData);
 
   return (
     <>
       <div className={styles.top}>
         <div className={styles.profile_panel}>
-          <Follow href="/profile/follower" cnt={12} title="식물" />
+          <Follow href="/profile/user" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식집사" />
 
           <Link href={`/profile/detail`}>
             <div className={styles.thumbnail}>
@@ -39,7 +38,7 @@ export default async function Page() {
             </div>
           </Link>
 
-          <Follow href="/profile/following" cnt={followingListRes.ok && followingListRes.item.length} title="식집사" />
+          <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
         </div>
       </div>
 

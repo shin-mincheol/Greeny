@@ -1,5 +1,6 @@
 import { auth } from '@/auth';
-import { FollowingListRes } from '../page';
+import { UserBookmark } from '@/types/bookmark';
+import { List } from '@/types/response';
 import PageTemplate from './PageTemplate';
 
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
@@ -13,7 +14,7 @@ export default async function Page() {
       Authorization: `Bearer ${session.accessToken}`,
     },
   });
-  const followingListRes = (await response.json()) as FollowingListRes;
+  const userBookmarkList = (await response.json()) as List<UserBookmark>;
 
-  return <PageTemplate list={followingListRes.item} />;
+  return <PageTemplate list={userBookmarkList.item} />;
 }

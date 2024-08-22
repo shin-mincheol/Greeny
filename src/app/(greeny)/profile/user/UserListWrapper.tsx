@@ -1,8 +1,8 @@
-import styles from './Following.module.scss';
-import { Following } from '@/types/follow';
+import { UserBookmark } from '@/types/bookmark';
+import styles from './User.module.scss';
 import User from './User';
 
-export default function FollowingListWrapper({ followingList }: { followingList: Following[] }) {
+export default function UserListWrapper({ followingList }: { followingList: UserBookmark[] }) {
   console.log('ClientFollowingListWrapper rendering...', followingList);
   return (
     <ul className={styles.follow_list}>

@@ -13,6 +13,7 @@ export async function deleteFollow(_id: number) {
       Authorization: `Bearer ${session?.accessToken}`,
     },
   });
-  revalidatePath('/profile/following');
+  // TODO: 왜 잘 작동했다가 안 되는지 확인
+  revalidatePath('/profile/user');
   return res.json();
 }
