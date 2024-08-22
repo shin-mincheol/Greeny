@@ -8,11 +8,12 @@ import ImageSlider from '@greeny/story/ImageSlider';
 import { fetchPost } from '@/app/api/fetch/postFetch';
 import SubMenuContainer from './SubMenuContainer';
 import { auth } from '@/auth';
+import { PostRes } from '@/types/post';
 
 export const revalidate = 0;
 
 export default async function PostDetail({ params: { id } }: { params: { id: string } }) {
-  const post = await fetchPost(id);
+  const post: PostRes = await fetchPost(id);
   const session = await auth();
   const isWriter = Number(session?.user?.id) === post.user._id;
 
@@ -25,7 +26,7 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
         </div>
         <pre>{post.content}</pre>
         {post.image.length > 0 && <ImageSlider images={post.image} />}
-        <PostInfo createdAt={post.createdAt} views={post.views} />
+        <PostInfo post={post} />
       </section>
       <section className={styles.reply}>
         <ReplyList postId={id} />

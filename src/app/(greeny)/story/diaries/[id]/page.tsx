@@ -1,4 +1,4 @@
-import diaryDetailStyles from './DiaryDetail.module.scss';
+import diaryDetailStyles from '@greeny/story/diaries/[id]/DiaryDetail.module.scss';
 import { fetchDiary } from '@/app/api/fetch/postFetch';
 import UserProfile from '@components/UserProfile';
 import Like from '@greeny/story/Like';
@@ -18,7 +18,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
             <>
               <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
-                <Like number={10} />
+                <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} />
               </div>
             </>
           }

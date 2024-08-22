@@ -16,7 +16,7 @@ export async function addPost(formData: FormData) {
 
   let images;
   const imageFiles = formData.getAll('attach') as File[];
-  if (imageFiles[0].size > 0) {
+  if (imageFiles[0]?.size > 0) {
     try {
       const imgFormData = new FormData();
       imageFiles.forEach((imageFile) => imgFormData.append('attach', imageFile));
@@ -140,6 +140,64 @@ export async function deleteReply(postId: string, replyId: number): Promise<Core
       },
     });
     revalidatePath(`/story/community/${postId}`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function likePost(targetId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/post`, {
+      method: 'POST',
+      headers: {
+        'client-id': `${DBNAME}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+      body: JSON.stringify({ target_id: Number(targetId) }),
+    });
+    revalidatePath(`/story/community/${targetId}`);
+    revalidatePath(`/story/diaries/${targetId}`);
+    revalidatePath(`/story/diaries`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function cancelLikePost(bookmarkId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/${bookmarkId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+    revalidatePath(`/story/community`);
+    revalidatePath(`/story/diaries`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function followPlant(targetId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/product`, {
+      method: 'POST',
+      headers: {
+        'client-id': `${DBNAME}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+      body: JSON.stringify({ target_id: Number(targetId) }),
+    });
+    revalidatePath(`/story/diaries/${targetId}`);
     return res.json();
   } catch (error) {
     throw new Error('network error');
