@@ -24,22 +24,20 @@ export default async function Page() {
 
   return (
     <>
-      <div className={styles.top}>
-        <div className={styles.profile_panel}>
-          <Follow href="/profile/user" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식집사" />
+      <div className={styles.profile_panel}>
+        <Follow href="/profile/user" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식집사" />
 
-          <Link href={`/profile/detail`}>
-            <div className={styles.thumbnail}>
-              <div>
-                <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" fill sizes="100%" />
-              </div>
-              <p>{session.user?.name}</p>
-              <span>{session.user?.email}</span>
+        <Link href={`/profile/detail`}>
+          <div className={styles.thumbnail}>
+            <div>
+              <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
             </div>
-          </Link>
+            <p>{session.user?.name}</p>
+            <span>{session.user?.email}</span>
+          </div>
+        </Link>
 
-          <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
-        </div>
+        <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
       </div>
 
       <div className={styles.gap}></div>

@@ -1,12 +1,10 @@
 @import '@styles/mixin';
 
-.top {
-  .profile_panel {
-    @include flex-horizontal(1rem);
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
+.profile_panel {
+  @include flex-horizontal(1rem);
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 
   .thumbnail {
     @include flex-vertical(1rem);
