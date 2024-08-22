@@ -16,21 +16,20 @@ export default function Banner() {
     <Swiper className={styles.bannerList} slidesPerView={1} spaceBetween={0} modules={[Autoplay]} autoplay={{ delay: 5000, disableOnInteraction: false }}>
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
-          <Image src={banner1} alt="식물 사진" fill sizes="100%" />
+          <Image src={banner3} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.banner_info}>
           <div className={styles.banner_text}>
             <span>식물 친구 추천해요!</span>
             <p>
-              당신의 새로운 식물 친구,
-              <br />
-              맞춤 추천으로 만나보세요!
+              나만의 식물 친구를 <br />
+              여기서 찾아보세요!
             </p>
           </div>
 
           <Link href="/event" className={styles.bannerLink}>
-            <Image src={bannerIcon} width={50} height={50} alt="테스트하러가기" />
+            <Image src={bannerIcon} width={40} height={40} alt="테스트하러가기" />
           </Link>
         </div>
       </SwiperSlide>
@@ -54,25 +53,28 @@ export default function Banner() {
           </Link>
         </div>
       </SwiperSlide>
+
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
-          <Image src={banner3} alt="식물 사진" fill sizes="100%" />
+          <Image src={banner1} alt="식물 사진" fill sizes="100%" />
         </div>
 
         <div className={styles.banner_info}>
           <div className={styles.banner_text}>
             <span>식물 친구 추천해요!</span>
             <p>
-              나만의 식물 친구를 <br />
-              여기서 찾아보세요!
+              당신의 새로운 식물 친구,
+              <br />
+              맞춤 추천으로 만나보세요!
             </p>
           </div>
 
           <Link href="/event" className={styles.bannerLink}>
-            <Image src={bannerIcon} width={40} height={40} alt="테스트하러가기" />
+            <Image src={bannerIcon} width={50} height={50} alt="테스트하러가기" />
           </Link>
         </div>
       </SwiperSlide>
+
       <SwiperSlide className={styles.banner_item}>
         <div className={styles.banner_cover}>
           <Image src={banner4} alt="식물 사진" fill sizes="100%" />
