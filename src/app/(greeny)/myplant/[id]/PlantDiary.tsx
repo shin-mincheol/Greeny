@@ -63,7 +63,7 @@ export default function PlantDiray({ id, name }: { id: number; name: string }) {
     selectData && selectData.length > 0 ? (
       selectData.map((item: PlantDetailRes) => (
         <li key={item._id}>
-          <Link href={`/story/diaries/${id}`} className={styles.diary_item}>
+          <Link href={`/story/diaries/${item._id}`} className={styles.diary_item}>
             <div className={styles.item_head}>
               <div className={styles.item_info}>
                 <span>식물 상태 :</span>
