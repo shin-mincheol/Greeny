@@ -303,7 +303,7 @@ export const initData = async (clientId, nextSeq) => {
         buyQuantity: 310,
         mainImages: [
           {
-            path: `/files/${clientId}sansevieria.jpg`,
+            path: `/files/${clientId}/sansevieria.jpg`,
             name: 'sansevieria.jpg',
           },
         ],

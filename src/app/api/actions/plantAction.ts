@@ -56,3 +56,19 @@ export async function DiaryNew(formData: FormData, id: string): Promise<ApiResWi
   const resJson = await res.json();
   return resJson;
 }
+
+export async function plantsDelete<T>(id: number | undefined) {
+  const session = await auth();
+
+  const url = `${SERVER}/seller/products/${id}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'client-id': `${DBNAME}`,
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  });
+  const resJson = await res.json();
+
+  return resJson;
+}

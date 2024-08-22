@@ -1,3 +1,4 @@
+import { auth } from '@/auth';
 import { FileRes } from '@/types/image';
 import { PlantForm, PlantRes } from '@/types/plant';
 import { ApiResWithValidation, MultiItem, SingleItem } from '@/types/response';
