@@ -1,15 +1,15 @@
 'use client';
-import styles from './Following.module.scss';
-import { Following } from '@/types/follow';
+import styles from './User.module.scss';
 import Image from 'next/image';
 import { useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { UserBookmark } from '@/types/bookmark';
 import Input from '@/components/Input';
 
 interface FormValues {
   name: string;
 }
-export default function FollowingForm({ followingList, setFollowingList }: { followingList: Following[]; setFollowingList: (list: Following[]) => void }) {
+export default function UserForm({ followingList, setFollowingList }: { followingList: UserBookmark[]; setFollowingList: (list: UserBookmark[]) => void }) {
   const initialFollowingList = useRef(followingList);
   const { handleSubmit, register } = useForm<FormValues>();
 
@@ -18,6 +18,7 @@ export default function FollowingForm({ followingList, setFollowingList }: { fol
       setFollowingList(initialFollowingList.current);
       return;
     }
+
     const filteredData = followingList.filter((item) => item.user.name.toLowerCase().includes(data.name.toLowerCase()));
     setFollowingList(filteredData);
   };
