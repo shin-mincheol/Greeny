@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { PlantDetailRes } from '@/types/plant';
 import { DiaryRes, PostComment, PostRes } from '@/types/post';
 import { CoreErrorRes, MultiItem, SingleItem } from '@/types/response';
 
@@ -76,6 +77,20 @@ export async function fetchReply(id: string) {
   if (!resJson.ok) throw new Error(resJson.message);
 
   return resJson.item;
+}
+
+export async function getPlantBookmarkId(plantId: string) {
+  const url = `${SERVER}/products/${plantId}`;
+  const res = await fetch(url, {
+    headers: {
+      'client-id': `${DBNAME}`,
+      ...(await getAuthHeader()),
+    },
+  });
+  const resJson: SingleItem<PlantDetailRes> | CoreErrorRes = await res.json();
+  if (!resJson.ok) throw new Error(resJson.message);
+
+  return resJson.item.myBookmarkId;
 }
 
 async function getAuthHeader() {

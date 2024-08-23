@@ -81,6 +81,23 @@ export async function deletePost(postId: string) {
   redirect('/story/community');
 }
 
+export async function deleteDiary(postId: string) {
+  const session = await auth();
+  try {
+    await fetch(`${SERVER}/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+  } catch (error) {
+    throw new Error('network error');
+  }
+  revalidatePath(`/story/diaries`);
+  redirect('/story/diaries');
+}
+
 export async function addReply(postId: string, formData: FormData): Promise<SingleItem<PostComment> | CoreErrorRes> {
   const session = await auth();
   const data = {
@@ -198,6 +215,23 @@ export async function followPlant(targetId: string) {
       body: JSON.stringify({ target_id: Number(targetId) }),
     });
     revalidatePath(`/story/diaries/${targetId}`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function unfollowPlant(bookmarkId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/${bookmarkId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+    revalidatePath(`/story/diaries`);
     return res.json();
   } catch (error) {
     throw new Error('network error');
