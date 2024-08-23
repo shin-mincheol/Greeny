@@ -48,6 +48,7 @@ export default function PostForm(props?: { post?: PostRes }) {
     }
     addPost(formData);
   };
+
   return (
     <>
       <form action={add} className={postStyles.post_form}>
@@ -102,7 +103,7 @@ export default function PostForm(props?: { post?: PostRes }) {
             제목
             <span className={postStyles.required_mark}>*</span>
           </label>
-          <input type="text" name="title" id="title" placeholder="제목을 입력해주세요." defaultValue={props?.post ? props.post.title : ''} />
+          <input type="text" name="title" id="title" placeholder="제목을 입력해주세요." defaultValue={props?.post ? props.post.title : ''} minLength={2} required />
         </div>
 
         <div>
@@ -110,7 +111,16 @@ export default function PostForm(props?: { post?: PostRes }) {
             상세 내용
             <span className={postStyles.required_mark}>*</span>
           </label>
-          <textarea rows={5} className={postStyles.description} name="content" id="content" placeholder="상세 내용을 입력해주세요." defaultValue={props?.post ? props.post.content : ''}></textarea>
+          <textarea
+            rows={5}
+            className={postStyles.description}
+            name="content"
+            id="content"
+            placeholder="상세 내용을 입력해주세요."
+            defaultValue={props?.post ? props.post.content : ''}
+            minLength={2}
+            required
+          ></textarea>
         </div>
 
         <button type="submit" className={postStyles.btn_submit}>
