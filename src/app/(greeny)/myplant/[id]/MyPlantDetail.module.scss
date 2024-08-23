@@ -17,7 +17,8 @@
   }
 
   .plant_name {
-    @include flex-vertical(0.5rem);
+    @include flex-vertical(1rem);
+    align-items: center;
     box-sizing: border-box;
     text-align: center;
 
@@ -31,13 +32,18 @@
     }
 
     p {
-      margin-top: 1rem;
+      width: 100%;
       color: var(--color-white);
       text-align: center;
       padding: 1.4rem 0;
       border-radius: 1rem;
       background-color: #a7c4a0;
       box-sizing: border-box;
+    }
+
+    .plant_with,
+    button {
+      margin-top: 1.3rem;
     }
   }
 
@@ -69,6 +75,48 @@
     @include flex-vertical(3rem);
     align-items: center;
     box-sizing: border-box;
+
+    .plant_head {
+      width: 100%;
+      @include flex-horizontal(0);
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+
+      .subMeun {
+        width: 2rem;
+        height: 2rem;
+        background-image: url('/images/SubMenuIcon.svg');
+        background-repeat: no-repeat;
+      }
+
+      .subMenuBox {
+        background-color: var(--color-white);
+        border: 0.1rem solid var(--color-gray-50);
+        overflow: hidden;
+        border-radius: 0.5rem;
+        position: absolute;
+        right: 0;
+        top: 2.4rem;
+        @include flex-vertical;
+        box-shadow: 0 0.1rem 0.3rem rgba($color: #000000, $alpha: 0.1);
+
+        hr {
+          all: unset;
+          width: 100%;
+          height: 0.1rem;
+          background-color: var(--color-gray-50);
+        }
+        .subMenuItem {
+          padding: 0.5rem 1rem;
+          font-size: 1.2rem;
+        }
+        .subMenuItem.delete {
+          color: var(--color-error);
+        }
+      }
+    }
+
     // 식물 정보 css
     .plant_gardening {
       width: 100%;

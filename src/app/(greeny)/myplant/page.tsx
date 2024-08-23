@@ -47,9 +47,6 @@ export default async function MyPlant() {
         <h2>My Plant</h2>
 
         <div className={styles.btn_box}>
-          <Link href="/myplant/delete" className={styles.button_line}>
-            <span className="hidden">삭제</span>
-          </Link>
           <Link href="/myplant/new" className={styles.button_fill}>
             <span className="hidden">추가</span>
           </Link>

@@ -9,7 +9,7 @@ import { PostRes } from '@/types/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 
-const categories = [
+const categories: { name: 'free' | 'planterior' | 'qna'; value: '자유' | '플랜테리어' | '질문' }[] = [
   { name: 'free', value: '자유' },
   { name: 'planterior', value: '플랜테리어' },
   { name: 'qna', value: '질문' },
@@ -21,12 +21,12 @@ export default function PostForm(props?: { post?: PostRes }) {
   const [urls, setUrls] = useState<string[]>([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files!.length > 5) return alert('이미지는 최대 5개 등록 가능합니다.');
+    if (files.length + e.target.files!.length > 5) return alert(`이미지는 최대 5개 등록 가능합니다.\n(현재 등록된 이미지 수: ${files.length}개)`);
     if (e.target.files) {
       const filesArr = Array.from(e.target.files);
       const imgUrls = filesArr.map((file) => URL.createObjectURL(file));
-      setFiles(filesArr);
-      setUrls(imgUrls);
+      setFiles((f) => [...f, ...filesArr]);
+      setUrls((u) => [...u, ...imgUrls]);
     }
   };
 
@@ -48,6 +48,7 @@ export default function PostForm(props?: { post?: PostRes }) {
     }
     addPost(formData);
   };
+
   return (
     <>
       <form action={add} className={postStyles.post_form}>
@@ -86,7 +87,7 @@ export default function PostForm(props?: { post?: PostRes }) {
                     value={category.name}
                     className={styles.sr_only}
                     checked={category.name === selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value as 'free' | 'planterior' | 'qna')}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
                   />
                   <label htmlFor={category.name} className={`${postStyles.tab} ${category.name === selectedCategory ? postStyles.selected : ''}`}>
                     {category.value}
@@ -102,7 +103,7 @@ export default function PostForm(props?: { post?: PostRes }) {
             제목
             <span className={postStyles.required_mark}>*</span>
           </label>
-          <input type="text" name="title" id="title" placeholder="제목을 입력해주세요." defaultValue={props?.post ? props.post.title : ''} />
+          <input type="text" name="title" id="title" placeholder="제목을 입력해주세요." defaultValue={props?.post ? props.post.title : ''} minLength={2} required />
         </div>
 
         <div>
@@ -110,7 +111,16 @@ export default function PostForm(props?: { post?: PostRes }) {
             상세 내용
             <span className={postStyles.required_mark}>*</span>
           </label>
-          <textarea rows={5} className={postStyles.description} name="content" id="content" placeholder="상세 내용을 입력해주세요." defaultValue={props?.post ? props.post.content : ''}></textarea>
+          <textarea
+            rows={5}
+            className={postStyles.description}
+            name="content"
+            id="content"
+            placeholder="상세 내용을 입력해주세요."
+            defaultValue={props?.post ? props.post.content : ''}
+            minLength={2}
+            required
+          ></textarea>
         </div>
 
         <button type="submit" className={postStyles.btn_submit}>

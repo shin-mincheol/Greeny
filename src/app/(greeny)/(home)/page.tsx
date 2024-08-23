@@ -1,5 +1,5 @@
 import styles from './Home.module.scss';
-import like from '@images/LikeIcon.svg';
+import like from '@images/LikeIcon_nor.svg';
 import comment from '@images/CommentIcon.svg';
 import view from '@images/ViewIcon.svg';
 import Image from 'next/image';
@@ -7,41 +7,46 @@ import Banner from './(section)/Banner';
 import TodayPlant from './(section)/TodayPlant';
 import TodayDiary from './(section)/TodayDiary';
 import { fetchDiaries, fetchPosts } from '@/app/api/fetch/postFetch';
+import Link from 'next/link';
+import { formatAgo } from '@/utils/date';
+
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function Home() {
   const dataPost = await fetchPosts();
   const dataDiary = await fetchDiaries();
 
-  const list = dataPost.map((item) => {
+  const list = dataPost.item.map((item) => {
     return (
-      <li className={styles.contents_item} key={item._id}>
-        <div className={styles.contents_main}>
-          <div className={styles.contents_info}>
-            <h3>{item.title}</h3>
-            <p>{item.content}</p>
-          </div>
-          <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image[0].path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
-        </div>
-
-        <div className={styles.contents_footer}>
-          <div className={styles.reaction_list}>
-            <div className={styles.reaction_item}>
-              <Image src={like} alt="좋아요" width={16} />
-              <p>0</p>
+      <li key={item._id}>
+        <Link href={`/story/community/${item._id}`} className={styles.contents_item}>
+          <div className={styles.contents_main}>
+            <div className={styles.contents_info}>
+              <h3>{item.title}</h3>
+              <p>{item.content}</p>
             </div>
-            <div className={styles.reaction_item}>
-              <Image src={comment} alt="댓글" width={16} />
-              <p>{item.repliesCount}</p>
-            </div>
-            <div className={styles.reaction_item}>
-              <Image src={view} alt="조회수" width={16} />
-              <p>{item.views}</p>
-            </div>
+            <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image[0].path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
           </div>
 
-          <p>3분전</p>
-        </div>
+          <div className={styles.contents_footer}>
+            <div className={styles.reaction_list}>
+              <div className={styles.reaction_item}>
+                <Image src={like} alt="좋아요" width={16} />
+                <p>0</p>
+              </div>
+              <div className={styles.reaction_item}>
+                <Image src={comment} alt="댓글" width={16} />
+                <p>{item.repliesCount}</p>
+              </div>
+              <div className={styles.reaction_item}>
+                <Image src={view} alt="조회수" width={16} />
+                <p>{item.views}</p>
+              </div>
+            </div>
+
+            <p>{formatAgo(item.createdAt)}</p>
+          </div>
+        </Link>
       </li>
     );
   });

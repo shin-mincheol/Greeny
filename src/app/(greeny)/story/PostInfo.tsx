@@ -1,14 +1,15 @@
+import styles from '@greeny/story/Community.module.scss';
 import { formatAgo } from '@/utils/date';
-import styles from './Community.module.scss';
 import Like from '@greeny/story/Like';
+import { PostRes } from '@/types/post';
 
-export default function PostInfo({ createdAt, views }: { createdAt: string; views: number }) {
+export default function PostInfo({ post }: { post: PostRes }) {
   return (
     <div className={styles.post_info}>
-      <Like number={10} />
+      <Like number={post.bookmarks} targetId={post._id.toString()} bookmarkId={post.myBookmarkId} />
       <div className={styles.time_and_views}>
-        <div>{formatAgo(createdAt)}</div>
-        <div>조회수 {views}</div>
+        <div>{formatAgo(post.createdAt)}</div>
+        <div>조회수 {post.views}</div>
       </div>
     </div>
   );

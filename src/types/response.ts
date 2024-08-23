@@ -21,6 +21,11 @@ export interface SingleItem<T> extends CoreSuccessRes {
 }
 
 // item 여러개 응답
+export interface List<T> extends CoreSuccessRes {
+  item: T[];
+}
+
+// item 여러개 응답(페이징)
 export interface MultiItem<T> extends CoreSuccessRes {
   item: T[];
   pagination: Pagination;

@@ -3,7 +3,7 @@ import styles from './MyPlantNew.module.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '@/components/button/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -11,12 +11,13 @@ import photoAdd from '@images/PhotoAddIcon.svg';
 import plantData from '@/app/data/plantList';
 import { PlantForm } from '@/types/plant';
 import { format } from 'date-fns';
-import { fetchAddPlant } from '@/app/api/fetch/plantFetch';
-import { useSession } from 'next-auth/react';
+import { plantNew } from '@/app/api/actions/plantAction';
 
 export default function MyPlantAddForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const { data: session } = useSession();
+  const [drop, setDrop] = useState(false);
+  const [plantName, setPlantName] = useState('식물을 선택해주세요.');
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   const {
     register,
@@ -38,8 +39,9 @@ export default function MyPlantAddForm() {
     }
   }, [image]);
 
-  const selectedPlantName = watch('name');
-  const selectedPlant = plantData.find((p) => p?.cntntsSj === selectedPlantName);
+  //식물 'name'
+  const selectedPlantName = watch('scientificName');
+  const selectedPlant = plantData.find((p) => p?.cntntsSj === plantName);
 
   useEffect(() => {
     if (selectedPlant) {
@@ -50,12 +52,39 @@ export default function MyPlantAddForm() {
     }
   }, [selectedPlantName, selectedPlant, setValue]);
 
+  //드롭다운
+  const handledrop = () => {
+    setDrop(!drop);
+  };
+
   const plantOptions = plantData.map((plant) => (
-    <option key={plant.cntntsNo} value={plant.cntntsSj}>
+    <li
+      key={plant.cntntsNo}
+      onClick={() => {
+        setPlantName(plant.cntntsSj);
+        setValue('scientificName', plant.cntntsSj);
+        setDrop(false);
+      }}
+      className={styles.dropItem}
+    >
       {plant.cntntsSj}
-    </option>
+    </li>
   ));
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDrop(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  //데이터 패치
   const onAddPlant = async (formData: PlantForm) => {
     try {
       const plantForm = new FormData();
@@ -68,11 +97,11 @@ export default function MyPlantAddForm() {
         plantForm.append('attach', formData.attach[0]);
       }
 
-      const res = await fetchAddPlant(plantForm, session?.accessToken);
+      const res = await plantNew(plantForm);
       // console.log(res);
       if (res.ok) {
         alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
-        router.push('/myplant');
+        router.replace('/myplant');
       }
     } catch (err) {
       console.log(err);
@@ -96,18 +125,15 @@ export default function MyPlantAddForm() {
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="name">
+        <label htmlFor="scientificName">
           식물<span>*</span>
         </label>
+        <div className={styles.selectBox} ref={dropdownRef} onClick={handledrop}>
+          {plantName}
 
-        <div className={styles.selectBox}>
-          <select className={styles.select} {...register('scientificName')} defaultValue="placeholder">
-            <option disabled value="placeholder">
-              식물을 선택해주세요.
-            </option>
-            {plantOptions}
-          </select>
+          {drop ? <ul className={styles.select}>{plantOptions}</ul> : ''}
         </div>
+        <input type="hidden" {...register('scientificName')} value={plantName} />
         {errors.scientificName && <p>{errors.scientificName.message}</p>}
       </div>
 
@@ -204,15 +230,15 @@ export default function MyPlantAddForm() {
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="feature">특징</label>
+        <label htmlFor="content">특징</label>
         <textarea
-          id="feature"
+          id="content"
           placeholder="식물의 특징을 적어주세요."
           {...register('content', {
             required: '식물의 특징을 적어주세요.',
             minLength: {
-              value: 2,
-              message: '특징을 2글자 이상 입력하세요.',
+              value: 10,
+              message: '특징을 10글자 이상 입력하세요.',
             },
           })}
         />

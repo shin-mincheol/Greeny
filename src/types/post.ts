@@ -23,6 +23,8 @@ export interface PostRes {
   image: ImageRes[];
   createdAt: string;
   updatedAt: string;
+  bookmarks: number;
+  myBookmarkId?: number;
   product?: { image: null };
   extra?: {
     category: 'free' | 'qna' | 'planterior';
@@ -34,7 +36,6 @@ export interface PostForm {
   category: 'free' | 'qna' | 'planterior';
   title: string;
   content: string;
-  //이미지 부분 나중에 추가
 }
 
 export interface DiaryRes {
@@ -54,6 +55,8 @@ export interface DiaryRes {
   createdAt: string;
   updatedAt: string;
   product: PlantSimple;
+  bookmarks: number;
+  myBookmarkId?: number;
   image: ImageRes[];
   repliesCount: 0;
 }
@@ -66,5 +69,5 @@ export interface DiaryForm {
   plantState: '좋음' | '새싹' | '개화' | '아픔' | '죽음';
   action: '물주기' | '햇빛' | '분갈이' | '영양' | '가지' | '관찰';
   actionDate: string;
-  //이미지 부분 나중에 추가
+  attach: File[];
 }
