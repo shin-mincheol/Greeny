@@ -81,12 +81,16 @@
         background-color: #d5e1de;
       }
       .user_data {
-        @include flex-vertical(1rem);
-        justify-content: space-between;
+        @include flex-vertical(0rem);
+        justify-content: space-evenly;
         align-items: flex-start;
         p {
-          font-weight: var(--font-semibold);
+          font-weight: var(--font-bold);
+          font-size: 1.4rem;
+        }
+        span {
           font-size: 1.2rem;
+          color: var(--color-gray-10);
         }
       }
     }

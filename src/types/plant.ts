@@ -88,7 +88,7 @@ export interface PlantJson {
   waterCycleCode: string;
 }
 
-// 2-1 식물 목록 조회
+// 02. 일반 회원 - 2-1 식물 목록 조회
 export interface PlantListRes extends PlantRes {
   mainImages: ImageRes[];
   seller: {
@@ -104,4 +104,5 @@ export interface PlantListRes extends PlantRes {
   options: number;
   orders: number;
   ordersQuantity: number;
+  shippingFees: number;
 }
