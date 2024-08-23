@@ -8,11 +8,12 @@ type Props = {
   number: number;
   targetId: string;
   bookmarkId: number | undefined;
+  content: string;
 };
 
-export default function Like({ number, targetId, bookmarkId }: Props) {
+export default function Like({ number, targetId, bookmarkId, content }: Props) {
   const isFilled = !!bookmarkId;
-  const likePostWithId = likePost.bind(null, targetId);
+  const likePostWithId = likePost.bind(null, targetId, content);
   const cancelLikePostWithId = () => bookmarkId && cancelLikePost.bind(null, bookmarkId.toString())();
 
   return (
