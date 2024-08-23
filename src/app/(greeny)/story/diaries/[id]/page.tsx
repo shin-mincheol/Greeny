@@ -49,7 +49,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
 
         <div className={diaryDetailStyles.plant_card}>
           <div className={diaryDetailStyles.plant_profile}>
-            <Link href={`/myplant/${diary.product_id}`}>
+            <Link href={`/plant/${diary.product_id}`}>
               <div className={diaryDetailStyles.plant_image_container}>
                 <Image src={`${SERVER}/${plant.mainImages[0][0].path}`} alt={plant.name} fill sizes="100%" />
               </div>
