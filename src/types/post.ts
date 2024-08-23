@@ -23,6 +23,8 @@ export interface PostRes {
   image: ImageRes[];
   createdAt: string;
   updatedAt: string;
+  bookmarks: number;
+  myBookmarkId?: number;
   product?: { image: null };
   extra?: {
     category: 'free' | 'qna' | 'planterior';
@@ -53,6 +55,8 @@ export interface DiaryRes {
   createdAt: string;
   updatedAt: string;
   product: PlantSimple;
+  bookmarks: number;
+  myBookmarkId?: number;
   image: ImageRes[];
   repliesCount: 0;
 }

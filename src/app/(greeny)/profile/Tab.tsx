@@ -9,7 +9,7 @@ import { CoreErrorRes, MultiItem } from '@/types/response';
 import { PlantListRes } from '@/types/plant';
 import MyPlantIcon from '@images/MyPlantIcon.svg';
 import MyPostIcon from '@images/MyPostIcon.svg';
-import like from '@images/LikeIcon.svg';
+import like from '@images/LikeIcon_nor.svg';
 import comment from '@images/CommentIcon.svg';
 import view from '@images/ViewIcon.svg';
 

@@ -1,5 +1,5 @@
 import styles from './Home.module.scss';
-import like from '@images/LikeIcon.svg';
+import like from '@images/LikeIcon_nor.svg';
 import comment from '@images/CommentIcon.svg';
 import view from '@images/ViewIcon.svg';
 import Image from 'next/image';
@@ -8,13 +8,15 @@ import TodayPlant from './(section)/TodayPlant';
 import TodayDiary from './(section)/TodayDiary';
 import { fetchDiaries, fetchPosts } from '@/app/api/fetch/postFetch';
 import Link from 'next/link';
+import { formatAgo } from '@/utils/date';
+
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function Home() {
   const dataPost = await fetchPosts();
   const dataDiary = await fetchDiaries();
 
-  const list = dataPost.map((item) => {
+  const list = dataPost.item.map((item) => {
     return (
       <li key={item._id}>
         <Link href={`/story/community/${item._id}`} className={styles.contents_item}>
@@ -42,7 +44,7 @@ export default async function Home() {
               </div>
             </div>
 
-            <p>3분전</p>
+            <p>{formatAgo(item.createdAt)}</p>
           </div>
         </Link>
       </li>
