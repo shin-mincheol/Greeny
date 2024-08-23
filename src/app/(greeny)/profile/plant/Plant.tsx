@@ -5,7 +5,6 @@ import DeleteButton from './DeleteButton';
 import NormalProfile from '@images/NormalProfile.svg';
 
 export default function Plant(plant: PlantBookmark) {
-  console.log(plant);
   return (
     <li className={styles.item_wrapper}>
       <div className={styles.user_info_wrapper}>
