@@ -1,17 +1,19 @@
-import styles from './Community.module.scss';
+import styles from '@greeny/story/Community.module.scss';
 import PostItem from '@greeny/story/PostItem';
 import { fetchPosts } from '@/app/api/fetch/postFetch';
+import NoResult from '@greeny/story/NoResult';
+import Pagination from './Pagination';
 
 export const revalidate = 0;
 
-export default async function PostList({ searchParams: { category } }: { searchParams: { category: string } }) {
-  const posts = await fetchPosts({ category });
+export default async function PostList({ searchParams, usePagination = true }: { searchParams: { category: string; keyword: string; page: string }; usePagination?: boolean }) {
+  const data = await fetchPosts(searchParams);
+  const posts = data.item;
 
   return (
     <ul className={styles.ul}>
-      {posts.map((post) => (
-        <PostItem key={post._id} item={post} />
-      ))}
+      {posts.length > 0 ? posts.map((post) => <PostItem key={post._id} item={post} />) : <NoResult />}
+      {usePagination && posts.length > 0 && <Pagination totalPage={data.pagination.totalPages} />}
     </ul>
   );
 }

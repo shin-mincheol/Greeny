@@ -16,7 +16,7 @@ export async function addPost(formData: FormData) {
 
   let images;
   const imageFiles = formData.getAll('attach') as File[];
-  if (imageFiles[0].size > 0) {
+  if (imageFiles[0]?.size > 0) {
     try {
       const imgFormData = new FormData();
       imageFiles.forEach((imageFile) => imgFormData.append('attach', imageFile));
@@ -81,6 +81,23 @@ export async function deletePost(postId: string) {
   redirect('/story/community');
 }
 
+export async function deleteDiary(postId: string) {
+  const session = await auth();
+  try {
+    await fetch(`${SERVER}/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+  } catch (error) {
+    throw new Error('network error');
+  }
+  revalidatePath(`/story/diaries`);
+  redirect('/story/diaries');
+}
+
 export async function addReply(postId: string, formData: FormData): Promise<SingleItem<PostComment> | CoreErrorRes> {
   const session = await auth();
   const data = {
@@ -140,6 +157,81 @@ export async function deleteReply(postId: string, replyId: number): Promise<Core
       },
     });
     revalidatePath(`/story/community/${postId}`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function likePost(targetId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/post`, {
+      method: 'POST',
+      headers: {
+        'client-id': `${DBNAME}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+      body: JSON.stringify({ target_id: Number(targetId) }),
+    });
+    revalidatePath(`/story/community/${targetId}`);
+    revalidatePath(`/story/diaries/${targetId}`);
+    revalidatePath(`/story/diaries`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function cancelLikePost(bookmarkId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/${bookmarkId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+    revalidatePath(`/story/community`);
+    revalidatePath(`/story/diaries`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function followPlant(targetId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/product`, {
+      method: 'POST',
+      headers: {
+        'client-id': `${DBNAME}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+      body: JSON.stringify({ target_id: Number(targetId) }),
+    });
+    revalidatePath(`/story/diaries/${targetId}`);
+    return res.json();
+  } catch (error) {
+    throw new Error('network error');
+  }
+}
+
+export async function unfollowPlant(bookmarkId: string) {
+  const session = await auth();
+  try {
+    const res = await fetch(`${SERVER}/bookmarks/${bookmarkId}`, {
+      method: 'DELETE',
+      headers: {
+        'client-id': `${DBNAME}`,
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+    revalidatePath(`/story/diaries`);
     return res.json();
   } catch (error) {
     throw new Error('network error');

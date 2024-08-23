@@ -46,6 +46,8 @@ export interface PlantDetailRes {
   updatedAt: string;
   product: { name: string; mainImages: null };
   repliesCount: 0;
+  bookmarks: number;
+  myBookmarkId?: number;
 }
 
 export interface PlantJson {

@@ -9,7 +9,7 @@ type Props = {
   item: PostRes;
 };
 
-export default function PostItem({ item: { _id, title, content, views, repliesCount, createdAt, image } }: Props) {
+export default function PostItem({ item: { _id, title, content, views, repliesCount, bookmarks, createdAt, image } }: Props) {
   return (
     <li>
       <article className={styles.post_item_container}>
@@ -22,7 +22,7 @@ export default function PostItem({ item: { _id, title, content, views, repliesCo
         </Link>
         <div className={styles.info}>
           <div className={styles.icons}>
-            <IconAndNumber src="/images/LikeIcon.svg" alt="좋아요" number={10} />
+            <IconAndNumber src="/images/LikeIcon_nor.svg" alt="좋아요" number={bookmarks} />
             <IconAndNumber src="/images/CommentIcon.svg" alt="코멘트" number={repliesCount!} />
             <IconAndNumber src="/images/ViewIcon.svg" alt="조회수" number={views} />
           </div>
