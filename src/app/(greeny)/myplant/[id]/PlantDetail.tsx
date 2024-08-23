@@ -6,7 +6,7 @@ import PlantInfo from './PlantInfo';
 import PlantDiray from './PlantDiary';
 
 export default function MyPlantDetail({ item }: { item: PlantRes }) {
-  const [tabMenun, setTabMenu] = useState(false);
+  const [tabMenun, setTabMenu] = useState(true);
   const handleTab = (tabClick: string) => {
     if (tabClick === 'info') {
       return setTabMenu(true);

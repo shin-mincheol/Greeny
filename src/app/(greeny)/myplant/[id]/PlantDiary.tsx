@@ -41,6 +41,8 @@ export default function PlantDiray({ id, name }: { id: number; name: string }) {
     const fetchData = async () => {
       const scheduleItems = await fetchPlantsDiary(id, selectDay, true);
       setSscheduleData(scheduleItems);
+      const todayItems = await fetchPlantsDiary(id, selectDay, false);
+      setSelectData(todayItems);
       setIsLoaded(true);
     };
 
@@ -63,7 +65,7 @@ export default function PlantDiray({ id, name }: { id: number; name: string }) {
     selectData && selectData.length > 0 ? (
       selectData.map((item: PlantDetailRes) => (
         <li key={item._id}>
-          <Link href={`/story/diaries/${id}`} className={styles.diary_item}>
+          <Link href={`/story/diaries/${item._id}`} className={styles.diary_item}>
             <div className={styles.item_head}>
               <div className={styles.item_info}>
                 <span>식물 상태 :</span>
@@ -111,9 +113,9 @@ export default function PlantDiray({ id, name }: { id: number; name: string }) {
   return (
     <div className={styles.layout_wrapper}>
       <div className={styles.diary_head}>
-        <h3>식물 일지</h3>
-        <Link href={`/myplant/${id}/diaryAdd`} className={styles.diary_add}>
-          <span className="hidden">식물 일지 추가</span>
+        <h3>식물 일기</h3>
+        <Link href={`/myplant/${id}/diaryNew`} className={styles.diary_add}>
+          <span className="hidden">식물 일기 추가</span>
         </Link>
       </div>
       <Calendar

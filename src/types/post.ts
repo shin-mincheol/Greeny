@@ -34,7 +34,6 @@ export interface PostForm {
   category: 'free' | 'qna' | 'planterior';
   title: string;
   content: string;
-  //이미지 부분 나중에 추가
 }
 
 export interface DiaryRes {
@@ -66,5 +65,5 @@ export interface DiaryForm {
   plantState: '좋음' | '새싹' | '개화' | '아픔' | '죽음';
   action: '물주기' | '햇빛' | '분갈이' | '영양' | '가지' | '관찰';
   actionDate: string;
-  //이미지 부분 나중에 추가
+  attach: File[];
 }

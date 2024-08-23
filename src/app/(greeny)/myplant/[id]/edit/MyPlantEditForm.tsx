@@ -1,5 +1,5 @@
 'use client';
-import styles from './MyPlantNew.module.scss';
+import styles from './MyPlantEdit.module.scss';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '@/components/button/Button';
@@ -9,11 +9,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import photoAdd from '@images/PhotoAddIcon.svg';
 import plantData from '@/app/data/plantList';
-import { PlantForm } from '@/types/plant';
+import { PlantForm, PlantRes } from '@/types/plant';
 import { format } from 'date-fns';
 import { plantNew } from '@/app/api/actions/plantAction';
 
-export default function MyPlantAddForm() {
+export default function MyPlantEditForm({ id }: { id: string }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [drop, setDrop] = useState(false);
   const [plantName, setPlantName] = useState('식물을 선택해주세요.');

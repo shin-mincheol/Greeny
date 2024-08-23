@@ -121,7 +121,7 @@ export const initData = async (clientId, nextSeq) => {
         buyQuantity: 310,
         mainImages: [
           {
-            path: `/files/${clientId}clivia.jpg`,
+            path: `/files/${clientId}/clivia.jpg`,
             name: 'clivia.jpg',
           },
         ],
@@ -303,7 +303,7 @@ export const initData = async (clientId, nextSeq) => {
         buyQuantity: 310,
         mainImages: [
           {
-            path: `/files/${clientId}sansevieria.jpg`,
+            path: `/files/${clientId}/sansevieria.jpg`,
             name: 'sansevieria.jpg',
           },
         ],
@@ -1253,8 +1253,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '선장',
           image: '/files/03-Greeny/mincheol.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1294,8 +1294,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '쑥쑤루쑥',
           image: '/files/03-Greeny/leeBadcuk.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1326,8 +1326,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '금전수 장인',
           image: '/files/03-Greeny/jiwon.jpeg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1351,8 +1351,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '금전수 장인',
           image: '/files/03-Greeny/jiwon.jpeg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1388,8 +1388,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '금전수 장인',
           image: '/files/03-Greeny/jiwon.jpeg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'qna',
         },
@@ -1453,8 +1453,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '식집사',
           image: '/files/03-Greeny/plant1.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'free',
         },
@@ -1532,8 +1532,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '쑥쑤루쑥',
           image: '/files/03-Greeny/leeBadcuk.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'free',
         },
@@ -1569,8 +1569,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '선장',
           image: '/files/03-Greeny/mincheol.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
@@ -1625,8 +1625,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '선장',
           image: '/files/03-Greeny/mincheol.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
@@ -1648,8 +1648,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '식집사',
           image: '/files/03-Greeny/plant1.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
@@ -1685,8 +1685,8 @@ export const initData = async (clientId, nextSeq) => {
           name: '식물고수',
           image: '/files/03-Greeny/plant2.jpg',
         },
-        createdAt: '2024.08.08 11:06:06',
-        updatedAt: '2024.08.08 11:06:06',
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
         extra: {
           category: 'planterior',
         },
