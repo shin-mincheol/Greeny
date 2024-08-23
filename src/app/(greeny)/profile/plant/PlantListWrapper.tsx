@@ -6,7 +6,7 @@ export default function FollowingListWrapper({ followingList }: { followingList:
   console.log('ClientFollowingListWrapper rendering...', followingList);
   return (
     <ul className={styles.follow_list}>
-      {followingList.map((item) => (
+      {followingList?.map((item) => (
         <Plant key={item._id} {...item} />
       ))}
     </ul>

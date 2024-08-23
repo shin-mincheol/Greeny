@@ -6,7 +6,7 @@ export default function UserListWrapper({ followingList }: { followingList: User
   console.log('ClientFollowingListWrapper rendering...', followingList);
   return (
     <ul className={styles.follow_list}>
-      {followingList.map((item) => (
+      {followingList?.map((item) => (
         <User key={item._id} {...item} />
       ))}
     </ul>
