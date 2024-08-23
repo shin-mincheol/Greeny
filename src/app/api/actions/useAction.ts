@@ -65,7 +65,6 @@ export async function editUser(formData: FormData): Promise<ApiResWithValidation
     address: formData.get('address'),
     image: '',
   };
-  console.log('🚀 ~ editUser ~ userObj:', userObj);
 
   const attach = formData.get('attach') as File;
 

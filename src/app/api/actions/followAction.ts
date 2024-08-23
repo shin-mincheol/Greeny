@@ -7,7 +7,6 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export async function deleteBookmark(_id: number) {
-  console.log('🚀 ~ deleteUser ~ _id:', _id);
   const session = await auth();
   const res = await fetch(SERVER + `/bookmarks/${_id}`, {
     method: 'DELETE',
