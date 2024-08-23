@@ -5,7 +5,6 @@ import DeleteButton from './DeleteButton';
 import NormalProfile from '@images/NormalProfile.svg';
 
 export default function User(user: UserBookmark) {
-  console.log(user);
   return (
     <li className={styles.item_wrapper}>
       <div className={styles.user_info_wrapper}>
