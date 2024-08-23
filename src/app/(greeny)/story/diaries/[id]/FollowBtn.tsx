@@ -1,5 +1,7 @@
 'use client';
 
+import diaryDetailStyles from '@greeny/story/diaries/[id]/DiaryDetail.module.scss';
+
 import { followPlant, unfollowPlant } from '@/app/api/actions/postAction';
 
 export default function FollowBtn({ plantId, bookmarkId }: { plantId: number; bookmarkId: number | undefined }) {
@@ -8,7 +10,9 @@ export default function FollowBtn({ plantId, bookmarkId }: { plantId: number; bo
 
   return (
     <form action={bookmarkId ? unfollowPlantWithId : followPlantWithId}>
-      <button type="submit">{bookmarkId ? '언팔로우' : '팔로우'}</button>
+      <button className={`${diaryDetailStyles.followBtn} ${bookmarkId ? diaryDetailStyles.selected : ''}`} type="submit">
+        {bookmarkId ? '팔로잉' : '팔로우'}
+      </button>
     </form>
   );
 }
