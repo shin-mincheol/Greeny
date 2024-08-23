@@ -4,10 +4,18 @@ import { fetchPlantsDetail } from '@/app/api/fetch/plantFetch';
 import { PlantRes } from '@/types/plant';
 import { differenceInDays } from 'date-fns';
 import MyPlantDetail from './PlantDetail';
+import Button from '@/components/button/Button';
+import { auth } from '@/auth';
+import { followPlant } from '@/app/api/actions/plantAction';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function MyPlantItem({ params }: { params: { id: string } }) {
+  const session = await auth();
   const item = await fetchPlantsDetail<PlantRes>(params.id);
+
+  const handleFollow = () => {
+    const res = followPlant(params.id);
+  };
 
   const currentDay = item.adoptionDate;
   const toDay = new Date();
@@ -20,11 +28,18 @@ export default async function MyPlantItem({ params }: { params: { id: string } }
       </div>
 
       <div className={styles.plant_name}>
-        <h2>{item.nickName}</h2>
-        <span>{item.name}</span>
-        <p className={styles.plant_with}>
-          `{item.name}`와 함께한지 {diffDays}일째에요!
-        </p>
+        <h2>{item.name}</h2>
+        <span>{item.scientificName}</span>
+
+        {session?.user?.id == item.seller_id ? (
+          <p className={styles.plant_with}>
+            `{item.name}`와 함께한지 {diffDays}일째에요!
+          </p>
+        ) : (
+          <Button type="button" bgColor="fill" btnSize="lg" radiusStyle="round" onClick={handleFollow}>
+            식물 친구 추가
+          </Button>
+        )}
       </div>
       <MyPlantDetail item={item} />
     </div>
