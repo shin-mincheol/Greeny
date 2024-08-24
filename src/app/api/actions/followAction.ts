@@ -7,6 +7,7 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export async function deleteBookmark(_id: number) {
+  console.log('🚀 ~ deleteUser ~ _id:', _id);
   const session = await auth();
   const res = await fetch(SERVER + `/bookmarks/${_id}`, {
     method: 'DELETE',
@@ -37,5 +38,36 @@ export async function addUser(_id: number) {
     }),
   });
   revalidatePath(`/bookmarks/user`);
+  return await res.json();
+}
+
+//식물 북마크
+export async function followPlant(id: string | undefined) {
+  const session = await auth();
+  const url = `${SERVER}/bookmarks/product`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'client-id': `${DBNAME}`,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+    body: JSON.stringify({ target_id: Number(id) }),
+  });
+  revalidatePath(`/plant/${id}`);
+  return await res.json();
+}
+
+export async function unFollowPlant(id: number | undefined) {
+  const session = await auth();
+  const url = `${SERVER}/bookmarks/${id}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'client-id': `${DBNAME}`,
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  });
+  revalidatePath(`/plant/${id}`);
   return await res.json();
 }
