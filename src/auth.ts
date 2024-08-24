@@ -102,14 +102,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             };
           }
         }
-      } else {
       }
-
-      // 세션 없데이트
-      if (trigger === 'update' && session) {
-        token.name = session.name;
-      }
-
       return token;
     },
 

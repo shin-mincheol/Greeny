@@ -3,7 +3,6 @@ import { PlantBookmark } from '@/types/bookmark';
 import Plant from './Plant';
 
 export default function FollowingListWrapper({ followingList }: { followingList: PlantBookmark[] }) {
-  console.log('ClientFollowingListWrapper rendering...', followingList);
   return (
     <ul className={styles.follow_list}>
       {followingList?.map((item) => (

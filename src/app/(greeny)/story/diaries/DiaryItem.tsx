@@ -24,7 +24,7 @@ export default function DiaryItem({ diary }: { diary: DiaryRes }) {
             <>
               <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
-                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} />
+                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} />
               </div>
             </>
           }

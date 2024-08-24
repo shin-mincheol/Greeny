@@ -25,6 +25,15 @@ export interface Plant {
   mainImages: ImageRes[];
 }
 
+export interface Post {
+  _id: number;
+  // images: ImageRes[];
+  image: ImageRes[];
+  type: 'post';
+  title: string;
+  user: UserSimple;
+}
+
 interface BookmarkHeader {
   _id: number;
   createdAt: string;
@@ -37,7 +46,10 @@ export interface UserBookmark extends BookmarkHeader {
 export interface PlantBookmark extends BookmarkHeader {
   product: Plant;
 }
+export interface PostBookmark extends BookmarkHeader {
+  post: Post;
+}
 
-export type Bookmark = UserBookmark | PlantBookmark;
+export type Bookmark = UserBookmark | PlantBookmark | PostBookmark;
 
 // export type Bookmark<T> = { user: T; bookmark?: never } | ({ product: T; user?: never } & BookmarkHeader);
