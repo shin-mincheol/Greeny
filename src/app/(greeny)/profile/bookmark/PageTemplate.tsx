@@ -12,7 +12,7 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function PageTemplate({ plants, posts }: { plants: PlantBookmark[]; posts: PostBookmark[] }) {
   const firstItem = plants.map((plant) => {
-    return <PlantThumbnail key={plant._id} href={`/myplant/${plant._id}`} src={`${SERVER}${plant.product.mainImages.at(0)?.path}`} />;
+    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={`${SERVER}${plant.product.mainImages.at(0)?.path}`} />;
   });
   const first = <ul className={styles.tab_body}>{firstItem}</ul>;
   const secondItem = posts.map((post) => {

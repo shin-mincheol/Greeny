@@ -101,7 +101,7 @@ export default function MyPlantAddForm() {
       // console.log(res);
       if (res.ok) {
         alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
-        router.replace('/myplant');
+        router.replace('/plant');
       }
     } catch (err) {
       console.log(err);
