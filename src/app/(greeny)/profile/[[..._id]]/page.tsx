@@ -1,18 +1,71 @@
 import styles from '../Profile.module.scss';
 import Image from 'next/image';
 import { auth } from '@/auth';
-import { CoreErrorRes, List, SingleItem } from '@/types/response';
+import { PlantListRes } from '@/types/plant';
+import { CoreErrorRes, List, SingleItem, MultiItem } from '@/types/response';
 import NormalProfile from '@images/NormalProfile.svg';
-import Tab from '../Tab';
+import Tab from '@components/Tab';
 import Follow from '../Follow';
 import Link from 'next/link';
 import { UserInfo } from '@/types/user';
-import Button from '@/components/button/Button';
 import { UserBookmark } from '@/types/bookmark';
 import AddButton from './AddButton';
+import { PostRes } from '@/types/post';
+import PlantThumbnail from '../PlantThumbnail';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
+async function fetchMyPlant(accessToken: string) {
+  const myPlantRes = await fetch(`${SERVER}/seller/products`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
+  if (!myPlantData.ok) return 'error';
+
+  const firstItem = myPlantData.item.map((plant) => {
+    return PlantThumbnail({ href: `/plant/${plant._id}`, src: `${SERVER}${plant.mainImages.at(0)?.path}` });
+  });
+  const tab = <ul className={styles.tab_body}>{firstItem}</ul>;
+
+  return tab;
+}
+
+async function fetchMyPost(id: string) {
+  const myPostRes = await fetch(`${SERVER}/posts/users/${id}?type=post`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+    },
+  });
+  const myPostData: MultiItem<PostRes> | CoreErrorRes = await myPostRes.json();
+  console.log('🚀 ~ Page ~ myPostData:', myPostData);
+
+  if (!myPostData.ok) {
+    return 'error';
+  }
+  const secondItem = myPostData.item.map((item) => {
+    return (
+      <li className={styles.contents_item} key={item._id}>
+        <Link href={`/story/community/${item._id}`}>
+          <div className={styles.contents_main}>
+            <div className={styles.contents_info}>
+              <h3>{item.title}</h3>
+              <p>{item.content}</p>
+            </div>
+            <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image.at(0)?.path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
+          </div>
+        </Link>
+      </li>
+    );
+  });
+
+  const tab = <ul className={styles.contentsList}>{secondItem}</ul>;
+
+  return tab;
+}
 
 export default async function Page({ params }: { params: { _id: string[] } }) {
   const session = await auth();
@@ -58,7 +111,7 @@ export default async function Page({ params }: { params: { _id: string[] } }) {
 
       <div className={styles.gap}></div>
 
-      <Tab />
+      <Tab first={fetchMyPlant(session.accessToken)} second={fetchMyPost(session.user?.id!)} firstSrOnly="식물" secondSrOnly="포스트" />
     </>
   );
 }
