@@ -23,7 +23,7 @@ export default function Tab<T, V>({ first, second, firstSrOnly, secondSrOnly }: 
         <button onClick={toggleTab} className={`${styles.plant_diary} ${isFirstTab ? styles.is_active : ''}`}>
           <span className="hidden">{firstSrOnly}</span>
         </button>
-        <button onClick={toggleTab} className={`${styles.plant_diary} ${!isFirstTab ? styles.is_active : ''}`}>
+        <button onClick={toggleTab} className={`${styles.plant_info} ${!isFirstTab ? styles.is_active : ''}`}>
           <span className="hidden">{secondSrOnly}</span>
         </button>
       </div>
