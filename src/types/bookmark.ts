@@ -48,6 +48,7 @@ export interface PlantBookmark extends BookmarkHeader {
 }
 export interface PostBookmark extends BookmarkHeader {
   post: Post;
+  memo?: string;
 }
 
 export type Bookmark = UserBookmark | PlantBookmark | PostBookmark;

@@ -16,25 +16,25 @@ import PlantThumbnail from '../PlantThumbnail';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-async function fetchMyPlant(accessToken: string) {
-  const myPlantRes = await fetch(`${SERVER}/seller/products`, {
+async function fetchUserPlant(id: string) {
+  const myPlantRes = await fetch(`${SERVER}/products?seller_id=${id}`, {
     headers: {
       'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${id}`,
     },
   });
   const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
-  if (!myPlantData.ok) return 'error';
+  if (!myPlantData.ok) return myPlantData.message;
 
   const firstItem = myPlantData.item.map((plant) => {
-    return PlantThumbnail({ href: `/plant/${plant._id}`, src: `${SERVER}${plant.mainImages.at(0)?.path}` });
+    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={`${SERVER}${plant.mainImages.at(0)?.path}`} />;
   });
   const tab = <ul className={styles.tab_body}>{firstItem}</ul>;
 
   return tab;
 }
 
-async function fetchMyPost(id: string) {
+async function fetchUserPost(id: string) {
   const myPostRes = await fetch(`${SERVER}/posts/users/${id}?type=post`, {
     headers: {
       'client-id': `${DBNAME}`,
@@ -44,7 +44,7 @@ async function fetchMyPost(id: string) {
   console.log('🚀 ~ Page ~ myPostData:', myPostData);
 
   if (!myPostData.ok) {
-    return 'error';
+    return myPostData.message;
   }
   const secondItem = myPostData.item.map((item) => {
     return (
@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: { _id: string[] } }) {
   if (!session) return '로그인 만료';
 
   const urlParam = params._id ? params._id[0] : session.user?.id;
-  const response = await fetch(SERVER + `/users/${urlParam}`, {
+  const response = await fetch(`${SERVER}/users/${urlParam}`, {
     headers: {
       'client-id': `${DBNAME}`,
     },
@@ -95,11 +95,17 @@ export default async function Page({ params }: { params: { _id: string[] } }) {
         <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
 
         <div className={styles.thumbnail}>
-          <Link href={`/profile/detail`}>
+          {!params._id || params._id[0] === session.user?.id ? (
+            <Link href={`/profile/detail`}>
+              <div>
+                <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
+              </div>
+            </Link>
+          ) : (
             <div>
               <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
             </div>
-          </Link>
+          )}
           <p>{resData.ok && resData.item.name}</p>
           <span>{resData.ok && resData.item.email}</span>
           {/* (/profile이다 || params._id가 내 세션과 같다. || 이미 팔로우한 관계다)  =>  null : 팔로우 버튼 */}
@@ -111,7 +117,7 @@ export default async function Page({ params }: { params: { _id: string[] } }) {
 
       <div className={styles.gap}></div>
 
-      <Tab first={fetchMyPlant(session.accessToken)} second={fetchMyPost(session.user?.id!)} firstSrOnly="식물" secondSrOnly="포스트" />
+      <Tab first={fetchUserPlant(urlParam!)} second={fetchUserPost(urlParam!)} firstSrOnly="식물" secondSrOnly="포스트" />
     </>
   );
 }
