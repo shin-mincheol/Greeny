@@ -17,7 +17,7 @@ export interface PlantForm {
 
 export interface PlantSimple {
   name: string;
-  mainImages: ImageRes;
+  mainImages: ImageRes[][];
 }
 
 export interface PlantRes extends PlantForm {

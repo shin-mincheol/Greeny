@@ -18,7 +18,7 @@ export default function DiarySubMenu() {
         <SubMenu isMenuOpened={isMenuOpened} toggleMenu={() => setIsMenuOpened((o) => !o)}>
           <DropDown>
             <DropDownOption>
-              <Link href={`/myplant/${postId}/diaryEdit`}>일기 수정</Link>
+              <Link href={`/plant/${postId}/diaryEdit`}>일기 수정</Link>
             </DropDownOption>
             <DropDownOptionRed>
               <form action={deleteDiary.bind(null, postId)}>

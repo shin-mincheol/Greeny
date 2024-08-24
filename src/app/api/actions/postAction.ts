@@ -163,7 +163,7 @@ export async function deleteReply(postId: string, replyId: number): Promise<Core
   }
 }
 
-export async function likePost(targetId: string) {
+export async function likePost(targetId: string, content: string) {
   const session = await auth();
   try {
     const res = await fetch(`${SERVER}/bookmarks/post`, {
@@ -173,7 +173,7 @@ export async function likePost(targetId: string) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${session?.accessToken}`,
       },
-      body: JSON.stringify({ target_id: Number(targetId) }),
+      body: JSON.stringify({ target_id: Number(targetId), content }),
     });
     revalidatePath(`/story/community/${targetId}`);
     revalidatePath(`/story/diaries/${targetId}`);
