@@ -8,9 +8,15 @@ import { auth } from '@/auth';
 import DiarySubMenu from '@greeny/story/diaries/[id]/DiarySubMenu';
 import FollowBtn from './FollowBtn';
 import Link from 'next/link';
+import Image from 'next/image';
+import { DiaryRes } from '@/types/post';
+
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function DiaryDetail({ params: { id } }: { params: { id: string } }) {
-  const diary = await fetchDiary(id);
+  const diary: DiaryRes = await fetchDiary(id);
+  const plant = diary.product;
+
   const session = await auth();
   const isWriter = Number(session?.user?.id) === diary.user._id;
   const bookmarkId = await getPlantBookmarkId(diary.product_id.toString());
@@ -25,7 +31,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
             <>
               <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
-                <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} />
+                <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} content={diary.content} />
                 {isWriter && <DiarySubMenu />}
               </div>
             </>
@@ -38,12 +44,20 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
           {diary.title}
         </h2>
         <DiaryImageSlider images={diary.image} />
-        <div style={{ display: 'flex', gap: '1rem', alignSelf: 'end' }}>
-          <Link href={`/myplant/${diary.product_id}`}>{diary.product.name}</Link>
-          <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} />
-        </div>
-        <div className={diaryDetailStyles.text}>
-          <div className={diaryDetailStyles.plant_info}>
+
+        <pre className={diaryDetailStyles.description}>{diary.content}</pre>
+
+        <div className={diaryDetailStyles.plant_card}>
+          <div className={diaryDetailStyles.plant_profile}>
+            <Link href={`/plant/${diary.product_id}`}>
+              <div className={diaryDetailStyles.plant_image_container}>
+                <Image src={`${SERVER}/${plant.mainImages[0][0].path}`} alt={plant.name} fill sizes="100%" />
+              </div>
+              <div className={diaryDetailStyles.plant_nickname}>{diary.product.name}</div>
+            </Link>
+            <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} />
+          </div>
+          <div className={diaryDetailStyles.plant_diary_info}>
             <div>
               <span className={diaryDetailStyles.heading}>식물 상태: </span>
               {diary.extra.plantState}
@@ -57,7 +71,6 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
               {diary.extra.actionDate}
             </div>
           </div>
-          <pre className={diaryDetailStyles.description}>{diary.content}</pre>
         </div>
       </article>
     </>
