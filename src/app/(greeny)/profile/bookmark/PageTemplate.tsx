@@ -2,20 +2,17 @@ import styles from './Bookmark.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PlantBookmark, PostBookmark } from '@/types/bookmark';
-import Tab from './Tab';
+import Tab from '@components/Tab';
 import like from '@images/LikeIcon_nor.svg';
 import comment from '@images/CommentIcon.svg';
 import view from '@images/ViewIcon.svg';
+import PlantThumbnail from '../PlantThumbnail';
+
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function PageTemplate({ plants, posts }: { plants: PlantBookmark[]; posts: PostBookmark[] }) {
   const firstItem = plants.map((plant) => {
-    return (
-      <li key={plant._id}>
-        <Link href={`/myplant/${plant._id}`}>
-          <Image src={`${process.env.NEXT_PUBLIC_API_SERVER}${plant.product.mainImages.at(0)?.path}`} alt="식물 썸네일" width={117} height={100} priority />
-        </Link>
-      </li>
-    );
+    return <PlantThumbnail key={plant._id} href={`/myplant/${plant._id}`} src={`${SERVER}${plant.product.mainImages.at(0)?.path}`} />;
   });
   const first = <ul className={styles.tab_body}>{firstItem}</ul>;
   const secondItem = posts.map((post) => {
@@ -28,9 +25,7 @@ export default async function PageTemplate({ plants, posts }: { plants: PlantBoo
               <h3>{post.post.title}</h3>
               <p>{post.post.title}</p>
             </div>
-            <div className={styles.contents_cover}>
-              {post.post.image.length > 0 ? <Image src={`${process.env.NEXT_PUBLIC_API_SERVER}${post.post.image[0].path}`} alt="식물 사진" sizes="100%" fill /> : ''}
-            </div>
+            <div className={styles.contents_cover}>{post.post.image.length > 0 ? <Image src={`${SERVER}${post.post.image[0].path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
           </div>
 
           {/* <div className={styles.contents_footer}>
