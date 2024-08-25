@@ -2,18 +2,16 @@
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import diaryDetailStyles from './DiaryDetail.module.scss';
+import diaryDetailStyles from '@greeny/story/diaries/[id]/DiaryDetail.module.scss';
 import ImageModal from '@greeny/story/ImageModal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ImageRes } from '@/types/image';
 import ImageItem from '@greeny/story/ImageItem';
-import { useState } from 'react';
 import { Pagination } from 'swiper/modules';
+import useImageModal from '@/hooks/useImageModal';
 
 export default function DiaryImageSlider({ images }: { images: ImageRes[] }) {
-  const [selectedImage, setSelectedImage] = useState<ImageRes | null>();
-  const openModal = (image: ImageRes) => setSelectedImage(image);
-  const closeModal = () => setSelectedImage(null);
+  const { selectedImage, openModal, closeModal } = useImageModal();
 
   return (
     <>

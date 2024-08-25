@@ -15,7 +15,11 @@ export default function DiarySwiper({ diaries }: { diaries: DiaryRes[] }) {
       {diaries.map((diary, i) => (
         <SwiperSlide key={i} className={styles.slider}>
           <Link href={`/story/diaries/${diary._id}`}>
-            <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} sizes={'100%'} fill />
+            <div className={styles.image_container}>
+              <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} sizes={'100%'} fill />
+            </div>
+            <p className={styles.title}>{diary.title}</p>
+            <span className={styles.content}>{diary.content}</span>
           </Link>
         </SwiperSlide>
       ))}

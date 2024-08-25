@@ -1,21 +1,15 @@
 'use client';
 
 import 'swiper/css';
-import styles from './Community.module.scss';
+import styles from '@greeny/story/Community.module.scss';
 import ImageModal from '@greeny/story/ImageModal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ImageRes } from '@/types/image';
-import ImageItem from './ImageItem';
-import { useState } from 'react';
+import ImageItem from '@greeny/story/ImageItem';
+import useImageModal from '@/hooks/useImageModal';
 
 export default function ImageSlider({ images }: { images: ImageRes[] }) {
-  const [selectedImage, setSelectedImage] = useState<ImageRes | null>();
-  const openModal = (image: ImageRes) => {
-    setSelectedImage(image);
-  };
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
+  const { selectedImage, openModal, closeModal } = useImageModal();
 
   return (
     <>
