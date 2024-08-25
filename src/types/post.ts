@@ -71,3 +71,9 @@ export interface DiaryForm {
   actionDate: string;
   attach: File[];
 }
+export interface plantState {
+  plantState: '좋음' | '새싹' | '개화' | '아픔' | '죽음';
+}
+export interface action {
+  action: '물주기' | '햇빛' | '분갈이' | '영양' | '가지' | '관찰';
+}

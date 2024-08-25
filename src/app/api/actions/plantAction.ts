@@ -37,7 +37,7 @@ export async function DiaryNew(formData: FormData, id: string): Promise<ApiResWi
     }
     const fileData: MultiItem<FileRes> = await fileRes.json();
 
-    console.log(fileData);
+    // console.log(fileData);
     if (fileData.ok) {
       diaryObj.image = fileData.item.map((image) => ({
         path: image.path,
@@ -91,7 +91,7 @@ export async function plantNew(formData: FormData): Promise<ApiResWithValidation
     }
     const fileData: MultiItem<FileRes> = await fileRes.json();
 
-    console.log(fileData);
+    // console.log(fileData);
 
     plantObj.mainImages = [
       {

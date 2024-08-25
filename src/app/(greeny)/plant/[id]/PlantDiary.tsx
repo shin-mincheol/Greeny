@@ -20,8 +20,6 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
   const [scheduleData, setSscheduleData] = useState<PlantDetailRes[] | undefined>();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log(item);
-
   const fetchPlantsDiary = async (productId: number | undefined, selectDay: string, fetchAll: boolean) => {
     let url = `${SERVER}/posts/?type=diary`;
 
