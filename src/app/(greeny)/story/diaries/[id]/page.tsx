@@ -56,7 +56,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
               </div>
               <div className={diaryDetailStyles.plant_nickname}>{diary.product.name}</div>
             </Link>
-            <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} />
+            <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} isLoggedIn={isLoggedIn} />
           </div>
           <div className={diaryDetailStyles.plant_diary_info}>
             <div>
