@@ -14,7 +14,7 @@ import { format } from 'date-fns';
 import { plantNew } from '@/app/api/actions/plantAction';
 
 export default function MyPlantAddForm() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>();
   const [drop, setDrop] = useState(false);
   const [plantName, setPlantName] = useState('식물을 선택해주세요.');
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -196,6 +196,7 @@ export default function MyPlantAddForm() {
             <DatePicker
               selected={selectedDate}
               dateFormat="yyyy.MM.dd"
+              placeholderText="입양일을 선택해주세요."
               onChange={(date) => {
                 setSelectedDate(date);
                 onChange(date ? format(date, 'yyyy-MM-dd') : '');
@@ -233,7 +234,7 @@ export default function MyPlantAddForm() {
         <label htmlFor="content">특징</label>
         <textarea
           id="content"
-          placeholder="식물의 특징을 적어주세요."
+          placeholder="10글자 이상 적어주세요."
           {...register('content', {
             required: '식물의 특징을 적어주세요.',
             minLength: {

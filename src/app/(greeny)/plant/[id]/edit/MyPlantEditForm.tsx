@@ -110,7 +110,7 @@ export default function MyPlantEditForm({ id }: { id: string }) {
 
   return (
     <form onSubmit={handleSubmit(onAddPlant)}>
-      <h1>나의 식물 등록</h1>
+      <h1>나의 식물 수정</h1>
 
       <div className={styles.file_container}>
         <h3>
@@ -246,7 +246,7 @@ export default function MyPlantEditForm({ id }: { id: string }) {
       </div>
 
       <Button type="submit" bgColor="fill" btnSize="lg">
-        식물 등록
+        식물 수정
       </Button>
     </form>
   );
