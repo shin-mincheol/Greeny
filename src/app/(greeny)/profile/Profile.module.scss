@@ -128,3 +128,28 @@
     }
   }
 }
+
+.zero_item_noti_wrapper {
+  width: 100%;
+  margin-top: 50%;
+
+  .zero_item_noti {
+    @include flex-vertical(1.8rem);
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .zero_item_noti_msg {
+      @include flex-vertical(1rem);
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: var(--font-bold);
+    }
+
+    zero_item_noti_link {
+      font-size: 1.2rem;
+      font-weight: var(--font-medium);
+    }
+  }
+}

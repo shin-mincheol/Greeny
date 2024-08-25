@@ -10,6 +10,7 @@ import { PostRes } from '@/types/post';
 import Follow from './Follow';
 import PlantThumbnail from './PlantThumbnail';
 import NormalProfile from '@images/NormalProfile.svg';
+import Button from '@/components/button/Button';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
@@ -24,8 +25,24 @@ export async function fetchUserPlant(id: string) {
   const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
   if (!myPlantData.ok) return myPlantData.message;
 
+  if (myPlantData.item.length === 0) {
+    return (
+      <div className={styles.zero_item_noti_wrapper}>
+        <div className={styles.zero_item_noti}>
+          <div className={styles.zero_item_noti_msg}>
+            <p>지금 여러분의 식물 정원이 비어있네요.</p>
+            <p>식물 친구를 초대해주세요!</p>
+          </div>
+          <Link href="/plant" className={styles.zero_item_noti_link}>
+            <Button btnSize="sm">식물 추가하기</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
   const firstItem = myPlantData.item.map((plant) => {
-    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={`${SERVER}${plant.mainImages.at(0)?.path}`} />;
+    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
+    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
   });
   const tab = <ul className={styles.tab_body}>{firstItem}</ul>;
   return tab;
@@ -40,6 +57,22 @@ export async function fetchUserPost(id: string) {
   const myPostData: MultiItem<PostRes> | CoreErrorRes = await myPostRes.json();
   if (!myPostData.ok) {
     return myPostData.message;
+  }
+
+  if (myPostData.item.length === 0) {
+    return (
+      <div className={styles.zero_item_noti_wrapper}>
+        <div className={styles.zero_item_noti}>
+          <div className={styles.zero_item_noti_msg}>
+            <p>아직 작성된 게시글이 없어요!</p>
+            <p>첫 글을 올려보세요!</p>
+          </div>
+          <Link href="/story/community/new" className={styles.zero_item_noti_link}>
+            <Button btnSize="sm">게시글 작성하기</Button>
+          </Link>
+        </div>
+      </div>
+    );
   }
   const secondItem = myPostData.item.map((item) => {
     return (

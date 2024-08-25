@@ -3,7 +3,7 @@ import { useTransition } from 'react';
 import { deleteBookmark } from '@/app/api/actions/followAction';
 import { redirect } from 'next/navigation';
 
-export default function DeleteButton({ _id }: { _id: number }) {
+export default function DeleteButton({ _id, userId }: { _id: number; userId: string }) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = async () => {
@@ -12,7 +12,7 @@ export default function DeleteButton({ _id }: { _id: number }) {
       if (!resData.ok) {
         alert('삭제 실패');
       }
-      redirect(`/profile/${_id}/plant`);
+      redirect(`/profile/${userId}/plant`);
     });
   };
 
