@@ -27,7 +27,7 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
         </div>
         <pre>{post.content}</pre>
         {post.image.length > 0 && <ImageSlider images={post.image} />}
-        <PostInfo post={post} />
+        <PostInfo post={post} isLoginned={isLoginned} />
       </section>
       <section className={styles.reply}>
         <ReplyList postId={id} />

@@ -3,17 +3,23 @@
 import styles from '@greeny/story/Community.module.scss';
 import { cancelLikePost, likePost } from '@/app/api/actions/postAction';
 import Image from 'next/image';
+import promptLoginModal from '@/utils/confirm';
 
 type Props = {
   number: number;
   targetId: string;
   bookmarkId: number | undefined;
   content: string;
+  isLoggedIn: boolean;
 };
 
-export default function Like({ number, targetId, bookmarkId, content }: Props) {
+export default function Like({ number, targetId, bookmarkId, content, isLoggedIn }: Props) {
   const isFilled = !!bookmarkId;
-  const likePostWithId = likePost.bind(null, targetId, content);
+  const likePostWithId = () => {
+    if (!isLoggedIn) return promptLoginModal();
+
+    likePost.bind(null, targetId, content)();
+  };
   const cancelLikePostWithId = () => bookmarkId && cancelLikePost.bind(null, bookmarkId.toString())();
 
   return (
