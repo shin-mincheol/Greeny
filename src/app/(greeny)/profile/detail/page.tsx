@@ -27,7 +27,7 @@ export default async function Page() {
   return (
     <>
       <div className={styles.profile_panel}>
-        <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
+        <Follow href={`/profile/${session.user?.id}/plant`} cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
 
         <Link href={`/profile/detail`}>
           <div className={styles.thumbnail}>
@@ -39,7 +39,7 @@ export default async function Page() {
           </div>
         </Link>
 
-        <Follow href="/profile/user" cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
+        <Follow href={`/profile/${session.user?.id}/user`} cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
       </div>
 
       <div className={styles.gap}></div>

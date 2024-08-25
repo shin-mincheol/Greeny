@@ -7,7 +7,6 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export async function deleteBookmark(_id: number) {
-  console.log('🚀 ~ deleteUser ~ _id:', _id);
   const session = await auth();
   const res = await fetch(SERVER + `/bookmarks/${_id}`, {
     method: 'DELETE',
@@ -17,10 +16,10 @@ export async function deleteBookmark(_id: number) {
     },
   });
   // TODO: 왜 잘 작동했다가 안 되는지 확인
-  revalidatePath('/profile/user');
-  revalidatePath('/profile/plant');
-  // revalidateTag('user');
-  // redirect('/profile/user');
+  revalidatePath(`/profile/${_id}/user`);
+  revalidatePath(`/profile/${_id}/plant`);
+  // revalidateTag(``);
+  // redirect(`/profile/${_id}/user`);
   return await res.json();
 }
 

@@ -10,42 +10,66 @@ import Link from 'next/link';
 import { UserInfo } from '@/types/user';
 import { UserBookmark } from '@/types/bookmark';
 import AddButton from './AddButton';
-import { PostRes } from '@/types/post';
 import PlantThumbnail from '../PlantThumbnail';
+// import { UserPlant, UserPost } from '../page';
+import Button from '@/components/button/Button';
+import { PostRes } from '@/types/post';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-async function fetchUserPlant(id: string) {
-  const myPlantRes = await fetch(`${SERVER}/products?seller_id=${id}`, {
+export default async function Page({ params }: { params: { _id: string } }) {
+  const session = await auth();
+  if (!session) return '로그인 만료';
+  const urlParam = params._id ?? session.user?.id;
+
+  const response = await fetch(`${SERVER}/users/${urlParam}`, {
     headers: {
       'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${id}`,
+    },
+  });
+  const resData: SingleItem<UserInfo> | CoreErrorRes = await response.json();
+
+  const myBookmarkedUsersRes = await fetch(SERVER + `/bookmarks/user`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+      Authorization: `Bearer ${session.accessToken}`,
+    },
+  });
+  const myBookmarkedUsersData: List<UserBookmark> | CoreErrorRes = await myBookmarkedUsersRes.json();
+
+  const isAlreadyFollow = params._id && !!myBookmarkedUsersData.ok && myBookmarkedUsersData.item.some((item) => String(item.user._id) === params._id);
+
+  //
+
+  const myPlantRes = await fetch(`${SERVER}/products?seller_id=${urlParam}`, {
+    headers: {
+      'client-id': `${DBNAME}`,
     },
   });
   const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
   if (!myPlantData.ok) return myPlantData.message;
 
+  let firstTab = <></>;
+
   const firstItem = myPlantData.item.map((plant) => {
-    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={`${SERVER}${plant.mainImages.at(0)?.path}`} />;
+    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
+    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
   });
-  const tab = <ul className={styles.tab_body}>{firstItem}</ul>;
+  firstTab = <ul className={styles.tab_body}>{firstItem}</ul>;
 
-  return tab;
-}
-
-async function fetchUserPost(id: string) {
-  const myPostRes = await fetch(`${SERVER}/posts/users/${id}?type=post`, {
+  //
+  const myPostRes = await fetch(`${SERVER}/posts/users/${urlParam}?type=post`, {
     headers: {
       'client-id': `${DBNAME}`,
     },
   });
   const myPostData: MultiItem<PostRes> | CoreErrorRes = await myPostRes.json();
-  console.log('🚀 ~ Page ~ myPostData:', myPostData);
-
   if (!myPostData.ok) {
     return myPostData.message;
   }
+  let secondTab = <></>;
+
   const secondItem = myPostData.item.map((item) => {
     return (
       <li className={styles.contents_item} key={item._id}>
@@ -62,40 +86,15 @@ async function fetchUserPost(id: string) {
     );
   });
 
-  const tab = <ul className={styles.contentsList}>{secondItem}</ul>;
-
-  return tab;
-}
-
-export default async function Page({ params }: { params: { _id: string[] } }) {
-  const session = await auth();
-  if (!session) return '로그인 만료';
-
-  const urlParam = params._id ? params._id[0] : session.user?.id;
-  const response = await fetch(`${SERVER}/users/${urlParam}`, {
-    headers: {
-      'client-id': `${DBNAME}`,
-    },
-  });
-  const resData: SingleItem<UserInfo> | CoreErrorRes = await response.json();
-
-  const myBookmarkedUsersRes = await fetch(SERVER + `/bookmarks/user`, {
-    headers: {
-      'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  });
-  const myBookmarkedUsersData: List<UserBookmark> | CoreErrorRes = await myBookmarkedUsersRes.json();
-
-  const isAlreadyFollow = params._id && !!myBookmarkedUsersData.ok && myBookmarkedUsersData.item.some((item) => String(item.user._id) === params._id[0]);
+  secondTab = <ul className={styles.contentsList}>{secondItem}</ul>;
 
   return (
     <>
       <div className={styles.profile_panel}>
-        <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
+        <Follow href={`/profile/${params._id}/plant`} cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
 
         <div className={styles.thumbnail}>
-          {!params._id || params._id[0] === session.user?.id ? (
+          {!params._id || params._id === session.user?.id ? (
             <Link href={`/profile/detail`}>
               <div>
                 <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
@@ -108,16 +107,22 @@ export default async function Page({ params }: { params: { _id: string[] } }) {
           )}
           <p>{resData.ok && resData.item.name}</p>
           <span>{resData.ok && resData.item.email}</span>
-          {/* (/profile이다 || params._id가 내 세션과 같다. || 이미 팔로우한 관계다)  =>  null : 팔로우 버튼 */}
-          {!params._id || params._id[0] === session.user?.id || isAlreadyFollow ? null : <AddButton _id={Number(params._id[0])} />}
+
+          {params._id === session.user?.id ? null : isAlreadyFollow ? (
+            <Button bgColor="fill" btnSize="xs" radiusStyle="curve" disabled style={{ cursor: 'auto', background: 'var(--color-primary-disabled)' }}>
+              팔로잉 중
+            </Button>
+          ) : (
+            <AddButton _id={Number(params._id)} />
+          )}
         </div>
 
-        <Follow href="/profile/user" cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
+        <Follow href={`/profile/${params._id}/user`} cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
       </div>
 
       <div className={styles.gap}></div>
 
-      <Tab first={fetchUserPlant(urlParam!)} second={fetchUserPost(urlParam!)} firstSrOnly="식물" secondSrOnly="포스트" />
+      <Tab first={firstTab} second={secondTab} firstSrOnly="식물" secondSrOnly="포스트" />
     </>
   );
 }
