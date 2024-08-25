@@ -13,7 +13,7 @@ export default function DiaryItem({ diary }: { diary: DiaryRes }) {
     <div className={diaryStyles.item}>
       <Link href={`/story/diaries/${diary._id}`}>
         <div className={diaryStyles.thumbnail}>
-          <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} fill />
+          <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} sizes="100%" fill />
         </div>
       </Link>
       <div className={diaryStyles.info}>
