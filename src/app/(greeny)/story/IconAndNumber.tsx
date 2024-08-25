@@ -9,13 +9,11 @@ type Props = {
   fontSize?: number;
 };
 
-export default function IconAndNumber({ src, alt, iconSize = 12, number, fontSize = 10 }: Props) {
+export default function IconAndNumber({ src, alt, iconSize = 16, number }: Props) {
   return (
     <div className={styles.icon_container}>
       <Image src={src} width={iconSize} height={iconSize} alt={alt} className={styles.icon} />
-      <span className={styles.number} style={{ fontSize }}>
-        {number}
-      </span>
+      <span className={styles.number}>{number}</span>
     </div>
   );
 }

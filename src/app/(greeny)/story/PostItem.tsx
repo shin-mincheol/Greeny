@@ -18,7 +18,7 @@ export default function PostItem({ item: { _id, title, content, views, repliesCo
             <h3 className={styles.title}>{title}</h3>
             <p className={styles.description}>{content}</p>
           </div>
-          <div className={styles.thumbnail}>{image?.length > 0 && <Image src={'https://api.fesp.shop' + image[0].path} width={50} height={50} alt={image[0].name} />}</div>
+          <div className={styles.thumbnail}>{image?.length > 0 && <Image src={'https://api.fesp.shop' + image[0].path} width={70} height={70} alt={image[0].name} />}</div>
         </Link>
         <div className={styles.info}>
           <div className={styles.icons}>
