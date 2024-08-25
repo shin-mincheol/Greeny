@@ -6,11 +6,11 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import promptLoginModal from '@/utils/confirm';
 
-export default function ReplyInput({ postId, isLoginned }: { postId: string; isLoginned: boolean }) {
+export default function ReplyInput({ postId, isLoggedin }: { postId: string; isLoggedin: boolean }) {
   const [content, setContent] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
   const addReplyWithId = async (formData: FormData) => {
-    if (!isLoginned) return promptLoginModal();
+    if (!isLoggedin) return promptLoginModal();
 
     const trimmedContent = content.trim();
     if (trimmedContent.length === 0) return inputRef.current!.focus();
