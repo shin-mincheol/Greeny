@@ -15,6 +15,7 @@ export const revalidate = 0;
 export default async function PostDetail({ params: { id } }: { params: { id: string } }) {
   const post: PostRes = await fetchPost(id);
   const session = await auth();
+  const isLoginned = !!session;
   const isWriter = Number(session?.user?.id) === post.user._id;
 
   return (
@@ -30,7 +31,7 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
       </section>
       <section className={styles.reply}>
         <ReplyList postId={id} />
-        <ReplyInput postId={id} />
+        <ReplyInput postId={id} isLoginned={isLoginned} />
       </section>
     </article>
   );

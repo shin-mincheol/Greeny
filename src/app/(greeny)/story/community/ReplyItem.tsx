@@ -26,7 +26,6 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
               <div style={{ color: 'var(--color-gray-10)', fontSize: 10 }}>{formatAgo(reply.createdAt)}</div>
               <div style={{ marginLeft: '0.6rem' }}>
                 <SubMenu isMenuOpened={isMenuOpened} toggleMenu={() => setIsMenuOpened((o) => !o)}>
-                  {/* <DropDown replyId={reply._id} /> */}
                   <DropDown>
                     <DropDownOption>
                       <button
@@ -57,7 +56,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
       />
 
       <div className={styles.reply_item_content_container}>
-        {isModifying ? <ReplyModify currentReply={reply} cancel={cancelModifying} /> : <pre className={styles.reply_item_content}>{reply.content}</pre>}
+        {isModifying ? <ReplyModify currentReply={reply} cancel={cancelModifying} /> : <pre className={styles.reply_item_content}>{reply.content.slice(0, reply.content.length - 1)}</pre>}
       </div>
     </li>
   );
