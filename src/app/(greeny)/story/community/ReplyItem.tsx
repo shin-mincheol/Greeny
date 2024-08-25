@@ -14,6 +14,11 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const startModifying = () => setIsModifying(true);
   const cancelModifying = () => setIsModifying(false);
+  const deleteActionWithConfirm = () => {
+    const check = confirm('댓글을 삭제하시겠습니까?');
+    if (!check) return;
+    deleteAction();
+  };
 
   return (
     <li>
@@ -39,7 +44,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
                       </button>
                     </DropDownOption>
                     <DropDownOptionRed>
-                      <form action={deleteAction}>
+                      <form action={deleteActionWithConfirm}>
                         <button type="submit">댓글 삭제</button>
                       </form>
                     </DropDownOptionRed>
