@@ -11,8 +11,9 @@ import { UserInfo } from '@/types/user';
 import { UserBookmark } from '@/types/bookmark';
 import AddButton from './AddButton';
 import PlantThumbnail from '../PlantThumbnail';
-import { fetchUserPlant, fetchUserPost } from '../page';
+// import { UserPlant, UserPost } from '../page';
 import Button from '@/components/button/Button';
+import { PostRes } from '@/types/post';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
@@ -38,6 +39,54 @@ export default async function Page({ params }: { params: { _id: string } }) {
   const myBookmarkedUsersData: List<UserBookmark> | CoreErrorRes = await myBookmarkedUsersRes.json();
 
   const isAlreadyFollow = params._id && !!myBookmarkedUsersData.ok && myBookmarkedUsersData.item.some((item) => String(item.user._id) === params._id);
+
+  //
+
+  const myPlantRes = await fetch(`${SERVER}/products?seller_id=${urlParam}`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+    },
+  });
+  const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
+  if (!myPlantData.ok) return myPlantData.message;
+
+  let firstTab = <></>;
+
+  const firstItem = myPlantData.item.map((plant) => {
+    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
+    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
+  });
+  firstTab = <ul className={styles.tab_body}>{firstItem}</ul>;
+
+  //
+  const myPostRes = await fetch(`${SERVER}/posts/users/${urlParam}?type=post`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+    },
+  });
+  const myPostData: MultiItem<PostRes> | CoreErrorRes = await myPostRes.json();
+  if (!myPostData.ok) {
+    return myPostData.message;
+  }
+  let secondTab = <></>;
+
+  const secondItem = myPostData.item.map((item) => {
+    return (
+      <li className={styles.contents_item} key={item._id}>
+        <Link href={`/story/community/${item._id}`}>
+          <div className={styles.contents_main}>
+            <div className={styles.contents_info}>
+              <h3>{item.title}</h3>
+              <p>{item.content}</p>
+            </div>
+            <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image.at(0)?.path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
+          </div>
+        </Link>
+      </li>
+    );
+  });
+
+  secondTab = <ul className={styles.contentsList}>{secondItem}</ul>;
 
   return (
     <>
@@ -73,7 +122,7 @@ export default async function Page({ params }: { params: { _id: string } }) {
 
       <div className={styles.gap}></div>
 
-      <Tab first={fetchUserPlant(urlParam!)} second={fetchUserPost(urlParam!)} firstSrOnly="식물" secondSrOnly="포스트" />
+      <Tab first={firstTab} second={secondTab} firstSrOnly="식물" secondSrOnly="포스트" />
     </>
   );
 }
