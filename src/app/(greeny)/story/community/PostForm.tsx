@@ -62,9 +62,9 @@ export default function PostForm(props?: { post?: PostRes }) {
               <Swiper spaceBetween={10} className={postStyles.image_preview_swiper}>
                 {urls.map((url, i) => (
                   <SwiperSlide key={i} className={postStyles.slider}>
-                    <Image src={url} alt={url} sizes="100%" fill />
+                    <Image src={url} alt={url} sizes="100%" fill className={postStyles.preview_image} />
                     <button type="button" onClick={() => handleDeleteImage(i)} className={postStyles.delete}>
-                      <Image src="/images/CloseIcon.svg" width={10} height={10} alt="close" />
+                      <Image src="/images/PhotoDeleteIcon.svg" width={24} height={24} alt="close" className={postStyles.delete_icon} />
                     </button>
                   </SwiperSlide>
                 ))}
