@@ -78,7 +78,7 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
               </div>
               <div className={styles.item_info}>
                 <span>활동 날짜 :</span>
-                <p>{item.extra.actionDate}</p>
+                <p>{format(item.extra.actionDate, 'yyyy년 M월 d일')}</p>
               </div>
             </div>
 

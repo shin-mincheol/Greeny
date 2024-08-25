@@ -1,8 +1,8 @@
 'use client';
 import styles from './MyPlantEdit.module.scss';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Button from '@/components/button/Button';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -12,13 +12,16 @@ import plantData from '@/app/data/plantList';
 import { PlantForm, PlantRes } from '@/types/plant';
 import { format } from 'date-fns';
 import { plantNew } from '@/app/api/actions/plantAction';
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default function MyPlantEditForm({ id }: { id: string }) {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+export default function MyPlantEditForm({ id, item }: { id: string; item: PlantRes }) {
+  // export default function MyPlantEditForm({ id }: { id: string }) {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(item.adoptionDate);
   const [drop, setDrop] = useState(false);
   const [plantName, setPlantName] = useState('식물을 선택해주세요.');
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -26,10 +29,20 @@ export default function MyPlantEditForm({ id }: { id: string }) {
     control,
     setValue,
     watch,
-  } = useForm<PlantForm>();
+  } = useForm<PlantForm>({
+    defaultValues: {
+      name: item.name,
+      content: item.content,
+      light: item.light,
+      grwhTp: item.grwhTp,
+      humidity: item.humidity,
+      waterCycle: item.waterCycle,
+      adoptionDate: item.adoptionDate,
+    },
+  });
 
   //식물 사진 미리보기
-  const [imagePreview, setImagePreview] = useState<string>('');
+  const [imagePreview, setImagePreview] = useState<string>(SERVER + item.mainImages[0].path);
   const image = watch('attach');
 
   useEffect(() => {
@@ -165,12 +178,12 @@ export default function MyPlantEditForm({ id }: { id: string }) {
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="nickName">
+        <label htmlFor="name">
           식물 애칭<span>*</span>
         </label>
         <input
           type="text"
-          id="nickName"
+          id="name"
           placeholder="식물 애칭을 입력하세요."
           {...register('name', {
             required: '식물 애칭을 입력하세요.',
