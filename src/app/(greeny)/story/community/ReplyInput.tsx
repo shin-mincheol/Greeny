@@ -3,8 +3,8 @@
 import styles from '@greeny/story/Community.module.scss';
 import { addReply } from '@/app/api/actions/postAction';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
 import { useRef, useState } from 'react';
+import promptLoginModal from '@/utils/confirm';
 
 export default function ReplyInput({ postId, isLoginned }: { postId: string; isLoginned: boolean }) {
   const [content, setContent] = useState<string>('');
@@ -32,9 +32,4 @@ export default function ReplyInput({ postId, isLoginned }: { postId: string; isL
       </button>
     </form>
   );
-}
-
-function promptLoginModal() {
-  const check = confirm('로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?');
-  check && redirect('/login');
 }
