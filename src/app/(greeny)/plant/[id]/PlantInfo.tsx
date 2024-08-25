@@ -1,16 +1,17 @@
 'use client';
 import styles from './MyPlantDetail.module.scss';
 import { PlantRes } from '@/types/plant';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { plantsDelete } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 
-export default function PlantInfo({ item }: { item: PlantRes }) {
+export default function PlantInfo({ item, user }: { item: PlantRes; user: Session | null }) {
   const [menu, setMenu] = useState(false);
+  const menuRef = useRef<HTMLButtonElement | null>(null);
+  const subMenuBoxRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-  const session = useSession();
 
   const handleMenu = () => {
     setMenu(!menu);
@@ -23,18 +24,31 @@ export default function PlantInfo({ item }: { item: PlantRes }) {
     }
   };
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node) && subMenuBoxRef.current && !subMenuBoxRef.current.contains(event.target as Node)) {
+        setMenu(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={styles.layout_wrapper}>
       <div className={styles.plant_gardening}>
         <div className={styles.plant_head}>
           <h3>가드닝 정보</h3>
-          {Number(session.data?.user?.id) === item?.seller_id && (
-            <button className={styles.subMeun} onClick={handleMenu}>
+          {Number(user?.user?.id) === item?.seller_id && (
+            <button className={styles.subMeun} ref={menuRef} onClick={handleMenu}>
               <span className="hidden">메뉴</span>
             </button>
           )}
           {menu && (
-            <div className={styles.subMenuBox}>
+            <div className={styles.subMenuBox} ref={subMenuBoxRef}>
               <Link href={`/plant/${item._id}/edit`} className={styles.subMenuItem}>
                 식물 수정
               </Link>

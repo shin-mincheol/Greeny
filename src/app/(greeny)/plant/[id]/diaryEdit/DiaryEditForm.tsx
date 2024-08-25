@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import styles from './MyPlantDiaryNew.module.scss';
+import styles from './MyPlantDiaryEdit.module.scss';
 import { Controller, useForm } from 'react-hook-form';
 import { action, DiaryForm, plantState } from '@/types/post';
 import { useEffect, useRef, useState } from 'react';
@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
 const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
 
-export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
+export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
   const [selectedDate, setSelectedDate] = useState<Date | null>();
   const stateRef = useRef<HTMLDivElement | null>(null);
   const actionRef = useRef<HTMLDivElement | null>(null);
@@ -43,12 +43,15 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
   const handleStatedrop = () => {
     setStateDrop(!stateDrop);
   };
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      // stateRef 영역을 클릭하지 않았으면 stateDrop을 false로 설정
       if (stateRef.current && !stateRef.current.contains(event.target as Node)) {
         setStateDrop(false);
       }
 
+      // actionRef 영역을 클릭하지 않았으면 actionDrop을 false로 설정
       if (actionRef.current && !actionRef.current.contains(event.target as Node)) {
         setActionDrop(false);
       }
@@ -162,7 +165,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
 
   return (
     <form onSubmit={handleSubmit(onNewDiary)}>
-      <h1>식물 일기 등록</h1>
+      <h1>식물 일기 수정</h1>
       <div className={styles.file_container}>
         <div className={styles.file_head}>
           <h3>식물 이미지</h3>
@@ -250,7 +253,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
       </div>
 
       <Button type="submit" bgColor="fill" btnSize="lg">
-        일기 등록
+        일기 수정
       </Button>
     </form>
   );
