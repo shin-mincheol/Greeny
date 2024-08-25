@@ -19,11 +19,7 @@ interface FilterValues {
   waterCycleCode: string;
 }
 
-// export default function Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
 export default function Page() {
-  // console.log(searchParams);
-
-  // const [plants, setPlants] = useState<PlantJsonlant[]>(searchParams.keyword ? plantList.filter((item) => item.cntntsSj.includes(searchParams.keyword as string)) : plantList);
   const [plants, setPlants] = useState<PlantJson[]>(plantList);
   const { register, handleSubmit } = useForm<FormData>();
   const submitHandler = (values: FormData) => {

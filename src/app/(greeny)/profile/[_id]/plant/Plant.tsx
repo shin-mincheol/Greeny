@@ -4,7 +4,7 @@ import { PlantBookmark } from '@/types/bookmark';
 import DeleteButton from './DeleteButton';
 import NormalProfile from '@images/NormalProfile.svg';
 
-export default function Plant(plant: PlantBookmark) {
+export default function Plant(plant: PlantBookmark & { children: React.ReactNode }) {
   return (
     <li className={styles.item_wrapper}>
       <div className={styles.user_info_wrapper}>
@@ -15,7 +15,9 @@ export default function Plant(plant: PlantBookmark) {
             <span>{plant.createdAt}</span>
           </div>
         </div>
-        <DeleteButton _id={plant._id} />
+
+        {/* <DeleteButton _id={plant._id} /> */}
+        {plant.children}
       </div>
     </li>
   );
