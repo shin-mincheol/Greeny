@@ -11,6 +11,11 @@ export default function DiarySubMenu() {
   const pathname = usePathname();
   const postId = pathname.split('/')[3];
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
+  const checkAndDeleteDiaryWithId = () => {
+    const check = confirm('해당 글을 삭제하시겠습니까?');
+    if (!check) return;
+    deleteDiary.bind(null, postId)();
+  };
 
   return (
     <>
@@ -21,7 +26,7 @@ export default function DiarySubMenu() {
               <Link href={`/plant/${postId}/diaryEdit`}>일기 수정</Link>
             </DropDownOption>
             <DropDownOptionRed>
-              <form action={deleteDiary.bind(null, postId)}>
+              <form action={checkAndDeleteDiaryWithId}>
                 <button type="submit">일기 삭제</button>
               </form>
             </DropDownOptionRed>
