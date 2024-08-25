@@ -164,7 +164,6 @@ export async function deleteReply(postId: string, replyId: number): Promise<Core
 }
 
 export async function likePost(targetId: string, content: string) {
-  console.log('❤️❤️❤️', content);
   const session = await auth();
   try {
     const res = await fetch(`${SERVER}/bookmarks/post`, {

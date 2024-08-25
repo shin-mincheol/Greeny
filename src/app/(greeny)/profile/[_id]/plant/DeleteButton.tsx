@@ -12,7 +12,7 @@ export default function DeleteButton({ _id }: { _id: number }) {
       if (!resData.ok) {
         alert('삭제 실패');
       }
-      redirect('/profile/plant');
+      redirect(`/profile/${_id}/plant`);
     });
   };
 

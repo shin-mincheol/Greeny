@@ -26,7 +26,7 @@ export default function AddButton({ _id }: { _id: number }) {
   };
 
   return (
-    <Button btnSize="sm" style={style} onClick={handleClick} disabled={isPending}>
+    <Button btnSize="xs" bgColor="fill" radiusStyle="curve" onClick={handleClick} disabled={isPending}>
       {/* <span className="hidden">팔로우</span> */}
       팔로우
     </Button>
