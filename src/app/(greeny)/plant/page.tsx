@@ -4,8 +4,19 @@ import Link from 'next/link';
 import { PlantRes } from '@/types/plant';
 import { auth } from '@/auth';
 import { differenceInDays } from 'date-fns';
+import { Metadata } from 'next';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
+export const metadata: Metadata = {
+  title: 'Plant',
+  openGraph: {
+    title: 'Plant',
+    description: '나의 식물 목록 페이지',
+    images: 'images/MetaImage.png',
+    url: '/plant',
+  },
+};
 
 export default async function MyPlant() {
   const session = await auth();

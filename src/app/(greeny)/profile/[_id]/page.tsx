@@ -12,11 +12,28 @@ import { UserBookmark } from '@/types/bookmark';
 import AddButton from './AddButton';
 import PlantThumbnail from '../PlantThumbnail';
 import { PostRes } from '@/types/post';
+import { Metadata, ResolvingMetadata } from 'next';
 import { redirect } from 'next/navigation';
 import DeleteButton from './DeleteButton';
 
+
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
+
+export async function generateMetadata({ params }: { params: { id: string } }, parent: ResolvingMetadata): Promise<Metadata> {
+  const userId = params.id;
+  const previousImages = (await parent).openGraph?.images || [];
+  return {
+    title: 'Profile',
+    openGraph: {
+      title: `Profile`,
+      description: `${userId}의 프로필 페이지`,
+      images: [...previousImages],
+      url: `/profile/${params.id}`,
+    },
+  };
+}
 
 async function UserPlant(id: string) {
   const myPlantRes = await fetch(`${SERVER}/products?seller_id=${id}`, {

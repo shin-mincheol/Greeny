@@ -10,7 +10,7 @@ export default function FollowButton({ id, bookmarkData }: { id: string; bookmar
   return (
     <>
       <button type="button" className={isFollowed ? styles.unFollowBtn : styles.followBtn} onClick={() => (isFollowed ? unFollowPlant(LikeId?._id) : followPlant(id))}>
-        {isFollowed ? '언팔로우' : '팔로우'}
+        {isFollowed ? '관찰 끊기' : '관찰 하기'}
       </button>
     </>
   );

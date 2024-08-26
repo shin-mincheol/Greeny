@@ -161,6 +161,9 @@
       @include flex-vertical(2rem);
       align-items: center;
 
+      .diaryNull:hover {
+        background-color: var(--color-secondary-light);
+      }
       .diaryNull {
         text-align: center;
         line-height: 2rem;
@@ -170,13 +173,18 @@
         }
       }
 
+      li:hover {
+        background-color: var(--color-secondary-dark);
+      }
       li {
+        cursor: pointer;
         background-color: var(--color-secondary-light);
         border: 1px solid var(--color-secondary-dark);
         padding: 2rem;
         box-sizing: border-box;
         width: 100%;
         border-radius: 2rem;
+        transition: all 0.3s;
         .diary_item {
           @include flex-vertical(3rem);
           align-items: center;
@@ -191,6 +199,10 @@
               span {
                 font-weight: var(--font-semibold);
               }
+            }
+
+            li:hover {
+              background-color: var(--color-secondary-dark);
             }
           }
 

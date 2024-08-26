@@ -11,10 +11,21 @@ import Follow from './Follow';
 import PlantThumbnail from './PlantThumbnail';
 import NormalProfile from '@images/NormalProfile.svg';
 import Button from '@/components/button/Button';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  openGraph: {
+    title: 'Profile',
+    description: 'User 프로필 페이지',
+    images: 'images/MetaImage.png',
+    url: '/profile',
+  },
+};
 
 async function MyPlant(id: string) {
   const myPlantRes = await fetch(`${SERVER}/products?seller_id=${id}`, {
