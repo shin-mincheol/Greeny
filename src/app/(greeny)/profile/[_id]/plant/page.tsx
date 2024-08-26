@@ -3,13 +3,15 @@ import PageTemplate from './PageTemplate';
 import { List, MultiItem } from '@/types/response';
 import { PlantBookmark } from '@/types/bookmark';
 import { PlantListRes } from '@/types/plant';
+import { redirect } from 'next/navigation';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export default async function Page({ params }: { params: { _id: string } }) {
   const session = await auth();
-  if (!session) return '로그인 만료';
+  if (!session) redirect('/login');
+
   const plantBookmarkRes = await fetch(SERVER + '/bookmarks/product', {
     headers: {
       'client-id': `${DBNAME}`,

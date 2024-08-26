@@ -10,12 +10,14 @@ import { auth } from '@/auth';
 import { CoreErrorRes, SingleItem } from '@/types/response';
 import { UserInfo } from '@/types/user';
 import NormalProfile from '@images/NormalProfile.svg';
+import { redirect } from 'next/navigation';
 
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export default async function Page() {
   const session = await auth();
-  if (!session) return '로그인 만료';
+  if (!session) redirect('/login');
+
   const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + `/users/${session.user?.id}`, {
     headers: {
       'client-id': `${DBNAME}`,

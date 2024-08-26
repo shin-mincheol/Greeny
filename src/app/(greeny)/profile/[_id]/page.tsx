@@ -11,9 +11,10 @@ import { UserInfo } from '@/types/user';
 import { UserBookmark } from '@/types/bookmark';
 import AddButton from './AddButton';
 import PlantThumbnail from '../PlantThumbnail';
-// import { UserPlant, UserPost } from '../page';
 import Button from '@/components/button/Button';
 import { PostRes } from '@/types/post';
+import { redirect } from 'next/navigation';
+import DeleteButton from './DeleteButton';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
@@ -68,7 +69,13 @@ async function UserPost(id: string) {
 
 export default async function Page({ params }: { params: { _id: string } }) {
   const session = await auth();
-  if (!session) return '로그인 만료';
+  if (!session) redirect('/login');
+
+  // 세션 아이디가 params.id와 같으면 /profile로 보내버림
+  if (session.user?.id === params._id) {
+    redirect('/profile');
+  }
+
   const urlParam = params._id ?? session.user?.id;
 
   const response = await fetch(`${SERVER}/users/${urlParam}`, {
@@ -86,7 +93,12 @@ export default async function Page({ params }: { params: { _id: string } }) {
   });
   const myBookmarkedUsersData: List<UserBookmark> | CoreErrorRes = await myBookmarkedUsersRes.json();
 
-  const isAlreadyFollow = params._id && !!myBookmarkedUsersData.ok && myBookmarkedUsersData.item.some((item) => String(item.user._id) === params._id);
+  let bookmarkId;
+  const bookmarkUser = params._id && !!myBookmarkedUsersData.ok && myBookmarkedUsersData.item.find((item) => String(item.user._id) === params._id);
+
+  if (bookmarkUser && typeof bookmarkUser === 'object') {
+    bookmarkId = bookmarkUser._id;
+  }
 
   const firstTab = await UserPlant(params._id);
   const secondTab = await UserPost(params._id);
@@ -97,27 +109,13 @@ export default async function Page({ params }: { params: { _id: string } }) {
         <Follow href={`/profile/${params._id}/plant`} cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
 
         <div className={styles.thumbnail}>
-          {!params._id || params._id === session.user?.id ? (
-            <Link href={`/profile/detail`}>
-              <div>
-                <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
-              </div>
-            </Link>
-          ) : (
-            <div>
-              <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
-            </div>
-          )}
+          <div>
+            <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
+          </div>
           <p>{resData.ok && resData.item.name}</p>
           <span>{resData.ok && resData.item.email}</span>
 
-          {params._id === session.user?.id ? null : isAlreadyFollow ? (
-            <Button bgColor="fill" btnSize="xs" radiusStyle="curve" disabled style={{ cursor: 'auto', background: 'var(--color-primary-disabled)' }}>
-              팔로잉 중
-            </Button>
-          ) : (
-            <AddButton _id={Number(params._id)} />
-          )}
+          {bookmarkId ? <DeleteButton _id={bookmarkId}>팔로잉</DeleteButton> : <AddButton _id={Number(params._id)} />}
         </div>
 
         <Follow href={`/profile/${params._id}/user`} cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />

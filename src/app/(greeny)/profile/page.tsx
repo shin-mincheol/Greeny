@@ -11,11 +11,12 @@ import Follow from './Follow';
 import PlantThumbnail from './PlantThumbnail';
 import NormalProfile from '@images/NormalProfile.svg';
 import Button from '@/components/button/Button';
+import { redirect } from 'next/navigation';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-async function UserPlant(id: string) {
+async function MyPlant(id: string) {
   const myPlantRes = await fetch(`${SERVER}/products?seller_id=${id}`, {
     headers: {
       'client-id': `${DBNAME}`,
@@ -47,7 +48,7 @@ async function UserPlant(id: string) {
   return firstTab;
 }
 
-async function UserPost(id: string) {
+async function MyPost(id: string) {
   const myPostRes = await fetch(`${SERVER}/posts/users/${id}?type=post`, {
     headers: {
       'client-id': `${DBNAME}`,
@@ -93,9 +94,18 @@ async function UserPost(id: string) {
   return secondTab;
 }
 
+/**
+ * [id]와 page.tsx로 나눈 이유: 내 페이지를 볼 때와 다른 사람의 정보를 볼 때의 기능이 다름.
+ * 다른 점 1. 내 페이지의 경우 썸네일 좌우 식물, 식집사를 클릭해서 들어갈 수 있으며, 들어가서 목록을 조회, 검색, 삭제할 수 있다.
+ * 다른 점 2. 내 페이지의 경우 팔로잉, 팔로우 버튼을 설계할 필요가 없다.
+ * 다른 점 3. 내 페이지의 경우 탭메뉴에서 등록한 식물, 포스트가 없으면 등록하라는 UI가 보인다.
+ * 다른 점 4. 내 페이지의 경우 썸네일 이미지를 클릭 시 프로필 상세 페이지로 이동할 수 있다.
+ * 나누지 않을 경우 [[...id]]/page.tsx로 작성해야 하는데, /profile/[id]/user|plant 까지 depth가 들어가기도 해서
+ * 하나의 page.tsx에서 할 일이 많아짐
+ */
 export default async function Page() {
   const session = await auth();
-  if (!session) return '로그인 만료';
+  if (!session) redirect('/login');
 
   const urlParam = session.user!.id;
   const response = await fetch(`${SERVER}/users/${urlParam}`, {
@@ -105,8 +115,8 @@ export default async function Page() {
   });
   const loginUserData: SingleItem<UserInfo> | CoreErrorRes = await response.json();
 
-  const firstTab = await UserPlant(urlParam!);
-  const secondTab = await UserPost(urlParam!);
+  const firstTab = await MyPlant(urlParam!);
+  const secondTab = await MyPost(urlParam!);
 
   return (
     <>
