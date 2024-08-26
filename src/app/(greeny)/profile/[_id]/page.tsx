@@ -18,6 +18,54 @@ import { PostRes } from '@/types/post';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
+async function UserPlant(id: string) {
+  const myPlantRes = await fetch(`${SERVER}/products?seller_id=${id}`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+    },
+  });
+  const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
+  if (!myPlantData.ok) return myPlantData.message;
+
+  const firstItem = myPlantData.item.map((plant) => {
+    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
+    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
+  });
+  const firstTab = <ul className={styles.tab_body}>{firstItem}</ul>;
+  return firstTab;
+}
+
+async function UserPost(id: string) {
+  const myPostRes = await fetch(`${SERVER}/posts/users/${id}?type=post`, {
+    headers: {
+      'client-id': `${DBNAME}`,
+    },
+  });
+  const myPostData: MultiItem<PostRes> | CoreErrorRes = await myPostRes.json();
+  if (!myPostData.ok) {
+    return myPostData.message;
+  }
+
+  const secondItem = myPostData.item.map((item) => {
+    return (
+      <li className={styles.contents_item} key={item._id}>
+        <Link href={`/story/community/${item._id}`}>
+          <div className={styles.contents_main}>
+            <div className={styles.contents_info}>
+              <h3>{item.title}</h3>
+              <p>{item.content}</p>
+            </div>
+            <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image.at(0)?.path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
+          </div>
+        </Link>
+      </li>
+    );
+  });
+
+  const secondTab = <ul className={styles.contentsList}>{secondItem}</ul>;
+  return secondTab;
+}
+
 export default async function Page({ params }: { params: { _id: string } }) {
   const session = await auth();
   if (!session) return '로그인 만료';
@@ -40,53 +88,8 @@ export default async function Page({ params }: { params: { _id: string } }) {
 
   const isAlreadyFollow = params._id && !!myBookmarkedUsersData.ok && myBookmarkedUsersData.item.some((item) => String(item.user._id) === params._id);
 
-  //
-
-  const myPlantRes = await fetch(`${SERVER}/products?seller_id=${urlParam}`, {
-    headers: {
-      'client-id': `${DBNAME}`,
-    },
-  });
-  const myPlantData: MultiItem<PlantListRes> | CoreErrorRes = await myPlantRes.json();
-  if (!myPlantData.ok) return myPlantData.message;
-
-  let firstTab = <></>;
-
-  const firstItem = myPlantData.item.map((plant) => {
-    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
-    return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
-  });
-  firstTab = <ul className={styles.tab_body}>{firstItem}</ul>;
-
-  //
-  const myPostRes = await fetch(`${SERVER}/posts/users/${urlParam}?type=post`, {
-    headers: {
-      'client-id': `${DBNAME}`,
-    },
-  });
-  const myPostData: MultiItem<PostRes> | CoreErrorRes = await myPostRes.json();
-  if (!myPostData.ok) {
-    return myPostData.message;
-  }
-  let secondTab = <></>;
-
-  const secondItem = myPostData.item.map((item) => {
-    return (
-      <li className={styles.contents_item} key={item._id}>
-        <Link href={`/story/community/${item._id}`}>
-          <div className={styles.contents_main}>
-            <div className={styles.contents_info}>
-              <h3>{item.title}</h3>
-              <p>{item.content}</p>
-            </div>
-            <div className={styles.contents_cover}>{item.image?.length > 0 ? <Image src={`${SERVER}${item.image.at(0)?.path}`} alt="식물 사진" sizes="100%" fill /> : ''}</div>
-          </div>
-        </Link>
-      </li>
-    );
-  });
-
-  secondTab = <ul className={styles.contentsList}>{secondItem}</ul>;
+  const firstTab = await UserPlant(params._id);
+  const secondTab = await UserPost(params._id);
 
   return (
     <>

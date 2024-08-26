@@ -18,5 +18,5 @@ export default async function Page() {
   });
   const userBookmarkList = (await response.json()) as List<UserBookmark>;
 
-  return <PageTemplate list={userBookmarkList.item} />;
+  return <PageTemplate list={userBookmarkList.item} userId={session.user?.id!} />;
 }

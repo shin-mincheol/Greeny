@@ -4,7 +4,7 @@ import { UserBookmark } from '@/types/bookmark';
 import DeleteButton from './DeleteButton';
 import NormalProfile from '@images/NormalProfile.svg';
 
-export default function User(user: UserBookmark) {
+export default function User({ user, userId }: { user: UserBookmark; userId: string }) {
   return (
     <li className={styles.item_wrapper}>
       <div className={styles.user_info_wrapper}>
@@ -15,7 +15,7 @@ export default function User(user: UserBookmark) {
             <span>{user.user.email}</span>
           </div>
         </div>
-        <DeleteButton _id={user._id} />
+        <DeleteButton _id={user._id} userId={userId} />
       </div>
     </li>
   );
