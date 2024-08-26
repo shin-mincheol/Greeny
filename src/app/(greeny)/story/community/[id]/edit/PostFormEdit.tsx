@@ -22,7 +22,7 @@ export default function PostFormEdit(props?: { post?: PostRes }) {
   const pathname = usePathname();
 
   const originalImage = props?.post?.image;
-  const originalImagePath = originalImage?.map((img) => SERVER + img.path);
+  const originalImagePath = originalImage?.map((img) => `${SERVER}${img.path}`);
 
   const [selectedCategory, setSelectedCategory] = useState(props?.post?.extra?.category || 'free');
   const [files, setFiles] = useState<(File | ImageRes)[]>(originalImage ?? []);

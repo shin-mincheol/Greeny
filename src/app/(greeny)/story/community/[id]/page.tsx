@@ -30,7 +30,7 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
       type: 'article',
       publishedTime: post.createdAt,
       authors: [post.user.name],
-      images: SERVER + post.image[0].path,
+      images: `${SERVER}${post.image[0].path}`,
     },
   };
 }

@@ -14,7 +14,7 @@ function ImageModal({ image, closeModal }: { image: ImageRes; closeModal: () => 
           <Image src="/images/CloseIcon.svg" width={18} height={18} alt="닫기" />
         </button>
         <div className={post.image_container}>
-          <Image src={SERVER + image.path} sizes="100%" fill={true} alt={image.name} />
+          <Image src={`${SERVER}${image.path}`} sizes="100%" fill={true} alt={image.name} />
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import Button from '@/components/button/Button';
 import photoAdd from '@images/PhotoAddIcon.svg';
 import { editUser } from '@/app/api/actions/userAction';
 import { signOut } from 'next-auth/react';
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default function EditForm({ user }: { user: UserInfo }) {
   const {
@@ -65,7 +66,7 @@ export default function EditForm({ user }: { user: UserInfo }) {
             {imagePreview ? (
               <Image src={imagePreview} alt="프로필 사진 선택" fill sizes="100%" priority />
             ) : user.image ? (
-              <Image src={process.env.NEXT_PUBLIC_API_SERVER + '/' + user.image} alt="프로필 사진 선택" fill sizes="100%" priority />
+              <Image src={`${SERVER}/${user.image}`} alt="프로필 사진 선택" fill sizes="100%" priority />
             ) : (
               <Image src={photoAdd} alt="프로필 사진 선택" fill sizes="100%" priority />
             )}

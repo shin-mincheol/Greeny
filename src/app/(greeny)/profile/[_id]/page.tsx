@@ -16,10 +16,8 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { redirect } from 'next/navigation';
 import DeleteButton from './DeleteButton';
 
-
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
-
 
 export async function generateMetadata({ params }: { params: { id: string } }, parent: ResolvingMetadata): Promise<Metadata> {
   const userId = params.id;
@@ -45,7 +43,7 @@ async function UserPlant(id: string) {
   if (!myPlantData.ok) return myPlantData.message;
 
   const firstItem = myPlantData.item.map((plant) => {
-    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
+    const src = plant.mainImages.at(0)?.path === '' ? '' : `${SERVER}${plant.mainImages.at(0)?.path}`;
     return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
   });
   const firstTab = <ul className={styles.tab_body}>{firstItem}</ul>;
@@ -101,7 +99,7 @@ export default async function Page({ params }: { params: { _id: string } }) {
   });
   const resData: SingleItem<UserInfo> | CoreErrorRes = await response.json();
 
-  const myBookmarkedUsersRes = await fetch(SERVER + `/bookmarks/user`, {
+  const myBookmarkedUsersRes = await fetch(`${SERVER}/bookmarks/user`, {
     headers: {
       'client-id': `${DBNAME}`,
       Authorization: `Bearer ${session.accessToken}`,
@@ -126,7 +124,7 @@ export default async function Page({ params }: { params: { _id: string } }) {
 
         <div className={styles.thumbnail}>
           <div>
-            <Image src={resData.ok && resData.item.image ? SERVER + resData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
+            <Image src={resData.ok && resData.item.image ? `${SERVER}${resData.item.image}` : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
           </div>
           <p>{resData.ok && resData.item.name}</p>
           <span>{resData.ok && resData.item.email}</span>
