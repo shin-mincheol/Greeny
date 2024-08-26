@@ -11,7 +11,6 @@ import { UserInfo } from '@/types/user';
 import { UserBookmark } from '@/types/bookmark';
 import AddButton from './AddButton';
 import PlantThumbnail from '../PlantThumbnail';
-import Button from '@/components/button/Button';
 import { PostRes } from '@/types/post';
 import { redirect } from 'next/navigation';
 import DeleteButton from './DeleteButton';
@@ -76,7 +75,7 @@ export default async function Page({ params }: { params: { _id: string } }) {
     redirect('/profile');
   }
 
-  const urlParam = params._id ?? session.user?.id;
+  const urlParam = params._id;
 
   const response = await fetch(`${SERVER}/users/${urlParam}`, {
     headers: {

@@ -1,24 +1,27 @@
-import { auth } from '@/auth';
-import { UserBookmark } from '@/types/bookmark';
-import { List } from '@/types/response';
-import PageTemplate from './PageTemplate';
 import { redirect } from 'next/navigation';
+import { Bookmark } from '@/types/bookmark';
+import { CoreErrorRes, SingleItem } from '@/types/response';
+import { auth } from '@/auth';
+import PageTemplate from './PageTemplate';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-export default async function Page() {
+export default async function Page({ params }: { params: { _id: string } }) {
   const session = await auth();
   if (!session) redirect('/login');
 
-  const response = await fetch(SERVER + '/bookmarks/user', {
+  const bookmarksRes = await fetch(`${SERVER}/users/${params._id}/bookmarks/`, {
     headers: {
       'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${session.accessToken}`,
     },
-    // next: { tags: ['user'] },
   });
-  const userBookmarkList = (await response.json()) as List<UserBookmark>;
+  const bookmark: SingleItem<Bookmark> | CoreErrorRes = await bookmarksRes.json();
+  if (!bookmark.ok) {
+    redirect('/');
+  }
 
-  return <PageTemplate list={userBookmarkList.item} userId={session.user?.id!} />;
+  const isMe = session.user?.id === params._id;
+
+  return <PageTemplate list={bookmark.item.user} isMe={isMe} userId={session.user?.id!} />;
 }
