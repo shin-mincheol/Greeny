@@ -2,6 +2,12 @@ import styles from './Community.module.scss';
 import CommunitySection from '@greeny/story/CommunitySection';
 import PostList from '@greeny/story/PostList';
 import DiarySlider from '@greeny/story/DiarySlider';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Story',
+  description: '식물 이야기들을 확인해보세요!',
+};
 
 export default async function Story({ searchParams }: { searchParams: { category: string; keyword: string; page: string } }) {
   return (

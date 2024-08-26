@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default function DiaryItem({ diary }: { diary: DiaryRes }) {
+export default function DiaryItem({ diary, isLoggedIn }: { diary: DiaryRes; isLoggedIn: boolean }) {
   return (
     <div className={diaryStyles.item}>
       <Link href={`/story/diaries/${diary._id}`}>
@@ -24,7 +24,7 @@ export default function DiaryItem({ diary }: { diary: DiaryRes }) {
             <>
               <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
-                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} />
+                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} isLoggedIn={isLoggedIn} />
               </div>
             </>
           }
