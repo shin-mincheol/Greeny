@@ -42,7 +42,7 @@ export default function MyPlantEditForm({ id, item }: { id: string; item: PlantR
   });
 
   //식물 사진 미리보기
-  const [imagePreview, setImagePreview] = useState<string>(SERVER + item.mainImages[0].path);
+  const [imagePreview, setImagePreview] = useState<string>(`${SERVER}${item.mainImages[0].path}`);
   const image = watch('attach');
 
   useEffect(() => {
