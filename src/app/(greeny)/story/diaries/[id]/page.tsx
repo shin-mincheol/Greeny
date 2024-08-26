@@ -10,8 +10,28 @@ import FollowBtn from './FollowBtn';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DiaryRes } from '@/types/post';
+import { Metadata } from 'next';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
+export async function generateMetadata({ params: { id } }: { params: { id: string } }): Promise<Metadata> {
+  const diary: DiaryRes = await fetchDiary(id);
+  const titleEllipsis = diary.title.length > 20 ? diary.title.slice(0, 20) + '...' : diary.title;
+
+  return {
+    title: {
+      absolute: `${titleEllipsis} | Diary`,
+    },
+    openGraph: {
+      title: diary.title,
+      description: diary.content,
+      type: 'article',
+      publishedTime: diary.createdAt,
+      authors: [diary.user.name],
+      images: SERVER + diary.image[0].path,
+    },
+  };
+}
 
 export default async function DiaryDetail({ params: { id } }: { params: { id: string } }) {
   const diary: DiaryRes = await fetchDiary(id);
