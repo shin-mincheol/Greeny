@@ -8,11 +8,12 @@ export default function DeleteButton({ _id, userId }: { _id: number; userId: str
 
   const handleClick = async () => {
     startTransition(async () => {
-      const resData = await deleteBookmark(_id);
+      const pathToRevalidate = `/profile/${userId}/plant`;
+      const resData = await deleteBookmark(_id, pathToRevalidate);
       if (!resData.ok) {
         alert('삭제 실패');
       }
-      redirect(`/profile/${userId}/plant`);
+      redirect(pathToRevalidate);
     });
   };
 
