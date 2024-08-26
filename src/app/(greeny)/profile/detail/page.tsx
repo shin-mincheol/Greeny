@@ -10,8 +10,19 @@ import { auth } from '@/auth';
 import { CoreErrorRes, SingleItem } from '@/types/response';
 import { UserInfo } from '@/types/user';
 import NormalProfile from '@images/NormalProfile.svg';
+import { Metadata } from 'next';
 
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  openGraph: {
+    title: 'Profile',
+    description: 'User 프로필 페이지',
+    images: 'images/MetaImage.png',
+    url: '/profile/detail',
+  },
+};
 
 export default async function Page() {
   const session = await auth();

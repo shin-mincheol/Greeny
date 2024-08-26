@@ -9,8 +9,19 @@ import TodayDiary from './(section)/TodayDiary';
 import { fetchDiaries, fetchPosts } from '@/app/api/fetch/postFetch';
 import Link from 'next/link';
 import { formatAgo } from '@/utils/date';
+import { Metadata } from 'next';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
+export const metadata: Metadata = {
+  title: 'Home',
+  openGraph: {
+    title: 'Home',
+    description: 'Greeny 메인 페이지',
+    images: 'images/MetaImage.png',
+    url: '/',
+  },
+};
 
 export default async function Home() {
   const dataPost = await fetchPosts();
