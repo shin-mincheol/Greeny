@@ -2,14 +2,14 @@
 import styles from './Tab.module.scss';
 import { useState } from 'react';
 
-interface TabProps<T, V> {
-  first: React.ReactNode;
-  second: React.ReactNode;
+interface TabProps {
+  first: React.ReactNode | string;
+  second: React.ReactNode | string;
   firstSrOnly: string;
   secondSrOnly: string;
 }
 
-export default function Tab<T, V>({ first, second, firstSrOnly, secondSrOnly }: TabProps<T, V>) {
+export default function Tab({ first, second, firstSrOnly, secondSrOnly }: TabProps) {
   const [isFirstTab, setIsFirstTab] = useState(true);
 
   const toggleTab = (content: string) => {

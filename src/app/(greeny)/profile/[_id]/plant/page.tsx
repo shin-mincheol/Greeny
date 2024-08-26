@@ -1,9 +1,10 @@
+import { redirect } from 'next/navigation';
+import { Bookmark } from '@/types/bookmark';
+import { CoreErrorRes, SingleItem } from '@/types/response';
 import { auth } from '@/auth';
 import PageTemplate from './PageTemplate';
-import { List, MultiItem } from '@/types/response';
-import { PlantBookmark } from '@/types/bookmark';
-import { PlantListRes } from '@/types/plant';
 import { Metadata, ResolvingMetadata } from 'next';
+
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
@@ -24,33 +25,19 @@ export async function generateMetadata({ params }: { params: { id: string } }, p
 
 export default async function Page({ params }: { params: { _id: string } }) {
   const session = await auth();
-  if (!session) return '로그인 만료';
-  const plantBookmarkRes = await fetch(SERVER + '/bookmarks/product', {
-    headers: {
-      'client-id': `${DBNAME}`,
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  });
-  const plantBookmarkList = (await plantBookmarkRes.json()) as List<PlantBookmark>;
+  if (!session) redirect('/login');
 
-  const allPlantRes = await fetch(`${SERVER}/products?seller_id=${params._id}`, {
+  const bookmarksRes = await fetch(`${SERVER}/users/${params._id}/bookmarks/`, {
     headers: {
       'client-id': `${DBNAME}`,
     },
-    cache: 'no-cache',
   });
+  const bookmark: SingleItem<Bookmark> | CoreErrorRes = await bookmarksRes.json();
+  if (!bookmark.ok) {
+    redirect('/');
+  }
+
   const isMe = session.user?.id === params._id;
 
-  const allPlantList: MultiItem<PlantListRes> = await allPlantRes.json();
-
-  const processedPlantBookmarkList = {} as List<PlantBookmark>;
-  processedPlantBookmarkList.item = plantBookmarkList.item.map((plantBookmark) => {
-    const plant = allPlantList.item.find((plant) => plant._id === plantBookmark.product._id);
-    // TODO: REFACTOR
-    return {
-      ...plantBookmark,
-      createdAt: plant?.scientificName ?? '',
-    };
-  });
-  return <PageTemplate list={processedPlantBookmarkList.item} isMe={isMe} userId={params._id} />;
+  return <PageTemplate list={bookmark.item.user} isMe={isMe} userId={session.user?.id!} />;
 }
