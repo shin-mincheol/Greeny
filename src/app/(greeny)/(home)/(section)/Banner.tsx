@@ -28,9 +28,9 @@ export default function Banner() {
             </p>
           </div>
 
-          <Link href="/event" className={styles.bannerLink}>
+          {/* <Link href="/event" className={styles.bannerLink}>
             <Image src={bannerIcon} width={40} height={40} alt="테스트하러가기" />
-          </Link>
+          </Link> */}
         </div>
       </SwiperSlide>
 
@@ -48,9 +48,9 @@ export default function Banner() {
             </p>
           </div>
 
-          <Link href="/event" className={styles.bannerLink}>
+          {/* <Link href="/event" className={styles.bannerLink}>
             <Image src={bannerIcon} width={50} height={50} alt="테스트하러가기" />
-          </Link>
+          </Link> */}
         </div>
       </SwiperSlide>
 
@@ -69,9 +69,9 @@ export default function Banner() {
             </p>
           </div>
 
-          <Link href="/event" className={styles.bannerLink}>
+          {/* <Link href="/event" className={styles.bannerLink}>
             <Image src={bannerIcon} width={50} height={50} alt="테스트하러가기" />
-          </Link>
+          </Link> */}
         </div>
       </SwiperSlide>
 
@@ -89,9 +89,9 @@ export default function Banner() {
             </p>
           </div>
 
-          <Link href="/event" className={styles.bannerLink}>
+          {/* <Link href="/event" className={styles.bannerLink}>
             <Image src={bannerIcon} width={50} height={50} alt="테스트하러가기" />
-          </Link>
+          </Link> */}
         </div>
       </SwiperSlide>
     </Swiper>

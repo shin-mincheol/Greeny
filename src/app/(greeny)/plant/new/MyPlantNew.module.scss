@@ -91,6 +91,7 @@
     }
   }
   .photo_cover {
+    cursor: pointer;
     position: relative;
     width: 12rem;
     height: 12rem;
@@ -119,6 +120,7 @@
 }
 
 .selectBox {
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: 4rem;
