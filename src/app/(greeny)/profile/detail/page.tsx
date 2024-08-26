@@ -12,13 +12,14 @@ import { UserInfo } from '@/types/user';
 import NormalProfile from '@images/NormalProfile.svg';
 import { redirect } from 'next/navigation';
 
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 export default async function Page() {
   const session = await auth();
   if (!session) redirect('/login');
 
-  const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + `/users/${session.user?.id}`, {
+  const response = await fetch(`${SERVER}/users/${session.user?.id}`, {
     headers: {
       'client-id': `${DBNAME}`,
     },
@@ -34,7 +35,7 @@ export default async function Page() {
         <Link href={`/profile/detail`}>
           <div className={styles.thumbnail}>
             <div>
-              <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
+              <Image src={session.user?.image === '' ? NormalProfile : session.user?.image} alt="썸네일 이미지" fill sizes="100%" priority />
             </div>
             <p>{session.user?.name}</p>
             <span>{session.user?.email}</span>
