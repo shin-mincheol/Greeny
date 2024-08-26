@@ -52,7 +52,7 @@ async function MyPlant(id: string) {
     );
   }
   const firstItem = myPlantData.item.map((plant) => {
-    const src = plant.mainImages.at(0)?.path === '' ? '' : SERVER + plant.mainImages.at(0)?.path;
+    const src = plant.mainImages.at(0)?.path === '' ? '' : `${SERVER}${plant.mainImages.at(0)?.path}`;
     return <PlantThumbnail key={plant._id} href={`/plant/${plant._id}`} src={src} />;
   });
   const firstTab = <ul className={styles.tab_body}>{firstItem}</ul>;
@@ -136,7 +136,7 @@ export default async function Page() {
         <div className={styles.thumbnail}>
           <Link href={`/profile/detail`}>
             <div>
-              <Image src={loginUserData.ok && loginUserData.item.image ? SERVER + loginUserData.item.image : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
+              <Image src={loginUserData.ok && loginUserData.item.image ? `${SERVER}${loginUserData.item.image}` : NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
             </div>
           </Link>
           <p>{loginUserData.ok && loginUserData.item.name}</p>

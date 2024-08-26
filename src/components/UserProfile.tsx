@@ -17,7 +17,7 @@ export default function UserProfile({ user, fontStyle, component }: Props) {
       <Link href={`/profile/${user._id}`}>
         <div className={styles.basic}>
           <div className={styles.profile_image}>
-            <Image src={user.image ? SERVER + user.image : '/images/NormalProfile.svg'} sizes="100%" fill alt="프로필" />
+            <Image src={user.image ? `${SERVER}${user.image}` : '/images/NormalProfile.svg'} sizes="100%" fill alt="프로필" />
           </div>
           <p className={styles[fontStyle]}>{user.name}</p>
         </div>
