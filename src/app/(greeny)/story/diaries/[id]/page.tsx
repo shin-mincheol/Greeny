@@ -15,12 +15,12 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default async function DiaryDetail({ params: { id } }: { params: { id: string } }) {
   const diary: DiaryRes = await fetchDiary(id);
-  const plant = diary.product;
-
   const session = await auth();
+  const bookmarkId = await getPlantBookmarkId(diary.product_id.toString());
+  const plant = diary.product;
+  const isMyPlant = Number(session?.user?.id) === diary.seller_id;
   const isLoggedIn = !!session;
   const isWriter = Number(session?.user?.id) === diary.user._id;
-  const bookmarkId = await getPlantBookmarkId(diary.product_id.toString());
 
   return (
     <>
@@ -56,7 +56,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
               </div>
               <div className={diaryDetailStyles.plant_nickname}>{diary.product.name}</div>
             </Link>
-            <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} isLoggedIn={isLoggedIn} />
+            {!isMyPlant && <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} isLoggedIn={isLoggedIn} />}
           </div>
           <div className={diaryDetailStyles.plant_diary_info}>
             <div>
