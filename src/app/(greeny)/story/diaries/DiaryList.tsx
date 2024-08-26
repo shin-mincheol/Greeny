@@ -5,7 +5,7 @@ import NoResultDiary from '@greeny/story/diaries/NoResultDiary';
 import { auth } from '@/auth';
 
 export default async function DiaryList({ searchParams }: { searchParams: { keyword: string } }) {
-  const diaries = await fetchDiaries(searchParams);
+  const diaries = await fetchDiaries(searchParams, true);
   const session = await auth();
   const isLoggedIn = !!session;
 
