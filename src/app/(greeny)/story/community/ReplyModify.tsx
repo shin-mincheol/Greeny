@@ -9,9 +9,15 @@ import { usePathname } from 'next/navigation';
 export default function ReplyModify({ currentReply, cancel }: { currentReply: PostComment; cancel: () => void }) {
   const pathname = usePathname();
   const postId = pathname.split('/')[3];
-  const [content, setContent] = useState<string>(currentReply.content);
+  const [content, setContent] = useState<string>(currentReply.content.slice(0, currentReply.content.length - 1));
   const updateReplyWithIds = async (formData: FormData) => {
-    formData.set('content', content);
+    const check = confirm('댓글을 수정하시겠습니까?');
+    if (!check) return;
+
+    const trimmedContent = content.trim();
+    if (trimmedContent.length === 0) return alert('댓글은 한 글자 이상이어야합니다.');
+
+    formData.set('content', trimmedContent + '#');
     const resJson = await updateReply.bind(null, postId, currentReply._id)(formData);
     if (resJson.ok) cancel();
   };

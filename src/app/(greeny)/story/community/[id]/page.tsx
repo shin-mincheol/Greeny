@@ -9,12 +9,36 @@ import { fetchPost } from '@/app/api/fetch/postFetch';
 import SubMenuContainer from './SubMenuContainer';
 import { auth } from '@/auth';
 import { PostRes } from '@/types/post';
+import { Metadata } from 'next';
 
 export const revalidate = 0;
+
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
+export async function generateMetadata({ params: { id } }: { params: { id: string } }): Promise<Metadata> {
+  const post: PostRes = await fetchPost(id);
+  const titleEllipsis = post.title.length > 20 ? post.title.slice(0, 20) + '...' : post.title;
+
+  return {
+    title: {
+      absolute: `${titleEllipsis} | Community`,
+    },
+    description: post.content,
+    openGraph: {
+      title: post.title,
+      description: post.content,
+      type: 'article',
+      publishedTime: post.createdAt,
+      authors: [post.user.name],
+      images: SERVER + post.image[0].path,
+    },
+  };
+}
 
 export default async function PostDetail({ params: { id } }: { params: { id: string } }) {
   const post: PostRes = await fetchPost(id);
   const session = await auth();
+  const isLoggedin = !!session;
   const isWriter = Number(session?.user?.id) === post.user._id;
 
   return (
@@ -26,11 +50,11 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
         </div>
         <pre>{post.content}</pre>
         {post.image.length > 0 && <ImageSlider images={post.image} />}
-        <PostInfo post={post} />
+        <PostInfo post={post} isLoggedin={isLoggedin} />
       </section>
       <section className={styles.reply}>
         <ReplyList postId={id} />
-        <ReplyInput postId={id} />
+        <ReplyInput postId={id} isLoggedin={isLoggedin} />
       </section>
     </article>
   );

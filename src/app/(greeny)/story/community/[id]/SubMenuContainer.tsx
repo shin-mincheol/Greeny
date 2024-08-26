@@ -11,6 +11,11 @@ export default function SubMenuContainer() {
   const pathname = usePathname();
   const postId = pathname.split('/')[3];
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
+  const checkAndDeletePostWithId = () => {
+    const check = confirm('해당 글을 삭제하시겠습니까?');
+    if (!check) return;
+    deletePost.bind(null, postId)();
+  };
 
   return (
     <>
@@ -21,7 +26,7 @@ export default function SubMenuContainer() {
               <Link href={`${pathname}/edit`}>글 수정</Link>
             </DropDownOption>
             <DropDownOptionRed>
-              <form action={deletePost.bind(null, postId)}>
+              <form action={checkAndDeletePostWithId}>
                 <button type="submit">글 삭제</button>
               </form>
             </DropDownOptionRed>
