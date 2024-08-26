@@ -9,8 +9,19 @@ import TodayDiary from './(section)/TodayDiary';
 import { fetchDiaries, fetchPosts } from '@/app/api/fetch/postFetch';
 import Link from 'next/link';
 import { formatAgo } from '@/utils/date';
+import { Metadata } from 'next';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
+export const metadata: Metadata = {
+  title: 'Home',
+  openGraph: {
+    title: 'Home',
+    description: 'Greeny 메인 페이지',
+    images: 'images/MetaImage.png',
+    url: '/',
+  },
+};
 
 export default async function Home() {
   const dataPost = await fetchPosts();
@@ -57,17 +68,17 @@ export default async function Home() {
 
       <div className={styles.main_list}>
         <div className={styles.list_item}>
-          <h2 className={styles.list_title}>오늘의 식물 추천!</h2>
+          <h2 className={styles.list_title}>오늘의 식물 추천!💡</h2>
           <TodayPlant />
         </div>
 
         <div className={styles.list_item}>
-          <h2 className={styles.list_title}>식집사들의 식물을 구경해봐요!</h2>
+          <h2 className={styles.list_title}>식물 친구들 구경하기 🪴</h2>
           <TodayDiary data={dataDiary} />
         </div>
 
         <div className={styles.list_item}>
-          <h2 className={styles.list_title}>다른 식집사들의 이야기를 들어봐요!</h2>
+          <h2 className={styles.list_title}>새롭게 올라온 스토리 👀</h2>
 
           <ul className={styles.contentsList}>{list}</ul>
         </div>

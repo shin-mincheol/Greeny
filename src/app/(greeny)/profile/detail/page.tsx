@@ -10,13 +10,27 @@ import { auth } from '@/auth';
 import { CoreErrorRes, SingleItem } from '@/types/response';
 import { UserInfo } from '@/types/user';
 import NormalProfile from '@images/NormalProfile.svg';
+import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  openGraph: {
+    title: 'Profile',
+    description: 'User 프로필 페이지',
+    images: 'images/MetaImage.png',
+    url: '/profile/detail',
+  },
+};
 
 export default async function Page() {
   const session = await auth();
-  if (!session) return '로그인 만료';
-  const response = await fetch(process.env.NEXT_PUBLIC_API_SERVER + `/users/${session.user?.id}`, {
+  if (!session) redirect('/login');
+
+  const response = await fetch(`${SERVER}/users/${session.user?.id}`, {
     headers: {
       'client-id': `${DBNAME}`,
     },
@@ -27,19 +41,19 @@ export default async function Page() {
   return (
     <>
       <div className={styles.profile_panel}>
-        <Follow href="/profile/plant" cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
+        <Follow href={`/profile/${session.user?.id}/plant`} cnt={resData.ok ? resData.item.bookmark.products : 0} title="식물" />
 
         <Link href={`/profile/detail`}>
           <div className={styles.thumbnail}>
             <div>
-              <Image src={session.user?.image ?? NormalProfile} alt="썸네일 이미지" fill sizes="100%" priority />
+              <Image src={session.user?.image === '' ? NormalProfile : session.user?.image} alt="썸네일 이미지" fill sizes="100%" priority />
             </div>
             <p>{session.user?.name}</p>
             <span>{session.user?.email}</span>
           </div>
         </Link>
 
-        <Follow href="/profile/user" cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
+        <Follow href={`/profile/${session.user?.id}/user`} cnt={resData.ok ? resData.item.bookmark.users : 0} title="식집사" />
       </div>
 
       <div className={styles.gap}></div>

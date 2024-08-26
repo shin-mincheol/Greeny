@@ -1,13 +1,6 @@
 import { ImageRes } from './image';
 import { UserSimple } from './user';
 
-// export interface User {
-//   _id: number;
-//   user_id: number;
-//   createdAt: string;
-//   user: UserSimple & { type: 'seller' };
-// }
-
 export interface User {
   _id: number;
   name: string;
@@ -48,8 +41,11 @@ export interface PlantBookmark extends BookmarkHeader {
 }
 export interface PostBookmark extends BookmarkHeader {
   post: Post;
+  memo?: string;
 }
-
-export type Bookmark = UserBookmark | PlantBookmark | PostBookmark;
-
-// export type Bookmark<T> = { user: T; bookmark?: never } | ({ product: T; user?: never } & BookmarkHeader);
+export interface Bookmark {
+  byUser: {}[];
+  user: UserBookmark[];
+  product: PlantBookmark[];
+  post: PostBookmark[];
+}

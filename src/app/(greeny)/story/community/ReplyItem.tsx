@@ -14,6 +14,11 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const startModifying = () => setIsModifying(true);
   const cancelModifying = () => setIsModifying(false);
+  const deleteActionWithConfirm = () => {
+    const check = confirm('댓글을 삭제하시겠습니까?');
+    if (!check) return;
+    deleteAction();
+  };
 
   return (
     <li>
@@ -26,7 +31,6 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
               <div style={{ color: 'var(--color-gray-10)', fontSize: 10 }}>{formatAgo(reply.createdAt)}</div>
               <div style={{ marginLeft: '0.6rem' }}>
                 <SubMenu isMenuOpened={isMenuOpened} toggleMenu={() => setIsMenuOpened((o) => !o)}>
-                  {/* <DropDown replyId={reply._id} /> */}
                   <DropDown>
                     <DropDownOption>
                       <button
@@ -40,7 +44,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
                       </button>
                     </DropDownOption>
                     <DropDownOptionRed>
-                      <form action={deleteAction}>
+                      <form action={deleteActionWithConfirm}>
                         <button type="submit">댓글 삭제</button>
                       </form>
                     </DropDownOptionRed>
@@ -57,7 +61,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
       />
 
       <div className={styles.reply_item_content_container}>
-        {isModifying ? <ReplyModify currentReply={reply} cancel={cancelModifying} /> : <pre className={styles.reply_item_content}>{reply.content}</pre>}
+        {isModifying ? <ReplyModify currentReply={reply} cancel={cancelModifying} /> : <pre className={styles.reply_item_content}>{reply.content.slice(0, reply.content.length - 1)}</pre>}
       </div>
     </li>
   );

@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import styles from './MyPlantDiaryNew.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import { DiaryForm } from '@/types/post';
-import { useEffect, useState } from 'react';
+import { action, DiaryForm, plantState } from '@/types/post';
+import { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import photoAdd from '@images/PhotoAddIcon.svg';
 import photoDelete from '@images/PhotoDeleteIcon.svg';
@@ -15,8 +15,17 @@ import Button from '@/components/button/Button';
 import { DiaryNew } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
 
+const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
+const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
+
 export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>();
+  const stateRef = useRef<HTMLDivElement | null>(null);
+  const actionRef = useRef<HTMLDivElement | null>(null);
+  const [stateDrop, setStateDrop] = useState(false);
+  const [actionDrop, setActionDrop] = useState(false);
+  const [state, setState] = useState('식물 상태를 선택해주세요.');
+  const [action, setAction] = useState('활동을 선택해주세요');
   const router = useRouter();
   const {
     register,
@@ -24,8 +33,66 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
     formState: { errors },
     control,
     watch,
+    setValue,
   } = useForm<DiaryForm>();
 
+  //드롭다운
+  const handleActiondrop = () => {
+    setActionDrop(!actionDrop);
+  };
+  const handleStatedrop = () => {
+    setStateDrop(!stateDrop);
+  };
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (stateRef.current && !stateRef.current.contains(event.target as Node)) {
+        setStateDrop(false);
+      }
+
+      if (actionRef.current && !actionRef.current.contains(event.target as Node)) {
+        setActionDrop(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const stateSelect = selState.map((item, i) => {
+    return (
+      <li
+        key={i}
+        onClick={() => {
+          setState(item.plantState);
+          setValue('plantState', item.plantState);
+          setStateDrop(false);
+        }}
+        className={styles.dropItem}
+      >
+        {item.plantState}
+      </li>
+    );
+  });
+
+  const actionSelect = selAction.map((item, i) => {
+    return (
+      <li
+        key={i}
+        onClick={() => {
+          setAction(item.action);
+          setValue('action', item.action);
+          setActionDrop(false);
+        }}
+        className={styles.dropItem}
+      >
+        {item.action}
+      </li>
+    );
+  });
+
+  //이미지 프리뷰
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const images = watch('attach');
 
@@ -67,6 +134,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
     </SwiperSlide>
   ));
 
+  //데이터 패치
   const onNewDiary = async (formData: DiaryForm) => {
     try {
       const plantForm = new FormData();
@@ -120,38 +188,24 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
           식물 상태<span>*</span>
         </label>
 
-        <div className={styles.selectBox}>
-          <select className={styles.select} defaultValue="placeholder" {...register('plantState')}>
-            <option disabled value="placeholder">
-              식물의 상태를 선택해주세요.
-            </option>
-            <option value="좋음">좋음</option>
-            <option value="새싹">새싹</option>
-            <option value="개화">개화</option>
-            <option value="아픔">아픔</option>
-            <option value="죽음">죽음</option>
-          </select>
+        <div className={styles.selectBox} ref={stateRef} onClick={handleStatedrop}>
+          {state}
+          {stateDrop && <ul className={styles.select}>{stateSelect}</ul>}
         </div>
+        <input type="hidden" {...register('plantState')} value={state} />
         {errors.plantState && <p>{errors.plantState.message}</p>}
       </div>
+
       <div className={styles.input_container}>
         <label htmlFor="action">
           반려식물을 위한 활동<span>*</span>
         </label>
 
-        <div className={styles.selectBox}>
-          <select className={styles.select} defaultValue="placeholder" {...register('action')}>
-            <option disabled value="placeholder">
-              활동을 선택해주세요.
-            </option>
-            <option value="물주기">물주기</option>
-            <option value="햇빛">햇빛</option>
-            <option value="분갈이">분갈이</option>
-            <option value="영양">영양</option>
-            <option value="가지">가지</option>
-            <option value="관찰">관찰</option>
-          </select>
+        <div className={styles.selectBox} ref={actionRef} onClick={handleActiondrop}>
+          {action}
+          {actionDrop && <ul className={styles.select}>{actionSelect}</ul>}
         </div>
+        <input type="hidden" {...register('action')} value={action} />
         {errors.action && <p>{errors.action.message}</p>}
       </div>
 
@@ -166,6 +220,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
           rules={{ required: '활동 날짜를 선택해주세요.' }}
           render={({ field: { onChange } }) => (
             <DatePicker
+              placeholderText="활동 날짜를 선택해주세요."
               selected={selectedDate}
               dateFormat="yyyy.MM.dd"
               onChange={(date) => {
@@ -190,7 +245,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
         <label htmlFor="content">
           내용<span>*</span>
         </label>
-        <textarea id="content" placeholder="물주기를 선택해주세요." {...register('content')} />
+        <textarea id="content" placeholder="내용을 입력해주세요." {...register('content')} />
         {errors.content && <p>{errors.content.message}</p>}
       </div>
 

@@ -63,7 +63,6 @@ export async function editUser(formData: FormData): Promise<ApiResWithValidation
     address: formData.get('address'),
     image: '',
   };
-  console.log('🚀 ~ editUser ~ userObj:', userObj);
 
   const attach = formData.get('attach') as File;
 
@@ -80,8 +79,6 @@ export async function editUser(formData: FormData): Promise<ApiResWithValidation
       throw new Error('파일 업로드 실패');
     }
     const fileData: MultiItem<FileRes> = await fileRes.json();
-
-    console.log('fileData', fileData);
 
     userObj.image = fileData.item[0].path;
   }

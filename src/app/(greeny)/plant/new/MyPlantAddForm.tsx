@@ -14,7 +14,7 @@ import { format } from 'date-fns';
 import { plantNew } from '@/app/api/actions/plantAction';
 
 export default function MyPlantAddForm() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>();
   const [drop, setDrop] = useState(false);
   const [plantName, setPlantName] = useState('식물을 선택해주세요.');
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -86,25 +86,29 @@ export default function MyPlantAddForm() {
 
   //데이터 패치
   const onAddPlant = async (formData: PlantForm) => {
-    try {
-      const plantForm = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key !== 'attach') {
-          plantForm.append(key, value as string);
+    if (formData.attach.length > 0) {
+      try {
+        const plantForm = new FormData();
+        Object.entries(formData).forEach(([key, value]) => {
+          if (key !== 'attach') {
+            plantForm.append(key, value as string);
+          }
+        });
+        if (formData.attach) {
+          plantForm.append('attach', formData.attach[0]);
         }
-      });
-      if (formData.attach) {
-        plantForm.append('attach', formData.attach[0]);
-      }
 
-      const res = await plantNew(plantForm);
-      // console.log(res);
-      if (res.ok) {
-        alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
-        router.replace('/plant');
+        const res = await plantNew(plantForm);
+        // console.log(res);
+        if (res.ok) {
+          alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
+          router.replace('/plant');
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      alert('식물 사진은 필수입니다.');
     }
   };
 
@@ -165,12 +169,12 @@ export default function MyPlantAddForm() {
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="nickName">
+        <label htmlFor="name">
           식물 애칭<span>*</span>
         </label>
         <input
           type="text"
-          id="nickName"
+          id="name"
           placeholder="식물 애칭을 입력하세요."
           {...register('name', {
             required: '식물 애칭을 입력하세요.',
@@ -196,6 +200,7 @@ export default function MyPlantAddForm() {
             <DatePicker
               selected={selectedDate}
               dateFormat="yyyy.MM.dd"
+              placeholderText="입양일을 선택해주세요."
               onChange={(date) => {
                 setSelectedDate(date);
                 onChange(date ? format(date, 'yyyy-MM-dd') : '');
@@ -233,7 +238,7 @@ export default function MyPlantAddForm() {
         <label htmlFor="content">특징</label>
         <textarea
           id="content"
-          placeholder="식물의 특징을 적어주세요."
+          placeholder="10글자 이상 적어주세요."
           {...register('content', {
             required: '식물의 특징을 적어주세요.',
             minLength: {

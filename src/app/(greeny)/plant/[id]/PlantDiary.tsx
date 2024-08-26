@@ -6,20 +6,19 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { PlantDetailRes } from '@/types/plant';
+import { PlantDetailRes, PlantRes } from '@/types/plant';
 import { format } from 'date-fns';
 import scheduleIcon from '@images/CaleandarIcon.svg';
-import { useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-export default function PlantDiray({ productId, sellerId, name }: { productId: number; sellerId: number; name: string }) {
+export default function PlantDiray({ item, user }: { item: PlantRes; user: Session | null }) {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const selectDay = format(currentDate, 'yyyy-MM-dd');
   const [selectData, setSelectData] = useState<PlantDetailRes[] | undefined>();
   const [scheduleData, setSscheduleData] = useState<PlantDetailRes[] | undefined>();
   const [isLoaded, setIsLoaded] = useState(false);
-  const session = useSession();
 
   const fetchPlantsDiary = async (productId: number | undefined, selectDay: string, fetchAll: boolean) => {
     let url = `${SERVER}/posts/?type=diary`;
@@ -41,20 +40,20 @@ export default function PlantDiray({ productId, sellerId, name }: { productId: n
 
   useEffect(() => {
     const fetchData = async () => {
-      const scheduleItems = await fetchPlantsDiary(productId, selectDay, true);
+      const scheduleItems = await fetchPlantsDiary(item._id, selectDay, true);
       setSscheduleData(scheduleItems);
-      const todayItems = await fetchPlantsDiary(productId, selectDay, false);
+      const todayItems = await fetchPlantsDiary(item._id, selectDay, false);
       setSelectData(todayItems);
       setIsLoaded(true);
     };
 
     fetchData();
-  }, [productId, currentDate.getMonth()]);
+  }, [item._id, currentDate.getMonth()]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (isLoaded) {
-        const dateItems = await fetchPlantsDiary(productId, selectDay, false);
+        const dateItems = await fetchPlantsDiary(item._id, selectDay, false);
         setSelectData(dateItems);
       }
     };
@@ -79,7 +78,7 @@ export default function PlantDiray({ productId, sellerId, name }: { productId: n
               </div>
               <div className={styles.item_info}>
                 <span>활동 날짜 :</span>
-                <p>{item.extra.actionDate}</p>
+                <p>{format(item.extra.actionDate, 'yyyy년 M월 d일')}</p>
               </div>
             </div>
 
@@ -94,7 +93,7 @@ export default function PlantDiray({ productId, sellerId, name }: { productId: n
       ))
     ) : (
       <li className={styles.diaryNull}>
-        <span>{name}</span>이(가) 몰래 메시지를 남겼어요! <br /> &quot;나 오늘 잘 자랐어?&quot;
+        <span>{item.name}</span>이(가) 몰래 메시지를 남겼어요! <br /> &quot;나 오늘 잘 자랐어?&quot;
       </li>
     );
 
@@ -116,8 +115,8 @@ export default function PlantDiray({ productId, sellerId, name }: { productId: n
     <div className={styles.layout_wrapper}>
       <div className={styles.diary_head}>
         <h3>식물 일기</h3>
-        {Number(session.data?.user?.id) === sellerId && (
-          <Link href={`/plant/${productId}/diaryNew`} className={styles.diary_add}>
+        {Number(user?.user?.id) === item.seller_id && (
+          <Link href={`/plant/${item._id}/diaryNew`} className={styles.diary_add}>
             <span className="hidden">식물 일기 추가</span>
           </Link>
         )}

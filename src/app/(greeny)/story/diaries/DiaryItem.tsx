@@ -8,12 +8,12 @@ import Image from 'next/image';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default function DiaryItem({ diary }: { diary: DiaryRes }) {
+export default function DiaryItem({ diary, isLoggedIn }: { diary: DiaryRes; isLoggedIn: boolean }) {
   return (
     <div className={diaryStyles.item}>
       <Link href={`/story/diaries/${diary._id}`}>
         <div className={diaryStyles.thumbnail}>
-          <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} fill />
+          <Image src={`${SERVER}${diary.image[0].path}`} alt={diary.image[0].name} sizes="100%" fill />
         </div>
       </Link>
       <div className={diaryStyles.info}>
@@ -24,7 +24,7 @@ export default function DiaryItem({ diary }: { diary: DiaryRes }) {
             <>
               <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
-                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} />
+                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} isLoggedIn={isLoggedIn} />
               </div>
             </>
           }

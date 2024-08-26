@@ -3,13 +3,31 @@ import styles from './MyPlantDetail.module.scss';
 import { fetchPlantsDetail, fetchPlantsLike } from '@/app/api/fetch/plantFetch';
 import { PlantRes } from '@/types/plant';
 import { differenceInDays } from 'date-fns';
-import MyPlantDetail from './PlantDetail';
 import { auth } from '@/auth';
 import { PlantBookmark } from '@/types/bookmark';
 import FollowButton from './FollowButton';
+import Tab from '@/components/Tab';
+import PlantInfo from './PlantInfo';
+import PlantDiray from './PlantDiary';
+import { Metadata, ResolvingMetadata } from 'next';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default async function MyPlantItem({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: { id: string } }, parent: ResolvingMetadata): Promise<Metadata> {
+  const plantId = params.id;
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: 'Plant Detail',
+    openGraph: {
+      title: `Plant Detail`,
+      description: `${plantId}식물 상세 페이지`,
+      url: `/plant/${params.id}`,
+      images: [...previousImages],
+    },
+  };
+}
+
+export default async function MyPlantDetail({ params }: { params: { id: string } }) {
   const session = await auth();
   const item = await fetchPlantsDetail<PlantRes>(params.id);
   const bookmarkData = await fetchPlantsLike<PlantBookmark>(session?.accessToken);
@@ -36,7 +54,7 @@ export default async function MyPlantItem({ params }: { params: { id: string } }
           <FollowButton id={params.id} bookmarkData={bookmarkData} />
         )}
       </div>
-      <MyPlantDetail item={item} />
+      <Tab first={<PlantInfo item={item} user={session} />} second={<PlantDiray item={item} user={session} />} firstSrOnly="식물정보" secondSrOnly="식물다이어리" />
     </div>
   );
 }

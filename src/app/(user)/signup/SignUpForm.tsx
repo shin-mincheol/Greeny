@@ -127,7 +127,9 @@ export default function SignupForm() {
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="phone">전화번호</label>
+        <label htmlFor="phone">
+          전화번호<span>*</span>
+        </label>
         <input
           type="text"
           id="phone"
@@ -144,7 +146,9 @@ export default function SignupForm() {
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="address">주소</label>
+        <label htmlFor="address">
+          주소<span>*</span>
+        </label>
         <input
           type="text"
           id="address"

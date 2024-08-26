@@ -11,7 +11,7 @@ export default async function PostList({ searchParams, usePagination = true }: {
   const posts = data.item;
 
   return (
-    <ul className={styles.ul}>
+    <ul className={styles.post_list}>
       {posts.length > 0 ? posts.map((post) => <PostItem key={post._id} item={post} />) : <NoResult />}
       {usePagination && posts.length > 0 && <Pagination totalPage={data.pagination.totalPages} />}
     </ul>

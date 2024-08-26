@@ -173,7 +173,7 @@ export async function likePost(targetId: string, content: string) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${session?.accessToken}`,
       },
-      body: JSON.stringify({ target_id: Number(targetId), content }),
+      body: JSON.stringify({ target_id: Number(targetId), memo: content }),
     });
     revalidatePath(`/story/community/${targetId}`);
     revalidatePath(`/story/diaries/${targetId}`);

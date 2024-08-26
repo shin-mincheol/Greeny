@@ -1,26 +1,21 @@
 'use server';
 import { auth } from '@/auth';
-import { revalidatePath, revalidateTag } from 'next/cache';
-import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-export async function deleteBookmark(_id: number) {
-  console.log('🚀 ~ deleteUser ~ _id:', _id);
+export async function deleteBookmark(bookmarkId: number, pathToRevalidate: string) {
   const session = await auth();
-  const res = await fetch(SERVER + `/bookmarks/${_id}`, {
+  const res = await fetch(SERVER + `/bookmarks/${bookmarkId}`, {
     method: 'DELETE',
     headers: {
       'client-id': `${DBNAME}`,
       Authorization: `Bearer ${session?.accessToken}`,
     },
   });
-  // TODO: 왜 잘 작동했다가 안 되는지 확인
-  revalidatePath('/profile/user');
-  revalidatePath('/profile/plant');
-  // revalidateTag('user');
-  // redirect('/profile/user');
+  // revalidatePath(`/profile/${_id}/user`);
+  revalidatePath(pathToRevalidate);
   return await res.json();
 }
 
