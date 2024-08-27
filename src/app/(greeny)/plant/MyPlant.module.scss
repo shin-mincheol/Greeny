@@ -53,6 +53,7 @@
         @include flex-vertical(1rem);
         padding: 0.4rem 0;
         box-sizing: border-box;
+        align-items: flex-start;
 
         h3 {
           font-size: 1.6rem;
