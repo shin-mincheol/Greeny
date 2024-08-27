@@ -9,15 +9,16 @@ import { fetchPost } from '@/app/api/fetch/postFetch';
 import SubMenuContainer from './SubMenuContainer';
 import { auth } from '@/auth';
 import { PostRes } from '@/types/post';
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 
 export const revalidate = 0;
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export async function generateMetadata({ params: { id } }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { id } }: { params: { id: string } }, parent: ResolvingMetadata): Promise<Metadata> {
   const post: PostRes = await fetchPost(id);
   const titleEllipsis = post.title.length > 20 ? post.title.slice(0, 20) + '...' : post.title;
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: {
@@ -30,7 +31,7 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
       type: 'article',
       publishedTime: post.createdAt,
       authors: [post.user.name],
-      images: `${SERVER}${post.image[0].path}`,
+      images: post.image[0]?.path ? `${SERVER}${post.image[0].path}` : [...previousImages],
     },
   };
 }
