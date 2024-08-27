@@ -606,13 +606,6 @@ export const initData = async (clientId, nextSeq) => {
         _id: await nextSeq('bookmark'),
         user_id: 1,
         type: 'product',
-        target_id: 13,
-        createdAt: getTime(-3, -60 * 60 * 2),
-      },
-      {
-        _id: await nextSeq('bookmark'),
-        user_id: 1,
-        type: 'product',
         target_id: 10,
         createdAt: getTime(-3, -60 * 60 * 2),
       },
@@ -1058,7 +1051,6 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
-
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -1086,7 +1078,6 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
-
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -1499,37 +1490,6 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
-        product_id: 13,
-        seller_id: 6,
-        title: '감동... 코코 꽃 폈다...',
-        content: '울 코코가 개화했습니다.\n내 새끼 처럼 공 들여서 키웠는데\n꽃까지 피니 너무 좋네요 ㅜㅜ\n잘 커줘서 고마워 코코야',
-        extra: {
-          plantState: '개화',
-          action: '관찰',
-          actionDate: '2024-08-14',
-        },
-        image: [
-          {
-            path: `/files/${clientId}/glecoma_d2.webp`,
-            name: 'glecoma_d2.webp',
-          },
-          {
-            path: `/files/${clientId}/glecoma_d3.webp`,
-            name: 'glecoma_d3.webp',
-          },
-        ],
-        views: 10,
-        user: {
-          _id: 6,
-          name: '새싹이',
-          image: `/files/${clientId}/sprout.webp`,
-        },
-        createdAt: getTime(-2, -60 * 60 * 1),
-        updatedAt: getTime(-1, -60 * 60 * 20),
-      },
-      {
-        _id: await nextSeq('post'),
-        type: 'diary',
         product_id: 8,
         seller_id: 4,
         title: '자란이는 너무 예쁜 꽃이다.',
@@ -1782,6 +1742,37 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('post'),
         type: 'diary',
+        product_id: 13,
+        seller_id: 6,
+        title: '감동... 코코 꽃 폈다...',
+        content: '울 코코가 개화했습니다.\n내 새끼 처럼 공 들여서 키웠는데\n꽃까지 피니 너무 좋네요 ㅜㅜ\n잘 커줘서 고마워 코코야',
+        extra: {
+          plantState: '개화',
+          action: '관찰',
+          actionDate: '2024-08-14',
+        },
+        image: [
+          {
+            path: `/files/${clientId}/glecoma_d2.webp`,
+            name: 'glecoma_d2.webp',
+          },
+          {
+            path: `/files/${clientId}/glecoma_d3.webp`,
+            name: 'glecoma_d3.webp',
+          },
+        ],
+        views: 10,
+        user: {
+          _id: 6,
+          name: '새싹이',
+          image: `/files/${clientId}/sprout.webp`,
+        },
+        createdAt: getTime(-2, -60 * 60 * 1),
+        updatedAt: getTime(-1, -60 * 60 * 20),
+      },
+      {
+        _id: await nextSeq('post'),
+        type: 'diary',
         product_id: 17,
         seller_id: 8,
         title: '후회된다.',
@@ -1887,7 +1878,6 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
-
       {
         _id: await nextSeq('post'),
         type: 'diary',
@@ -1915,7 +1905,6 @@ export const initData = async (clientId, nextSeq) => {
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
       },
-
       //@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 게시글 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       {
         _id: await nextSeq('post'),
