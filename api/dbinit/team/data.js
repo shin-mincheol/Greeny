@@ -1016,7 +1016,7 @@ export const initData = async (clientId, nextSeq) => {
         user: {
           _id: 1,
           name: 'Greeny',
-          image: `/files/${clientId}/leeBadcuk.webp`,
+          image: `/files/${clientId}/greeny.webp`,
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
@@ -1071,7 +1071,7 @@ export const initData = async (clientId, nextSeq) => {
         user: {
           _id: 3,
           name: '금전수 장인',
-          image: `/files${clientId}/jiwon.webp`,
+          image: `/files/${clientId}/jiwon.webp`,
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
@@ -1099,7 +1099,7 @@ export const initData = async (clientId, nextSeq) => {
         user: {
           _id: 1,
           name: 'Greeny',
-          image: `/files${clientId}/leeBadcuk.webp`,
+          image: `/files/${clientId}/greeny.webp`,
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
@@ -1118,8 +1118,8 @@ export const initData = async (clientId, nextSeq) => {
         },
         image: [
           {
-            path: `/files/${clientId}/caladium.webp`,
-            name: 'caladium.webp',
+            path: `/files/${clientId}/begonia_day2.webp`,
+            name: 'begonia_day2.webp',
           },
         ],
         views: 1,
@@ -1566,7 +1566,7 @@ export const initData = async (clientId, nextSeq) => {
         user: {
           _id: 2,
           name: '행운목수',
-          image: `/files${clientId}/mincheol.webp`,
+          image: `/files/${clientId}/mincheol.webp`,
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
@@ -1593,7 +1593,7 @@ export const initData = async (clientId, nextSeq) => {
         user: {
           _id: 1,
           name: 'Greeny',
-          image: `/files/${clientId}/leeBadcuk.webp`,
+          image: `/files/${clientId}/greeny.webp`,
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
@@ -1702,7 +1702,7 @@ export const initData = async (clientId, nextSeq) => {
         user: {
           _id: 1,
           name: 'Greeny',
-          image: `/files/${clientId}/leeBadcuk.webp`,
+          image: `/files/${clientId}/greeny.webp`,
         },
         createdAt: getTime(-2, -60 * 60 * 1),
         updatedAt: getTime(-1, -60 * 60 * 20),
