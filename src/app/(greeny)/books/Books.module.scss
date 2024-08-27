@@ -251,9 +251,10 @@
     width: 1.6rem;
     height: 1.6rem;
     border-radius: 0.35rem;
+    border: 0.1rem solid var(--color-primary);
     background-image: url('/images/CheckBox_nor.svg');
-    background-size: 100% 100%;
-    background-position: 50%;
+    background-size: 1.4rem 1.4rem;
+    background-position: center;
     background-repeat: no-repeat;
 
     &:checked {
