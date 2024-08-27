@@ -44,7 +44,7 @@ export default async function MyPlant() {
 
         <div className={styles.item_info}>
           <h3>{item.name}</h3>
-          <p>{item.name}</p>
+          <p>{item.scientificName}</p>
 
           {currentDay && <span>{diffDays} 일째</span>}
         </div>

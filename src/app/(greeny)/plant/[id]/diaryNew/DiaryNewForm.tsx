@@ -136,27 +136,31 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
 
   //데이터 패치
   const onNewDiary = async (formData: DiaryForm) => {
-    try {
-      const plantForm = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key !== 'attach') {
-          plantForm.append(key, value as string);
-        }
-      });
-      if (formData.attach) {
-        Array.from(formData.attach).forEach((file) => {
-          plantForm.append('attach', file);
+    if (formData.attach.length > 0) {
+      try {
+        const plantForm = new FormData();
+        Object.entries(formData).forEach(([key, value]) => {
+          if (key !== 'attach') {
+            plantForm.append(key, value as string);
+          }
         });
-      }
+        if (formData.attach) {
+          Array.from(formData.attach).forEach((file) => {
+            plantForm.append('attach', file);
+          });
+        }
 
-      const res = await DiaryNew(plantForm, id);
-      // console.log(res);
-      if (res.ok) {
-        alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
-        router.push(`/plant/${id}`);
+        const res = await DiaryNew(plantForm, id);
+        // console.log(res);
+        if (res.ok) {
+          alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
+          router.push(`/plant/${id}`);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      alert('식물 사진은 필수입니다.');
     }
   };
 
