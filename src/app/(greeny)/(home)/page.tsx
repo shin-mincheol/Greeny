@@ -16,8 +16,8 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 export const metadata: Metadata = {
   title: 'Home',
   openGraph: {
-    title: 'Home',
-    description: 'Greeny 메인 페이지',
+    title: 'Greeny',
+    description: '내 식물의 성장 기록과 다른 식물의 여정을 함께하는, 식물 애호가들을 위한 소셜 네트워크',
     images: 'images/MetaImage.png',
     url: '/',
   },

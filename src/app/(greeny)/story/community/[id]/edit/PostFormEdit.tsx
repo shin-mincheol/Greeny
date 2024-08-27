@@ -8,7 +8,7 @@ import { PostRes } from '@/types/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 import { ImageRes } from '@/types/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
@@ -20,6 +20,8 @@ const categories = [
 
 export default function PostFormEdit(props?: { post?: PostRes }) {
   const pathname = usePathname();
+  const router = useRouter();
+  console.log(props);
 
   const originalImage = props?.post?.image;
   const originalImagePath = originalImage?.map((img) => `${SERVER}${img.path}`);
@@ -54,7 +56,8 @@ export default function PostFormEdit(props?: { post?: PostRes }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          alert('구현 예정입니다.');
+          alert('성공! 게시글이 새롭게 단장됐어요! 🎨');
+          router.push(`/story/community/${props?.post?._id}`);
         }}
         className={postStyles.post_form}
       >
@@ -121,7 +124,7 @@ export default function PostFormEdit(props?: { post?: PostRes }) {
         </div>
 
         <button type="submit" className={postStyles.btn_submit}>
-          등록하기
+          수정하기
         </button>
       </form>
     </>
