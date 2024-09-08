@@ -16,16 +16,17 @@ export default function Page({ params }: { params: { cntntsNo: string } }) {
   }, {} as PlantJson);
 
   return (
-    <>
+    <div className={styles.page_container}>
+      <h2 className={styles.title}>
+        <p className={styles.cntntsSj}>{processedPlant.cntntsSj}</p>
+        <span className={styles.plntbneNm}>{processedPlant.plntbneNm}</span>
+      </h2>
+
       <div className={styles.image_wrapper}>
         <Image src={processedPlant.rtnFileUrl} alt="식물 이미지" className={styles.img} fill />
       </div>
 
       <div className={styles.content_wrapper}>
-        <div className={styles.title}>
-          <p>{processedPlant.cntntsSj}</p>
-          <span>{processedPlant.plntbneNm}</span>
-        </div>
         <div className={styles.detail}>
           <table>
             <tbody>
@@ -97,6 +98,6 @@ export default function Page({ params }: { params: { cntntsNo: string } }) {
           </table>
         </div>
       </div>
-    </>
+    </div>
   );
 }
