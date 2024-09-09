@@ -1,15 +1,13 @@
 @import '@styles/mixin';
 
-//
-
 @media (max-width: 48rem) {
-  .layout_main_search {
+  .search_container {
     margin: 2rem 0;
 
     .heading_container {
       display: none;
     }
-    .main_search {
+    .search_form {
       @include flex-horizontal(1.2rem);
       justify-content: space-between;
 
@@ -23,9 +21,9 @@
         color: var(--color-gray-30);
         font-size: 1.2rem;
       }
-      .btn_group {
+      .btn_wrapper {
         @include flex-horizontal(1rem);
-        .btn_submit {
+        .search_btn {
           @include flex-horizontal(0);
           justify-content: center;
           align-items: center;
@@ -35,7 +33,7 @@
           border-radius: 1rem;
           cursor: pointer;
         }
-        .btn_btn {
+        .filter_btn {
           @include flex-horizontal(0);
           justify-content: center;
           align-items: center;
@@ -51,37 +49,6 @@
     }
   }
 
-  .content_list {
-    @include flex-vertical(2rem);
-  }
-
-  .item_wrapper {
-    @include flex-horizontal(1.8rem);
-    align-items: center;
-
-    .item_image_wrapper {
-      width: 9rem;
-      height: 9rem;
-      img {
-        border-radius: 2rem;
-      }
-    }
-    .item_content {
-      @include flex-vertical(1rem);
-      justify-content: space-between;
-      align-items: flex-start;
-
-      p {
-        font-weight: var(--font-semibold);
-        font-size: 1.4rem;
-      }
-      span {
-        font-weight: var(--font-medium);
-        font-size: 1.2rem;
-      }
-    }
-  }
-
   .inputs_wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -93,7 +60,7 @@
   .page_container {
     @include flex-vertical(0rem);
     align-items: center;
-    .layout_main_search {
+    .search_container {
       .heading_container {
         margin-top: 10rem;
         .heading {
@@ -102,7 +69,7 @@
         }
       }
 
-      .main_search {
+      .search_form {
         @include flex-horizontal(1.2rem);
         justify-content: space-between;
         margin: 2rem 0;
@@ -117,12 +84,12 @@
           color: var(--color-gray-30);
           font-size: 1.2rem;
         }
-        .btn_group {
+        .btn_wrapper {
           @include flex-horizontal(1rem);
           justify-content: center;
           align-items: center;
 
-          .btn_submit {
+          .search_btn {
             @include flex-horizontal(0);
             justify-content: center;
             align-items: center;
@@ -132,7 +99,7 @@
             border-radius: 1rem;
             cursor: pointer;
           }
-          .btn_btn {
+          .filter_btn {
             @include flex-horizontal(0);
             justify-content: center;
             align-items: center;
@@ -143,42 +110,6 @@
             border: 0.1rem solid var(--color-primary);
             box-sizing: border-box;
             cursor: pointer;
-          }
-        }
-      }
-    }
-
-    .content_list {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 2rem;
-
-      li {
-        .item_wrapper {
-          @include flex-vertical(0);
-          justify-content: space-between;
-          gap: 1.6rem;
-          .item_image_wrapper {
-            img {
-              width: 16rem;
-              height: 16rem;
-              border-radius: 2rem;
-            }
-          }
-
-          .item_content {
-            @include flex-vertical(1rem);
-            justify-content: space-between;
-            align-items: flex-start;
-
-            p {
-              font-weight: var(--font-semibold);
-              font-size: 1.4rem;
-            }
-            span {
-              font-weight: var(--font-medium);
-              font-size: 1.2rem;
-            }
           }
         }
       }

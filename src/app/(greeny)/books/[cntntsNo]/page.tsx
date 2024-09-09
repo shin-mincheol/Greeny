@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './[cntntsNo].module.scss';
+import styles from './page.module.scss';
 import plantList from '@/app/data/plantList';
 import { PlantJson } from '@/types/plant';
 
