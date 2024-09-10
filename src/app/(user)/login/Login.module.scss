@@ -1,37 +1,67 @@
 @import '@styles/mixin';
 
 .login_wrapper {
-  width: 100%;
-  height: 100svh;
+  width: 50%;
+  height: 100vh;
   @include flex-vertical(5rem);
   align-items: center;
+  margin-left: auto;
   justify-content: center;
-  margin: -7.4rem 0 0;
+  margin-top: -16rem;
+  margin-right: -3.2rem;
+
+  @include mobile {
+    width: 100%;
+    margin-top: -7.4rem;
+    margin-right: 0;
+  }
 
   form {
+    max-width: 50rem;
     width: 100%;
     @include flex-vertical(3rem);
     align-items: center;
 
+    @include mobile {
+      max-width: 100%;
+    }
+
     .input_container {
       width: 100%;
-      @include flex-vertical(0.5rem);
+      @include flex-vertical(1rem);
 
       label {
         margin-bottom: 0.5rem;
         color: var(--color-primary);
         font-weight: var(--font-semibold);
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 1.6rem;
+        }
       }
 
       p {
         color: var(--color-error);
         font-weight: var(--font-semibold);
+        font-size: 1.4rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 1.2rem;
+        }
       }
     }
 
     .signupText {
       color: var(--color-black);
+      font-size: 1.6rem;
+      transition: all 0.3s;
+
+      @include mobile {
+        font-size: 1.4rem;
+      }
       a {
         color: var(--color-black);
         text-decoration: underline;
@@ -50,6 +80,9 @@
       justify-content: center;
       align-items: center;
       color: var(--color-gray-10);
+      flex-basis: 0;
+      flex-shrink: 0;
+      flex-grow: 1;
     }
 
     p::after,
@@ -57,22 +90,34 @@
       content: '';
       display: block;
       height: 0.1rem;
-      width: 8.6rem;
       background-color: var(--color-gray-30);
+      width: 16rem;
+      transition: all;
+
+      @include mobile {
+        width: 8.6rem;
+      }
     }
 
     .socail_list {
-      @include flex-horizontal(1rem);
+      @include flex-horizontal(1.4rem);
     }
   }
 }
 .login_wrapper:after {
   content: '';
   display: block;
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-image: url('/images/LoginBackground.png');
   background-repeat: no-repeat;
-  opacity: 0.2;
+  background-size: 50% 100%;
+  opacity: 0.5;
   z-index: -1;
+  transition: all 0.3s;
+
+  @include mobile {
+    opacity: 0.2;
+    background-size: cover;
+  }
 }
