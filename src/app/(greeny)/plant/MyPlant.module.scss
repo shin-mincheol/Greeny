@@ -1,8 +1,10 @@
 @import '@styles/mixin';
 
 .plant_wrapper {
+  max-width: 102.4rem;
   width: 100%;
-  @include flex-vertical(3rem);
+  margin: 5rem auto;
+  @include flex-vertical(5rem);
 
   .contents_head {
     @include flex-horizontal(0);
@@ -10,40 +12,70 @@
     justify-content: space-between;
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 3.2rem;
       font-weight: var(--font-semibold);
       color: var(--color-primary);
+      transition: all 0.3s;
+
+      @include mobile {
+        font-size: 1.8rem;
+      }
     }
 
-    .btn_box {
+    .plant_Add_btn {
+      border-radius: 0.8rem;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 0.6rem 1.2rem;
+      box-sizing: border-box;
       @include flex-horizontal(1rem);
+      align-items: center;
 
-      .button_fill {
-        width: 5rem;
-        height: 3rem;
-        background-image: url('/images/PlantAddIcon.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 0.8rem;
-        background-color: var(--color-primary);
+      @include mobile {
+        span {
+          display: none;
+        }
+      }
+
+      .btn_cover {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
       }
     }
   }
 
   .contents_main {
-    @include flex-vertical(3rem);
+    width: 100%;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    transition: all 0.3s;
 
     .contents_item {
-      @include flex-horizontal(1.8rem);
+      width: 100%;
+      @include flex-vertical(1.8rem);
+
+      @include mobile {
+        align-items: center;
+        flex-direction: row;
+      }
+
       .item_cover {
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 10rem;
-        height: 10rem;
         overflow: hidden;
+        width: 100%;
+        height: 16rem;
         border-radius: 1rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          width: 14rem;
+          height: 14rem;
+        }
         img {
           object-fit: cover;
         }
@@ -56,17 +88,28 @@
         align-items: flex-start;
 
         h3 {
-          font-size: 1.6rem;
           font-weight: var(--font-semibold);
+          font-size: 1.8rem;
+          transition: all 0.3s;
+
+          @include mobile {
+            font-size: 1.6rem;
+          }
         }
 
         span {
-          margin-top: auto;
+          margin-top: 1.6rem;
           background-color: var(--color-secondary-dark);
-          padding: 0.5rem 1.2rem;
           text-align: center;
           color: var(--color-primary);
           border-radius: 2rem;
+          padding: 0.8rem 1.6rem;
+          font-size: 1.4rem;
+
+          @include mobile {
+            font-size: 1.2rem;
+            padding: 0.5rem 1.2rem;
+          }
         }
       }
     }
