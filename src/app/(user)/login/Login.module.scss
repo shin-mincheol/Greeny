@@ -5,14 +5,11 @@
   height: 100vh;
   @include flex-vertical(5rem);
   align-items: center;
-  margin-left: auto;
   justify-content: center;
-  margin-top: -16rem;
-  margin-right: -3.2rem;
+  margin: -8rem -3.2rem -5rem auto;
 
   @include mobile {
     width: 100%;
-    margin-top: -7.4rem;
     margin-right: 0;
   }
 

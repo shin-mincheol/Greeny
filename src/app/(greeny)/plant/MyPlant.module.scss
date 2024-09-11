@@ -3,7 +3,7 @@
 .plant_wrapper {
   max-width: 102.4rem;
   width: 100%;
-  margin: 5rem auto;
+  margin: 5rem auto 0;
   @include flex-vertical(5rem);
 
   .contents_head {
@@ -47,13 +47,13 @@
 
   .contents_main {
     width: 100%;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
     transition: all 0.3s;
 
     .contents_item {
-      width: 100%;
+      min-width: 24rem;
       @include flex-vertical(1.8rem);
 
       @include mobile {

@@ -2,14 +2,12 @@
 
 .plantDetail_wrapper {
   @include flex-vertical(3rem);
-  box-shadow: inset 0 0 10px saddlebrown;
   max-width: 102.4rem;
   width: 100%;
-  margin: 13rem auto 5rem;
+  margin: 5rem auto;
 
   @include mobile {
     margin-top: 0;
-    margin-bottom: 10rem;
   }
 
   .plantContentPc {
@@ -176,10 +174,14 @@
 
   .contents_wrapper {
     margin-top: 3rem;
-    @include flex-vertical(3rem);
+    @include flex-vertical(5rem);
     align-items: center;
-    box-sizing: border-box;
-    padding: 0 2.4rem;
+
+    @include mobile {
+      box-sizing: border-box;
+      padding: 0 2.4rem;
+      gap: 3rem;
+    }
 
     .plant_head {
       width: 100%;
@@ -267,12 +269,18 @@
 
       pre {
         width: 100%;
-        line-height: 2rem;
-        font-size: 1.2rem;
-        padding: 1.6rem;
+        line-height: 2.4rem;
+        padding: 2rem;
         box-sizing: border-box;
         border-radius: 1rem;
         background-color: #ffffe0;
+        font-size: 1.6rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          line-height: 2rem;
+          font-size: 1.4rem;
+        }
       }
     }
 
@@ -282,29 +290,56 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      font-size: 1.4rem;
+
       .diary_add {
-        display: inline-block;
-        width: 4rem;
-        height: 3rem;
-        border-radius: 1rem;
+        @include flex-horizontal(1rem);
+        align-items: center;
         background-color: var(--color-primary);
-        background-image: url('/images/DiaryAddIcon.svg');
-        background-repeat: no-repeat;
-        background-position: center;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        color: var(--color-white);
+        transition: all 0.3s;
+
+        @include mobile {
+          padding: 1rem 1.2rem;
+          span {
+            display: none;
+          }
+        }
       }
     }
 
     .diary_list {
       width: 100%;
-      @include flex-vertical(2rem);
-      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      transition: all 0.3s;
+      justify-content: center;
+
+      &:has(li:nth-child(3)) {
+        justify-content: flex-start;
+
+        @include mobile {
+          justify-content: center;
+        }
+      }
 
       .diaryNull:hover {
         background-color: var(--color-secondary-light);
       }
       .diaryNull {
+        width: 100%;
         text-align: center;
-        line-height: 2rem;
+        line-height: 2.4rem;
+        font-size: 1.6rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          line-height: 2rem;
+          font-size: 1.2rem;
+        }
         span {
           color: var(--color-primary);
           font-weight: var(--font-semibold);
@@ -318,18 +353,25 @@
         cursor: pointer;
         background-color: var(--color-secondary-light);
         border: 1px solid var(--color-secondary-dark);
-        padding: 2rem;
+        padding: 2.4rem;
         box-sizing: border-box;
-        width: 100%;
+        min-width: 32.8rem;
         border-radius: 2rem;
         transition: all 0.3s;
+
         .diary_item {
           @include flex-vertical(3rem);
           align-items: center;
 
           .item_head {
             width: 100%;
-            @include flex-vertical(1rem);
+            @include flex-vertical(1.4rem);
+            font-size: 1.6rem;
+            transition: all 0.3s;
+
+            @include mobile {
+              font-size: 1.2rem;
+            }
 
             .item_info {
               @include flex-horizontal(1rem);
@@ -344,10 +386,16 @@
             @include flex-horizontal(0);
             position: relative;
             align-items: center;
-            width: 25rem;
-            height: 20rem;
+            width: 26rem;
+            height: 25rem;
             border-radius: 1rem;
             overflow: hidden;
+            transition: all 0.3s;
+
+            @include mobile {
+              width: 25rem;
+              height: 20rem;
+            }
 
             img {
               object-fit: cover;
@@ -356,12 +404,33 @@
 
           .item_desc {
             width: 100%;
-            line-height: 1.6rem;
-            font-size: 1.2rem;
+            line-height: 2.4rem;
+            font-size: 1.6rem;
+            transition: all 0.3s;
+
+            @include mobile {
+              line-height: 2rem;
+              font-size: 1.2rem;
+            }
           }
         }
       }
     }
+  }
+}
+
+.plant_delete {
+  @include flex-horizontal(1rem);
+  border: 0.1rem solid var(--color-primary);
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  color: var(--color-primary);
+  transition: all 0.3s;
+  margin-left: auto;
+
+  @include mobile {
+    display: none;
   }
 }
 

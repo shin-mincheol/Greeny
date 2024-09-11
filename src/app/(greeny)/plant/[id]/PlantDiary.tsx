@@ -9,7 +9,11 @@ import 'react-calendar/dist/Calendar.css';
 import { PlantDetailRes, PlantRes } from '@/types/plant';
 import { format } from 'date-fns';
 import scheduleIcon from '@images/CaleandarIcon.svg';
+import diaryAdd from '@images/DiaryAddIcon.svg';
+import plantdelete from '@images/DeleteIcon.svg';
 import { Session } from 'next-auth';
+import { plantsDelete } from '@/app/api/actions/plantAction';
+import { useRouter } from 'next/navigation';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
@@ -19,6 +23,7 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
   const [selectData, setSelectData] = useState<PlantDetailRes[] | undefined>();
   const [scheduleData, setSscheduleData] = useState<PlantDetailRes[] | undefined>();
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
 
   const fetchPlantsDiary = async (productId: number | undefined, selectDay: string, fetchAll: boolean) => {
     let url = `${SERVER}/posts/?type=diary`;
@@ -111,13 +116,21 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
     }
   };
 
+  const handleDelete = () => {
+    if (confirm(`"정말 떠나보낼 거예요?" \n${item.name}이(가) 마지막으로 잎사귀를 흔들고 있어요... 🍃`) == true) {
+      plantsDelete(item._id);
+      router.push('/plant');
+    }
+  };
+
   return (
     <div className={styles.contents_wrapper}>
       <div className={styles.diary_head}>
         <h3>식물 일기</h3>
         {Number(user?.user?.id) === item.seller_id && (
           <Link href={`/plant/${item._id}/diaryNew`} className={styles.diary_add}>
-            <span className="hidden">식물 일기 추가</span>
+            <Image src={diaryAdd} alt="다이어리 추가하기" width={20} height={20} />
+            <span>일기 쓰기</span>
           </Link>
         )}
       </div>
@@ -131,6 +144,13 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
       />
 
       <ul className={styles.diary_list}>{diaryList}</ul>
+
+      {Number(user?.user?.id) === item.seller_id && (
+        <button type="button" onClick={handleDelete} className={styles.plant_delete}>
+          <Image src={plantdelete} alt="식물 삭제하기" width={20} height={20} />
+          <span>식물 삭제</span>
+        </button>
+      )}
     </div>
   );
 }

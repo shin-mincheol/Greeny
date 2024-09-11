@@ -52,7 +52,7 @@ export default async function MyPlantDetail({ params }: { params: { id: string }
 
         {Number(session?.user?.id) === item.seller_id && (
           <div className={styles.plantDetail_edit}>
-            <Image src={plantEdit} alt="식물 수정 버튼" />
+            <Image src={plantEdit} alt="식물 수정 버튼" width={20} height={20} />
             <Link href={`/plant/${item._id}/edit`}>정보 수정</Link>
           </div>
         )}
