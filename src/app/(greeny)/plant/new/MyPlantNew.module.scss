@@ -89,6 +89,7 @@
         font-weight: var(--font-semibold);
         font-size: 2rem;
         width: 11rem;
+        flex-shrink: 0;
         transition: all 0.3s;
 
         @include mobile {
