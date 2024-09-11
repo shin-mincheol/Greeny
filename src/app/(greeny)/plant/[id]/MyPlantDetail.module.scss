@@ -1,52 +1,180 @@
 @import '@styles/mixin';
 
 .plantDetail_wrapper {
-  @include flex-vertical(2rem);
+  @include flex-vertical(3rem);
+  box-shadow: inset 0 0 10px saddlebrown;
+  max-width: 102.4rem;
+  width: 100%;
+  margin: 13rem auto 5rem;
 
-  .plant_photo {
-    @include flex-horizontal(0);
-    position: relative;
-    margin: -2.4rem -2.4rem 0;
-    align-items: center;
-    justify-content: center;
-    height: 30rem;
-    overflow: hidden;
-    img {
-      object-fit: cover;
+  @include mobile {
+    margin-top: 0;
+    margin-bottom: 10rem;
+  }
+
+  .plantContentPc {
+    @include flex-vertical(3rem);
+
+    @include mobile {
+      display: none;
     }
   }
 
-  .plant_name {
-    @include flex-vertical(1rem);
+  .plantContentMo {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
+  }
+
+  .plantDetail_head {
+    @include flex-horizontal(0);
+    justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
-    text-align: center;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+
+    @include mobile {
+      display: none;
+    }
 
     h2 {
-      font-size: 1.8rem;
+      color: var(--color-primary);
       font-weight: var(--font-semibold);
+      font-size: 3.2rem;
     }
 
-    span {
-      color: var(--color-gray-10);
-    }
-
-    p {
-      width: 100%;
-      color: var(--color-white);
-      text-align: center;
-      padding: 1.4rem 0;
+    .plantDetail_edit {
+      @include flex-horizontal(1rem);
+      align-items: center;
+      background-color: var(--color-primary);
+      padding: 1rem 2rem;
       border-radius: 1rem;
-      background-color: #a7c4a0;
-      box-sizing: border-box;
-    }
-
-    .plant_with {
-      margin-top: 1.3rem;
+      color: var(--color-white);
     }
   }
 
-  .layout_wrapper {
+  .plant {
+    @include flex-horizontal(5rem);
+    align-items: center;
+
+    @include mobile {
+      gap: 3rem;
+      flex-direction: column;
+    }
+
+    .plant_photo {
+      position: relative;
+      border-radius: 1rem;
+      width: 40rem;
+      height: 32rem;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      @include mobile {
+        margin-left: -3.2rem;
+        border-radius: 0;
+        width: calc(100% + (2.4rem + 2.4rem));
+      }
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    .plant_info {
+      width: 100%;
+      @include flex-vertical(2rem);
+
+      .plant_name {
+        @include flex-vertical(1.4rem);
+        box-sizing: border-box;
+        font-size: 2rem;
+        font-weight: var(--font-semibold);
+
+        h2 {
+          display: none;
+        }
+
+        @include mobile {
+          text-align: center;
+          align-items: center;
+
+          h2 {
+            display: block;
+          }
+
+          h3 {
+            display: none;
+          }
+        }
+
+        span {
+          font-weight: var(--font-regular);
+          font-size: 1.8rem;
+
+          @include mobile {
+            color: var(--color-gray-10);
+          }
+        }
+      }
+
+      .plant_gardeningPc {
+        width: 100%;
+        @include flex-vertical(2rem);
+
+        @include mobile {
+          display: none;
+        }
+
+        h3 {
+          font-size: 2rem;
+          font-weight: var(--font-semibold);
+        }
+
+        ul {
+          width: 100%;
+          padding: 2rem 4rem;
+          box-sizing: border-box;
+          border-radius: 1rem;
+          background-color: var(--color-secondary-light);
+          @include flex-vertical(1.8rem);
+
+          li {
+            @include flex-horizontal(2rem);
+            span {
+              width: 5rem;
+              font-weight: var(--font-semibold);
+              font-size: 1.6rem;
+            }
+            p {
+              font-size: 1.6rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .plant_with {
+    margin-top: 1.3rem;
+    width: 100%;
+    color: var(--color-white);
+    text-align: center;
+    padding: 1.8rem 0;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    background-color: #a7c4a0;
+    box-sizing: border-box;
+
+    @include mobile {
+      padding: 1.4rem 0;
+      font-size: 1.4rem;
+    }
+  }
+
+  .contents_wrapper {
     margin-top: 3rem;
     @include flex-vertical(3rem);
     align-items: center;
@@ -95,9 +223,14 @@
     }
 
     // 식물 정보 css
-    .plant_gardening {
-      width: 100%;
-      @include flex-vertical(1rem);
+    .plant_gardeningMo {
+      display: none;
+
+      @include mobile {
+        display: block;
+        width: 100%;
+        @include flex-vertical(1rem);
+      }
       ul {
         width: 100%;
         padding: 1.6rem 2rem;
@@ -120,11 +253,16 @@
     }
 
     h3 {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: var(--font-semibold);
+      transition: all 0.3s;
+
+      @include mobile {
+        font-size: 1.6rem;
+      }
     }
     .plant_tips {
-      @include flex-vertical(1rem);
+      @include flex-vertical(2rem);
       width: 100%;
 
       pre {
@@ -230,6 +368,7 @@
 .followBtn,
 .unFollowBtn {
   width: 100%;
+  text-align: center;
   padding: 1rem;
   background-color: #a7c4a0;
   border-radius: 10rem;

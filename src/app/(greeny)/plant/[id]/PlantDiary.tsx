@@ -112,7 +112,7 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
   };
 
   return (
-    <div className={styles.layout_wrapper}>
+    <div className={styles.contents_wrapper}>
       <div className={styles.diary_head}>
         <h3>식물 일기</h3>
         {Number(user?.user?.id) === item.seller_id && (

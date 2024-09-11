@@ -6,10 +6,10 @@
   min-height: 100vh;
   padding: 0 3.2rem;
   box-sizing: border-box;
+  margin: auto;
 
   @include mobile {
     @include flex-vertical(0);
-    margin: auto;
     overflow: hidden;
     position: relative;
     min-height: 100vh;
@@ -19,8 +19,8 @@
 
   .bannerList {
     display: flex;
-    width: calc(100% + (2.4rem + 2.4rem));
-    margin-left: -2.4rem;
+    width: calc(100% + (3.2rem + 3.2rem));
+    margin-left: -3.2rem;
     height: 40rem;
 
     @for $i from 1 through 4 {
