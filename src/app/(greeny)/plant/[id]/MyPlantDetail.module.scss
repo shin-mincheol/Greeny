@@ -111,6 +111,7 @@
         span {
           font-weight: var(--font-regular);
           font-size: 1.8rem;
+          transition: all 0.3s;
 
           @include mobile {
             color: var(--color-gray-10);

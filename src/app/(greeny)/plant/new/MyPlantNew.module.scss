@@ -1,26 +1,56 @@
 @import '@styles/mixin';
 
 .plantNew_wrapper {
+  max-width: 102.4rem;
   width: 100%;
+  margin: 5rem auto;
   @include flex-vertical();
   align-items: center;
   justify-content: center;
 
   form {
     width: 100%;
-    @include flex-vertical(3rem);
+    @include flex-vertical(5rem);
     align-items: center;
 
     h1 {
-      font-size: 2rem;
+      font-size: 3rem;
+      margin-right: auto;
       font-weight: var(--font-bold);
       color: var(--color-primary);
+      transition: all 0.3s;
+
+      @include mobile {
+        margin-right: 0;
+        font-size: 2rem;
+      }
+    }
+
+    .layout_wrapper {
+      width: 100%;
+      @include flex-horizontal(5rem);
+      align-items: center;
+
+      @include mobile {
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .subLayout_wrapper {
+        @include flex-vertical(5rem);
+        width: 100%;
+      }
     }
 
     .file_container {
-      width: 100%;
-      @include flex-vertical(0.5rem);
-      align-items: center;
+      @include flex-vertical(1.4rem);
+      transition: all 0.3s;
+      align-items: flex-start;
+
+      @include mobile {
+        width: 100%;
+        align-items: center;
+      }
 
       h3 {
         text-align: left;
@@ -28,10 +58,24 @@
         margin-bottom: 0.5rem;
         color: var(--color-black);
         font-weight: var(--font-semibold);
-        font-size: 1.6rem;
+        font-size: 2rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 1.6rem;
+        }
+
         span {
           color: var(--color-error);
         }
+      }
+    }
+
+    .input_container.type_flex {
+      flex-direction: row;
+
+      @include mobile {
+        flex-direction: column;
       }
     }
 
@@ -43,7 +87,14 @@
         margin-bottom: 0.5rem;
         color: var(--color-black);
         font-weight: var(--font-semibold);
-        font-size: 1.6rem;
+        font-size: 2rem;
+        width: 11rem;
+        transition: all 0.3s;
+
+        @include mobile {
+          width: 100%;
+          font-size: 1.6rem;
+        }
 
         span {
           color: var(--color-error);
@@ -52,24 +103,35 @@
 
       .infoBox {
         width: 100%;
+        @include flex-vertical(1.4rem);
         padding: 1.6rem 2rem;
         box-sizing: border-box;
         border-radius: 1rem;
         background-color: var(--color-secondary-light);
 
         .infoItem {
-          @include flex-horizontal(1rem);
+          @include flex-horizontal(1.4rem);
           align-items: center;
+          font-size: 1.6rem;
+          transition: all 0.3s;
+
+          @include mobile {
+            font-size: 1.4rem;
+          }
+
           .infoTit {
             @include flex-horizontal(0);
             justify-content: space-between;
-            width: 5rem;
-            font-size: 1.4rem;
+            width: 8rem;
             font-weight: var(--font-semibold);
+            transition: all 0.3s;
             flex-shrink: 0;
+
+            @include mobile {
+              width: 5rem;
+            }
           }
           .readInput {
-            // box-shadow: inset 0 0 10px saddlebrown;
             background-color: transparent;
             border: none;
           }
@@ -90,14 +152,22 @@
       }
     }
   }
+
   .photo_cover {
     cursor: pointer;
     position: relative;
-    width: 12rem;
-    height: 12rem;
+    width: 40rem;
+    height: 32rem;
     overflow: hidden;
     border-radius: 2rem;
-    border: 0.1rem solid var(--color-secondary-dark);
+    transition: all 0.3s;
+    flex-shrink: 0;
+
+    @include mobile {
+      width: 16rem;
+      height: 16rem;
+    }
+
     img {
       object-fit: cover;
     }
