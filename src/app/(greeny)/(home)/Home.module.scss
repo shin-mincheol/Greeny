@@ -2,18 +2,15 @@
 
 .main {
   @include flex-vertical(0);
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   padding: 0 3.2rem;
   box-sizing: border-box;
   margin: 8rem auto 0;
 
   @include mobile {
-    @include flex-vertical(0);
-    overflow: hidden;
-    position: relative;
-    min-height: 100vh;
     padding: 3rem 2.4rem;
-    box-sizing: border-box;
     margin-top: 0;
   }
 
