@@ -1,20 +1,50 @@
 @import '@styles/mixin';
 
-.layout_wrapper {
+.headPc_wrapper {
   position: fixed;
-  z-index: 10;
-  max-width: 36rem;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 10;
   width: 100%;
-  height: 5rem;
-  overflow: hidden;
-  margin: auto;
-  box-shadow: 0 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.2);
-  padding: 0 2.4rem;
-  box-sizing: border-box;
-  background-color: var(--color-secondary-light);
+  background-color: var(--color-white);
   @include flex-horizontal(0);
+  justify-content: space-between;
   align-items: center;
+  padding: 0 3.2rem;
+  box-sizing: border-box;
+  height: 8rem;
+  align-items: center;
+  box-shadow: 0 0.3rem 0.7rem 0 rgba(0, 0, 0, 0.3);
+
+  @include mobile {
+    display: none;
+  }
+
+  .nav {
+    @include flex-horizontal(2.4rem);
+    font-size: 1.8rem;
+
+    .nav_item.login {
+      padding: 0.6rem 1.6rem;
+      color: var(--color-white);
+      border-radius: 3rem;
+      background-color: var(--color-primary);
+    }
+  }
+}
+.headMo_wrapper {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--color-secondary-light);
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    z-index: 10;
+    transform: translateX(-50%);
+    height: 5rem;
+    padding: 0 2.4rem;
+  }
 }

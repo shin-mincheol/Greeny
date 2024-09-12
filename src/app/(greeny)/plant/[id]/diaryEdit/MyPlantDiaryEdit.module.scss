@@ -146,7 +146,7 @@
 .selectBox {
   position: relative;
   width: 100%;
-  height: 4rem;
+  height: 5rem;
   border-radius: 0.4rem;
   border: 0.1rem solid var(--color-gray-50);
   box-sizing: border-box;
@@ -157,6 +157,11 @@
   @include flex-horizontal;
   align-items: center;
   padding-left: 1rem;
+  transition: all 0.3s;
+
+  @include mobile {
+    height: 4rem;
+  }
 
   .select {
     width: 100%;
@@ -165,7 +170,7 @@
     z-index: 5;
     box-shadow: 0 0.2rem 0.5rem rgba($color: #000000, $alpha: 0.3);
     position: absolute;
-    top: 5rem;
+    top: 6rem;
     left: 0;
     background-color: var(--color-white);
     border-radius: 1rem;
@@ -175,7 +180,7 @@
     .dropItem {
       cursor: pointer;
       width: 100%;
-      padding: 1rem 1.2rem;
+      padding: 1.2rem;
     }
 
     .dropItem:hover {

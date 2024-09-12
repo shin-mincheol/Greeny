@@ -23,7 +23,7 @@ export default async function MyPlantDiaryEdit({ params }: { params: { id: strin
   const item = await fetchPlantsDetail<PlantRes>(params.id);
 
   return (
-    <div className={styles.plantNew_wrapper}>
+    <div className={styles.plantEdit_wrapper}>
       <MyPlantEditForm id={params.id} item={item} />
     </div>
   );

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './MyPlant.module.scss';
 import Link from 'next/link';
+import addPlant from '@images/PlantAddIcon.svg';
 import { PlantRes } from '@/types/plant';
 import { auth } from '@/auth';
 import { differenceInDays } from 'date-fns';
@@ -57,11 +58,12 @@ export default async function MyPlant() {
       <div className={styles.contents_head}>
         <h2>My Plant</h2>
 
-        <div className={styles.btn_box}>
-          <Link href="/plant/new" className={styles.button_fill}>
-            <span className="hidden">추가</span>
-          </Link>
-        </div>
+        <Link href="/plant/new" className={styles.plant_Add_btn}>
+          <div className={styles.btn_cover}>
+            <Image src={addPlant} alt="식물 추가 버튼" fill sizes="100%" />
+          </div>
+          <span>식물 추가</span>
+        </Link>
       </div>
 
       <div className={styles.contents_main}>{myPlantList}</div>
