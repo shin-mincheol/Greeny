@@ -1,3 +1,4 @@
+import styles from '@greeny/story/Community.module.scss';
 import PageHeading from '@greeny/story/PageHeading';
 import PostList from '@greeny/story/PostList';
 import SearchAndWrite from '@greeny/story/community/SearchAndWrite';
@@ -14,8 +15,10 @@ export async function generateMetadata({ searchParams: { keyword } }: { searchPa
 export default function Community({ searchParams }: { searchParams: { category: string; keyword: string; page: string } }) {
   return (
     <>
-      <PageHeading text="커뮤니티" href="/story/community" />
-      <SearchAndWrite />
+      <div className={styles.title_search_container}>
+        <PageHeading text="커뮤니티" href="/story/community" />
+        <SearchAndWrite />
+      </div>
       <Categories />
       <PostList searchParams={searchParams} />
     </>

@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import { PlantDetailRes } from '@/types/plant';
+import { PlantRes } from '@/types/plant';
 import { DiaryRes, PostComment, PostRes } from '@/types/post';
 import { CoreErrorRes, MultiItem, SingleItem } from '@/types/response';
 
@@ -79,7 +79,7 @@ export async function fetchReply(id: string) {
   return resJson.item;
 }
 
-export async function getPlantBookmarkId(plantId: string) {
+export async function fetchPlant(plantId: string) {
   const url = `${SERVER}/products/${plantId}`;
   const res = await fetch(url, {
     headers: {
@@ -87,10 +87,10 @@ export async function getPlantBookmarkId(plantId: string) {
       ...(await getAuthHeader()),
     },
   });
-  const resJson: SingleItem<PlantDetailRes> | CoreErrorRes = await res.json();
+  const resJson: SingleItem<PlantRes> | CoreErrorRes = await res.json();
   if (!resJson.ok) throw new Error(resJson.message);
 
-  return resJson.item.myBookmarkId;
+  return resJson.item;
 }
 
 async function getAuthHeader() {
