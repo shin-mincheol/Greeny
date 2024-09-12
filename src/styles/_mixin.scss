@@ -21,3 +21,9 @@
   font-weight: $weight;
   letter-spacing: $size * -0.03;
 }
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
