@@ -1,5 +1,4 @@
 import { auth } from '@/auth';
-import styles from './Edit.module.scss';
 import EditForm from './EditForm';
 import { redirect } from 'next/navigation';
 import { CoreErrorRes, SingleItem } from '@/types/response';
@@ -31,9 +30,5 @@ export default async function Page() {
   });
   const resJson: SingleItem<UserInfo> | CoreErrorRes = await res.json();
   if (!resJson.ok) throw new Error(resJson.message);
-  return (
-    <div className={styles.edit_wrapper}>
-      <EditForm user={resJson.item} />
-    </div>
-  );
+  return <EditForm user={resJson.item} />;
 }

@@ -1,4 +1,5 @@
 'use client';
+import styles from './DeleteButton.module.scss';
 import { useTransition } from 'react';
 import { deleteBookmark } from '@/app/api/actions/followAction';
 import { redirect } from 'next/navigation';
@@ -17,16 +18,5 @@ export default function DeleteButton({ _id, userId }: { _id: number; userId: str
     });
   };
 
-  const style = {
-    width: '2.8rem',
-    height: '2.8rem',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    borderRadius: '1rem',
-    backgroundImage: 'url(/images/FollowerDelete.svg)',
-    border: isPending ? 'var(--color-primary-disabled)' : 'var(--color-primary)',
-    backgroundColor: isPending ? 'var(--color-primary-disabled)' : 'var(--color-primary)',
-  };
-
-  return <button type="button" style={style} onClick={handleClick} disabled={isPending}></button>;
+  return <button type="button" className={styles.btn} onClick={handleClick} disabled={isPending}></button>;
 }

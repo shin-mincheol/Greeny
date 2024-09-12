@@ -1,6 +1,6 @@
 import styles from './Filter.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import { FilterValues } from './page';
+import { FilterValues } from './UI';
 
 export default function Filter({ onClose, onSubmit }: { onClose: () => void; onSubmit: (data: FilterValues) => void }) {
   const { control, handleSubmit } = useForm<FilterValues>({
@@ -17,12 +17,12 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
     onSubmit(formData);
   };
   return (
-    <div className={styles.filter_wrapper}>
-      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+    <div className={styles.filter_container}>
+      <form className={styles.filter_wrapper} onSubmit={handleSubmit(submitHandler)}>
         <div className={styles.filter_group}>
           <div className={styles.plant_type}>
-            <p>식물의 종류를 선택해주세요.</p>
-            <div className={styles.label_wrapper}>
+            <p className={styles.question_title}>식물의 종류를 선택해주세요.</p>
+            <div className={styles.label_wrapper_sm}>
               {[
                 { grwhstleCode: '054001', grwhstleCodeNm: '관엽형' },
                 { grwhstleCode: '054002', grwhstleCodeNm: '직립형' },
@@ -60,10 +60,10 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
           </div>
 
           <div className={styles.plant_props}>
-            <p>식물의 잎무늬, 꽃 색, 열매 색을 선택해주세요.</p>
+            <p className={styles.question_title}>식물의 잎무늬, 꽃 색, 열매 색을 선택해주세요.</p>
             <div className={styles.flower_color}>
-              <p>꽃 색</p>
-              <div className={styles.label_wrapper}>
+              <p className={styles.question_subtitle}>꽃 색</p>
+              <div className={styles.label_wrapper_sm}>
                 {[
                   { flclrCode: '071001', flclrCodeNm: '파랑색' },
                   { flclrCode: '071002', flclrCodeNm: '보라색' },
@@ -103,8 +103,8 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
               </div>
             </div>
             <div className={styles.fruit_color}>
-              <p>열매 색</p>
-              <div className={styles.label_wrapper}>
+              <p className={styles.question_subtitle}>열매 색</p>
+              <div className={styles.label_wrapper_sm}>
                 {[
                   { fmldecolrCode: '081001', fmldecolrCodeNm: '파랑색' },
                   { fmldecolrCode: '081002', fmldecolrCodeNm: '보라색' },
@@ -144,8 +144,8 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
               </div>
             </div>
             <div className={styles.leaf_pattern}>
-              <p>잎무늬</p>
-              <div className={styles.label_wrapper}>
+              <p className={styles.question_subtitle}>잎무늬</p>
+              <div className={styles.label_wrapper_md}>
                 {[
                   { lefmrkCode: '070001', lefmrkCodeNm: '줄무늬' },
                   { lefmrkCode: '070002', lefmrkCodeNm: '점무늬' },
@@ -182,8 +182,8 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
           </div>
 
           <div className={styles.light_quantity}>
-            <p>식물이 필요한 햇빛의 양을 선택해주세요.</p>
-            <div className={styles.label_wrapper}>
+            <p className={styles.question_title}>식물이 필요한 햇빛의 양을 선택해주세요.</p>
+            <div className={styles.label_wrapper_md}>
               {[
                 { lighttdemanddoCode: '055001', lighttdemanddoCodeNm: '낮은 광도' },
                 { lighttdemanddoCode: '055002', lighttdemanddoCodeNm: '중간 광도' },
@@ -216,9 +216,10 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
               ))}
             </div>
           </div>
-          <div className={styles.waterCycle}>
-            <p>식물의 물 주기 빈도를 선택해주세요.</p>
-            <div className={styles.label_wrapper}>
+
+          <div className={styles.water_cycle}>
+            <p className={styles.question_title}>식물의 물 주기 빈도를 선택해주세요.</p>
+            <div className={styles.label_wrapper_lg}>
               {[
                 {
                   waterCycleCode: '053001',
@@ -251,7 +252,7 @@ export default function Filter({ onClose, onSubmit }: { onClose: () => void; onS
             </div>
           </div>
         </div>
-        <div className={styles.btn_group}>
+        <div className={styles.btn_wrapper}>
           <button type="submit" className={styles.btn_submit}>
             검색
           </button>

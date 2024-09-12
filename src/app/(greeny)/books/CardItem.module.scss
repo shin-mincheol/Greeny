@@ -1,27 +1,31 @@
 @import '@styles/mixin';
 
-@media (max-width: 48rem) {
-  .item_wrapper {
+@media (max-width: 767px) {
+  .card_wrapper {
     @include flex-horizontal(1.8rem);
     align-items: center;
 
-    .item_image_wrapper {
+    .card_image_wrapper {
+      position: relative;
       width: 9rem;
       height: 9rem;
-      img {
+      display: block;
+      .card_image {
+        // width: 100%; // next/image의 Image가 fill일 경우 이미 width: 100%가 적용되어 있음
+        object-fit: cover;
         border-radius: 2rem;
       }
     }
-    .item_content {
+    .card_content_wrapper {
       @include flex-vertical(1rem);
       justify-content: space-between;
       align-items: flex-start;
 
-      p {
+      .card_title {
         font-weight: var(--font-semibold);
         font-size: 1.4rem;
       }
-      span {
+      .card_subtitle {
         font-weight: var(--font-medium);
         font-size: 1.2rem;
       }
@@ -29,29 +33,34 @@
   }
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   li {
-    .item_wrapper {
+    .card_wrapper {
       @include flex-vertical(1.6rem);
       justify-content: space-between;
-      .item_image_wrapper {
-        img {
-          width: 16rem;
-          height: 16rem;
+
+      .card_image_wrapper {
+        position: relative;
+        min-width: 16rem;
+        min-height: 16rem;
+        display: block;
+        .card_image {
+          // width: 100%;
           border-radius: 2rem;
+          object-fit: cover;
         }
       }
 
-      .item_content {
+      .card_content_wrapper {
         @include flex-vertical(0.8rem);
         justify-content: space-between;
         align-items: flex-start;
 
-        p {
+        .card_title {
           font-weight: var(--font-semibold);
           font-size: 1.4rem;
         }
-        span {
+        .card_subtitle {
           font-weight: var(--font-medium);
           font-size: 1.2rem;
         }

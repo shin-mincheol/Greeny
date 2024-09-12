@@ -1,13 +1,13 @@
 @import '@styles/mixin';
 
-.filter_wrapper {
+.filter_container {
   @include flex-vertical(3rem);
   justify-content: space-between;
   background: var(--color-white);
   overflow-x: hidden;
-  margin: 0 auto;
-  max-width: 31.2rem;
-  .form {
+  // margin: 0 auto;
+  // max-width: 31.2rem;
+  .filter_wrapper {
     @include flex-vertical(2rem);
     .filter_group {
       @include flex-vertical(3rem);
@@ -26,80 +26,33 @@
         @include flex-vertical(2rem);
         justify-content: space-between;
         align-items: flex-start;
+        width: 100%;
         height: 8.5rem;
-        p {
-          font-weight: var(--font-semibold);
-          font-size: 1.4rem;
-        }
-        .label_wrapper {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-          place-items: start start;
-        }
       }
 
       .plant_props {
         @include flex-vertical(2rem);
         justify-content: space-between;
         align-items: flex-start;
-        p {
-          font-weight: var(--font-semibold);
-          font-size: 1.4rem;
-        }
+        width: 100%;
+
         .flower_color {
           @include flex-vertical(1rem);
           justify-content: space-between;
           align-items: flex-start;
-          p {
-            font-weight: var(--font-semibold);
-            font-size: 1.4rem;
-          }
-          .label_wrapper {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            place-items: start start;
-            font-weight: var(--font-reqular);
-            font-size: 1.2rem;
-          }
+          width: 100%;
         }
         .fruit_color {
           @include flex-vertical(1rem);
           justify-content: space-between;
           align-items: flex-start;
-          p {
-            font-weight: var(--font-semibold);
-            font-size: 1.4rem;
-          }
-          .label_wrapper {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            place-items: start start;
-            font-weight: var(--font-reqular);
-            font-size: 1.2rem;
-          }
+          width: 100%;
         }
         .leaf_pattern {
           @include flex-vertical(1rem);
           justify-content: space-between;
           align-items: flex-start;
           width: 100%;
-          p {
-            font-weight: var(--font-semibold);
-            font-size: 1.4rem;
-          }
-          .label_wrapper {
-            width: 25rem;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            row-gap: 1rem;
-            column-gap: 1rem;
-            font-weight: var(--font-reqular);
-            font-size: 1.2rem;
-          }
         }
       }
 
@@ -107,34 +60,15 @@
         @include flex-vertical(2rem);
         justify-content: space-between;
         align-items: flex-start;
-        p {
-          font-weight: var(--font-semibold);
-          font-size: 1.4rem;
-        }
-        .label_wrapper {
-          width: 25rem;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          row-gap: 1rem;
-          column-gap: 1rem;
-        }
+        width: 100%;
       }
-      .waterCycle {
+      .water_cycle {
         @include flex-vertical(2rem);
         justify-content: space-between;
-        p {
-          font-weight: var(--font-semibold);
-          font-size: 1.4rem;
-        }
-        .label_wrapper {
-          @include flex-vertical(1rem);
-          justify-content: space-between;
-          align-items: flex-start;
-        }
       }
     }
 
-    .btn_group {
+    .btn_wrapper {
       @include flex-horizontal(1rem);
       justify-content: center;
       .btn_submit {
@@ -163,6 +97,8 @@
 }
 .custom_checkbox {
   @include flex-horizontal(1rem);
+  align-items: center;
+
   & > input {
     margin: 0;
     appearance: none;
@@ -182,5 +118,78 @@
     & + span {
       cursor: pointer;
     }
+  }
+}
+
+.question_title,
+.question_subtitle {
+  font-weight: var(--font-semibold);
+  font-size: 1.4rem;
+}
+
+@mixin label_wrapper($count: 1, $rem: 1.2rem) {
+  display: grid;
+  grid-template-columns: repeat($count, 1fr);
+  grid-gap: 1rem;
+  place-items: start start;
+  width: 100%;
+  font-weight: var(--font-reqular);
+  font-size: $rem;
+}
+
+.label_wrapper_lg {
+  @include label_wrapper(1, 1.2rem);
+}
+.label_wrapper_md {
+  @include label_wrapper(2, 1.2rem);
+}
+.label_wrapper_sm {
+  @include label_wrapper(3, 1.2rem);
+}
+
+@media (min-width: 768px) {
+  .filter_container {
+    .filter_wrapper {
+      .filter_group {
+        @include flex-vertical(4.5rem);
+
+        .plant_type {
+          @include flex-vertical(3rem);
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+        .plant_props {
+          @include flex-vertical(3rem);
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+        .light_quantity {
+          @include flex-vertical(3rem);
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+        .water_cycle {
+          @include flex-vertical(3rem);
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+      }
+    }
+  }
+
+  .question_title,
+  .question_subtitle {
+    font-weight: var(--font-semibold);
+    font-size: 2.1rem;
+  }
+
+  .label_wrapper_lg {
+    @include label_wrapper(1, 1.8rem);
+  }
+  .label_wrapper_md {
+    @include label_wrapper(2, 1.8rem);
+  }
+  .label_wrapper_sm {
+    @include label_wrapper(4, 1.8rem);
   }
 }

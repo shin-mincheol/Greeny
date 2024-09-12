@@ -1,26 +1,11 @@
 @import '@styles/mixin';
 
-.tab_body {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 100px;
-  gap: 0.2rem;
-  align-items: stretch;
-  justify-items: stretch;
-  flex-grow: 1;
-
-  img {
-    display: block;
-    object-fit: cover;
-  }
-}
-
-.contentsList {
+.list_wrapper {
   // margin: 0 -2.4rem;
 
-  .contents_item:nth-child(1) {
-    border-top: 0.1rem solid var(--color-gray-50);
-  }
+  // .contents_item:nth-child(1) {
+  // border-top: 0.1rem solid var(--color-gray-50);
+  // }
 
   .contents_item {
     padding: 2rem 2.4rem;

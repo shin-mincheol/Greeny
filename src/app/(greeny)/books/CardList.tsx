@@ -4,7 +4,7 @@ import { PlantJson } from '@/types/plant';
 
 export default function CardList({ cards }: { cards: PlantJson[] }) {
   return (
-    <ul className={styles.content_list}>
+    <ul className={styles.card_list}>
       {cards.map((card) => (
         <CardItem key={card.cntntsNo} card={card} />
       ))}

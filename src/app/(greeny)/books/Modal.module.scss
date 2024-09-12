@@ -31,14 +31,19 @@
   }
 }
 
-@media (max-width: 48rem) {
-  .modal_content {
-    max-width: 31.2rem;
+@media (max-width: 767px) {
+  .modal_overlay {
+    .modal_content {
+      max-width: 31.2rem;
+    }
   }
 }
 
-@media (min-width: 48rem) {
-  .modal_content {
-    max-width: 66.4rem;
+@media (min-width: 768px) {
+  .modal_overlay {
+    .modal_content {
+      max-width: 50rem;
+      padding: 4.5rem 3.2rem 3rem;
+    }
   }
 }

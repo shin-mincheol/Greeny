@@ -13,10 +13,10 @@ export default function User({ user, children }: { user: UserBookmark; userId: s
       <div className={styles.user_info_wrapper}>
         <Link href={`/profile/${user.user._id}`}>
           <div className={styles.thumbnail_wrapper}>
-            <Image src={!user.user.image ? NormalProfile : `${SERVER}${user.user.image}`} alt="썸네일" width={50} height={50} />
+            <Image className={styles.image} src={!user.user.image ? NormalProfile : `${SERVER}${user.user.image}`} alt="썸네일" width={50} height={50} />
             <div className={styles.user_data}>
-              <p>{user.user.name}</p>
-              <span>{user.user.email}</span>
+              <p className={styles.title}>{user.user.name}</p>
+              <span className={styles.subtitle}>{user.user.email}</span>
             </div>
           </div>
         </Link>

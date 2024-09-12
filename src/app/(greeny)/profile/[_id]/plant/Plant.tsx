@@ -12,10 +12,10 @@ export default function Plant(plant: PlantBookmark & { children: React.ReactNode
       <div className={styles.user_info_wrapper}>
         <Link href={`/plant/${plant.product._id}`}>
           <div className={styles.thumbnail_wrapper}>
-            <Image src={!plant.product.mainImages[0]?.path ? NormalProfile : `${SERVER}${plant.product.mainImages[0]?.path}`} alt="썸네일" width={50} height={50} />
+            <Image className={styles.image} src={!plant.product.mainImages[0]?.path ? NormalProfile : `${SERVER}${plant.product.mainImages[0]?.path}`} alt="썸네일" width={50} height={50} />
             <div className={styles.user_data}>
-              <p>{plant.product.name}</p>
-              <span>{plant.createdAt}</span>
+              <p className={styles.title}>{plant.product.name}</p>
+              <span className={styles.subtitle}>{plant.createdAt}</span>
             </div>
           </div>
         </Link>

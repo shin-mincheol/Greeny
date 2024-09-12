@@ -1,0 +1,46 @@
+@import '@styles/mixin';
+
+.zero_item_noti_container {
+  width: 100%;
+  margin-top: 50%;
+
+  .zero_item_noti {
+    @include flex-vertical(1.8rem);
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .zero_item_noti_msg {
+      @include flex-vertical(1rem);
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: var(--font-bold);
+    }
+
+    zero_item_noti_link {
+      font-size: 1.2rem;
+      font-weight: var(--font-medium);
+    }
+  }
+}
+
+.list_wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  // TODO: 높이가 왜 안 커지는지 확인
+  grid-auto-rows: minmax(10rem, auto);
+  grid-gap: 0.2rem;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .list_wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.6rem;
+    align-items: stretch;
+    justify-items: stretch;
+  }
+}
