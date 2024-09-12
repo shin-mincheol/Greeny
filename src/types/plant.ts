@@ -30,6 +30,7 @@ export interface PlantRes extends PlantForm {
   createdAt: string;
   updatedAt: string;
   mainImages: ImageRes[];
+  myBookmarkId?: number;
 }
 export interface PlantDetailRes {
   _id: number;

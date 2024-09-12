@@ -1,7 +1,7 @@
 'use client';
 
+import styles from '@greeny/story/Community.module.scss';
 import 'swiper/css';
-import styles from './Community.module.scss';
 import { DiaryRes } from '@/types/post';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
 export default function DiarySwiper({ diaries }: { diaries: DiaryRes[] }) {
   return (
-    <Swiper spaceBetween={10} slidesPerView={2.3} className={styles.diary_swiper}>
+    <Swiper spaceBetween={10} slidesPerView={'auto'} className={styles.diary_swiper}>
       {diaries.map((diary, i) => (
         <SwiperSlide key={i} className={styles.slider}>
           <Link href={`/story/diaries/${diary._id}`}>
