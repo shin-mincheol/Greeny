@@ -33,7 +33,7 @@
 
     .file_container {
       width: 100%;
-      @include flex-vertical(1rem);
+      @include flex-vertical(1.2rem);
 
       .file_head {
         @include flex-horizontal(0);
@@ -55,20 +55,18 @@
         }
       }
       .photo_Box {
+        width: 100%;
         @include flex-horizontal(1rem);
-        position: relative;
 
         .photo_cover {
           cursor: pointer;
           position: relative;
-          flex-shrink: 0;
           width: 14rem;
           height: 14rem;
           overflow: hidden;
           border-radius: 2rem;
           border: 0.1rem solid var(--color-secondary-dark);
           transition: all 0.3s;
-          box-shadow: 0 0 10px saddlebrown;
 
           @include mobile {
             width: 12rem;
@@ -81,45 +79,24 @@
         }
 
         .swiperList {
-          @include flex-horizontal(2rem);
-          flex-grow: 1;
-          flex-shrink: 0;
-          position: absolute;
-          top: 0;
-          left: 16rem;
-          box-shadow: inset 0 0 10px saddlebrown;
-
-          @include mobile {
-            left: 13rem;
-          }
+          margin: 0;
+          width: 100%;
 
           .swiperItem {
-            max-width: 14rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            width: 14rem;
             height: 14rem;
             transition: all 0.3s;
-            flex-shrink: 0;
 
             @include mobile {
-              max-width: 12rem;
+              width: 12rem;
               height: 12rem;
             }
 
-            .swiper_cover {
-              position: relative;
-              overflow: hidden;
-              width: 14rem;
-              height: 14rem;
-              border-radius: 2rem;
-              transition: all 0.3s;
-
-              @include mobile {
-                width: 12rem;
-                height: 12rem;
-              }
-
-              img {
-                object-fit: cover;
-              }
+            img {
+              object-fit: cover;
             }
 
             .deleteIcon {
@@ -134,8 +111,13 @@
       }
 
       p {
-        font-size: 1.2rem;
         color: var(--color-gray-10);
+        transition: all 0.3s;
+        font-size: 1.6rem;
+
+        @include mobile {
+          font-size: 1.4rem;
+        }
       }
     }
 
