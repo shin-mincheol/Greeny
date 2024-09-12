@@ -6,7 +6,7 @@ import Pagination from './Pagination';
 
 export const revalidate = 0;
 
-export default async function PostList({ searchParams, usePagination = true }: { searchParams: { category: string; keyword: string; page: string }; usePagination?: boolean }) {
+export default async function PostList({ searchParams, usePagination = true }: { searchParams: { category?: string; keyword?: string; page?: string }; usePagination?: boolean }) {
   const data = await fetchPosts(searchParams);
   const posts = data.item;
 
