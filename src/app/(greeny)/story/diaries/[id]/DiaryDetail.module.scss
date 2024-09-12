@@ -1,6 +1,7 @@
+@use '../../../../../styles/mixin' as commonMixin;
+
 .user_info {
   padding-top: 1.4rem;
-  margin-bottom: 2rem;
 }
 
 .user_info::after {
@@ -16,14 +17,15 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  color: var(--color-gray-10);
 
   .heading {
-    font-weight: var(--font-medium);
+    font: {
+      size: clamp(1.8rem, 3.15vw, 3.2rem);
+      weight: var(--font-semibold);
+    }
   }
 
   .plant_card {
-    margin: 0 -2.4rem -3rem;
     padding: 2.4rem 3rem;
     font-size: 1.2rem;
     background-color: #f6f6f6;
@@ -41,8 +43,8 @@
         gap: 1rem;
         .plant_image_container {
           position: relative;
-          width: 2.8rem;
-          height: 2.8rem;
+          width: 3.4rem;
+          height: 3.4rem;
           border-radius: 100%;
           overflow: hidden;
           img {
@@ -54,6 +56,10 @@
             size: 2rem;
             weight: var(--font-semibold);
           }
+        }
+        .plant_scientific_name {
+          font-size: 1rem;
+          color: var(--color-gray-10);
         }
       }
 
@@ -70,20 +76,32 @@
         color: #a7c4a0;
       }
     }
-
-    .plant_diary_info {
-      padding-bottom: 2rem;
-      :not(:last-child) {
-        margin-bottom: 0.6rem;
-      }
-    }
   }
   .description {
-    font-size: 1.2rem;
     white-space: pre-wrap;
     line-height: 2.4rem;
     color: var(--color-black);
   }
+}
+
+.plant_diary_info {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  .container {
+    padding: 1.4rem 2.5rem;
+    background-color: #f9f9f9;
+    border-radius: 1rem;
+  }
+  .headings {
+    padding-right: 1rem;
+    color: #609285;
+  }
+  // padding-bottom: 2rem;
+  // :not(:last-child) {
+  //   margin-bottom: 0.6rem;
+  // }
 }
 
 // DiaryImageSlider
@@ -95,8 +113,23 @@
   --swiper-pagination-bullet-horizontal-gap: 0.2rem;
 
   .slide {
-    width: 31.2rem;
-    height: 31.2rem;
+    aspect-ratio: 2/1;
+    min-width: 31.2rem;
+    min-height: 31.2rem;
+
+    &.pair {
+      display: flex;
+      gap: 1rem;
+      height: 100%;
+
+      .pairItem {
+        width: calc(50% - 0.5rem);
+      }
+    }
+
+    @include commonMixin.mobile {
+      aspect-ratio: 1/1;
+    }
   }
 
   button {
