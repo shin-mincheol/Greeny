@@ -174,7 +174,7 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
         <div className={styles.photo_Box}>
           <label htmlFor="attach" className={styles.photoAdd}>
             <div className={styles.photo_cover}>
-              <Image src={photoAdd} alt="프로필 사진 선택" fill sizes="100%" priority />
+              <Image src={photoAdd} alt="프로필 사진 선택" fill priority />
             </div>
             <input type="file" id="attach" multiple {...register('attach')} />
           </label>

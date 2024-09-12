@@ -56,38 +56,66 @@
       }
       .photo_Box {
         @include flex-horizontal(1rem);
+        position: relative;
+
         .photo_cover {
           cursor: pointer;
           position: relative;
           flex-shrink: 0;
-          width: 10rem;
-          height: 10rem;
+          width: 14rem;
+          height: 14rem;
           overflow: hidden;
           border-radius: 2rem;
           border: 0.1rem solid var(--color-secondary-dark);
+          transition: all 0.3s;
+          box-shadow: 0 0 10px saddlebrown;
+
+          @include mobile {
+            width: 12rem;
+            height: 12rem;
+          }
+
           img {
             object-fit: cover;
           }
         }
 
         .swiperList {
-          margin-right: -2.4rem;
-          display: flex;
-          width: 100%;
-          align-items: flex-start;
+          @include flex-horizontal(2rem);
+          flex-grow: 1;
+          flex-shrink: 0;
+          position: absolute;
+          top: 0;
+          left: 16rem;
+          box-shadow: inset 0 0 10px saddlebrown;
+
+          @include mobile {
+            left: 13rem;
+          }
 
           .swiperItem {
-            box-shadow: inset 0 0 10px saddlebrown;
+            max-width: 14rem;
+            height: 14rem;
             transition: all 0.3s;
-            width: 10rem;
-            height: 10rem;
+            flex-shrink: 0;
+
+            @include mobile {
+              max-width: 12rem;
+              height: 12rem;
+            }
 
             .swiper_cover {
               position: relative;
               overflow: hidden;
-              width: 10rem;
-              height: 10rem;
+              width: 14rem;
+              height: 14rem;
               border-radius: 2rem;
+              transition: all 0.3s;
+
+              @include mobile {
+                width: 12rem;
+                height: 12rem;
+              }
 
               img {
                 object-fit: cover;
@@ -127,7 +155,7 @@
         margin-bottom: 0.5rem;
         color: var(--color-black);
         font-weight: var(--font-semibold);
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         width: 20rem;
         transition: all 0.3s;
         flex-shrink: 0;
