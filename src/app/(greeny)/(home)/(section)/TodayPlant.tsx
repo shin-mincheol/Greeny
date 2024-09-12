@@ -23,7 +23,25 @@ export default function TodayPlant() {
     return setPlantInfo(randomPlantImgUrl);
   }, []);
   return (
-    <Swiper className={styles.swiperList} slidesPerView={1.5} spaceBetween={10}>
+    <Swiper
+      className={styles.swiperList}
+      slidesPerView={1.5}
+      spaceBetween={10}
+      breakpoints={{
+        360: {
+          slidesPerView: 2,
+          spaceBetween: 12,
+        },
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 24,
+        },
+        1024: {
+          slidesPerView: 3.5,
+          spaceBetween: 32,
+        },
+      }}
+    >
       <SwiperSlide>
         <Link href={`/books/${plantInfo && plantInfo[0].plantCod}`} className={styles.swiper_item}>
           <div className={styles.swiper_cover}>{plantInfo && <Image src={plantInfo[0].plantImg} alt="식물 사진" fill sizes="100%" />}</div>

@@ -24,7 +24,25 @@ export default function TodayDiary({ data }: { data: DiaryRes[] }) {
   });
 
   return (
-    <Swiper className={styles.swiperList} slidesPerView={1.5} spaceBetween={10}>
+    <Swiper
+      className={styles.swiperList}
+      slidesPerView={1.5}
+      spaceBetween={10}
+      breakpoints={{
+        360: {
+          slidesPerView: 2,
+          spaceBetween: 12,
+        },
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 24,
+        },
+        1024: {
+          slidesPerView: 3.5,
+          spaceBetween: 32,
+        },
+      }}
+    >
       {diaryList}
     </Swiper>
   );

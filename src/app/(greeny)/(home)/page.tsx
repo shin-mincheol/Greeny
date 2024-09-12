@@ -63,10 +63,9 @@ export default async function Home() {
   });
 
   return (
-    <div className={styles.home_wrapper}>
+    <>
       <Banner />
-
-      <div className={styles.main_list}>
+      <div className={styles.home_wrapper}>
         <div className={styles.list_item}>
           <h2 className={styles.list_title}>오늘의 식물 추천!💡</h2>
           <TodayPlant />
@@ -83,6 +82,6 @@ export default async function Home() {
           <ul className={styles.contentsList}>{list}</ul>
         </div>
       </div>
-    </div>
+    </>
   );
 }
