@@ -1,4 +1,4 @@
-import styles from './Plant.module.scss';
+import styles from './PlantListWrapper.module.scss';
 import { PlantBookmark } from '@/types/bookmark';
 import Plant from './Plant';
 import DeleteButton from './DeleteButton';

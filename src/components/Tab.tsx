@@ -21,7 +21,7 @@ export default function Tab({ first, second, firstSrOnly, secondSrOnly }: TabPro
   };
 
   return (
-    <div className={styles.tabContainer}>
+    <div className={styles.tab_wrapper}>
       {/* 탭 버튼 */}
       <div className={styles.plant_tabMenu}>
         <button onClick={() => toggleTab(firstSrOnly)} className={`${styles.plant_diary} ${isFirstTab ? styles.is_active : ''}`}>
