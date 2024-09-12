@@ -132,9 +132,8 @@
     width: 100%;
     .slider {
       position: relative;
-      flex-basis: 10rem;
-      width: 10rem;
-      height: 10rem;
+      width: clamp(12rem, 15vw, 14rem);
+      height: clamp(12rem, 15vw, 14rem);
       overflow: hidden;
       border-radius: 1rem;
       .preview_image {
@@ -156,14 +155,14 @@
     cursor: pointer;
     display: inline-block;
     flex-shrink: 0;
-    width: 10rem;
-    height: 10rem;
+    width: clamp(12rem, 15vw, 14rem);
+    height: clamp(12rem, 15vw, 14rem);
     border-radius: 1rem;
     background-color: #d5e1de;
     background-image: url('/images/PhotoAddIcon.svg');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 11rem;
+    background-size: clamp(12.3rem, 15vw + 0.3rem, 14.3rem);
   }
 
   input,
