@@ -1,0 +1,27 @@
+@import '@styles/mixin';
+
+.template_wrapper {
+  .content_wrapper {
+    .form_container {
+      margin-top: 2.4rem;
+    }
+    .gap {
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .template_wrapper {
+    width: 50rem;
+    margin: 0 auto;
+    .content_wrapper {
+      .form_container {
+        margin-top: 0;
+      }
+      .gap {
+        margin-bottom: 5rem;
+      }
+    }
+  }
+}

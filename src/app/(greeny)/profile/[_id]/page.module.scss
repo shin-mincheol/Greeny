@@ -1,0 +1,18 @@
+@import '@styles/mixin';
+
+.page_container {
+  margin-top: 2rem;
+  .tab_container {
+    margin: 0 -2.4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .page_container {
+    margin: 3.2rem auto 0 auto;
+    width: 50rem;
+    .tab_container {
+      margin: 0;
+    }
+  }
+}

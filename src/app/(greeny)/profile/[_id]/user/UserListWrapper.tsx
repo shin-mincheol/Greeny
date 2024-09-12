@@ -1,4 +1,4 @@
-import styles from './User.module.scss';
+import styles from './UserListWrapper.module.scss';
 import { UserBookmark } from '@/types/bookmark';
 import User from './User';
 import DeleteButton from './DeleteButton';

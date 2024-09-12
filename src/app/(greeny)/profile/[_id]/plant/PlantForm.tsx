@@ -1,5 +1,5 @@
 'use client';
-import styles from './Plant.module.scss';
+import styles from './PlantForm.module.scss';
 import { PlantBookmark } from '@/types/bookmark';
 import Image from 'next/image';
 import { useRef } from 'react';
@@ -24,10 +24,10 @@ export default function FollowingForm({ followingList, setFollowingList }: { fol
   };
 
   return (
-    <form className={styles.search_form} onSubmit={handleSubmit(submitHandler)}>
-      <Input placeholder="이름으로 검색" {...register('name')} />
+    <form className={styles.form_wrapper} onSubmit={handleSubmit(submitHandler)}>
+      <Input placeholder="이름을 검색해주세요." {...register('name')} />
       <button className={styles.btn_submit}>
-        <Image src="/images/SearchIcon.svg" width={18} height={18} alt="search" />
+        <Image className={styles.image} src="/images/SearchIcon.svg" width={18} height={18} alt="search" />
       </button>
     </form>
   );

@@ -1,0 +1,8 @@
+@import '@styles/mixin';
+
+.follow_list {
+  @include flex-vertical();
+  li + li {
+    margin-top: -0.1rem;
+  }
+}

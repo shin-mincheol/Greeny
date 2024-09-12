@@ -1,7 +1,7 @@
 @import '@styles/mixin';
 
-.edit_wrapper {
-  form {
+.edit_form_container {
+  .edit_form {
     width: 100%;
     @include flex-vertical(3rem);
     align-items: center;
@@ -11,7 +11,10 @@
       font-weight: var(--font-bold);
       color: var(--color-primary);
     }
-
+    .form_list {
+      @include flex-vertical(2rem);
+      width: 100%;
+    }
     .file_container {
       width: 100%;
       @include flex-vertical(0.5rem);
@@ -58,6 +61,21 @@
     border: 0.1rem solid var(--color-secondary-dark);
     img {
       object-fit: cover;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .edit_form_container {
+    width: 45rem;
+    margin: 0 auto;
+
+    .edit_form {
+      @include flex-vertical(7rem);
+      align-items: flex-start;
+      .heading {
+        align-self: center;
+      }
     }
   }
 }
