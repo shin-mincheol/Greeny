@@ -5,10 +5,10 @@
   min-width: 360px;
   max-width: 1024px;
   width: 100%;
-  margin: 0 auto;
+  margin: 5rem auto;
   gap: 5rem;
   .search_container {
-    margin: 2rem 0;
+    margin-bottom: 2rem;
 
     .heading_container {
       display: none;
@@ -64,9 +64,8 @@
       max-width: 1024px;
       width: 100%;
       justify-content: space-between;
-      margin: 5rem 0;
+      margin-bottom: 5rem 0;
       .heading_container {
-        margin-top: 10rem;
         display: block;
         .heading {
           font-weight: var(--font-semibold);

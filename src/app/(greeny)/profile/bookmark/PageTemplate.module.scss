@@ -110,11 +110,11 @@
     margin-top: 1rem;
   }
   .template_container {
-    margin: 0 auto;
     width: 50rem;
+    margin: 5rem auto;
     .heading_container {
       display: block;
-      margin: 2.4rem 0;
+      margin-bottom: 2.4rem;
       .heading {
         font-weight: var(--font-semibold);
         font-size: 3.2rem;

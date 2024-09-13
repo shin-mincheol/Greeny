@@ -3,7 +3,7 @@
 .page_container {
   width: 100%;
   max-width: 50rem;
-  margin: 2rem auto 0 auto;
+  margin: 2rem auto;
   .tab_container {
     margin: 0 -2.4rem;
   }
@@ -11,7 +11,7 @@
 
 @media (min-width: 768px) {
   .page_container {
-    margin: 3.2rem auto 0 auto;
+    margin: 5rem auto;
     width: 50rem;
     .tab_container {
       margin: 0;

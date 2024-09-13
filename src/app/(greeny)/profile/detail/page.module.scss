@@ -3,7 +3,7 @@
 .page_container {
   width: 100%;
   max-width: 50rem;
-  margin: 2rem auto 0 auto;
+  margin: 2rem auto;
   @include flex-vertical(2rem);
   .list_wrapper {
     @include flex-vertical(1.6rem);
@@ -28,7 +28,7 @@
 @media (min-width: 768px) {
   .page_container {
     @include flex-vertical(5rem);
-    margin: 3.2rem auto 0 auto;
+    margin: 5rem auto;
     width: 50rem;
   }
 }
