@@ -89,11 +89,19 @@
   }
 
   .photo_cover {
+    cursor: pointer;
+    flex-shrink: 0;
     position: relative;
-    width: 12rem;
-    height: 12rem;
+    width: 16rem;
+    height: 16rem;
     border-radius: 50%;
     overflow: hidden;
+    transition: all 0.3s;
+
+    @include mobile {
+      width: 14rem;
+      height: 14rem;
+    }
 
     img {
       object-fit: cover;

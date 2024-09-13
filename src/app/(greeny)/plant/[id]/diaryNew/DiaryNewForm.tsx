@@ -125,12 +125,10 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
 
   const imageList = imagePreviews.map((preview, i) => (
     <SwiperSlide key={i} className={styles.swiperItem}>
-      <div className={styles.swiper_cover}>
-        <Image src={preview} alt={`preview-${i}`} fill sizes="100%" />
-        <button type="button" className={styles.deleteIcon} onClick={() => handleDeleteImage(i)}>
-          <Image src={photoDelete} alt={`preview-${i}`} width={24} height={24} />
-        </button>
-      </div>
+      <Image src={preview} alt={`preview-${i}`} fill />
+      <button type="button" className={styles.deleteIcon} onClick={() => handleDeleteImage(i)}>
+        <Image src={photoDelete} alt={`preview-${i}`} width={24} height={24} />
+      </button>
     </SwiperSlide>
   ));
 
@@ -180,7 +178,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
             <input type="file" id="attach" multiple {...register('attach')} />
           </label>
 
-          <Swiper className={styles.swiperList} slidesPerView={2} spaceBetween={5}>
+          <Swiper className={styles.swiperList} slidesPerView={'auto'} spaceBetween={10}>
             {imageList}
           </Swiper>
         </div>
