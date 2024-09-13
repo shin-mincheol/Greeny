@@ -1,18 +1,22 @@
 @import '@styles/mixin';
 
 .filter_container {
-  @include flex-vertical(3rem);
-  justify-content: space-between;
-  background: var(--color-white);
-  overflow-x: hidden;
-  // margin: 0 auto;
-  // max-width: 31.2rem;
+  @include mobile {
+    @include flex-vertical(3rem);
+    justify-content: space-between;
+    background: var(--color-white);
+    overflow-x: hidden;
+  }
+
   .filter_wrapper {
     @include flex-vertical(2rem);
     .filter_group {
-      @include flex-vertical(3rem);
+      @include flex-vertical(4.5rem);
       height: 40rem;
       overflow-y: scroll;
+      @include mobile {
+        @include flex-vertical(3rem);
+      }
       &::-webkit-scrollbar {
         width: 0.4rem;
       }
@@ -23,18 +27,30 @@
       }
 
       .plant_type {
-        @include flex-vertical(2rem);
+        @include flex-vertical(3rem);
         justify-content: space-between;
         align-items: flex-start;
-        width: 100%;
-        height: 8.5rem;
+
+        @include mobile {
+          @include flex-vertical(2rem);
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+          height: 8.5rem;
+        }
       }
 
       .plant_props {
-        @include flex-vertical(2rem);
+        @include flex-vertical(3rem);
         justify-content: space-between;
         align-items: flex-start;
-        width: 100%;
+
+        @include mobile {
+          @include flex-vertical(2rem);
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+        }
 
         .flower_color {
           @include flex-vertical(1rem);
@@ -57,14 +73,26 @@
       }
 
       .light_quantity {
-        @include flex-vertical(2rem);
+        @include flex-vertical(3rem);
         justify-content: space-between;
         align-items: flex-start;
-        width: 100%;
+
+        @include mobile {
+          @include flex-vertical(2rem);
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+        }
       }
       .water_cycle {
-        @include flex-vertical(2rem);
+        @include flex-vertical(3rem);
         justify-content: space-between;
+        align-items: flex-start;
+
+        @include mobile {
+          @include flex-vertical(2rem);
+          justify-content: space-between;
+        }
       }
     }
 
@@ -95,6 +123,18 @@
     }
   }
 }
+
+.question_title,
+.question_subtitle {
+  font-weight: var(--font-semibold);
+  font-size: 2.1rem;
+
+  @include mobile {
+    font-weight: var(--font-semibold);
+    font-size: 1.4rem;
+  }
+}
+
 .custom_checkbox {
   @include flex-horizontal(1rem);
   align-items: center;
@@ -121,12 +161,6 @@
   }
 }
 
-.question_title,
-.question_subtitle {
-  font-weight: var(--font-semibold);
-  font-size: 1.4rem;
-}
-
 @mixin label_wrapper($count: 1, $rem: 1.2rem) {
   display: grid;
   grid-template-columns: repeat($count, 1fr);
@@ -138,58 +172,20 @@
 }
 
 .label_wrapper_lg {
-  @include label_wrapper(1, 1.2rem);
+  @include label_wrapper(1, 1.8rem);
+  @include mobile {
+    @include label_wrapper(1, 1.2rem);
+  }
 }
 .label_wrapper_md {
-  @include label_wrapper(2, 1.2rem);
+  @include label_wrapper(2, 1.8rem);
+  @include mobile {
+    @include label_wrapper(2, 1.2rem);
+  }
 }
 .label_wrapper_sm {
-  @include label_wrapper(3, 1.2rem);
-}
-
-@media (min-width: 768px) {
-  .filter_container {
-    .filter_wrapper {
-      .filter_group {
-        @include flex-vertical(4.5rem);
-
-        .plant_type {
-          @include flex-vertical(3rem);
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-        .plant_props {
-          @include flex-vertical(3rem);
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-        .light_quantity {
-          @include flex-vertical(3rem);
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-        .water_cycle {
-          @include flex-vertical(3rem);
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-      }
-    }
-  }
-
-  .question_title,
-  .question_subtitle {
-    font-weight: var(--font-semibold);
-    font-size: 2.1rem;
-  }
-
-  .label_wrapper_lg {
-    @include label_wrapper(1, 1.8rem);
-  }
-  .label_wrapper_md {
-    @include label_wrapper(2, 1.8rem);
-  }
-  .label_wrapper_sm {
-    @include label_wrapper(4, 1.8rem);
+  @include label_wrapper(4, 1.8rem);
+  @include mobile {
+    @include label_wrapper(3, 1.2rem);
   }
 }
