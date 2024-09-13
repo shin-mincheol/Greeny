@@ -1,6 +1,9 @@
 @import '@styles/mixin';
 
 .template_wrapper {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
   .content_wrapper {
     .form_container {
       margin-top: 2.4rem;

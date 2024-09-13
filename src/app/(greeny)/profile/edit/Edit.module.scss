@@ -1,13 +1,16 @@
 @import '@styles/mixin';
 
 .edit_form_container {
+  width: 100%;
+  max-width: 50rem;
+  margin: 2rem auto 0 auto;
   .edit_form {
     width: 100%;
     @include flex-vertical(3rem);
     align-items: center;
 
-    h2 {
-      font-size: 2rem;
+    .heading {
+      font-size: 2.4rem;
       font-weight: var(--font-bold);
       color: var(--color-primary);
     }
@@ -20,7 +23,7 @@
       @include flex-vertical(0.5rem);
       align-items: center;
 
-      h3 {
+      .profile_image_title {
         text-align: left;
         margin-right: auto;
         margin-bottom: 0.5rem;
@@ -34,18 +37,18 @@
       width: 100%;
       @include flex-vertical(0.5rem);
 
-      label {
+      .input_label {
         margin-bottom: 0.5rem;
         color: var(--color-black);
         font-weight: var(--font-semibold);
         font-size: 1.6rem;
 
-        span {
+        .asterisk {
           color: var(--color-error);
         }
       }
 
-      p {
+      .error_message {
         color: var(--color-error);
         font-weight: var(--font-semibold);
       }
@@ -59,7 +62,7 @@
     border-radius: 50%;
     overflow: hidden;
     border: 0.1rem solid var(--color-secondary-dark);
-    img {
+    .image {
       object-fit: cover;
     }
   }
@@ -67,13 +70,15 @@
 
 @media (min-width: 768px) {
   .edit_form_container {
-    width: 45rem;
-    margin: 0 auto;
+    margin: 10rem auto 5rem auto;
+    width: 50rem;
+    // margin: 0 auto;
 
     .edit_form {
       @include flex-vertical(7rem);
       align-items: flex-start;
       .heading {
+        font-size: 2.8rem;
         align-self: center;
       }
     }
