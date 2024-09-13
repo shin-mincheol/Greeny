@@ -17,6 +17,7 @@
       position: relative;
       width: 9rem;
       height: 9rem;
+      display: block;
       .card_image {
         object-fit: cover;
         border-radius: 50%;
@@ -28,6 +29,7 @@
     .user_name {
       font-size: 1.6rem;
       font-weight: var(--font-semibold);
+      text-align: center;
     }
     .user_email {
       display: block;

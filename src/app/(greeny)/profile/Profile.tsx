@@ -15,11 +15,11 @@ export default function Profile({ userInfo, userId, isMovable = false }: { userI
         <Follow href={`/profile/${userId}/plant`} cnt={userInfo.ok ? userInfo.item.bookmark.products : 0} title="식물" />
         {isMovable ? (
           <Link className={styles.card_wrapper} href={`/profile/detail`}>
-            <Image className={styles.card_image} fill src={userInfo.ok && userInfo.item.image ? `${SERVER}${userInfo.item.image}` : NormalProfile} alt="유저 썸네일 이미지" priority />
+            <Image className={styles.card_image} fill sizes="100%" src={userInfo.ok && userInfo.item.image ? `${SERVER}${userInfo.item.image}` : NormalProfile} alt="유저 썸네일 이미지" priority />
           </Link>
         ) : (
           <div className={styles.card_wrapper}>
-            <Image className={styles.card_image} fill src={userInfo.ok && userInfo.item.image ? `${SERVER}${userInfo.item.image}` : NormalProfile} alt="유저 썸네일 이미지" priority />
+            <Image className={styles.card_image} fill sizes="100%" src={userInfo.ok && userInfo.item.image ? `${SERVER}${userInfo.item.image}` : NormalProfile} alt="유저 썸네일 이미지" priority />
           </div>
         )}
         <Follow href={`/profile/${userId}/user`} cnt={userInfo.ok ? userInfo.item.bookmark.users : 0} title="식집사" />

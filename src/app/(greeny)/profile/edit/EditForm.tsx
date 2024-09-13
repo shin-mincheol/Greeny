@@ -61,15 +61,15 @@ export default function EditForm({ user }: { user: UserInfo }) {
         <h2 className={styles.heading}>프로필 수정</h2>
         <ul className={styles.form_list}>
           <li className={styles.file_container}>
-            <h3>프로필 이미지</h3>
-            <label htmlFor="attach" className={styles.photoAdd}>
+            <h3 className={styles.profile_image_title}>프로필 이미지</h3>
+            <label htmlFor="attach" className={styles.photo_add}>
               <div className={styles.photo_cover}>
                 {imagePreview ? (
-                  <Image src={imagePreview} alt="프로필 사진 선택" fill sizes="100%" priority />
+                  <Image className={styles.image} src={imagePreview} alt="프로필 사진 선택" fill sizes="100%" priority />
                 ) : user.image ? (
-                  <Image src={`${SERVER}/${user.image}`} alt="프로필 사진 선택" fill sizes="100%" priority />
+                  <Image className={styles.image} src={`${SERVER}/${user.image}`} alt="프로필 사진 선택" fill sizes="100%" priority />
                 ) : (
-                  <Image src={photoAdd} alt="프로필 사진 선택" fill sizes="100%" priority />
+                  <Image className={styles.image} src={photoAdd} alt="프로필 사진 선택" fill sizes="100%" priority />
                 )}
                 <input type="file" id="attach" {...register('attach')} />
               </div>
@@ -77,8 +77,8 @@ export default function EditForm({ user }: { user: UserInfo }) {
           </li>
 
           <li className={styles.input_container}>
-            <label htmlFor="name">
-              이름<span>*</span>
+            <label className={styles.input_label} htmlFor="name">
+              이름<span className={styles.asterisk}>*</span>
             </label>
             <input
               type="text"
@@ -93,12 +93,12 @@ export default function EditForm({ user }: { user: UserInfo }) {
                 },
               })}
             />
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && <p className={styles.error_message}>{errors.name.message}</p>}
           </li>
 
           <li className={styles.input_container}>
-            <label htmlFor="password">
-              비밀번호<span>*</span>
+            <label className={styles.input_label} htmlFor="password">
+              비밀번호<span className={styles.asterisk}>*</span>
             </label>
             <input
               type="password"
@@ -112,11 +112,13 @@ export default function EditForm({ user }: { user: UserInfo }) {
                 },
               })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && <p className={styles.error_message}>{errors.password.message}</p>}
           </li>
 
           <li className={styles.input_container}>
-            <label htmlFor="phone">전화번호</label>
+            <label className={styles.input_label} htmlFor="phone">
+              전화번호
+            </label>
             <input
               type="text"
               id="phone"
@@ -130,11 +132,13 @@ export default function EditForm({ user }: { user: UserInfo }) {
                 },
               })}
             />
-            {errors.phone && <p>{errors.phone.message}</p>}
+            {errors.phone && <p className={styles.error_message}>{errors.phone.message}</p>}
           </li>
 
           <li className={styles.input_container}>
-            <label htmlFor="address">주소</label>
+            <label className={styles.input_label} htmlFor="address">
+              주소
+            </label>
             <input
               type="text"
               id="address"
@@ -148,7 +152,7 @@ export default function EditForm({ user }: { user: UserInfo }) {
                 },
               })}
             />
-            {errors.address && <p>{errors.address.message}</p>}
+            {errors.address && <p className={styles.error_message}>{errors.address.message}</p>}
           </li>
         </ul>
 

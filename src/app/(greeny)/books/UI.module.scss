@@ -56,17 +56,8 @@
   }
 }
 
-// .inputs_wrapper {
-//   display: grid;
-//   grid-template-columns: repeat(2, 1fr);
-//   gap: 1rem;
-// }
-// }
-
 @media (min-width: 768px) {
   .page_container {
-    // @include flex-vertical(5rem);
-    // align-items: center;
     .search_container {
       @include flex-horizontal(10rem);
       align-items: flex-end;

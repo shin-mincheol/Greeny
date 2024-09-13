@@ -16,7 +16,7 @@ export default function PlantThumbnail({ href, src }: { href: string; src: strin
   return (
     <li>
       <Link href={href} className={styles.thumbnail_wrapper}>
-        <Image className={styles.thumbnail} src={src} fill alt="식물 썸네일" priority />
+        <Image className={styles.thumbnail} src={src} fill sizes="100%" alt="식물 썸네일" priority />
       </Link>
     </li>
   );

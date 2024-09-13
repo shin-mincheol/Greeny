@@ -1,7 +1,9 @@
 @import '@styles/mixin';
 
 .page_container {
-  margin-top: 2rem;
+  width: 100%;
+  max-width: 50rem;
+  margin: 2rem auto 0 auto;
   .tab_container {
     margin: 0 -2.4rem;
   }

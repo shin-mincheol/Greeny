@@ -1,18 +1,16 @@
-// TODO: profile/_id/plant,user 반복되는 파일 refactoring
+@import '@styles/mixin';
+
 .btn {
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 3.6rem;
+  height: 3.6rem;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 1rem;
   background-image: url(/images/FollowerDelete.svg);
   border: var(--color-primary);
   background-color: var(--color-primary);
-}
-
-@media (min-width: 768px) {
-  .btn {
-    width: 3.6rem;
-    height: 3.6rem;
+  @include mobile {
+    width: 2.8rem;
+    height: 2.8rem;
   }
 }
