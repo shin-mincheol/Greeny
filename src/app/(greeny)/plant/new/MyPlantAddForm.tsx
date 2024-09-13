@@ -123,7 +123,7 @@ export default function MyPlantAddForm() {
           </h3>
           <label htmlFor="attach" className={styles.photoAdd}>
             <div className={styles.photo_cover}>
-              {imagePreview ? <Image src={imagePreview} alt="프로필 사진 선택" fill sizes="100%" priority /> : <Image src={photoAdd} alt="프로필 사진 선택" fill sizes="100%" priority />}
+              {imagePreview ? <Image src={imagePreview} alt="프로필 사진 선택" fill /> : <Image src={photoAdd} alt="프로필 사진 선택" fill priority />}
               <input type="file" id="attach" {...register('attach')} />
             </div>
           </label>
