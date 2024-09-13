@@ -1,12 +1,12 @@
+@import '@styles/mixin';
+
 .heading {
-  display: none;
-}
-@media (min-width: 768px) {
-  .heading {
-    display: block;
-    color: var(--color-primary);
-    font-weight: var(--font-semibold);
-    font-size: 3.2rem;
-    margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  font-size: 3.2rem;
+  margin-bottom: 1.5rem;
+
+  @include mobile {
+    display: none;
   }
 }

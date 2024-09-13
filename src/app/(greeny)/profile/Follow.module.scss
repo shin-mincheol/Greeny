@@ -2,36 +2,34 @@
 
 .follow {
   @include flex-vertical(0.8rem);
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 8rem;
-  height: 4rem;
+  width: 17.5rem;
+  height: 5rem;
+
+  @include mobile {
+    @include flex-vertical(0.8rem);
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 4rem;
+  }
 
   .follow_count {
-    font-weight: var(--font-semibold);
-    font-size: 1.4rem;
+    font-weight: var(--font-medium);
+    font-size: 1.8rem;
+    @include mobile {
+      font-weight: var(--font-semibold);
+      font-size: 1.4rem;
+    }
   }
   .follow_title {
     font-weight: var(--font-regular);
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     color: var(--color-gray-10);
-  }
-}
-
-@media (min-width: 768px) {
-  .follow {
-    @include flex-vertical(0.8rem);
-    justify-content: space-between;
-    align-items: center;
-    width: 17.5rem;
-    height: 5rem;
-    .follow_count {
-      font-weight: var(--font-medium);
-      font-size: 1.8rem;
-    }
-    .follow_title {
+    @include mobile {
       font-weight: var(--font-regular);
-      font-size: 1.8rem;
+      font-size: 1.2rem;
     }
   }
 }
