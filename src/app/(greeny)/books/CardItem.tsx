@@ -8,7 +8,7 @@ export default function CardItem({ card }: { card: PlantJson }) {
     <li>
       <div className={styles.card_wrapper}>
         <Link className={styles.card_image_wrapper} href={`/books/${card.cntntsNo}`}>
-          <Image className={styles.card_image} src={card.rtnFileUrl} fill alt="식물 썸네일" />
+          <Image className={styles.card_image} src={card.rtnFileUrl} fill sizes="100%" alt="식물 썸네일" />
         </Link>
 
         <div className={styles.card_content_wrapper}>

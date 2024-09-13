@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: { _id: string } }) {
   return (
     <div className={styles.page_container}>
       <Profile userInfo={userData} userId={params._id} />
-      <div style={{ textAlign: 'center' }}>{bookmarkId ? <DeleteButton _id={bookmarkId}>팔로잉</DeleteButton> : <AddButton _id={Number(params._id)} />}</div>
+      <div style={{ textAlign: 'center', padding: '6px' }}>{bookmarkId ? <DeleteButton _id={bookmarkId}>팔로잉</DeleteButton> : <AddButton _id={Number(params._id)} />}</div>
 
       <div className={styles.tab_container}>
         <Tab first={firstTab} second={secondTab} firstSrOnly="식물" secondSrOnly="포스트" />

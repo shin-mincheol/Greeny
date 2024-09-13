@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { cntntsNo: string } }) {
       </div>
 
       <div className={styles.image_wrapper}>
-        <Image src={processedPlant.rtnFileUrl} alt="식물 이미지" className={styles.img} fill />
+        <Image src={processedPlant.rtnFileUrl} alt="식물 이미지" className={styles.img} fill sizes="100%" />
       </div>
 
       <table className={styles.content_container}>

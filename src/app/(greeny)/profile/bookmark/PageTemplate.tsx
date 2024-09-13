@@ -22,7 +22,7 @@ export default async function PageTemplate({ plants, posts }: { plants: PlantBoo
               <h3>{post.post.title}</h3>
               <p>{post.memo}</p>
             </div>
-            <div className={styles.contents_cover}>{post.post.image.length > 0 ? <Image fill src={`${SERVER}${post.post.image[0].path}`} alt="식물 사진" /> : ''}</div>
+            <div className={styles.contents_cover}>{post.post.image.length > 0 ? <Image fill sizes="100%" src={`${SERVER}${post.post.image[0].path}`} alt="식물 사진" /> : ''}</div>
           </div>
         </Link>
       </li>
