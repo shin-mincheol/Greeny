@@ -1,23 +1,27 @@
 @import '@styles/mixin';
 
-.follow_wrapper {
-  // @include flex-horizontal(0rem);
+.follow {
+  @include flex-vertical(1rem);
+  align-items: center;
+  min-width: 10rem;
 
-  .follow {
-    @include flex-vertical(0.8rem);
-    justify-content: center;
-    align-items: center;
-    width: 8rem;
-    height: 4rem;
+  .follow_count {
+    font-weight: var(--font-medium);
+    font-size: 2rem;
+    transition: all 0.3s;
 
-    p {
-      font-size: 1.4rem;
-      font-weight: var(--font-semibold);
+    @include mobile {
+      font-size: 1.6rem;
     }
-    span {
-      font-size: 1.2rem;
-      font-weight: var(--font-regular);
-      color: var(--color-gray-10);
+  }
+  .follow_title {
+    font-weight: var(--font-regular);
+    font-size: 2rem;
+    color: var(--color-gray-10);
+    transition: all 0.3s;
+
+    @include mobile {
+      font-size: 1.4rem;
     }
   }
 }

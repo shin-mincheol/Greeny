@@ -1,3 +1,4 @@
+import styles from './PlantThumbnail.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -6,15 +7,16 @@ export default function PlantThumbnail({ href, src }: { href: string; src: strin
     return (
       <li>
         <Link href={href}>
-          <div style={{ width: '11.7rem', height: '10rem', background: ' #d5e1de' }}></div>
+          <div className={styles.default_thumbnail}></div>
         </Link>
       </li>
     );
   }
+
   return (
     <li>
-      <Link href={href}>
-        <Image src={src} alt="식물 썸네일" width={117} height={100} priority />
+      <Link href={href} className={styles.thumbnail_wrapper}>
+        <Image className={styles.thumbnail} src={src} fill sizes="100%" alt="식물 썸네일" priority />
       </Link>
     </li>
   );

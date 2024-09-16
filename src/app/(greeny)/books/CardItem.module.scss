@@ -1,0 +1,61 @@
+@import '@styles/mixin';
+
+.card_wrapper {
+  @include flex-vertical(1.6rem);
+  justify-content: space-between;
+
+  @include mobile {
+    flex-direction: row;
+    gap: 1.8rem;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .card_image_wrapper {
+    position: relative;
+    min-width: 16rem;
+    min-height: 16rem;
+    display: block;
+
+    @include mobile {
+      position: relative;
+      width: 9rem;
+      height: 9rem;
+      min-width: 0;
+      min-height: 0;
+      display: block;
+    }
+    .card_image {
+      border-radius: 2rem;
+      object-fit: cover;
+    }
+  }
+
+  .card_content_wrapper {
+    @include flex-vertical(0.8rem);
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include mobile {
+      @include flex-vertical(1rem);
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .card_title {
+      font-weight: var(--font-semibold);
+      font-size: 1.4rem;
+      @include mobile {
+        font-weight: var(--font-semibold);
+        font-size: 1.4rem;
+      }
+    }
+    .card_subtitle {
+      font-weight: var(--font-medium);
+      font-size: 1.2rem;
+      @include mobile {
+        font-weight: var(--font-medium);
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

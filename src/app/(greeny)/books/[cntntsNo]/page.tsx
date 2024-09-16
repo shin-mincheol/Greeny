@@ -1,5 +1,5 @@
+import styles from './page.module.scss';
 import Image from 'next/image';
-import styles from './[cntntsNo].module.scss';
 import plantList from '@/app/data/plantList';
 import { PlantJson } from '@/types/plant';
 
@@ -16,87 +16,83 @@ export default function Page({ params }: { params: { cntntsNo: string } }) {
   }, {} as PlantJson);
 
   return (
-    <>
-      <div className={styles.image_wrapper}>
-        <Image src={processedPlant.rtnFileUrl} alt="식물 이미지" className={styles.img} fill />
+    <div className={styles.page_container}>
+      <div className={styles.title_container}>
+        <h2 className={styles.title}>{processedPlant.cntntsSj}</h2>
+        <p className={styles.subtitle}>{processedPlant.plntbneNm}</p>
       </div>
 
-      <div className={styles.content_wrapper}>
-        <div className={styles.title}>
-          <p>{processedPlant.cntntsSj}</p>
-          <span>{processedPlant.plntbneNm}</span>
+      <div className={styles.image_wrapper}>
+        <Image src={processedPlant.rtnFileUrl} alt="식물 이미지" className={styles.img} fill sizes="100%" />
+      </div>
+
+      <div className={styles.content_container}>
+        <div className={styles.content_item}>
+          <h4>물주기</h4>
+          <p>{processedPlant.waterCycle}</p>
         </div>
-        <div className={styles.detail}>
-          <table>
-            <tbody>
-              <tr>
-                <th>물주기</th>
-                <td>{processedPlant.waterCycle}</td>
-              </tr>
-              <tr>
-                <th>온도</th>
-                <td>{processedPlant.grwhTpCodeNm}</td>
-              </tr>
-              <tr>
-                <th>습도</th>
-                <td>{processedPlant.hdCodeNm}</td>
-              </tr>
-              <tr>
-                <th>일조량</th>
-                <td>{processedPlant.lighttdemanddoCodeNm}</td>
-              </tr>
-              <tr>
-                <th>비료</th>
-                <td>{processedPlant.frtlzrInfo}</td>
-              </tr>
-              <tr>
-                <th>관리수준</th>
-                <td>{processedPlant.managelevelCodeNm}</td>
-              </tr>
-              <tr>
-                <th>관리요구도</th>
-                <td>{processedPlant.managedemanddoCodeNm}</td>
-              </tr>
-              <tr>
-                <th>병해충</th>
-                <td>{processedPlant.dlthtsCodeNm}</td>
-              </tr>
-              <tr>
-                <th>생육형태</th>
-                <td>{processedPlant.grwhstleCodeNm}</td>
-              </tr>
-              <tr>
-                <th>생태</th>
-                <td>{processedPlant.eclgyCodeNm}</td>
-              </tr>
-              <tr>
-                <th>번식방법</th>
-                <td>{processedPlant.prpgtmthCodeNm}</td>
-              </tr>
-              <tr>
-                <th>꽃색</th>
-                <td>{processedPlant.flclrCodeNm}</td>
-              </tr>
-              <tr>
-                <th>열매색</th>
-                <td>{processedPlant.fmldecolrCodeNm}</td>
-              </tr>
-              <tr>
-                <th>잎색</th>
-                <td>{processedPlant.lefcolrCodeNm}</td>
-              </tr>
-              <tr>
-                <th>잎무늬</th>
-                <td>{processedPlant.lefmrkCodeNm}</td>
-              </tr>
-              <tr>
-                <th>발화계절</th>
-                <td>{processedPlant.prpgtEraInfo}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className={styles.content_item}>
+          <h4>온도</h4>
+          <p>{processedPlant.grwhTpCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>습도</h4>
+          <p>{processedPlant.hdCodeNm}</p>
+        </div>
+
+        <div className={styles.content_item}>
+          <h4>일조량</h4>
+          <p>{processedPlant.lighttdemanddoCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>비료</h4>
+          <p>{processedPlant.frtlzrInfo}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>관리수준</h4>
+          <p>{processedPlant.managelevelCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>관리요구도</h4>
+          <p>{processedPlant.managedemanddoCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>병해충</h4>
+          <p>{processedPlant.dlthtsCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>생육형태</h4>
+          <p>{processedPlant.grwhstleCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>생태</h4>
+          <p>{processedPlant.eclgyCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>번식방법</h4>
+          <p>{processedPlant.prpgtEraInfo}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>꽃색</h4>
+          <p>{processedPlant.flclrCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>열매색</h4>
+          <p>{processedPlant.fmldecolrCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>잎색</h4>
+          <p>{processedPlant.lefcolrCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>잎무늬</h4>
+          <p>{processedPlant.lefmrkCodeNm}</p>
+        </div>
+        <div className={styles.content_item}>
+          <h4>발화계절</h4>
+          <p>{processedPlant.prpgtEraInfo}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

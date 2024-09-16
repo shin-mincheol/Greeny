@@ -1,23 +1,42 @@
 @import '@styles/mixin';
 
-.edit_wrapper {
-  form {
+.edit_form_container {
+  margin: 5rem auto;
+  width: 50rem;
+
+  @include mobile {
+    width: 100%;
+    max-width: 50rem;
+    margin: 2rem auto;
+  }
+  .edit_form {
     width: 100%;
     @include flex-vertical(3rem);
     align-items: center;
-
-    h2 {
-      font-size: 2rem;
-      font-weight: var(--font-bold);
-      color: var(--color-primary);
+    @include mobile {
+      @include flex-vertical(7rem);
+      align-items: flex-start;
     }
 
+    .heading {
+      font-weight: var(--font-bold);
+      color: var(--color-primary);
+      font-size: 2.8rem;
+      align-self: center;
+      @include mobile {
+        font-size: 2.4rem;
+      }
+    }
+    .form_list {
+      @include flex-vertical(2rem);
+      width: 100%;
+    }
     .file_container {
       width: 100%;
       @include flex-vertical(0.5rem);
       align-items: center;
 
-      h3 {
+      .profile_image_title {
         text-align: left;
         margin-right: auto;
         margin-bottom: 0.5rem;
@@ -31,18 +50,18 @@
       width: 100%;
       @include flex-vertical(0.5rem);
 
-      label {
+      .input_label {
         margin-bottom: 0.5rem;
         color: var(--color-black);
         font-weight: var(--font-semibold);
         font-size: 1.6rem;
 
-        span {
+        .asterisk {
           color: var(--color-error);
         }
       }
 
-      p {
+      .error_message {
         color: var(--color-error);
         font-weight: var(--font-semibold);
       }
@@ -56,7 +75,7 @@
     border-radius: 50%;
     overflow: hidden;
     border: 0.1rem solid var(--color-secondary-dark);
-    img {
+    .image {
       object-fit: cover;
     }
   }

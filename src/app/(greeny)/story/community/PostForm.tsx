@@ -59,7 +59,7 @@ export default function PostForm(props?: { post?: PostRes }) {
               <input type="file" name="attach" id="image" accept="image/*" multiple onChange={handleChange} />
             </label>
             {urls.length > 0 && (
-              <Swiper spaceBetween={10} className={postStyles.image_preview_swiper}>
+              <Swiper spaceBetween={10} slidesPerView={'auto'} className={postStyles.image_preview_swiper}>
                 {urls.map((url, i) => (
                   <SwiperSlide key={i} className={postStyles.slider}>
                     <Image src={url} alt={url} sizes="100%" fill className={postStyles.preview_image} />

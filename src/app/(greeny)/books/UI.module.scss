@@ -1,0 +1,69 @@
+@import '@styles/mixin';
+
+.page_container {
+  @include flex-vertical(5rem);
+  margin: 5rem auto;
+  max-width: 102.4rem;
+  width: 100%;
+  transition: all 0.3s;
+
+  @include mobile {
+    gap: 3rem;
+    margin: 3rem auto;
+  }
+
+  .search_container {
+    @include flex-horizontal(10rem);
+    align-items: flex-end;
+    width: 100%;
+    justify-content: space-between;
+
+    .heading_container {
+      display: block;
+
+      @include mobile {
+        display: none;
+      }
+      .heading {
+        font-weight: var(--font-semibold);
+        font-size: 3.2rem;
+        line-height: 4rem;
+      }
+    }
+    .search_form {
+      @include flex-horizontal(1.2rem);
+      justify-content: flex-end;
+      align-items: center;
+      flex-grow: 1;
+
+      .btn_wrapper {
+        @include flex-horizontal(1rem);
+        justify-content: center;
+        align-items: center;
+
+        .search_btn,
+        .filter_btn {
+          @include flex-horizontal(0);
+          justify-content: center;
+          align-items: center;
+          width: 5rem;
+          height: 5rem;
+          background: var(--color-primary);
+          border-radius: 1rem;
+          cursor: pointer;
+          transition: all 0.3s;
+
+          @include mobile {
+            width: 4rem;
+            height: 4rem;
+          }
+        }
+
+        .filter_btn {
+          background-color: var(--color-white);
+          border: 0.1rem solid var(--color-primary);
+        }
+      }
+    }
+  }
+}

@@ -3,13 +3,18 @@
 //캘린더 전체
 .react-calendar {
   background-color: var(--color-white);
-  padding: 1rem;
+  padding: 2rem;
   box-sizing: border-box;
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
-  width: 100%;
+  width: 100% !important;
   border: none !important;
   @include flex-vertical(0);
+  transition: all 0.3s;
+
+  @include mobile {
+    padding: 1rem;
+  }
 }
 
 .react-calendar__navigation {
@@ -30,32 +35,55 @@
   text-align: center;
   color: var(--color-primary);
   font-weight: var(--font-semibold);
+  font-size: 2rem;
+  transition: all 0.3s;
+
+  @include mobile {
+    font-size: 1.6rem;
+  }
 }
 
 //month nav
 .react-calendar__navigation__arrow.react-calendar__navigation__prev-button,
 .react-calendar__navigation__arrow.react-calendar__navigation__next-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-primary);
-  font-size: 2rem;
+  font-size: 0;
+  background-image: url(/images/NextIcon.svg);
+  background-image: url(/images/NextIcon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.3s;
+}
+
+.react-calendar__navigation__arrow.react-calendar__navigation__prev-button {
+  background-image: url(/images/PrevIcon.svg);
 }
 
 //week text
 .react-calendar__month-view__weekdays__weekday abbr {
   text-decoration: none;
   color: var(--color-primary);
+  font-size: 1.6rem;
+  transition: all 0.3s;
+
+  @include mobile {
+    font-size: 1.2rem;
+  }
 }
 
 //day text
 .react-calendar__tile.react-calendar__month-view__days__day {
   color: var(--color-black);
-  min-height: 5.5rem;
-  @include flex-vertical(0.2rem);
+  min-height: 7rem;
+  @include flex-vertical(1.2rem);
   justify-content: flex-start;
   align-items: center;
-  transition: all 0.2s;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+
+  @include mobile {
+    min-height: 5.5rem;
+    font-size: 1.2rem;
+  }
 }
 
 // 오늘 날짜

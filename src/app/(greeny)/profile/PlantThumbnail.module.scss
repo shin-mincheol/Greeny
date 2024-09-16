@@ -1,0 +1,22 @@
+@import '@styles/mixin';
+
+.default_thumbnail {
+  height: 10rem;
+  background: #d5e1de;
+}
+
+.thumbnail_wrapper {
+  width: 100%;
+  display: block;
+  position: relative;
+  height: 12rem;
+  transition: all 0.3s;
+
+  @include mobile {
+    height: 10rem;
+  }
+
+  .thumbnail {
+    object-fit: cover;
+  }
+}

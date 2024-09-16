@@ -17,3 +17,7 @@
 .loading {
   margin-bottom: 15rem;
 }
+
+body {
+  min-width: 36rem;
+}

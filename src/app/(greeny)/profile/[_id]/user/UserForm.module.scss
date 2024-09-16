@@ -1,0 +1,15 @@
+@import '@styles/mixin';
+
+.form_wrapper {
+  @include flex-horizontal(1.2rem);
+  margin-bottom: 3rem;
+  .btn_submit {
+    padding: 1.1rem;
+    border-radius: 1rem;
+    background-color: var(--color-primary);
+
+    .image {
+      vertical-align: top;
+    }
+  }
+}

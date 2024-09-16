@@ -1,0 +1,10 @@
+@import '@styles/mixin';
+
+.follow_list {
+  @include flex-vertical(2rem);
+  transition: all 0.3s;
+
+  @include mobile {
+    gap: 1rem;
+  }
+}

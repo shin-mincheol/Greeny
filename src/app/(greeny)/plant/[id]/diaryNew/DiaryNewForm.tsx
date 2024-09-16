@@ -125,9 +125,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
 
   const imageList = imagePreviews.map((preview, i) => (
     <SwiperSlide key={i} className={styles.swiperItem}>
-      <div className={styles.swiper_cover}>
-        <Image src={preview} alt={`preview-${i}`} fill sizes="100%" />
-      </div>
+      <Image src={preview} alt={`preview-${i}`} fill />
       <button type="button" className={styles.deleteIcon} onClick={() => handleDeleteImage(i)}>
         <Image src={photoDelete} alt={`preview-${i}`} width={24} height={24} />
       </button>
@@ -180,14 +178,14 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
             <input type="file" id="attach" multiple {...register('attach')} />
           </label>
 
-          <Swiper className={styles.swiperList} slidesPerView={2} spaceBetween={5}>
+          <Swiper className={styles.swiperList} slidesPerView={'auto'} spaceBetween={10}>
             {imageList}
           </Swiper>
         </div>
         <p>업로드 가능한 사진의 최대 개수는 5장입니다 </p>
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="plantState">
           식물 상태<span>*</span>
         </label>
@@ -200,7 +198,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
         {errors.plantState && <p>{errors.plantState.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="action">
           반려식물을 위한 활동<span>*</span>
         </label>
@@ -213,7 +211,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
         {errors.action && <p>{errors.action.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="actionDate">
           활동 날짜<span>*</span>
         </label>
@@ -237,7 +235,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
         {errors.actionDate && <p>{errors.actionDate.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="title">
           제목<span>*</span>
         </label>
@@ -245,7 +243,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
         {errors.title && <p>{errors.title.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="content">
           내용<span>*</span>
         </label>

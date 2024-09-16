@@ -1,0 +1,12 @@
+@import '@styles/mixin';
+
+.heading {
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  font-size: 3.2rem;
+  margin-bottom: 1.5rem;
+
+  @include mobile {
+    display: none;
+  }
+}

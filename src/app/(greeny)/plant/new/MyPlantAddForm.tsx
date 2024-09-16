@@ -116,59 +116,63 @@ export default function MyPlantAddForm() {
     <form onSubmit={handleSubmit(onAddPlant)}>
       <h1>나의 식물 등록</h1>
 
-      <div className={styles.file_container}>
-        <h3>
-          식물 이미지<span>*</span>
-        </h3>
-        <label htmlFor="attach" className={styles.photoAdd}>
-          <div className={styles.photo_cover}>
-            {imagePreview ? <Image src={imagePreview} alt="프로필 사진 선택" fill sizes="100%" priority /> : <Image src={photoAdd} alt="프로필 사진 선택" fill sizes="100%" priority />}
-            <input type="file" id="attach" {...register('attach')} />
-          </div>
-        </label>
-      </div>
-
-      <div className={styles.input_container}>
-        <label htmlFor="scientificName">
-          식물<span>*</span>
-        </label>
-        <div className={styles.selectBox} ref={dropdownRef} onClick={handledrop}>
-          {plantName}
-
-          {drop ? <ul className={styles.select}>{plantOptions}</ul> : ''}
+      <div className={styles.layout_wrapper}>
+        <div className={styles.file_container}>
+          <h3>
+            식물 이미지<span>*</span>
+          </h3>
+          <label htmlFor="attach" className={styles.photoAdd}>
+            <div className={styles.photo_cover}>
+              {imagePreview ? <Image src={imagePreview} alt="프로필 사진 선택" fill /> : <Image src={photoAdd} alt="프로필 사진 선택" fill priority />}
+              <input type="file" id="attach" {...register('attach')} />
+            </div>
+          </label>
         </div>
-        <input type="hidden" {...register('scientificName')} value={plantName} />
-        {errors.scientificName && <p>{errors.scientificName.message}</p>}
-      </div>
 
-      <div className={styles.input_container}>
-        <label htmlFor="info">가드닝 정보</label>
-        <div className={styles.infoBox}>
-          <div className={styles.infoItem}>
-            <div className={styles.infoTit}>
-              <h4>습도</h4>
-              <span>|</span>
+        <div className={styles.subLayout_wrapper}>
+          <div className={styles.input_container}>
+            <label htmlFor="scientificName">
+              식물<span>*</span>
+            </label>
+            <div className={styles.selectBox} ref={dropdownRef} onClick={handledrop}>
+              {plantName}
+
+              {drop ? <ul className={styles.select}>{plantOptions}</ul> : ''}
             </div>
-            <input readOnly className={styles.readInput} type="text" {...register('humidity')} />
+            <input type="hidden" {...register('scientificName')} value={plantName} />
+            {errors.scientificName && <p>{errors.scientificName.message}</p>}
           </div>
-          <div className={styles.infoItem}>
-            <div className={styles.infoTit}>
-              <h4>온도</h4>
-              <span>|</span>
+
+          <div className={styles.input_container}>
+            <label htmlFor="info">가드닝 정보</label>
+            <div className={styles.infoBox}>
+              <div className={styles.infoItem}>
+                <div className={styles.infoTit}>
+                  <h4>습도</h4>
+                  <span>|</span>
+                </div>
+                <input readOnly className={styles.readInput} type="text" {...register('humidity')} />
+              </div>
+              <div className={styles.infoItem}>
+                <div className={styles.infoTit}>
+                  <h4>온도</h4>
+                  <span>|</span>
+                </div>
+                <input readOnly className={styles.readInput} type="text" {...register('grwhTp')} />
+              </div>
+              <div className={styles.infoItem}>
+                <div className={styles.infoTit}>
+                  <h4>일조량</h4>
+                  <span>|</span>
+                </div>
+                <input readOnly className={styles.readInput} type="text" {...register('light')} />
+              </div>
             </div>
-            <input readOnly className={styles.readInput} type="text" {...register('grwhTp')} />
-          </div>
-          <div className={styles.infoItem}>
-            <div className={styles.infoTit}>
-              <h4>일조량</h4>
-              <span>|</span>
-            </div>
-            <input readOnly className={styles.readInput} type="text" {...register('light')} />
           </div>
         </div>
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="name">
           식물 애칭<span>*</span>
         </label>
@@ -187,7 +191,7 @@ export default function MyPlantAddForm() {
         {errors.name && <p>{errors.name?.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="adoptionDate">
           식물 입양일<span>*</span>
         </label>
@@ -212,7 +216,7 @@ export default function MyPlantAddForm() {
         {errors.adoptionDate && <p>{errors.adoptionDate.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
         <label htmlFor="waterCycle">
           물주기<span>*</span>
         </label>
@@ -234,8 +238,10 @@ export default function MyPlantAddForm() {
         {errors.waterCycle && <p>{errors.waterCycle.message}</p>}
       </div>
 
-      <div className={styles.input_container}>
-        <label htmlFor="content">특징</label>
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
+        <label htmlFor="content">
+          특징<span>*</span>
+        </label>
         <textarea
           id="content"
           placeholder="10글자 이상 적어주세요."

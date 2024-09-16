@@ -7,6 +7,7 @@ import '@/styles/reset.css';
 import '@/styles/common.css';
 import '@/styles/variable.css';
 import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth';
 
 const pretendard = localFont({
   src: '../../../public/fonts/PretendardVariable.woff2',
@@ -33,11 +34,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en" className={`${pretendard.variable}`}>
       <head>
@@ -51,7 +53,7 @@ export default function RootLayout({
           <SessionProvider>
             <Header />
             <main className={styles.main}>{children}</main>
-            <Footer />
+            <Footer session={session} />
           </SessionProvider>
         </div>
       </body>

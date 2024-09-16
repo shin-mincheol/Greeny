@@ -1,7 +1,16 @@
+@import '@styles/mixin';
+
 .button {
-  padding: 1rem 0;
+  padding: 1.4rem 0;
   box-sizing: border-box;
   text-align: center;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+
+  @include mobile {
+    padding: 1rem 0;
+    font-size: 1.4rem;
+  }
 }
 .button.round {
   border-radius: 10rem;
@@ -30,7 +39,11 @@
 }
 
 .button.md {
-  padding: 1rem 4rem;
+  padding: 1.2rem 8rem;
+
+  @include mobile {
+    padding: 1rem 4rem;
+  }
 }
 
 .button.lg {

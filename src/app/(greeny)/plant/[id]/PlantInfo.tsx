@@ -38,8 +38,8 @@ export default function PlantInfo({ item, user }: { item: PlantRes; user: Sessio
   }, []);
 
   return (
-    <div className={styles.layout_wrapper}>
-      <div className={styles.plant_gardening}>
+    <div className={styles.contents_wrapper}>
+      <div className={styles.plant_gardeningMo}>
         <div className={styles.plant_head}>
           <h3>가드닝 정보</h3>
           {Number(user?.user?.id) === item?.seller_id && (
