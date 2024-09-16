@@ -15,7 +15,6 @@ export default function PageTemplate({ list, isMe, userId }: { list: PlantBookma
         <div className={styles.form_container}>
           <FollowingForm followingList={bookmarkList} setFollowingList={setBookmarkList} />
         </div>
-        <div className={styles.gap}></div>
         <FollowingListWrapper followingList={bookmarkList} isMe={isMe} userId={userId} />
       </div>
     </div>
