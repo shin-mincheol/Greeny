@@ -1,191 +1,106 @@
 @import '@styles/mixin';
 
-.filter_container {
-  @include mobile {
-    @include flex-vertical(3rem);
-    justify-content: space-between;
-    background: var(--color-white);
+.filter_wrapper {
+  @include flex-vertical(3rem);
+
+  .filter_group {
     overflow-x: hidden;
-  }
+    padding: 0 1rem;
+    @include flex-vertical(5rem);
+    height: 40rem;
+    overflow-y: scroll;
 
-  .filter_wrapper {
-    @include flex-vertical(2rem);
-    .filter_group {
-      @include flex-vertical(4.5rem);
-      height: 40rem;
-      overflow-y: scroll;
+    @include mobile {
+      gap: 3rem;
+    }
+
+    .question_section {
+      @include flex-vertical(2rem);
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 1.6rem;
+      transition: all 0.3s;
+
       @include mobile {
-        @include flex-vertical(3rem);
-      }
-      &::-webkit-scrollbar {
-        width: 0.4rem;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--color-primary);
-        border-radius: 1rem;
-      }
-
-      .plant_type {
-        @include flex-vertical(3rem);
-        justify-content: space-between;
         align-items: flex-start;
+        font-size: 1.4rem;
+        width: 100%;
+      }
+
+      .question_title {
+        font-weight: var(--font-semibold);
+        font-size: 1.8rem;
 
         @include mobile {
-          @include flex-vertical(2rem);
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-          height: 8.5rem;
+          font-weight: var(--font-semibold);
+          font-size: 1.6rem;
         }
-      }
-
-      .plant_props {
-        @include flex-vertical(3rem);
-        justify-content: space-between;
-        align-items: flex-start;
-
-        @include mobile {
-          @include flex-vertical(2rem);
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-        }
-
-        .flower_color {
-          @include flex-vertical(1rem);
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-        }
-        .fruit_color {
-          @include flex-vertical(1rem);
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-        }
-        .leaf_pattern {
-          @include flex-vertical(1rem);
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-        }
-      }
-
-      .light_quantity {
-        @include flex-vertical(3rem);
-        justify-content: space-between;
-        align-items: flex-start;
-
-        @include mobile {
-          @include flex-vertical(2rem);
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-        }
-      }
-      .water_cycle {
-        @include flex-vertical(3rem);
-        justify-content: space-between;
-        align-items: flex-start;
-
-        @include mobile {
-          @include flex-vertical(2rem);
-          justify-content: space-between;
-        }
-      }
-    }
-
-    .btn_wrapper {
-      @include flex-horizontal(1rem);
-      justify-content: center;
-      .btn_submit {
-        @include flex-horizontal(0);
-        justify-content: center;
-        align-items: center;
-        width: 7rem;
-        height: 3rem;
-        background: var(--color-primary);
-        border-radius: 1rem;
-        color: var(--color-white);
-      }
-      .btn_cancel {
-        @include flex-horizontal(0);
-        justify-content: center;
-        align-items: center;
-        width: 7rem;
-        height: 3rem;
-        background: var(--color-white);
-        border-radius: 1rem;
-        border: 0.1rem solid var(--color-primary);
-        box-sizing: border-box;
       }
     }
   }
-}
 
-.question_title,
-.question_subtitle {
-  font-weight: var(--font-semibold);
-  font-size: 2.1rem;
+  .label_wrapper {
+    @include flex-horizontal(1.4rem);
+    flex-wrap: wrap;
 
-  @include mobile {
-    font-weight: var(--font-semibold);
-    font-size: 1.4rem;
-  }
-}
-
-.custom_checkbox {
-  @include flex-horizontal(1rem);
-  align-items: center;
-
-  & > input {
-    margin: 0;
-    appearance: none;
-    cursor: pointer;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 0.35rem;
-    border: 0.1rem solid var(--color-primary);
-    background-image: url('/images/CheckBox_nor.svg');
-    background-size: 1.4rem 1.4rem;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    &:checked {
-      background-image: url('/images/CheckBox_sel.svg');
+    @include mobile {
+      gap: 1rem;
     }
-    & + span {
+  }
+
+  .custom_checkbox {
+    @include flex-horizontal(0.5rem);
+    align-items: center;
+    padding: 0.4rem 1.2rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    border: 0.1rem solid var(--color-gray-50);
+    flex-shrink: 0;
+    transition: all 0.3s;
+
+    & input[type='checkbox'] {
+      appearance: none;
       cursor: pointer;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 0.5rem;
+      border: 0.1rem solid var(--color-gray-50);
+      background-image: url('/images/CheckBox_nor.svg');
+      background-size: 1.6rem;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      @include mobile {
+        width: 1.4rem;
+        height: 1.4rem;
+        background-size: 1.4rem;
+      }
+
+      &:checked {
+        background-image: url('/images/CheckBox_sel.svg');
+      }
+      & + span {
+        flex-shrink: 0;
+        cursor: pointer;
+      }
     }
   }
-}
 
-@mixin label_wrapper($count: 1, $rem: 1.2rem) {
-  display: grid;
-  grid-template-columns: repeat($count, 1fr);
-  grid-gap: 1rem;
-  place-items: start start;
-  width: 100%;
-  font-weight: var(--font-reqular);
-  font-size: $rem;
-}
+  .custom_checkbox.lg {
+    justify-content: flex-start;
 
-.label_wrapper_lg {
-  @include label_wrapper(1, 1.8rem);
-  @include mobile {
-    @include label_wrapper(1, 1.2rem);
+    @include mobile {
+      padding: 0.4rem 1rem;
+    }
   }
-}
-.label_wrapper_md {
-  @include label_wrapper(2, 1.8rem);
-  @include mobile {
-    @include label_wrapper(2, 1.2rem);
+
+  .custom_checkbox:has(input[type='checkbox']:checked) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
   }
-}
-.label_wrapper_sm {
-  @include label_wrapper(4, 1.8rem);
-  @include mobile {
-    @include label_wrapper(3, 1.2rem);
+
+  .btn_wrapper {
+    @include flex-horizontal(1rem);
+    justify-content: center;
   }
 }
