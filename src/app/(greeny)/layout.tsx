@@ -8,6 +8,7 @@ import '@/styles/common.css';
 import '@/styles/variable.css';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
+import { ModalContextProvider } from '@/contexts/ModalContext';
 
 const pretendard = localFont({
   src: '../../../public/fonts/PretendardVariable.woff2',
@@ -50,11 +51,13 @@ export default async function RootLayout({
       </head>
       <body>
         <div className={styles.root}>
-          <SessionProvider>
-            <Header />
-            <main className={styles.main}>{children}</main>
-            <Footer session={session} />
-          </SessionProvider>
+          <ModalContextProvider>
+            <SessionProvider>
+              <Header />
+              <main className={styles.main}>{children}</main>
+              <Footer session={session} />
+            </SessionProvider>
+          </ModalContextProvider>
         </div>
       </body>
     </html>
