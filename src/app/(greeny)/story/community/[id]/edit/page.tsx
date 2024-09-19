@@ -1,5 +1,5 @@
-import { fetchPost } from '@/app/api/fetch/postFetch';
 import postStyles from '@greeny/story/community/Post.module.scss';
+import { fetchPost } from '@/app/api/fetch/postFetch';
 import PostFormEdit from '@greeny/story/community/[id]/edit/PostFormEdit';
 import { Metadata } from 'next';
 
@@ -13,7 +13,7 @@ export default async function Edit({ params: { id } }: { params: { id: string } 
 
   return (
     <>
-      <h1 className={postStyles.heading}>게시글 수정하기</h1>
+      <h1 className={postStyles.heading}>게시글 수정</h1>
       <PostFormEdit post={post} />
     </>
   );
