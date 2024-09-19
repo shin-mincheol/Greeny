@@ -1,24 +1,36 @@
 'use client';
 
+import { ImageRes } from '@/types/image';
 import postStyles from '@greeny/story/community/Post.module.scss';
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-export default function PostImage() {
-  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+type Props = {
+  originalImage: ImageRes[];
+  setOriginalImage: Dispatch<SetStateAction<ImageRes[]>>;
+};
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+
+export default function PostImage({ originalImage, setOriginalImage }: Props) {
+  const originalImagePath = originalImage?.map((img) => `${SERVER}${img.path}`);
+  const [previewUrls, setPreviewUrls] = useState<string[]>(originalImagePath ?? []);
+
+  const handleSelectImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (previewUrls.length + e.target.files!.length > 5) return alert(`이미지는 최대 5개 등록 가능합니다.\n(현재 등록된 이미지 수: ${previewUrls.length}개)`);
     if (e.target.files) {
-      const filesArr = Array.from(e.target.files);
-      const imgUrls = filesArr.map((file) => URL.createObjectURL(file));
-      setPreviewUrls((u) => [...u, ...imgUrls]);
+      const files = Array.from(e.target.files);
+      const urls = files.map((file) => URL.createObjectURL(file));
+      setPreviewUrls((prevUrls) => [...prevUrls, ...urls]);
     }
   };
 
   const handleDeleteImage = (index: number) => {
     setPreviewUrls((prevUrls) => prevUrls.filter((_, i) => i !== index));
+    if (index <= originalImage.length - 1) {
+      setOriginalImage((prevOgImg) => prevOgImg.filter((_, i) => i !== index));
+    }
   };
 
   return (
@@ -29,7 +41,7 @@ export default function PostImage() {
       </div>
       <div className={postStyles.image_container}>
         <label htmlFor="image" className={postStyles.photoAdd}>
-          <input type="file" name="attach" id="image" accept="image/*" multiple onChange={handleChange} />
+          <input type="file" name="attach" id="image" accept="image/*" multiple onChange={handleSelectImage} />
         </label>
         {previewUrls.length > 0 && (
           <Swiper spaceBetween={10} slidesPerView={'auto'} className={postStyles.image_preview_swiper}>
