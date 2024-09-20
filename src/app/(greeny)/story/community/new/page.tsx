@@ -1,6 +1,6 @@
 import postStyles from '@greeny/story/community/Post.module.scss';
-import PostForm from '@greeny/story/community/PostForm';
 import { Metadata } from 'next';
+import PostForm from '@greeny/story/community/PostForm';
 
 export const metadata: Metadata = {
   title: 'New Post',

@@ -312,6 +312,7 @@ $tablet_size: 768px;
   display: flex;
   gap: 1.2rem;
   font-size: 1.2rem;
+  z-index: 10;
 
   textarea {
     padding: 13px 18px;
@@ -489,7 +490,7 @@ $tablet_size: 768px;
 .dropdown_container {
   position: absolute;
   width: max-content;
-  z-index: 10;
+  z-index: 5;
   top: 2rem;
   right: 0;
   padding: 0.2rem 0.6rem;
