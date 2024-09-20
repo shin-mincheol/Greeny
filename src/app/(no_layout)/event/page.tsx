@@ -1,5 +1,13 @@
+import Link from 'next/link';
 import styles from './event.module.scss';
 
 export default function EventPage() {
-  return <h1>이벤트 페이지입니다.</h1>;
+  return (
+    <div className={styles.event_wrpper}>
+      <h2>나의 반려 식물 찾아보기!</h2>
+      <Link href="/event/plantTest" className={styles.testLink}>
+        테스트하러 가기
+      </Link>
+    </div>
+  );
 }
