@@ -23,6 +23,7 @@
   align-items: center;
   background-color: var(--color-secondary-dark);
 
+  // @@@@@@@@@@@@@ 테스트 페이지 @@@@@@@@@@@@@
   .test_wrapper {
     @include flex-vertical(5rem);
     align-items: center;
@@ -80,5 +81,30 @@
   }
   .fade-out {
     opacity: 0;
+  }
+
+  // @@@@@@@@@@@@@ 결과 페이지 @@@@@@@@@@@@@
+  .result_wrpper {
+    .result_cover {
+      position: relative;
+      width: 24rem;
+      height: 24rem;
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    .recommended {
+      .recommended_cover {
+        position: relative;
+        width: 24rem;
+        height: 24rem;
+
+        img {
+          object-fit: cover;
+        }
+      }
+    }
   }
 }
