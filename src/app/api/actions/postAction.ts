@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
-import { FileRes } from '@/types/image';
+import { FileRes, ImageRes } from '@/types/image';
 import { PostComment } from '@/types/post';
 import { CoreErrorRes, CoreSuccessRes, MultiItem, SingleItem } from '@/types/response';
 import { revalidatePath } from 'next/cache';
@@ -14,30 +14,8 @@ export async function addPost(formData: FormData) {
   const session = await auth();
   const category = formData.get('category');
 
-  let images;
   const imageFiles = formData.getAll('attach') as File[];
-  if (imageFiles[0]?.size > 0) {
-    try {
-      const imgFormData = new FormData();
-      imageFiles.forEach((imageFile) => imgFormData.append('attach', imageFile));
-      const res = await fetch(`${SERVER}/files`, {
-        method: 'POST',
-        headers: {
-          'client-id': `${DBNAME}`,
-        },
-        body: imgFormData,
-      });
-      const resJson: MultiItem<FileRes> | CoreErrorRes = await res.json();
-      if (resJson.ok) {
-        images = resJson.item.map((image) => ({
-          path: image.path,
-          name: image.originalname,
-        }));
-      }
-    } catch (error) {
-      throw new Error('network error');
-    }
-  } else images = [];
+  const images = imageFiles[0]?.size > 0 ? await uploadFile(imageFiles) : [];
 
   const data = {
     type: 'post',
@@ -62,6 +40,60 @@ export async function addPost(formData: FormData) {
   }
   revalidatePath('/story/community');
   redirect('/story/community');
+}
+
+export async function updatePost(postId: number, originalImage: ImageRes[], formData: FormData) {
+  const session = await auth();
+  const category = formData.get('category');
+
+  const imageFiles = formData.getAll('attach') as File[];
+  const images = imageFiles[0]?.size > 0 ? await uploadFile(imageFiles) : [];
+
+  const data = {
+    image: [...originalImage, ...images!],
+    title: formData.get('title'),
+    content: formData.get('content'),
+    extra: { category },
+  };
+
+  try {
+    await fetch(`${SERVER}/posts/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'client-id': `${DBNAME}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    throw new Error('network error');
+  }
+  revalidatePath('/story/community');
+  redirect('/story/community');
+}
+
+async function uploadFile(imageFiles: File[]) {
+  try {
+    const imgFormData = new FormData();
+    imageFiles.forEach((imageFile) => imgFormData.append('attach', imageFile));
+    const res = await fetch(`${SERVER}/files`, {
+      method: 'POST',
+      headers: {
+        'client-id': `${DBNAME}`,
+      },
+      body: imgFormData,
+    });
+    const resJson: MultiItem<FileRes> | CoreErrorRes = await res.json();
+    if (resJson.ok) {
+      return resJson.item.map((image) => ({
+        path: image.path,
+        name: image.originalname,
+      }));
+    }
+  } catch (error) {
+    throw new Error('network error');
+  }
 }
 
 export async function deletePost(postId: string) {

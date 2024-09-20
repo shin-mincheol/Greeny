@@ -117,10 +117,26 @@
   flex-direction: column;
   gap: 3rem;
 
-  h2 {
-    margin-bottom: 1rem;
-    font-weight: var(--font-bold);
-    font-size: clamp(1.4rem, 1.8vw, 1.6rem);
+  .image_heading {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: var(--font-bold);
+      font-size: clamp(1.4rem, 1.8vw, 1.6rem);
+    }
+
+    span {
+      color: var(--color-gray-10);
+      font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+    }
+  }
+
+  .image_notice {
+    margin-top: 1.2rem;
+    color: var(--color-gray-10);
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
   }
 
   .image_container {
@@ -234,6 +250,10 @@
     border: 0.1rem solid var(--color-primary);
     color: #ffffff;
     background-color: var(--color-primary);
+  }
+
+  textarea {
+    box-sizing: border-box;
   }
 }
 
