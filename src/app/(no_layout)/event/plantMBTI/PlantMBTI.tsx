@@ -41,10 +41,10 @@ export default function PlantTest() {
         </div>
         <div className={styles.btn_wrapper}>
           <button type="button" onClick={() => handleNextQuestion(1, questionData[currentQuestion].type)} className={styles.answerBtn}>
-            <pre> {questionData[currentQuestion].answer1}</pre>
+            {questionData[currentQuestion].answer1}
           </button>
           <button type="button" onClick={() => handleNextQuestion(0, questionData[currentQuestion].type)} className={styles.answerBtn}>
-            <pre>{questionData[currentQuestion].answer2}</pre>
+            {questionData[currentQuestion].answer2}
           </button>
         </div>
         <div className={styles.testCover}>

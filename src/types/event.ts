@@ -10,6 +10,7 @@ export interface ResultList {
   id: number;
   mbti: string;
   resultTitle: string;
+  resultIntroduction: string;
   resultText: string;
   resultImage: string;
   recommendedPlants: recommendedPlants[];

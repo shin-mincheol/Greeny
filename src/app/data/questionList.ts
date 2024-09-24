@@ -24,7 +24,7 @@ const questionData: QuestionList[] = [
     question: '새로운 식물 관리할 때, 나의 계획은??',
     answer1: '식물의 요구사항을 분석하고 철저한 계획과 체크리스트 작성 📋',
     answer2: '식물의 반응에 따라 매일 다른 관리 방법을 시도하기 🌀',
-    questionImage: '/images/PlantImg1.png',
+    questionImage: '/images/Question3.svg',
   },
 
   {
@@ -33,7 +33,7 @@ const questionData: QuestionList[] = [
     question: '친구에게 식물을 선물 받았을 때 나의 반응은??',
     answer1: '“식물 선물 정말 고마워! 너의 마음이 느껴지는 것 같아서 너무 기쁘고 행복해. \n  정말 소중히 잘 키울게!” 🤩',
     answer2: '“고마워! 이 식물은 어떤 종류야? 관리할 때 특별히 신경 써야 하는 점이 있을까?” 🤔',
-    questionImage: '/images/PlantImg1.png',
+    questionImage: '/images/Question4.svg',
   },
 
   {
@@ -91,7 +91,7 @@ const questionData: QuestionList[] = [
     question: '식물이 말을 할 수 있다면, 첫 번째로 당신에게 무엇을 말할 것 같나요??',
     answer1: '“항상 돌봐줘서 고마워요 💖” 또는 “오늘은 기분이 좋아요! 🌟',
     answer2: '물 주는 게 부족해요. 💧” 또는 “토양이 너무 건조해요.” 🌵',
-    questionImage: '/images/PlantImg1.png',
+    questionImage: '/images/Question11.svg',
   },
   {
     id: 12,
