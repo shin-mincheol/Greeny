@@ -9,12 +9,14 @@ export default function ResultMBTI({ params }: { params: { mbti: string } }) {
   return (
     <div className={styles.back_wrapper}>
       <div className={styles.result_wrpper}>
-        <div className={styles.result_cover}>
-          <Image src={`${result?.resultImage}`} alt="mbti 결과 이미지" fill sizes="100%" priority />
-        </div>
+        <div className={styles.result_card}>
+          <div className={styles.result_cover}>
+            <Image src={`${result?.resultImage}`} alt="mbti 결과 이미지" fill sizes="100%" priority />
+          </div>
 
-        <h2>{result?.resultTitle}</h2>
-        <p>{result?.resultText}</p>
+          <h2>{result?.resultTitle}</h2>
+          <p>{result?.resultText}</p>
+        </div>
 
         <div className={styles.recommended}>
           <div className={styles.recommended_item}>

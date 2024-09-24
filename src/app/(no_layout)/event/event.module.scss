@@ -1,27 +1,47 @@
 @import '@styles/mixin';
 
-.event_wrpper {
-  max-width: 102.4rem;
-  width: 100%;
-  margin: auto;
-  @include flex-vertical(2rem);
-  align-items: center;
-
-  .testLink {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-  }
-}
-
 .back_wrapper {
   width: calc(100% + 3.2rem + 3.2rem);
-  height: 100svh;
   margin: -8rem -3.2rem;
   display: flex;
   align-items: center;
   background-color: var(--color-secondary-dark);
+
+  .event_wrpper {
+    max-width: 102.4rem;
+    width: 100%;
+    margin: auto;
+    @include flex-vertical(5rem);
+    align-items: center;
+    justify-content: center;
+
+    .event_tit {
+      width: 100%;
+      text-align: center;
+      color: var(--color-primary);
+      @include flex-vertical(1rem);
+
+      p {
+        font-size: 2.4rem;
+        font-weight: var(--font-medium);
+      }
+
+      h2 {
+        font-size: 3.2rem;
+        font-weight: var(--font-bold);
+      }
+    }
+
+    .testLink {
+      font-size: 2rem;
+      width: 30rem;
+      text-align: center;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+  }
 
   // @@@@@@@@@@@@@ 테스트 페이지 @@@@@@@@@@@@@
   .test_wrapper {
@@ -47,11 +67,11 @@
 
     .testCover {
       position: relative;
-      width: 24rem;
-      height: 24rem;
+      width: 26rem;
+      height: 26rem;
 
       img {
-        object-fit: cover;
+        object-fit: contain;
       }
     }
 
@@ -85,17 +105,55 @@
 
   // @@@@@@@@@@@@@ 결과 페이지 @@@@@@@@@@@@@
   .result_wrpper {
-    .result_cover {
-      position: relative;
-      width: 24rem;
-      height: 24rem;
+    max-width: 102.4rem;
+    width: 100%;
+    margin: auto;
+    @include flex-vertical(5rem);
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    box-sizing: border-box;
 
-      img {
-        object-fit: cover;
+    .result_card {
+      @include flex-vertical(3rem);
+      text-align: center;
+      align-items: center;
+      padding: 3rem;
+      box-sizing: border-box;
+      max-width: 50rem;
+      height: 60rem;
+      width: 100%;
+      border-radius: 2rem;
+      border: 0.1rem solid #a7c4a0;
+      background-color: var(--color-secondary-light);
+
+      .result_cover {
+        position: relative;
+        width: 24rem;
+        height: 24rem;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+        }
+      }
+      & h2 {
+        font-size: 2.4rem;
+        color: var(--color-primary);
+        font-weight: var(--font-semibold);
+      }
+
+      & p {
+        font-size: 1.8rem;
+        line-height: 3rem;
+        word-break: keep-all;
       }
     }
 
     .recommended {
+      @include flex-horizontal(1rem);
+      box-shadow: inset 0 0 10px saddlebrown;
       .recommended_cover {
         position: relative;
         width: 24rem;

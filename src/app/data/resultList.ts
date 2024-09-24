@@ -248,7 +248,7 @@ const resultData: ResultList[] = [
     resultTitle: '🧑 효율적인 식물 감독관 🧑',
     resultText:
       '당신은 체계적이고 계획적인 방식으로 식물을 돌보며, 효율성을 가장 중요하게 생각해요. 언제 물을 줘야 하는지, 햇빛은 어느 정도가 필요한지 철저히 관리하며, 실수를 최소화하려 하죠. 모든 것이 계획에 맞아야 만족하는 당신은 진정한 식물계의 감독관으로, 식물들이 당신의 철저한 관리 아래에서 최상의 상태로 자라납니다.',
-    resultImage: '/images/PlantImg1.png',
+    resultImage: '/images/ESTJ.svg',
     recommendedPlants: [
       {
         cntntsNo: '12990',
