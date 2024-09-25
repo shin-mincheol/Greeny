@@ -24,7 +24,7 @@ export default async function MyPlantDiaryEdit({ params }: { params: { id: strin
 
   return (
     <div className={styles.plantEdit_wrapper}>
-      <MyPlantEditForm id={params.id} item={item} />
+      <MyPlantEditForm item={item} />
     </div>
   );
 }
