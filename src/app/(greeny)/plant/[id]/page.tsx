@@ -39,12 +39,6 @@ export default async function MyPlantDetail({ params }: { params: { id: string }
   const toDay = new Date();
   const diffDays = differenceInDays(toDay, currentDay);
 
-  const handleDelete = () => {
-    if (confirm(`"정말 떠나보낼 거예요?" \n${item.name}이(가) 마지막으로 잎사귀를 흔들고 있어요... 🍃`) == true) {
-      plantsDelete(item._id);
-    }
-  };
-
   return (
     <div className={styles.plantDetail_wrapper}>
       <div className={styles.plantDetail_head}>

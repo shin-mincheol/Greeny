@@ -4,23 +4,25 @@ import DatePicker from 'react-datepicker';
 import Button from '@/components/button/Button';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useRef, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FormState, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import photoAdd from '@images/PhotoAddIcon.svg';
 import plantData from '@/app/data/plantList';
 import { PlantForm, PlantRes } from '@/types/plant';
 import { format } from 'date-fns';
-import { plantNew } from '@/app/api/actions/plantAction';
+import { plantEdit, plantNew } from '@/app/api/actions/plantAction';
+import useModal from '@/hooks/useModal';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
-export default function MyPlantEditForm({ id, item }: { id: string; item: PlantRes }) {
-  // export default function MyPlantEditForm({ id }: { id: string }) {
+export default function MyPlantEditForm({ item }: { item: PlantRes }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(item.adoptionDate);
   const [drop, setDrop] = useState(false);
-  const [plantName, setPlantName] = useState('식물을 선택해주세요.');
+  const [plantName, setPlantName] = useState(item.scientificName);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const { alert } = useModal();
 
   const {
     register,
@@ -28,6 +30,7 @@ export default function MyPlantEditForm({ id, item }: { id: string; item: PlantR
     formState: { errors },
     control,
     setValue,
+    formState,
     watch,
   } = useForm<PlantForm>({
     defaultValues: {
@@ -98,23 +101,43 @@ export default function MyPlantEditForm({ id, item }: { id: string; item: PlantR
   }, []);
 
   //데이터 패치
-  const onAddPlant = async (formData: PlantForm) => {
+  const onEditPlant = async (formData: PlantForm) => {
+    const { dirtyFields } = formState;
     try {
-      const plantForm = new FormData();
+      const plantEditForm = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         if (key !== 'attach') {
-          plantForm.append(key, value as string);
+          plantEditForm.append(key, value as string);
         }
       });
-      if (formData.attach) {
-        plantForm.append('attach', formData.attach[0]);
+
+      if (dirtyFields.attach && formData.attach) {
+        plantEditForm.append('attach', formData.attach[0]);
+
+        const fileRes = await fetch(`${SERVER}/files`, {
+          method: 'POST',
+          headers: {
+            'client-id': `${DBNAME}`,
+          },
+          body: plantEditForm,
+        });
+
+        if (!fileRes.ok) {
+          throw new Error('파일 업로드 실패');
+        }
+
+        const fileData = await fileRes.json();
+
+        plantEditForm.append('mainImages', JSON.stringify([{ path: fileData.item[0].path, name: fileData.item[0].name }]));
+      } else {
+        plantEditForm.append('mainImages', JSON.stringify(item.mainImages));
       }
 
-      const res = await plantNew(plantForm);
-      // console.log(res);
+      const res = await plantEdit(item._id, plantEditForm);
+
       if (res.ok) {
-        alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
-        router.replace('/plant');
+        await alert(`"${res.item.name}이(가) 조금 더 특별해졌어요! 새로운 모습으로 여러분을 맞이해요! 🌱💕"`);
+        router.replace(`/plant/${item._id}`);
       }
     } catch (err) {
       console.log(err);
@@ -122,7 +145,7 @@ export default function MyPlantEditForm({ id, item }: { id: string; item: PlantR
   };
 
   return (
-    <form onSubmit={handleSubmit(onAddPlant)}>
+    <form onSubmit={handleSubmit(onEditPlant)}>
       <h1>나의 식물 수정</h1>
 
       <div className={styles.layout_wrapper}>

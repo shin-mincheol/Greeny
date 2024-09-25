@@ -5,6 +5,7 @@ import { FileRes } from '@/types/image';
 import { PlantForm, PlantRes } from '@/types/plant';
 import { DiaryForm, DiaryRes } from '@/types/post';
 import { ApiResWithValidation, MultiItem, SingleItem } from '@/types/response';
+import { revalidatePath } from 'next/cache';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
@@ -60,6 +61,7 @@ export async function DiaryNew(formData: FormData, id: string): Promise<ApiResWi
 }
 
 //식물 추가
+
 export async function plantNew(formData: FormData): Promise<ApiResWithValidation<SingleItem<PlantRes>, PlantForm>> {
   const session = await auth();
   const plantObj = {
@@ -115,7 +117,7 @@ export async function plantNew(formData: FormData): Promise<ApiResWithValidation
 }
 
 //식물 삭제
-export async function plantsDelete<T>(id: number | undefined) {
+export async function plantsDelete(id: number | undefined) {
   const session = await auth();
 
   const url = `${SERVER}/seller/products/${id}`;
@@ -128,5 +130,39 @@ export async function plantsDelete<T>(id: number | undefined) {
   });
   const resJson = await res.json();
 
+  return resJson;
+}
+
+export async function plantEdit(id: number | undefined, formData: FormData) {
+  const session = await auth();
+
+  const mainImages = formData.get('mainImages');
+  const parsedMainImages = mainImages ? JSON.parse(mainImages as string) : null;
+
+  const plantObj = {
+    name: formData.get('name'),
+    scientificName: formData.get('scientificName'),
+    light: formData.get('light'),
+    grwhTp: formData.get('grwhTp'),
+    humidity: formData.get('humidity'),
+    adoptionDate: formData.get('adoptionDate'),
+    waterCycle: formData.get('waterCycle'),
+    content: formData.get('content'),
+    mainImages: parsedMainImages,
+  };
+
+  const url = `${SERVER}/seller/products/${id}`;
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'client-id': `${DBNAME}`,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+    body: JSON.stringify(plantObj),
+  });
+
+  revalidatePath('/plant');
+  const resJson = await res.json();
   return resJson;
 }
