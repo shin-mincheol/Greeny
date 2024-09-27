@@ -6,15 +6,21 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import promptLoginModal from '@/utils/confirm';
 import useCheckViewportWidthByThreshold from '@/hooks/useCheckViewportWidthByThreshold';
+import { useSession } from 'next-auth/react';
 
 const THRESHOLD = 768;
 
-export default function ReplyInput({ postId, isLoggedin }: { postId: string; isLoggedin: boolean }) {
+type Props = {
+  postId: string;
+};
+
+export default function ReplyInput({ postId }: Props) {
   const [content, setContent] = useState<string>('');
+  const { data } = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
   const { isBiggerThanThreshold } = useCheckViewportWidthByThreshold(THRESHOLD);
   const addReplyWithId = async (formData: FormData) => {
-    if (!isLoggedin) return promptLoginModal();
+    if (!data) return promptLoginModal();
 
     const trimmedContent = content.trim();
     if (trimmedContent.length === 0) return inputRef.current!.focus();

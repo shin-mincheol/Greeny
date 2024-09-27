@@ -60,7 +60,7 @@ export default async function PostDetail({ params: { id } }: Props) {
         </section>
         <section className={styles.reply}>
           <ReplyList postId={id} />
-          <ReplyInput postId={id} isLoggedin={!!session} />
+          <ReplyInput postId={id} />
         </section>
       </article>
     </PostLayout>
