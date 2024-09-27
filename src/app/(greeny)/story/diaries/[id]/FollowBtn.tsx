@@ -4,10 +4,17 @@ import diaryDetailStyles from '@greeny/story/diaries/[id]/DiaryDetail.module.scs
 
 import { followPlant, unfollowPlant } from '@/app/api/actions/postAction';
 import promptLoginModal from '@/utils/confirm';
+import { useSession } from 'next-auth/react';
 
-export default function FollowBtn({ plantId, bookmarkId, isLoggedIn }: { plantId: number; bookmarkId: number | undefined; isLoggedIn: boolean }) {
+type Props = {
+  plantId: number;
+  bookmarkId: number | undefined;
+};
+
+export default function FollowBtn({ plantId, bookmarkId }: Props) {
+  const { data } = useSession();
   const followPlantWithId = () => {
-    if (!isLoggedIn) return promptLoginModal();
+    if (!data) return promptLoginModal();
     followPlant.bind(null, plantId.toString())();
   };
   const unfollowPlantWithId = () => bookmarkId && unfollowPlant.bind(null, bookmarkId.toString())();

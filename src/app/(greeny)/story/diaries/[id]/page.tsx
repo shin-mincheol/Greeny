@@ -6,7 +6,7 @@ import { formatAgo } from '@/utils/date';
 import DiaryImageSlider from '@greeny/story/diaries/[id]/DiaryImageSlider';
 import { auth } from '@/auth';
 import DiarySubMenu from '@greeny/story/diaries/[id]/DiarySubMenu';
-import FollowBtn from './FollowBtn';
+import FollowBtn from '@greeny/story/diaries/[id]/FollowBtn';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DiaryRes } from '@/types/post';
@@ -97,7 +97,7 @@ export default async function DiaryDetail({ params: { id } }: Props) {
                 <div className={diaryDetailStyles.plant_scientific_name}>{plantDetail.scientificName}</div>
               </div>
             </Link>
-            {!isMyPlant && <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} isLoggedIn={!!session} />}
+            {!isMyPlant && <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} />}
           </div>
           <div>{plantDetail.content}</div>
         </div>
