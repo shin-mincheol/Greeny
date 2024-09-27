@@ -4,19 +4,20 @@ import styles from '@greeny/story/Community.module.scss';
 import { cancelLikePost, likePost } from '@/app/api/actions/postAction';
 import Image from 'next/image';
 import promptLoginModal from '@/utils/confirm';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   number: number;
   targetId: string;
   bookmarkId: number | undefined;
   content: string;
-  isLoggedIn: boolean;
 };
 
-export default function Like({ number, targetId, bookmarkId, content, isLoggedIn }: Props) {
+export default function Like({ number, targetId, bookmarkId, content }: Props) {
   const isFilled = !!bookmarkId;
+  const { data } = useSession();
   const likePostWithId = () => {
-    if (!isLoggedIn) return promptLoginModal();
+    if (!data) return promptLoginModal();
 
     likePost.bind(null, targetId, content)();
   };

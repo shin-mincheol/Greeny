@@ -6,9 +6,13 @@ import { DiaryRes } from '@/types/post';
 import { formatAgo } from '@/utils/date';
 import Image from 'next/image';
 
+type Props = {
+  diary: DiaryRes;
+};
+
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default function DiaryItem({ diary, isLoggedIn }: { diary: DiaryRes; isLoggedIn: boolean }) {
+export default function DiaryItem({ diary }: Props) {
   return (
     <div className={diaryStyles.item}>
       <Link href={`/story/diaries/${diary._id}`} className={diaryStyles.thumbnail}>
@@ -22,7 +26,7 @@ export default function DiaryItem({ diary, isLoggedIn }: { diary: DiaryRes; isLo
             <>
               <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
-                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} isLoggedIn={isLoggedIn} />
+                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} />
               </div>
             </>
           }

@@ -37,7 +37,11 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
   };
 }
 
-export default async function PostDetail({ params: { id } }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+};
+
+export default async function PostDetail({ params: { id } }: Props) {
   const post: PostRes = await fetchPost(id);
   const session = await auth();
   const isWriter = Number(session?.user?.id) === post.user._id;
@@ -52,7 +56,7 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
           </div>
           <pre>{post.content}</pre>
           {post.image.length > 0 && <ImageSlider images={post.image} />}
-          <PostInfo post={post} isLoggedin={!!session} />
+          <PostInfo post={post} />
         </section>
         <section className={styles.reply}>
           <ReplyList postId={id} />

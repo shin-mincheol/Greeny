@@ -36,7 +36,11 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
   };
 }
 
-export default async function DiaryDetail({ params: { id } }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+};
+
+export default async function DiaryDetail({ params: { id } }: Props) {
   const diary: DiaryRes = await fetchDiary(id);
   const session = await auth();
   const plantDetail = await fetchPlant(diary.product_id.toString());
@@ -57,7 +61,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
               <>
                 <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>{formatAgo(diary.createdAt)}</p>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
-                  <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} content={diary.content} isLoggedIn={!!session} />
+                  <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} content={diary.content} />
                   {isWriter && <DiarySubMenu />}
                 </div>
               </>
