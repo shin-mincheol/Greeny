@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import styles from './MyPlantDiaryEdit.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import { action, DiaryForm, DiaryRes, plantState } from '@/types/post';
+import { action, DiaryEditData, DiaryRes, plantState } from '@/types/post';
 import { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import photoAdd from '@images/PhotoAddIcon.svg';
@@ -12,19 +12,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Button from '@/components/button/Button';
+import { DiaryEdit } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
 import useModal from '@/hooks/useModal';
-import { FileRes, ImageRes } from '@/types/image';
-import { DiaryEdit } from '@/app/api/actions/plantAction';
-import { MultiItem } from '@/types/response';
-const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
-const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
 const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
 
 export default function DiaryEditForm({ item }: { item: DiaryRes }) {
-  const [selectedDate, setSelectedDate] = useState<Date | null>();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(item.extra.actionDate);
   const stateRef = useRef<HTMLDivElement | null>(null);
   const actionRef = useRef<HTMLDivElement | null>(null);
   const [stateDrop, setStateDrop] = useState(false);
@@ -41,15 +37,16 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
     watch,
     setValue,
     formState,
-  } = useForm<DiaryForm>({
+  } = useForm<DiaryEditData>({
     defaultValues: {
       title: item.title,
       content: item.content,
-      // actionDate: item.extra.actionDate,
+      actionDate: item.extra.actionDate,
+      plantState: item.extra.plantState,
+      action: item.extra.action,
+      attach: item.image,
     },
   });
-
-  // console.log(item);
 
   //드롭다운
   const handleActiondrop = () => {
@@ -109,32 +106,30 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
   });
 
   //이미지 프리뷰
-  const originImg = item?.image.map((item) => `${SERVER}${item.path}`);
-  const [imagePreviews, setImagePreviews] = useState<string[]>(originImg);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const images = watch('attach');
 
-  useEffect(() => {
-    if (images && images.length > 0) {
-      // 총 이미지가 5개를 넘으면 알림을 띄우고 리턴
-      if (imagePreviews.length + images.length > 5) {
-        alert('이미지는 최대 5개 등록 가능합니다.');
-        return;
-      }
-      const files = Array.from(images);
-      const previews: string[] = [];
+  // useEffect(() => {
+  //   if (images && images.length > 0) {
+  //     if (images.length > 5) {
+  //       alert('이미지는 최대 5개 등록 가능합니다.');
+  //       return;
+  //     }
+  //     const files = Array.from(images);
+  //     const previews: string[] = [];
 
-      files.forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          previews.push(reader.result as string);
-          if (previews.length === files.length) {
-            setImagePreviews((newviews) => [...newviews, ...previews]);
-          }
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  }, [images]);
+  //     files.forEach((file) => {
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         previews.push(reader.result as string);
+  //         if (previews.length === files.length) {
+  //           setImagePreviews(previews);
+  //         }
+  //       };
+  //       reader.readAsDataURL(file);
+  //     });
+  //   }
+  // }, [images]);
 
   const handleDeleteImage = (index: number) => {
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
@@ -152,62 +147,31 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
     </SwiperSlide>
   ));
 
-  //데이터 패치
-  const onEditDiary = async (formData: DiaryForm) => {
-    const { dirtyFields } = formState;
+  console.log(images);
 
+  //데이터 패치
+  const onEditDiary = async (formData: DiaryEditData) => {
     try {
-      const diaryEditForm = new FormData();
+      const plantEditForm = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         if (key !== 'attach') {
-          diaryEditForm.append(key, value as string);
+          plantEditForm.append(key, value as string);
         }
       });
-
-      let existingImages = item.image.map((file: ImageRes) => ({
-        path: file.path,
-        name: file.name,
-      }));
-
-      // 이미지가 변경되었는지 여부 확인
-      if (dirtyFields.attach && formData.attach && formData.attach.length > 0) {
-        // 새로운 이미지가 있는 경우, 이미지 업로드
-        const fileRes = await fetch(`${SERVER}/files`, {
-          method: 'POST',
-          headers: {
-            'client-id': `${DBNAME}`,
-          },
-          body: diaryEditForm,
-        });
-
-        if (!fileRes.ok) {
-          throw new Error('파일 업로드 실패');
-        }
-
-        const fileData: MultiItem<FileRes> = await fileRes.json();
-        const newImages = fileData.item.map((file: ImageRes) => ({
-          path: file.path,
-          name: file.name,
-        }));
-
-        // 기존 이미지와 새로 추가된 이미지를 병합
-        existingImages = [...existingImages, ...newImages];
-      }
-      // 변경된 이미지가 없을 경우, 기존 이미지만 사용
-      diaryEditForm.set('attach', JSON.stringify(existingImages));
-
-      const res = await DiaryEdit(item._id, diaryEditForm);
-
-      // if (!res.ok) {
-      //   throw new Error('다이어리 수정 실패');
+      // if (formData.attach) {
+      //   Array.from(formData.attach).forEach((file) => {
+      //     plantEditForm.append('attach', file);
+      //   });
       // }
 
+      // const res = await DiaryEdit(item._id, plantEditForm);
+      // console.log(res);
       // if (res.ok) {
-      //   await alert('식물 다이어리가 새롭게 변했습니다! 🌿');
-      // router.push(`/plant/${item.plantId}`);
+      //   alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
+      //   router.push(`/plant/${id}`);
       // }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 
@@ -224,7 +188,7 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
             <div className={styles.photo_cover}>
               <Image src={photoAdd} alt="프로필 사진 선택" fill priority />
             </div>
-            <input type="file" id="attach" accept="image/*" multiple {...register('attach')} />
+            <input type="file" id="attach" multiple {...register('attach')} />
           </label>
 
           <Swiper className={styles.swiperList} slidesPerView={'auto'} spaceBetween={10}>

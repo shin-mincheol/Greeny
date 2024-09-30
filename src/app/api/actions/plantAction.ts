@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
-import { FileRes } from '@/types/image';
+import { FileRes, ImageRes } from '@/types/image';
 import { PlantForm, PlantRes } from '@/types/plant';
 import { DiaryForm, DiaryRes } from '@/types/post';
 import { ApiResWithValidation, MultiItem, SingleItem } from '@/types/response';
@@ -65,9 +65,9 @@ export async function DiaryEdit(id: number | undefined, formData: FormData) {
   const session = await auth();
   const mainImages = formData.getAll('attach');
 
-  const allmainImages = mainImages.length > 0 ? mainImages.forEach((image) => JSON.parse(image as string)) : [];
+  // const allmainImages = mainImages.length > 0 ? mainImages.forEach((image) => JSON.parse(image as string)) : [];
 
-  console.log(mainImages);
+  console.log('mainImages', mainImages);
 
   // const diaryObj = {
   //   type: 'diary',
