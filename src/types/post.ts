@@ -72,15 +72,6 @@ export interface DiaryForm {
   attach: File[];
 }
 
-export interface DiaryEditData {
-  title: string;
-  content: string;
-  plantState: '좋음' | '새싹' | '개화' | '아픔' | '죽음';
-  action: '물주기' | '햇빛' | '분갈이' | '영양' | '가지' | '관찰';
-  actionDate: Date | null;
-  attach: ImageRes[];
-}
-
 export interface plantState {
   plantState: '좋음' | '새싹' | '개화' | '아픔' | '죽음';
 }

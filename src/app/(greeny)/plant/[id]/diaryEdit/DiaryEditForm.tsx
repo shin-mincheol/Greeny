@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import styles from './MyPlantDiaryEdit.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import { action, DiaryEditData, DiaryRes, plantState } from '@/types/post';
+import { action, DiaryForm, DiaryRes, plantState } from '@/types/post';
 import { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import photoAdd from '@images/PhotoAddIcon.svg';
@@ -15,6 +15,9 @@ import Button from '@/components/button/Button';
 import { DiaryEdit } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
 import useModal from '@/hooks/useModal';
+import { ImageRes } from '@/types/image';
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
 const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
@@ -37,14 +40,13 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
     watch,
     setValue,
     formState,
-  } = useForm<DiaryEditData>({
+  } = useForm<DiaryForm>({
     defaultValues: {
       title: item.title,
       content: item.content,
       actionDate: item.extra.actionDate,
       plantState: item.extra.plantState,
       action: item.extra.action,
-      attach: item.image,
     },
   });
 
@@ -106,34 +108,39 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
   });
 
   //이미지 프리뷰
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
-  const images = watch('attach');
+  const [originImg, setOriginImg] = useState<ImageRes[]>(item.image);
+  const originImgURL = item?.image.map((item) => `${SERVER}${item.path}`);
+  const [imagePreviews, setImagePreviews] = useState<string[]>(originImgURL);
+  const images = watch('attach') || [];
 
-  // useEffect(() => {
-  //   if (images && images.length > 0) {
-  //     if (images.length > 5) {
-  //       alert('이미지는 최대 5개 등록 가능합니다.');
-  //       return;
-  //     }
-  //     const files = Array.from(images);
-  //     const previews: string[] = [];
+  useEffect(() => {
+    if (images && images.length > 0) {
+      if (images.length > 5) {
+        alert('이미지는 최대 5개 등록 가능합니다.');
+        return;
+      }
+      const files = Array.from(images);
+      const previews: string[] = [];
 
-  //     files.forEach((file) => {
-  //       const reader = new FileReader();
-  //       reader.onload = () => {
-  //         previews.push(reader.result as string);
-  //         if (previews.length === files.length) {
-  //           setImagePreviews(previews);
-  //         }
-  //       };
-  //       reader.readAsDataURL(file);
-  //     });
-  //   }
-  // }, [images]);
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          previews.push(reader.result as string);
+          if (previews.length === files.length) {
+            setImagePreviews((prev) => [...prev, ...previews]);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }, [images]);
 
   const handleDeleteImage = (index: number) => {
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
     setImagePreviews(newPreviews);
+    if (index <= originImg.length - 1) {
+      setOriginImg((orgImg) => orgImg.filter((_, i) => i !== index));
+    }
   };
 
   const imageList = imagePreviews.map((preview, i) => (
@@ -147,29 +154,30 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
     </SwiperSlide>
   ));
 
-  console.log(images);
-
   //데이터 패치
-  const onEditDiary = async (formData: DiaryEditData) => {
+  const onEditDiary = async (formData: DiaryForm) => {
     try {
+      const { dirtyFields } = formState;
+
       const plantEditForm = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         if (key !== 'attach') {
           plantEditForm.append(key, value as string);
         }
       });
-      // if (formData.attach) {
-      //   Array.from(formData.attach).forEach((file) => {
-      //     plantEditForm.append('attach', file);
-      //   });
-      // }
 
-      // const res = await DiaryEdit(item._id, plantEditForm);
-      // console.log(res);
-      // if (res.ok) {
-      //   alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
-      //   router.push(`/plant/${id}`);
-      // }
+      Array.from(formData.attach).forEach((imageFile) => {
+        plantEditForm.append('attach', imageFile);
+      });
+
+      const res = await DiaryEdit(item._id, plantEditForm, originImg);
+
+      console.log(res);
+
+      if (res.ok) {
+        alert('식물 식물 다이어리가 새롭게 변했습니다! 🌿');
+        router.push(`/plant/${item._id}`);
+      }
     } catch (err) {
       console.log(err);
     }

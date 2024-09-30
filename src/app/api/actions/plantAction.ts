@@ -61,37 +61,54 @@ export async function DiaryNew(formData: FormData, id: string): Promise<ApiResWi
 }
 
 // 다이어리 수정
-export async function DiaryEdit(id: number | undefined, formData: FormData) {
+export async function DiaryEdit(id: number | undefined, formData: FormData, originImage: ImageRes[]) {
   const session = await auth();
-  const mainImages = formData.getAll('attach');
+  const mainImages = formData.getAll('attach') as File[];
 
-  // const allmainImages = mainImages.length > 0 ? mainImages.forEach((image) => JSON.parse(image as string)) : [];
+  const imgFormData = new FormData();
+  Array.from(mainImages).forEach((imageFile) => {
+    imgFormData.append('attach', imageFile);
+  });
 
-  console.log('mainImages', mainImages);
+  const fileRes = await fetch(`${SERVER}/files`, {
+    method: 'POST',
+    headers: {
+      'client-id': `${DBNAME}`,
+    },
+    body: imgFormData,
+  });
 
-  // const diaryObj = {
-  //   type: 'diary',
-  //   title: formData.get('title'),
-  //   content: formData.get('content'),
-  //   extra: { plantState: formData.get('plantState'), action: formData.get('action'), actionDate: formData.get('actionDate') },
-  //   image: allmainImages,
-  // };
+  const fileData = await fileRes.json();
+  const newImages = fileData.item.map((file: ImageRes) => ({
+    path: file.path,
+    name: file.name,
+  }));
 
-  // const url = `${SERVER}/posts/${id}`;
-  // const res = await fetch(url, {
-  //   method: 'PATCH',
-  //   headers: {
-  //     'client-id': `${DBNAME}`,
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${session?.accessToken}`,
-  //   },
-  //   body: JSON.stringify(diaryObj),
-  // });
+  const diaryObj = {
+    type: 'diary',
+    title: formData.get('title'),
+    content: formData.get('content'),
+    extra: { plantState: formData.get('plantState'), action: formData.get('action'), actionDate: formData.get('actionDate') },
+    image: [...originImage, ...newImages],
+  };
 
-  // revalidatePath(`/plant/${id}/diaryEdit`);
-  // revalidatePath(`/plant/${id}`);
-  // const resJson = await res.json();
-  // return resJson;
+  console.log(diaryObj);
+
+  const url = `${SERVER}/posts/${id}`;
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'client-id': `${DBNAME}`,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+    body: JSON.stringify(diaryObj),
+  });
+
+  revalidatePath(`/plant/${id}/diaryEdit`);
+  revalidatePath(`/plant/${id}`);
+  const resJson = await res.json();
+  return resJson;
 }
 
 //식물 추가
