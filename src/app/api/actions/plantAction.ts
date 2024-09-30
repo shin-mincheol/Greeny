@@ -60,6 +60,40 @@ export async function DiaryNew(formData: FormData, id: string): Promise<ApiResWi
   return resJson;
 }
 
+// 다이어리 수정
+export async function DiaryEdit(id: number | undefined, formData: FormData) {
+  const session = await auth();
+  const mainImages = formData.getAll('attach');
+
+  const allmainImages = mainImages.length > 0 ? mainImages.forEach((image) => JSON.parse(image as string)) : [];
+
+  console.log(mainImages);
+
+  // const diaryObj = {
+  //   type: 'diary',
+  //   title: formData.get('title'),
+  //   content: formData.get('content'),
+  //   extra: { plantState: formData.get('plantState'), action: formData.get('action'), actionDate: formData.get('actionDate') },
+  //   image: allmainImages,
+  // };
+
+  // const url = `${SERVER}/posts/${id}`;
+  // const res = await fetch(url, {
+  //   method: 'PATCH',
+  //   headers: {
+  //     'client-id': `${DBNAME}`,
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${session?.accessToken}`,
+  //   },
+  //   body: JSON.stringify(diaryObj),
+  // });
+
+  // revalidatePath(`/plant/${id}/diaryEdit`);
+  // revalidatePath(`/plant/${id}`);
+  // const resJson = await res.json();
+  // return resJson;
+}
+
 //식물 추가
 
 export async function plantNew(formData: FormData): Promise<ApiResWithValidation<SingleItem<PlantRes>, PlantForm>> {
@@ -162,6 +196,7 @@ export async function plantEdit(id: number | undefined, formData: FormData) {
     body: JSON.stringify(plantObj),
   });
 
+  revalidatePath(`/plant/${id}/edit`);
   revalidatePath('/plant');
   const resJson = await res.json();
   return resJson;

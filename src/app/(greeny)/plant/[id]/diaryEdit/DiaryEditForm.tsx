@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import styles from './MyPlantDiaryEdit.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import { action, DiaryForm, plantState } from '@/types/post';
+import { action, DiaryForm, DiaryRes, plantState } from '@/types/post';
 import { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import photoAdd from '@images/PhotoAddIcon.svg';
@@ -12,21 +12,27 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Button from '@/components/button/Button';
-import { DiaryNew } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
+import useModal from '@/hooks/useModal';
+import { FileRes, ImageRes } from '@/types/image';
+import { DiaryEdit } from '@/app/api/actions/plantAction';
+import { MultiItem } from '@/types/response';
+const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
+const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
 const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
 
-export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
+export default function DiaryEditForm({ item }: { item: DiaryRes }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>();
   const stateRef = useRef<HTMLDivElement | null>(null);
   const actionRef = useRef<HTMLDivElement | null>(null);
   const [stateDrop, setStateDrop] = useState(false);
   const [actionDrop, setActionDrop] = useState(false);
-  const [state, setState] = useState('식물 상태를 선택해주세요.');
-  const [action, setAction] = useState('활동을 선택해주세요');
+  const [state, setState] = useState(item.extra.plantState);
+  const [action, setAction] = useState(item.extra.action);
   const router = useRouter();
+  const { alert } = useModal();
   const {
     register,
     handleSubmit,
@@ -34,7 +40,16 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
     control,
     watch,
     setValue,
-  } = useForm<DiaryForm>();
+    formState,
+  } = useForm<DiaryForm>({
+    defaultValues: {
+      title: item.title,
+      content: item.content,
+      // actionDate: item.extra.actionDate,
+    },
+  });
+
+  // console.log(item);
 
   //드롭다운
   const handleActiondrop = () => {
@@ -46,12 +61,10 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      // stateRef 영역을 클릭하지 않았으면 stateDrop을 false로 설정
       if (stateRef.current && !stateRef.current.contains(event.target as Node)) {
         setStateDrop(false);
       }
 
-      // actionRef 영역을 클릭하지 않았으면 actionDrop을 false로 설정
       if (actionRef.current && !actionRef.current.contains(event.target as Node)) {
         setActionDrop(false);
       }
@@ -96,12 +109,14 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
   });
 
   //이미지 프리뷰
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const originImg = item?.image.map((item) => `${SERVER}${item.path}`);
+  const [imagePreviews, setImagePreviews] = useState<string[]>(originImg);
   const images = watch('attach');
 
   useEffect(() => {
     if (images && images.length > 0) {
-      if (images.length > 5) {
+      // 총 이미지가 5개를 넘으면 알림을 띄우고 리턴
+      if (imagePreviews.length + images.length > 5) {
         alert('이미지는 최대 5개 등록 가능합니다.');
         return;
       }
@@ -113,7 +128,7 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
         reader.onload = () => {
           previews.push(reader.result as string);
           if (previews.length === files.length) {
-            setImagePreviews(previews);
+            setImagePreviews((newviews) => [...newviews, ...previews]);
           }
         };
         reader.readAsDataURL(file);
@@ -138,33 +153,66 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
   ));
 
   //데이터 패치
-  const onNewDiary = async (formData: DiaryForm) => {
+  const onEditDiary = async (formData: DiaryForm) => {
+    const { dirtyFields } = formState;
+
     try {
-      const plantForm = new FormData();
+      const diaryEditForm = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         if (key !== 'attach') {
-          plantForm.append(key, value as string);
+          diaryEditForm.append(key, value as string);
         }
       });
-      if (formData.attach) {
-        Array.from(formData.attach).forEach((file) => {
-          plantForm.append('attach', file);
-        });
-      }
 
-      const res = await DiaryNew(plantForm, id);
-      // console.log(res);
-      if (res.ok) {
-        alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
-        router.push(`/plant/${id}`);
+      let existingImages = item.image.map((file: ImageRes) => ({
+        path: file.path,
+        name: file.name,
+      }));
+
+      // 이미지가 변경되었는지 여부 확인
+      if (dirtyFields.attach && formData.attach && formData.attach.length > 0) {
+        // 새로운 이미지가 있는 경우, 이미지 업로드
+        const fileRes = await fetch(`${SERVER}/files`, {
+          method: 'POST',
+          headers: {
+            'client-id': `${DBNAME}`,
+          },
+          body: diaryEditForm,
+        });
+
+        if (!fileRes.ok) {
+          throw new Error('파일 업로드 실패');
+        }
+
+        const fileData: MultiItem<FileRes> = await fileRes.json();
+        const newImages = fileData.item.map((file: ImageRes) => ({
+          path: file.path,
+          name: file.name,
+        }));
+
+        // 기존 이미지와 새로 추가된 이미지를 병합
+        existingImages = [...existingImages, ...newImages];
       }
+      // 변경된 이미지가 없을 경우, 기존 이미지만 사용
+      diaryEditForm.set('attach', JSON.stringify(existingImages));
+
+      const res = await DiaryEdit(item._id, diaryEditForm);
+
+      // if (!res.ok) {
+      //   throw new Error('다이어리 수정 실패');
+      // }
+
+      // if (res.ok) {
+      //   await alert('식물 다이어리가 새롭게 변했습니다! 🌿');
+      // router.push(`/plant/${item.plantId}`);
+      // }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onNewDiary)}>
+    <form onSubmit={handleSubmit(onEditDiary)}>
       <h1>식물 일기 수정</h1>
       <div className={styles.file_container}>
         <div className={styles.file_head}>
@@ -176,10 +224,10 @@ export default function DiaryEditForm({ id }: { id: string }): JSX.Element {
             <div className={styles.photo_cover}>
               <Image src={photoAdd} alt="프로필 사진 선택" fill priority />
             </div>
-            <input type="file" id="attach" multiple {...register('attach')} />
+            <input type="file" id="attach" accept="image/*" multiple {...register('attach')} />
           </label>
 
-          <Swiper className={styles.swiperList} slidesPerView={2} spaceBetween={5}>
+          <Swiper className={styles.swiperList} slidesPerView={'auto'} spaceBetween={10}>
             {imageList}
           </Swiper>
         </div>
