@@ -1,0 +1,17 @@
+.kakapBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: #ffe812;
+  padding: 0.6rem 2rem;
+  color: #381f1f;
+  font-size: 1.8rem;
+  border-radius: 1rem;
+  font-weight: var(--font-semibold);
+  transition: all 0.3s;
+}
+
+.kakapBtn:hover {
+  background-color: rgb(255, 220, 15);
+}

@@ -1,6 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next';
 import DiaryEditForm from './DiaryEditForm';
 import styles from './MyPlantDiaryEdit.module.scss';
+import { fetchDiary } from '@/app/api/fetch/postFetch';
 
 export async function generateMetadata({ params }: { params: { id: string } }, parent: ResolvingMetadata): Promise<Metadata> {
   const plantId = params.id;
@@ -16,10 +17,12 @@ export async function generateMetadata({ params }: { params: { id: string } }, p
   };
 }
 
-export default function MyPlantDiaryEdit({ params }: { params: { id: string } }) {
+export default async function MyPlantDiaryEdit({ params }: { params: { id: string } }) {
+  const item = await fetchDiary(params.id);
+
   return (
     <div className={styles.diaryAdd_wrapper}>
-      <DiaryEditForm id={params.id} />
+      <DiaryEditForm item={item} />
     </div>
   );
 }

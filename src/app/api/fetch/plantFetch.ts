@@ -9,10 +9,7 @@ export async function fetchPlantsDetail<T>(id: string | undefined) {
     },
   });
   const resJson = await res.json();
-  // const responseText = await res.text();
-  // const parsedData = JSON.parse(responseText);
   return resJson.item;
-  // return parsedData;
 }
 
 export async function fetchPlantsLike<T>(accessToken: string | undefined) {

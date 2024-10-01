@@ -12,6 +12,7 @@ import plantData from '@/app/data/plantList';
 import { PlantForm } from '@/types/plant';
 import { format } from 'date-fns';
 import { plantNew } from '@/app/api/actions/plantAction';
+import useModal from '@/hooks/useModal';
 
 export default function MyPlantAddForm() {
   const [selectedDate, setSelectedDate] = useState<Date | null>();
@@ -19,6 +20,7 @@ export default function MyPlantAddForm() {
   const [plantName, setPlantName] = useState('식물을 선택해주세요.');
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const { alert } = useModal();
   const {
     register,
     handleSubmit,
@@ -101,8 +103,8 @@ export default function MyPlantAddForm() {
         const res = await plantNew(plantForm);
         // console.log(res);
         if (res.ok) {
-          alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
-          router.replace('/plant');
+          await alert(`${res.item.name}이(가) 우리 가족에 합류했어요! `);
+          router.push('/plant');
         }
       } catch (err) {
         console.log(err);
@@ -189,6 +191,25 @@ export default function MyPlantAddForm() {
           })}
         />
         {errors.name && <p>{errors.name?.message}</p>}
+      </div>
+
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
+        <label htmlFor="introduction">
+          식물 소개<span>*</span>
+        </label>
+        <input
+          type="text"
+          id="introduction"
+          placeholder="식물 소개를 입력하세요."
+          {...register('introduction', {
+            required: '식물 소개를 입력하세요.',
+            minLength: {
+              value: 2,
+              message: '소개를 2글자 이상 입력하세요.',
+            },
+          })}
+        />
+        {errors.introduction && <p>{errors.introduction?.message}</p>}
       </div>
 
       <div className={`${styles.input_container} ${styles.type_flex}`}>

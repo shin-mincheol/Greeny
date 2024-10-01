@@ -1,28 +1,66 @@
 @import '@styles/mixin';
 
-.event_wrpper {
-  max-width: 102.4rem;
-  width: 100%;
-  margin: auto;
-  @include flex-vertical(2rem);
-  align-items: center;
-
-  .testLink {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-  }
-}
-
 .back_wrapper {
   width: calc(100% + 3.2rem + 3.2rem);
-  height: 100svh;
   margin: -8rem -3.2rem;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   background-color: var(--color-secondary-dark);
 
+  .event_wrpper {
+    max-width: 102.4rem;
+    width: 100%;
+    margin: auto;
+    @include flex-vertical(5rem);
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+
+    @include mobile {
+      padding: 0 2.4rem;
+    }
+
+    .event_tit {
+      width: 100%;
+      text-align: center;
+      color: var(--color-primary);
+      @include flex-vertical(1rem);
+
+      p {
+        font-size: 2.4rem;
+        font-weight: var(--font-medium);
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 2rem;
+        }
+      }
+
+      h2 {
+        font-size: 3.2rem;
+        font-weight: var(--font-bold);
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 2.6rem;
+          line-height: 3.6rem;
+        }
+      }
+    }
+
+    .testLink {
+      font-size: 2rem;
+      width: 30rem;
+      text-align: center;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+  }
+
+  // @@@@@@@@@@@@@ 테스트 페이지 @@@@@@@@@@@@@
   .test_wrapper {
     @include flex-vertical(5rem);
     align-items: center;
@@ -32,12 +70,22 @@
     transition: opacity 0.6s ease-in-out;
     opacity: 1;
 
+    @include mobile {
+      padding: 0 2.4rem;
+      box-sizing: border-box;
+    }
+
     .questionTit {
       @include flex-vertical(2rem);
       text-align: center;
       font-size: 3.2rem;
       font-weight: var(--font-semibold);
       color: var(--color-primary);
+      transition: all 0.3s;
+
+      @include mobile {
+        font-size: 2.4rem;
+      }
 
       h3 {
         font-size: 3rem;
@@ -46,31 +94,47 @@
 
     .testCover {
       position: relative;
-      width: 24rem;
-      height: 24rem;
+      width: 50rem;
+      height: 30rem;
+      transition: all 0.3s;
+
+      @include mobile {
+        width: 40rem;
+        height: 25rem;
+      }
 
       img {
-        object-fit: cover;
+        object-fit: contain;
       }
     }
 
     .btn_wrapper {
       @include flex-vertical(3rem);
+      width: 100%;
+      align-items: center;
       .answerBtn {
-        padding: 1rem;
+        @include flex-vertical();
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
         box-sizing: border-box;
-        height: 7rem;
-        width: 60rem;
+        height: 8rem;
+        max-width: 60rem;
+        width: 100%;
         text-align: center;
         border-radius: 1rem;
-        // border: 0.2rem solid var(--color-gray-30);
         background-color: #a7c4a0;
         color: var(--color-white);
         transition: all 0.3s;
-        font-size: 1.6rem;
-      }
-      pre {
         line-height: 2.4rem;
+
+        font-size: 1.6rem;
+
+        @include mobile {
+          align-items: center;
+          justify-content: center;
+          font-size: 1.4rem;
+        }
       }
 
       .answerBtn:hover {
@@ -80,5 +144,183 @@
   }
   .fade-out {
     opacity: 0;
+  }
+
+  // @@@@@@@@@@@@@ 결과 페이지 @@@@@@@@@@@@@
+  .result_wrpper {
+    max-width: 102.4rem;
+    width: 100%;
+    margin: auto;
+    @include flex-vertical(7rem);
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    box-sizing: border-box;
+    @include mobile {
+      padding: 7rem 2.4rem;
+    }
+
+    .result_card {
+      @include flex-vertical(5rem);
+      text-align: center;
+      align-items: center;
+      padding: 5rem;
+      box-sizing: border-box;
+      max-width: 70rem;
+      width: 100%;
+      border-radius: 2rem;
+      background-color: var(--color-secondary-light);
+      transition: all 0.3s;
+
+      @include mobile {
+        gap: 3rem;
+        padding: 2.4rem;
+      }
+
+      .result_cover {
+        position: relative;
+        width: 30rem;
+        height: 30rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: all 0.3s;
+
+        @include mobile {
+          width: 24rem;
+          height: 24rem;
+        }
+
+        img {
+          object-fit: cover;
+        }
+      }
+      & h2 {
+        font-size: 3.6rem;
+        color: var(--color-primary);
+        font-weight: var(--font-semibold);
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 2.4rem;
+        }
+      }
+      & h3 {
+        font-size: 2.4rem;
+        margin-top: -1rem;
+        font-weight: var(--font-medium);
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 1.6rem;
+        }
+      }
+
+      & p {
+        font-size: 2rem;
+        line-height: 3rem;
+        word-break: keep-all;
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 1.6rem;
+          line-height: 2.4rem;
+        }
+      }
+    }
+
+    .recommended {
+      @include flex-vertical(3rem);
+      align-items: center;
+      h3 {
+        font-size: 2.4rem;
+        font-weight: var(--font-semibold);
+      }
+
+      .recommended_card {
+        @include flex-horizontal(3rem);
+
+        @include mobile {
+          flex-direction: column;
+        }
+
+        .recommended_item {
+          max-width: 49rem;
+          width: 100%;
+          @include flex-vertical(2rem);
+          align-items: center;
+          border: 0.1rem solid #a7c4a0;
+          padding: 3rem;
+          box-sizing: border-box;
+          border-radius: 2rem;
+          background-color: var(--color-secondary-light);
+          text-align: center;
+
+          .recommended_name {
+            font-size: 2rem;
+            font-weight: var(--font-semibold);
+            & p {
+              font-size: 1.6rem;
+              color: var(--color-gray-30);
+              font-weight: var(--font-regular);
+            }
+          }
+
+          & p {
+            word-break: keep-all;
+            line-height: 2.6rem;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+
+            @include mobile {
+              font-size: 1.6rem;
+              line-height: 2.4rem;
+            }
+
+            span {
+              font-weight: var(--font-semibold);
+            }
+          }
+
+          .recommended_cover {
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            width: 24rem;
+            height: 24rem;
+
+            img {
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+
+    .btnBox {
+      @include flex-horizontal(2rem);
+      margin-top: 3rem;
+
+      .replay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.6rem 2rem;
+        font-size: 1.8rem;
+        border-radius: 1rem;
+        font-weight: var(--font-semibold);
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        transition: all 0.3s;
+
+        @include mobile {
+          font-size: 1.6rem;
+        }
+      }
+
+      .replay:hover {
+        background-color: rgb(32, 76, 50);
+      }
+    }
   }
 }
