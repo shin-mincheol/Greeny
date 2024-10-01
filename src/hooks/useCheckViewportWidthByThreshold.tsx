@@ -1,23 +1,15 @@
 import { useEffect, useState } from 'react';
 
 export default function useCheckViewportWidthByThreshold(thresholdWidth: number) {
-  const [isBiggerThanThreshold, setIsBiggerThanThreshold] = useState<boolean | undefined>(undefined);
-
+  const [isBiggerThanThreshold, setIsBiggerThanThreshold] = useState<boolean | undefined>();
   useEffect(() => {
-    setIsBiggerThanThreshold(window.innerWidth > thresholdWidth);
-  }, []);
-
-  useEffect(() => {
-    function setState() {
-      if (window.innerWidth > thresholdWidth) {
-        setIsBiggerThanThreshold(true);
-      } else {
-        setIsBiggerThanThreshold(false);
-      }
+    function checkBrowserWidth() {
+      setIsBiggerThanThreshold(window.innerWidth > thresholdWidth);
     }
-    window.addEventListener('resize', setState);
+    checkBrowserWidth();
+    window.addEventListener('resize', checkBrowserWidth);
 
-    return () => window.removeEventListener('resize', setState);
+    return () => window.removeEventListener('resize', checkBrowserWidth);
   }, []);
 
   return { isBiggerThanThreshold };

@@ -6,19 +6,22 @@ import { plantsDelete } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Session } from 'next-auth';
+import useModal from '@/hooks/useModal';
 
 export default function PlantInfo({ item, user }: { item: PlantRes; user: Session | null }) {
   const [menu, setMenu] = useState(false);
   const menuRef = useRef<HTMLButtonElement | null>(null);
   const subMenuBoxRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const { confirm } = useModal();
 
   const handleMenu = () => {
     setMenu(!menu);
   };
 
-  const handleDelete = () => {
-    if (confirm(`"정말 떠나보낼 거예요?" \n${item.name}이(가) 마지막으로 잎사귀를 흔들고 있어요... 🍃`) == true) {
+  const handleDelete = async () => {
+    const modal = await confirm(`"정말 떠나보낼 거예요?" \n${item.name}이(가) 마지막으로 잎사귀를 흔들고 있어요... 🍃`);
+    if (modal) {
       plantsDelete(item._id);
       router.push('/plant');
     }

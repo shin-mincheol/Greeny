@@ -10,6 +10,7 @@ import { UserLoginForm } from '@/types/user';
 import { useRouter } from 'next/navigation';
 import { signInWithCredentials } from '@/app/api/actions/authAction';
 import Button from '@/components/button/Button';
+import useModal from '@/hooks/useModal';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -17,14 +18,15 @@ export default function LoginForm() {
     register,
     formState: { errors },
     handleSubmit,
-    setError,
   } = useForm<UserLoginForm>();
+  const { alert } = useModal();
   const onSubmit = async (data: UserLoginForm) => {
     try {
       const formData = new FormData();
       formData.append('email', data.email);
       formData.append('password', data.password);
       await signInWithCredentials(formData);
+      await alert('Greeny오신걸 환영합니다! 🌿');
       router.push('/');
     } catch (error) {
       console.error(error);

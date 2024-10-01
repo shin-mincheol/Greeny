@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import '@/styles/reset.css';
 import '@/styles/common.css';
 import '@/styles/variable.css';
+import { ModalContextProvider } from '@/contexts/ModalContext';
 
 const pretendard = localFont({
   src: '../../../public/fonts/PretendardVariable.woff2',
@@ -41,11 +42,14 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script defer src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
         <title>Greeny</title>
       </head>
       <body>
         <div className={styles.root}>
-          <main className={styles.main}>{children}</main>
+          <ModalContextProvider>
+            <main className={styles.main}>{children}</main>
+          </ModalContextProvider>
         </div>
       </body>
     </html>

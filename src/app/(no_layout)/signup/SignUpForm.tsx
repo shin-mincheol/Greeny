@@ -8,6 +8,7 @@ import { UserForm } from '@/types/user';
 import { signup } from '@/app/api/actions/userAction';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/button/Button';
+import useModal from '@/hooks/useModal';
 
 export default function SignupForm() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function SignupForm() {
     setError,
     watch,
   } = useForm<UserForm>();
+  const { alert } = useModal();
 
   //프로필 미리보기
   const [imagePreview, setImagePreview] = useState<string>();
@@ -44,7 +46,7 @@ export default function SignupForm() {
 
     const resData = await signup(userForm);
     if (resData.ok) {
-      alert(`안녕하세요${resData.item.name}님:) \n회원가입을 환영합니다.`);
+      await alert(`안녕하세요${resData.item.name}님:) \n회원가입을 환영합니다.`);
       router.push('/');
     } else {
       if ('errors' in resData) {
