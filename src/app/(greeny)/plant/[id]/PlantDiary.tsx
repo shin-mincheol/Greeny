@@ -14,6 +14,7 @@ import plantdelete from '@images/DeleteIcon.svg';
 import { Session } from 'next-auth';
 import { plantsDelete } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
+import useModal from '@/hooks/useModal';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
@@ -24,6 +25,7 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
   const [scheduleData, setSscheduleData] = useState<PlantDetailRes[] | undefined>();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
+  const { confirm } = useModal();
 
   const fetchPlantsDiary = async (productId: number | undefined, selectDay: string, fetchAll: boolean) => {
     let url = `${SERVER}/posts/?type=diary`;
@@ -116,8 +118,9 @@ export default function PlantDiray({ item, user }: { item: PlantRes; user: Sessi
     }
   };
 
-  const handleDelete = () => {
-    if (confirm(`"정말 떠나보낼 거예요?" \n${item.name}이(가) 마지막으로 잎사귀를 흔들고 있어요... 🍃`) == true) {
+  const handleDelete = async () => {
+    const modal = await confirm(`"정말 떠나보낼 거예요?" \n${item.name}이(가) 마지막으로 잎사귀를 흔들고 있어요... 🍃`);
+    if (modal) {
       plantsDelete(item._id);
       router.push('/plant');
     }

@@ -36,6 +36,7 @@ export default function MyPlantEditForm({ item }: { item: PlantRes }) {
     defaultValues: {
       name: item.name,
       content: item.content,
+      introduction: item.introduction,
       light: item.light,
       grwhTp: item.grwhTp,
       humidity: item.humidity,
@@ -221,6 +222,25 @@ export default function MyPlantEditForm({ item }: { item: PlantRes }) {
           })}
         />
         {errors.name && <p>{errors.name?.message}</p>}
+      </div>
+
+      <div className={`${styles.input_container} ${styles.type_flex}`}>
+        <label htmlFor="introduction">
+          식물 소개<span>*</span>
+        </label>
+        <input
+          type="text"
+          id="introduction"
+          placeholder="식물 소개를 입력하세요."
+          {...register('introduction', {
+            required: '식물 소개를 입력하세요.',
+            minLength: {
+              value: 2,
+              message: '소개를 2글자 이상 입력하세요.',
+            },
+          })}
+        />
+        {errors.introduction && <p>{errors.introduction?.message}</p>}
       </div>
 
       <div className={`${styles.input_container} ${styles.type_flex}`}>

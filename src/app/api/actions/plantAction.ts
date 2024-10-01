@@ -61,7 +61,7 @@ export async function DiaryNew(formData: FormData, id: string): Promise<ApiResWi
 }
 
 // 다이어리 수정
-export async function DiaryEdit(id: number | undefined, formData: FormData, originImage: ImageRes[]) {
+export async function DiaryEdit(diaryId: number | undefined, plantId: number | undefined, formData: FormData, originImage: ImageRes[]) {
   const session = await auth();
   const mainImages = formData.getAll('attach') as File[];
 
@@ -92,9 +92,7 @@ export async function DiaryEdit(id: number | undefined, formData: FormData, orig
     image: [...originImage, ...newImages],
   };
 
-  console.log(diaryObj);
-
-  const url = `${SERVER}/posts/${id}`;
+  const url = `${SERVER}/posts/${diaryId}`;
   const res = await fetch(url, {
     method: 'PATCH',
     headers: {
@@ -105,14 +103,14 @@ export async function DiaryEdit(id: number | undefined, formData: FormData, orig
     body: JSON.stringify(diaryObj),
   });
 
-  revalidatePath(`/plant/${id}/diaryEdit`);
-  revalidatePath(`/plant/${id}`);
   const resJson = await res.json();
+
+  revalidatePath(`/plant/${diaryId}/diaryEdit`);
+  revalidatePath(`/plant/${plantId}`);
   return resJson;
 }
 
 //식물 추가
-
 export async function plantNew(formData: FormData): Promise<ApiResWithValidation<SingleItem<PlantRes>, PlantForm>> {
   const session = await auth();
   const plantObj = {
@@ -144,8 +142,6 @@ export async function plantNew(formData: FormData): Promise<ApiResWithValidation
     }
     const fileData: MultiItem<FileRes> = await fileRes.json();
 
-    // console.log(fileData);
-
     plantObj.mainImages = [
       {
         path: fileData.item[0].path,
@@ -164,6 +160,7 @@ export async function plantNew(formData: FormData): Promise<ApiResWithValidation
     body: JSON.stringify(plantObj),
   });
   const resJson = await res.json();
+  revalidatePath('/plant');
   return resJson;
 }
 
@@ -180,7 +177,7 @@ export async function plantsDelete(id: number | undefined) {
     },
   });
   const resJson = await res.json();
-
+  revalidatePath('/plant');
   return resJson;
 }
 

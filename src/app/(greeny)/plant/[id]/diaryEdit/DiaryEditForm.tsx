@@ -17,7 +17,6 @@ import { useRouter } from 'next/navigation';
 import useModal from '@/hooks/useModal';
 import { ImageRes } from '@/types/image';
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
-const DBNAME = process.env.NEXT_PUBLIC_DB_NAME;
 
 const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
 const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
@@ -157,8 +156,6 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
   //데이터 패치
   const onEditDiary = async (formData: DiaryForm) => {
     try {
-      const { dirtyFields } = formState;
-
       const plantEditForm = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         if (key !== 'attach') {
@@ -170,13 +167,11 @@ export default function DiaryEditForm({ item }: { item: DiaryRes }) {
         plantEditForm.append('attach', imageFile);
       });
 
-      const res = await DiaryEdit(item._id, plantEditForm, originImg);
-
-      console.log(res);
+      const res = await DiaryEdit(item._id, item.product_id, plantEditForm, originImg);
 
       if (res.ok) {
-        alert('식물 식물 다이어리가 새롭게 변했습니다! 🌿');
-        router.push(`/plant/${item._id}`);
+        await alert('식물 다이어리가 새롭게 변했습니다! 🌿');
+        router.push(`/plant/${item.product_id}`);
       }
     } catch (err) {
       console.log(err);
