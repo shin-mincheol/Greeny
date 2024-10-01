@@ -4,21 +4,34 @@
   @include flex-vertical();
   align-items: center;
   justify-content: center;
+  max-width: 102.4rem;
+  width: 100%;
+  margin: 5rem auto;
 
   form {
     width: 100%;
-    @include flex-vertical(3rem);
+    @include flex-vertical(5rem);
     align-items: center;
+    transition: all 0.3s;
+
+    @include mobile {
+      gap: 3rem;
+    }
 
     h1 {
-      font-size: 2rem;
       font-weight: var(--font-bold);
       color: var(--color-primary);
+      font-size: 3rem;
+      transition: all 0.3s;
+
+      @include mobile {
+        font-size: 2rem;
+      }
     }
 
     .file_container {
       width: 100%;
-      @include flex-vertical(1rem);
+      @include flex-vertical(1.2rem);
 
       .file_head {
         @include flex-horizontal(0);
@@ -31,43 +44,57 @@
           margin-bottom: 0.5rem;
           color: var(--color-black);
           font-weight: var(--font-semibold);
-          font-size: 1.6rem;
+          font-size: 2rem;
+          transition: all 0.3s;
+
+          @include mobile {
+            font-size: 1.6rem;
+          }
         }
       }
       .photo_Box {
+        width: 100%;
         @include flex-horizontal(1rem);
+
         .photo_cover {
           cursor: pointer;
           position: relative;
-          flex-shrink: 0;
-          width: 10rem;
-          height: 10rem;
+          width: 14rem;
+          height: 14rem;
           overflow: hidden;
           border-radius: 2rem;
           border: 0.1rem solid var(--color-secondary-dark);
+          transition: all 0.3s;
+
+          @include mobile {
+            width: 12rem;
+            height: 12rem;
+          }
+
           img {
             object-fit: cover;
           }
         }
 
         .swiperList {
-          margin-right: -2.4rem;
-          display: flex;
-          width: 110%;
+          margin: 0;
+          width: 100%;
 
           .swiperItem {
             position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            width: 14rem;
+            height: 14rem;
             transition: all 0.3s;
 
-            .swiper_cover {
-              position: relative;
-              overflow: hidden;
-              width: 10rem;
-              height: 10rem;
-              border-radius: 2rem;
-              img {
-                object-fit: cover;
-              }
+            @include mobile {
+              width: 12rem;
+              height: 12rem;
+            }
+
+            img {
+              object-fit: cover;
             }
 
             .deleteIcon {
@@ -82,8 +109,21 @@
       }
 
       p {
-        font-size: 1.2rem;
         color: var(--color-gray-10);
+        transition: all 0.3s;
+        font-size: 1.6rem;
+
+        @include mobile {
+          font-size: 1.4rem;
+        }
+      }
+    }
+
+    .input_container.type_flex {
+      flex-direction: row;
+
+      @include mobile {
+        flex-direction: column;
       }
     }
 
@@ -95,7 +135,15 @@
         margin-bottom: 0.5rem;
         color: var(--color-black);
         font-weight: var(--font-semibold);
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        width: 20rem;
+        transition: all 0.3s;
+        flex-shrink: 0;
+
+        @include mobile {
+          width: 100%;
+          font-size: 1.6rem;
+        }
 
         span {
           color: var(--color-error);
@@ -144,6 +192,7 @@
 }
 
 .selectBox {
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: 5rem;
@@ -165,7 +214,7 @@
 
   .select {
     width: 100%;
-    height: 19rem;
+    height: 20rem;
     overflow-y: auto;
     z-index: 5;
     box-shadow: 0 0.2rem 0.5rem rgba($color: #000000, $alpha: 0.3);

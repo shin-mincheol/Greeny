@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { DiaryRes } from '@/types/post';
 import { Metadata, ResolvingMetadata } from 'next';
 import PostLayout from '@greeny/story/PostLayout';
+import { format } from 'date-fns';
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
@@ -74,7 +75,7 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
           </div>
           <div className={diaryDetailStyles.container}>
             <span className={diaryDetailStyles.headings}>활동 날짜</span>
-            {diary.extra.actionDate}
+            {diary.extra.actionDate ? format(new Date(diary.extra.actionDate), 'yyyy-MM-dd') : ''}
           </div>
         </div>
         <DiaryImageSlider images={diary.image} />

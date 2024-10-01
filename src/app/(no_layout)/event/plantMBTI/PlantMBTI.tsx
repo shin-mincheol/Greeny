@@ -1,10 +1,10 @@
 'use client';
 import styles from '../event.module.scss';
 import { useState } from 'react';
-import questionData from '@/app/data/questionList';
 import Image from 'next/image';
 import { Score } from '@/types/event';
 import { useRouter } from 'next/navigation';
+import questionData from '@/app/data/questionList';
 
 export default function PlantTest() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -15,23 +15,22 @@ export default function PlantTest() {
   const handleNextQuestion = (num: number, type: 'EI' | 'SN' | 'FT' | 'JP') => {
     setFade(true);
 
-    setScore((currentScore) => ({
-      ...currentScore,
-      [type]: currentScore[type] + num,
-    }));
+    if (currentQuestion + 1 < questionData.length) {
+      setScore((currentScore) => ({
+        ...currentScore,
+        [type]: currentScore[type] + num,
+      }));
 
-    if (score)
-      setTimeout(() => {
-        setFade(false);
-        setCurrentQuestion(currentQuestion + 1);
-      }, 600);
-
-    if (currentQuestion === 11) {
-      router.push('/event');
+      if (score)
+        setTimeout(() => {
+          setFade(false);
+          setCurrentQuestion(currentQuestion + 1);
+        }, 600);
+    } else {
+      const result = `${score.EI > 1 ? 'E' : 'I'}${score.SN > 1 ? 'S' : 'N'}${score.FT > 1 ? 'T' : 'F'}${score.JP > 1 ? 'J' : 'P'}`;
+      router.push(`/event/${result}`);
     }
   };
-
-  console.log(score);
 
   return (
     <div className={styles.back_wrapper}>
@@ -42,10 +41,10 @@ export default function PlantTest() {
         </div>
         <div className={styles.btn_wrapper}>
           <button type="button" onClick={() => handleNextQuestion(1, questionData[currentQuestion].type)} className={styles.answerBtn}>
-            <pre> {questionData[currentQuestion].answer1}</pre>
+            {questionData[currentQuestion].answer1}
           </button>
           <button type="button" onClick={() => handleNextQuestion(0, questionData[currentQuestion].type)} className={styles.answerBtn}>
-            <pre>{questionData[currentQuestion].answer2}</pre>
+            {questionData[currentQuestion].answer2}
           </button>
         </div>
         <div className={styles.testCover}>

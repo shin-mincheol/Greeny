@@ -1,10 +1,10 @@
 import styles from '../event.module.scss';
-import PlantTest from './PlantText';
+import PlantMBTI from './PlantMBTI';
 
 export default function TestHome() {
   return (
     <div className={styles.test_wrpper}>
-      <PlantTest />
+      <PlantMBTI />
     </div>
   );
 }

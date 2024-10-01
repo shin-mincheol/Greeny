@@ -4,6 +4,7 @@ import { UserSimple } from './user';
 export interface PlantForm {
   name: string;
   scientificName: string;
+  introduction: string;
   attach: File[];
   grwhTp: string;
   humidity: string;

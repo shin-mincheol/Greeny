@@ -14,6 +14,7 @@ import 'swiper/css';
 import Button from '@/components/button/Button';
 import { DiaryNew } from '@/app/api/actions/plantAction';
 import { useRouter } from 'next/navigation';
+import useModal from '@/hooks/useModal';
 
 const selState: plantState[] = [{ plantState: '좋음' }, { plantState: '새싹' }, { plantState: '개화' }, { plantState: '아픔' }, { plantState: '죽음' }];
 const selAction: action[] = [{ action: '물주기' }, { action: '햇빛' }, { action: '분갈이' }, { action: '영양' }, { action: '가지' }, { action: '관찰' }];
@@ -27,6 +28,7 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
   const [state, setState] = useState('식물 상태를 선택해주세요.');
   const [action, setAction] = useState('활동을 선택해주세요');
   const router = useRouter();
+  const { alert } = useModal();
   const {
     register,
     handleSubmit,
@@ -149,16 +151,15 @@ export default function DiaryNewForm({ id }: { id: string }): JSX.Element {
         }
 
         const res = await DiaryNew(plantForm, id);
-        // console.log(res);
         if (res.ok) {
-          alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
+          await alert('식물 다이어리가 새잎을 틔웠어요! 🌿');
           router.push(`/plant/${id}`);
         }
       } catch (err) {
         console.log(err);
       }
     } else {
-      alert('식물 사진은 필수입니다.');
+      await alert('식물 사진은 필수입니다.');
     }
   };
 
