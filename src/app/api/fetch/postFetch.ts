@@ -75,8 +75,9 @@ export async function fetchReply(id: string) {
   });
   const resJson: MultiItem<PostComment> | CoreErrorRes = await res.json();
   if (!resJson.ok) throw new Error(resJson.message);
+  const itemRemovedContentHash = resJson.item.map((item) => ({ ...item, content: item.content.slice(0, -1) }));
 
-  return resJson.item;
+  return itemRemovedContentHash;
 }
 
 export async function fetchPlant(plantId: string) {

@@ -21,7 +21,7 @@ export default function ReplyModify({ currentReply, cancel }: Props) {
   const { register, handleSubmit } = useForm<Form>({
     reValidateMode: 'onSubmit',
     defaultValues: {
-      content: currentReply.content.slice(0, -1),
+      content: currentReply.content,
     },
   });
 
