@@ -8,16 +8,23 @@ import { formatAgo } from '@/utils/date';
 import SubMenu from '@greeny/story/community/SubMenu';
 import DropDown, { DropDownOption, DropDownOptionRed } from './DropDown';
 import { useState } from 'react';
+import { deleteReply } from '@/app/api/actions/postAction';
+import useModal from '@/hooks/useModal';
 
-export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: PostComment; isWriter: boolean; deleteAction: () => void }) {
+type Props = {
+  reply: PostComment;
+  isWriter: boolean;
+  postId: string;
+};
+
+export default function ReplyItem({ reply, isWriter, postId }: Props) {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
   const [isModifying, setIsModifying] = useState<boolean>(false);
-  const startModifying = () => setIsModifying(true);
-  const cancelModifying = () => setIsModifying(false);
-  const deleteActionWithConfirm = () => {
-    const check = confirm('댓글을 삭제하시겠습니까?');
-    if (!check) return;
-    deleteAction();
+  const { confirm } = useModal();
+  const deleteActionWithConfirm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!(await confirm('댓글을 삭제하시겠습니까?'))) return;
+    deleteReply.bind(null, postId, reply._id)();
   };
 
   return (
@@ -36,7 +43,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
                       <button
                         type="button"
                         onClick={() => {
-                          startModifying();
+                          setIsModifying(true);
                           setIsMenuOpened(false);
                         }}
                       >
@@ -44,7 +51,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
                       </button>
                     </DropDownOption>
                     <DropDownOptionRed>
-                      <form action={deleteActionWithConfirm}>
+                      <form onSubmit={deleteActionWithConfirm}>
                         <button type="submit">댓글 삭제</button>
                       </form>
                     </DropDownOptionRed>
@@ -61,7 +68,7 @@ export default function ReplyItem({ reply, isWriter, deleteAction }: { reply: Po
       />
 
       <div className={styles.reply_item_content_container}>
-        {isModifying ? <ReplyModify currentReply={reply} cancel={cancelModifying} /> : <pre className={styles.reply_item_content}>{reply.content}</pre>}
+        {isModifying ? <ReplyModify currentReply={reply} cancel={() => setIsModifying(false)} /> : <pre className={styles.reply_item_content}>{reply.content}</pre>}
       </div>
     </li>
   );
