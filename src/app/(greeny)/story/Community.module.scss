@@ -303,9 +303,11 @@ $tablet_size: 768px;
 
 // ReplyInput
 .reply_form {
-  position: fixed;
+  position: static;
+  width: 100%;
+  margin-top: 2rem;
+
   min-width: 31rem;
-  width: calc(100% - 4.8rem);
   bottom: 6rem;
   padding: 1rem 0 1.5rem;
   background-color: white;
@@ -313,6 +315,10 @@ $tablet_size: 768px;
   gap: 1.2rem;
   font-size: 1.2rem;
   z-index: 10;
+  @include commonMixin.mobile {
+    position: fixed;
+    width: calc(100% - 4.8rem);
+  }
 
   textarea {
     padding: 13px 18px;
@@ -333,12 +339,6 @@ $tablet_size: 768px;
       vertical-align: top;
     }
   }
-}
-
-.reply_form.reply_form_over_threshold {
-  position: static;
-  width: 100%;
-  margin-top: 2rem;
 }
 
 // ReplyModify
@@ -381,13 +381,18 @@ $tablet_size: 768px;
   }
 
   .btn_reset {
-    height: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
     position: absolute;
     top: 50%;
     right: 1.2rem;
     transform: translateY(-50%);
 
     img {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       vertical-align: top;
     }
   }

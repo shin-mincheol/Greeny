@@ -130,7 +130,10 @@ export async function deleteDiary(postId: string) {
   redirect('/story/diaries');
 }
 
-export async function addReply(postId: string, formData: FormData): Promise<SingleItem<PostComment> | CoreErrorRes> {
+export async function addReply(postId: string, content: string): Promise<SingleItem<PostComment> | CoreErrorRes> {
+  const formData = new FormData();
+  // 댓글이 한 글자일 때 서버에서 실행되는 validation에 실패하기 때문에 임의로 한 글자(#)를 더 붙여주고 댓글을 불러올 땐 끝의 한 글자를 잘라서 보여줌
+  formData.set('content', content + '#');
   const session = await auth();
   const data = {
     content: formData.get('content'),
