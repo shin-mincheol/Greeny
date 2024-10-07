@@ -22,6 +22,9 @@ export default function PostContent({ register, errors }: Props) {
           {...register('title', {
             required: { value: true, message: '제목을 입력해주세요.' },
             minLength: { value: 2, message: '제목을 2글자 이상 입력해주세요.' },
+            validate: (value) => {
+              if (value.trim().length < 2) return '제목을 2글자 이상 입력해주세요.';
+            },
           })}
         />
         {errors.title && <div className={postStyles.error}>{errors.title.message}</div>}
@@ -40,6 +43,9 @@ export default function PostContent({ register, errors }: Props) {
           {...register('content', {
             required: { value: true, message: '상세 내용을 입력해주세요.' },
             minLength: { value: 2, message: '상세 내용을 2글자 이상 입력해주세요.' },
+            validate: (value) => {
+              if (value.trim().length < 2) return '상세 내용을 2글자 이상 입력해주세요.';
+            },
           })}
         ></textarea>
         {errors.content && <div className={postStyles.error}>{errors.content.message}</div>}
