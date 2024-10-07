@@ -242,6 +242,15 @@
     word-break: break-all;
   }
 
+  .error {
+    margin-top: 1rem;
+    color: var(--color-error);
+    font: {
+      weight: var(--font-semibold);
+      size: clamp(1.2rem, 1.5vw, 1.4rem);
+    }
+  }
+
   .btn_submit {
     padding: 1.15rem 0;
     border-radius: 1rem;
