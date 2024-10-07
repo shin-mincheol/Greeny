@@ -42,10 +42,10 @@ type Props = {
 
 export default async function DiaryDetail({ params: { id } }: Props) {
   const diary: DiaryRes = await fetchDiary(id);
-  const session = await auth();
   const plantDetail = await fetchPlant(diary.product_id.toString());
-  const bookmarkId = plantDetail.myBookmarkId;
   const plant = diary.product;
+  const bookmarkId = plantDetail.myBookmarkId;
+  const session = await auth();
   const isMyPlant = Number(session?.user?.id) === diary.seller_id;
   const isWriter = Number(session?.user?.id) === diary.user._id;
 
@@ -99,7 +99,7 @@ export default async function DiaryDetail({ params: { id } }: Props) {
             </Link>
             {!isMyPlant && <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} />}
           </div>
-          <div>{plantDetail.content}</div>
+          <div>{plantDetail.introduction}</div>
         </div>
       </article>
     </PostLayout>
