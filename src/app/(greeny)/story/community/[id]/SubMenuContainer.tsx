@@ -6,14 +6,16 @@ import DropDown, { DropDownOption, DropDownOptionRed } from '@greeny/story/commu
 import { deletePost } from '@/app/api/actions/postAction';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import useModal from '@/hooks/useModal';
 
 export default function SubMenuContainer() {
   const pathname = usePathname();
   const postId = pathname.split('/')[3];
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
-  const checkAndDeletePostWithId = () => {
-    const check = confirm('해당 글을 삭제하시겠습니까?');
-    if (!check) return;
+  const { confirm } = useModal();
+  const checkAndDeletePostWithId = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!(await confirm('해당 글을 삭제하시겠습니까?'))) return;
     deletePost.bind(null, postId)();
   };
 
@@ -26,7 +28,7 @@ export default function SubMenuContainer() {
               <Link href={`${pathname}/edit`}>글 수정</Link>
             </DropDownOption>
             <DropDownOptionRed>
-              <form action={checkAndDeletePostWithId}>
+              <form onSubmit={checkAndDeletePostWithId}>
                 <button type="submit">글 삭제</button>
               </form>
             </DropDownOptionRed>

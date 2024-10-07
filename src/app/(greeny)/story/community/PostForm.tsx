@@ -10,6 +10,7 @@ import { type PostForm, PostRes } from '@/types/post';
 import { ImageRes } from '@/types/image';
 import { addPost, updatePost } from '@/app/api/actions/postAction';
 import { useForm } from 'react-hook-form';
+import useModal from '@/hooks/useModal';
 
 type Props = {
   post?: PostRes;
@@ -39,28 +40,16 @@ export default function PostForm({ post }: Props) {
   } = useForm<Form>({ defaultValues });
   const selectedCategory = watch('category');
   const [originalImage, setOriginalImage] = useState<ImageRes[]>(post?.image ?? []);
-  const update = (form: Form) => {
-    const formData = new FormData();
-    formData.append('title', form.title);
-    formData.append('content', form.content);
-    formData.append('category', form.category);
-    form.attach.forEach((file) => formData.append('attach', file));
-    updatePost.bind(null, post?._id!, originalImage)(formData);
+  const { confirm } = useModal();
+  const update = async (form: Form) => {
+    if (!(await confirm('게시글을 수정하시겠습니까?'))) return;
+    updatePost.bind(null, post?._id!, originalImage)(convertToFormData(form));
   };
-  const add = (form: Form) => {
-    const formData = new FormData();
-    formData.append('title', form.title);
-    formData.append('content', form.content);
-    formData.append('category', form.category);
-    form.attach.forEach((file) => formData.append('attach', file));
-    addPost(formData);
-  };
-  const setFile = (files: File[]) => {
-    setValue('attach', files);
-  };
+  const add = (form: Form) => addPost(convertToFormData(form));
+
   return (
     <form onSubmit={handleSubmit(post ? update : add)} className={postStyles.post_form}>
-      <PostImage register={register} originalImage={originalImage} setOriginalImage={setOriginalImage} setFile={setFile} />
+      <PostImage register={register} originalImage={originalImage} setOriginalImage={setOriginalImage} setFile={(files: File[]) => setValue('attach', files)} />
       <PostCategory register={register} categoryList={categories} selected={selectedCategory} />
       <PostContent register={register} errors={errors} />
       <button type="submit" className={postStyles.btn_submit}>
@@ -68,4 +57,14 @@ export default function PostForm({ post }: Props) {
       </button>
     </form>
   );
+}
+
+function convertToFormData(form: Form) {
+  const formData = new FormData();
+  formData.append('title', form.title);
+  formData.append('content', form.content);
+  formData.append('category', form.category);
+  form.attach.forEach((file) => formData.append('attach', file));
+
+  return formData;
 }

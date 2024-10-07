@@ -52,7 +52,7 @@ export default async function PostDetail({ params: { id } }: Props) {
         <section className={postStyles.content}>
           <h1 className={postStyles.title}>{post.title}</h1>
           <div className={postStyles.info}>
-            {isWriter ? <UserProfile user={post.user} fontStyle="sm_medium" component={<SubMenuContainer />} /> : <UserProfile user={post.user} fontStyle="sm_medium" />}
+            <UserProfile user={post.user} fontStyle="sm_medium" component={isWriter ? <SubMenuContainer /> : null} />
           </div>
           <pre>{post.content}</pre>
           {post.image.length > 0 && <ImageSlider images={post.image} />}
