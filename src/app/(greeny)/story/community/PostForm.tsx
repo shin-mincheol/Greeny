@@ -45,7 +45,10 @@ export default function PostForm({ post }: Props) {
     if (!(await confirm('게시글을 수정하시겠습니까?'))) return;
     updatePost.bind(null, post?._id!, originalImage)(convertToFormData(form));
   };
-  const add = (form: Form) => addPost(convertToFormData(form));
+  const add = async (form: Form) => {
+    if (!(await confirm('게시글을 등록하시겠습니까?'))) return;
+    addPost(convertToFormData(form));
+  };
 
   return (
     <form onSubmit={handleSubmit(post ? update : add)} className={postStyles.post_form}>
