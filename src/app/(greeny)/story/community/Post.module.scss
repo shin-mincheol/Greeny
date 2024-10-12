@@ -18,7 +18,6 @@
     cursor: pointer;
     img {
       vertical-align: top;
-      transform: translateY(25%);
     }
     @include commonMixin.mobile {
       padding: 1rem;
