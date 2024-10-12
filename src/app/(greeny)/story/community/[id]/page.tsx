@@ -6,7 +6,7 @@ import ReplyList from '@greeny/story/community/ReplyList';
 import ReplyInput from '@greeny/story/community/ReplyInput';
 import ImageSlider from '@greeny/story/ImageSlider';
 import { fetchPost } from '@/app/api/fetch/postFetch';
-import SubMenuContainer from './SubMenuContainer';
+import SubMenuContainer from '@greeny/story/community/[id]/SubMenuContainer';
 import { auth } from '@/auth';
 import { PostRes } from '@/types/post';
 import { Metadata, ResolvingMetadata } from 'next';
@@ -52,7 +52,7 @@ export default async function PostDetail({ params: { id } }: Props) {
         <section className={postStyles.content}>
           <h1 className={postStyles.title}>{post.title}</h1>
           <div className={postStyles.info}>
-            <UserProfile user={post.user} fontStyle="sm_medium" component={isWriter ? <SubMenuContainer /> : null} />
+            <UserProfile user={post.user} fontStyle="sm_medium" component={isWriter ? <SubMenuContainer postId={id} /> : null} />
           </div>
           <pre>{post.content}</pre>
           {post.image.length > 0 && <ImageSlider images={post.image} />}

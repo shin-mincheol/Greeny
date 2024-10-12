@@ -413,6 +413,7 @@ $tablet_size: 768px;
 // SubMenu
 .sub_menu_container {
   position: relative;
+  z-index: 200;
   .sub_menu {
     display: block;
     height: 1.4rem;
@@ -420,6 +421,14 @@ $tablet_size: 768px;
       vertical-align: top;
     }
   }
+}
+.sub_menu_bg {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 }
 
 // ImageSlider
@@ -495,7 +504,7 @@ $tablet_size: 768px;
 .dropdown_container {
   position: absolute;
   width: max-content;
-  z-index: 5;
+  z-index: 200;
   top: 2rem;
   right: 0;
   padding: 0.2rem 0.6rem;
@@ -505,27 +514,23 @@ $tablet_size: 768px;
   background-color: var(--color-white);
 
   .dropdown_option {
-    button,
-    a {
-      display: inline-block;
-      padding: 0.8rem 1.15rem;
-    }
     font: {
       size: 1rem;
       weight: var(--font-semibold);
     }
-  }
-
-  .dropdown_option:not(:last-child)::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 0.1rem;
-    background-color: var(--color-gray-50);
-  }
-
-  .dropdown_option_red {
-    color: var(--color-error);
+    button {
+      padding: 0.8rem 1.15rem;
+    }
+    &.dropdown_option_red {
+      color: var(--color-error);
+    }
+    &:not(:last-child)::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0.1rem;
+      background-color: var(--color-gray-50);
+    }
   }
 }
 

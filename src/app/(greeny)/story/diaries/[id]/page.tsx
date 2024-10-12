@@ -62,7 +62,7 @@ export default async function DiaryDetail({ params: { id } }: Props) {
                 <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>{formatAgo(diary.createdAt)}</p>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
                   <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} content={diary.content} />
-                  {isWriter && <DiarySubMenu />}
+                  {isWriter && <DiarySubMenu postId={id} />}
                 </div>
               </>
             }
