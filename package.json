@@ -13,6 +13,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "date-fns": "^3.6.0",
     "jsonwebtoken": "^9.0.2",
+    "lodash.isequal": "^4.5.0",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "node-sass": "^9.0.0",
@@ -29,6 +30,7 @@
     "swiper": "^11.1.9"
   },
   "devDependencies": {
+    "@types/lodash.isequal": "^4.5.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-datepicker": "^7.0.0",

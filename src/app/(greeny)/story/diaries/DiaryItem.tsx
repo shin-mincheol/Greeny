@@ -8,11 +8,12 @@ import Image from 'next/image';
 
 type Props = {
   diary: DiaryRes;
+  onLikeClick?: () => void;
 };
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default function DiaryItem({ diary }: Props) {
+export default function DiaryItem({ diary, onLikeClick }: Props) {
   return (
     <div className={diaryStyles.item}>
       <Link href={`/story/diaries/${diary._id}`} className={diaryStyles.thumbnail}>
@@ -26,7 +27,7 @@ export default function DiaryItem({ diary }: Props) {
             <>
               <p style={{ marginLeft: 6, color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)' }}>{formatAgo(diary.createdAt)}</p>
               <div style={{ marginLeft: 'auto' }}>
-                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} />
+                <Like number={diary.bookmarks} targetId={diary._id.toString()} bookmarkId={diary.myBookmarkId} content={diary.content} onLikeClick={onLikeClick} />
               </div>
             </>
           }

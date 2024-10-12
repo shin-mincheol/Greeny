@@ -24,21 +24,21 @@ export async function fetchPosts(params?: { page?: string; keyword?: string; cat
   return resJson;
 }
 
-export async function fetchDiaries(params?: { page?: string; keyword?: string }, noLimit?: true) {
+export async function fetchDiaries(params?: { page?: string; keyword?: string }, token?: string, limit?: number) {
   const searchParams = new URLSearchParams();
   params?.page && searchParams.set('page', params.page);
   params?.keyword && searchParams.set('keyword', params.keyword);
-  const url = `${SERVER}/posts?type=diary&limit=${noLimit ? 0 : LIMIT}&${searchParams.toString()}`;
+  const url = `${SERVER}/posts?type=diary&limit=${limit ?? LIMIT}&${searchParams.toString()}`;
   const res = await fetch(url, {
     headers: {
       'client-id': `${DBNAME}`,
-      ...(await getAuthHeader()),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
   });
   const resJson: MultiItem<DiaryRes> | CoreErrorRes = await res.json();
   if (!resJson.ok) throw new Error(resJson.message);
 
-  return resJson.item;
+  return resJson;
 }
 
 export async function fetchPost(id: string) {
