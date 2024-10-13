@@ -6,6 +6,7 @@ import { PostComment } from '@/types/post';
 import { usePathname } from 'next/navigation';
 import useModal from '@/hooks/useModal';
 import { useForm } from 'react-hook-form';
+import { useReplyContext } from '@/contexts/ReplyContext';
 
 type Props = {
   currentReply: PostComment;
@@ -17,6 +18,7 @@ type Form = { content: string };
 export default function ReplyModify({ currentReply, cancel }: Props) {
   const pathname = usePathname();
   const postId = pathname.split('/')[3];
+  const { setMutateType } = useReplyContext();
   const { alert, confirm } = useModal();
   const { register, handleSubmit } = useForm<Form>({
     reValidateMode: 'onSubmit',
@@ -29,7 +31,10 @@ export default function ReplyModify({ currentReply, cancel }: Props) {
     if (!(await confirm('댓글을 수정하시겠습니까?'))) return;
 
     const resJson = await updateReply.bind(null, postId, currentReply._id)(formData.content.trim());
-    if (resJson.ok) cancel();
+    if (resJson.ok) {
+      cancel();
+      setMutateType('modify');
+    }
   };
 
   return (

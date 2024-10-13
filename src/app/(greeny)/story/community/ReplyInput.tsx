@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useModal from '@/hooks/useModal';
 import { useRouter } from 'next/navigation';
+import { useReplyContext } from '@/contexts/ReplyContext';
 
 type Props = {
   postId: string;
@@ -19,13 +20,17 @@ export default function ReplyInput({ postId }: Props) {
   const { push } = useRouter();
   const { alert, confirm } = useModal();
   const { register, handleSubmit, reset } = useForm<Form>();
+  const { setMutateType } = useReplyContext();
   const addReplyWithId: SubmitHandler<Form> = async (formData: Form) => {
     if (!data) {
       return (await confirm(`로그인이 필요한 서비스입니다\n 로그인 하시겠습니까?`)) && push('/login');
     }
 
     const resJson = await addReply.bind(null, postId)(formData.content.trim());
-    if (resJson.ok) reset();
+    if (resJson.ok) {
+      reset();
+      setMutateType('add');
+    }
   };
 
   return (

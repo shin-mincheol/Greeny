@@ -9,6 +9,7 @@ import { formatAgo } from '@/utils/date';
 import { useState } from 'react';
 import { deleteReply } from '@/app/api/actions/postAction';
 import useModal from '@/hooks/useModal';
+import { useReplyContext } from '@/contexts/ReplyContext';
 
 type Props = {
   reply: PostComment;
@@ -17,11 +18,13 @@ type Props = {
 };
 
 export default function ReplyItem({ reply, isWriter, postId }: Props) {
+  const { setMutateType } = useReplyContext();
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const { confirm } = useModal();
   const deleteActionWithConfirm = async () => {
     if (!(await confirm('댓글을 삭제하시겠습니까?'))) return;
-    deleteReply.bind(null, postId, reply._id)();
+    const res = await deleteReply.bind(null, postId, reply._id)();
+    if (res.ok) setMutateType('delete');
   };
 
   return (
