@@ -30,7 +30,7 @@ export default async function Home() {
 
         <div className={styles.list_item}>
           <h2 className={styles.list_title}>식물 친구들 구경하기 🪴</h2>
-          <TodayDiary data={dataDiary} />
+          <TodayDiary data={dataDiary.item} />
         </div>
 
         <div className={styles.list_item}>

@@ -4,29 +4,44 @@ import { ImageRes } from '@/types/image';
 import postStyles from '@greeny/story/community/Post.module.scss';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Form } from '@greeny/story/community/PostForm';
+import useModal from '@/hooks/useModal';
 
 type Props = {
   originalImage: ImageRes[];
   setOriginalImage: Dispatch<SetStateAction<ImageRes[]>>;
+  register: UseFormRegister<Form>;
+  setFile: (currentAddedFile: File[]) => void;
 };
 
 const SERVER = process.env.NEXT_PUBLIC_API_SERVER;
 
-export default function PostImage({ originalImage, setOriginalImage }: Props) {
-  const originalImagePath = originalImage?.map((img) => `${SERVER}${img.path}`);
-  const [previewUrls, setPreviewUrls] = useState<string[]>(originalImagePath ?? []);
+export default function PostImage({ register, originalImage, setOriginalImage, setFile }: Props) {
+  const originalImagePath = originalImage.map((img) => `${SERVER}${img.path}`);
+  const [previewUrls, setPreviewUrls] = useState<string[]>(originalImagePath);
+  const [images, setImages] = useState<File[]>([]);
+  const { alert } = useModal();
 
-  const handleSelectImage = (e: ChangeEvent<HTMLInputElement>) => {
-    if (previewUrls.length + e.target.files!.length > 5) return alert(`이미지는 최대 5개 등록 가능합니다.\n(현재 등록된 이미지 수: ${previewUrls.length}개)`);
+  const handleSelectImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (previewUrls.length + e.target.files!.length > 5) return await alert(`이미지는 최대 5개 등록 가능합니다.`);
     if (e.target.files) {
       const files = Array.from(e.target.files);
       const urls = files.map((file) => URL.createObjectURL(file));
+      setImages((prevImages) => [...prevImages, ...files]);
       setPreviewUrls((prevUrls) => [...prevUrls, ...urls]);
+      setFile([...images, ...files]);
     }
   };
 
   const handleDeleteImage = (index: number) => {
+    setImages((prevImages) => {
+      const idx = originalImage.length > 0 ? index - originalImage.length : index;
+      const filtered = prevImages.filter((_, i) => i !== idx);
+      setFile(filtered);
+      return filtered;
+    });
     setPreviewUrls((prevUrls) => prevUrls.filter((_, i) => i !== index));
     if (index <= originalImage.length - 1) {
       setOriginalImage((prevOgImg) => prevOgImg.filter((_, i) => i !== index));
@@ -41,7 +56,15 @@ export default function PostImage({ originalImage, setOriginalImage }: Props) {
       </div>
       <div className={postStyles.image_container}>
         <label htmlFor="image" className={postStyles.photoAdd}>
-          <input type="file" name="attach" id="image" accept="image/*" multiple onChange={handleSelectImage} />
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            multiple
+            {...register('attach', {
+              onChange: handleSelectImage,
+            })}
+          />
         </label>
         {previewUrls.length > 0 && (
           <Swiper spaceBetween={10} slidesPerView={'auto'} className={postStyles.image_preview_swiper}>

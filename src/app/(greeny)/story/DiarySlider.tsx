@@ -4,5 +4,5 @@ import DiarySwiper from './DiarySwiper';
 export default async function DiarySlider() {
   const diaries = await fetchDiaries();
 
-  return <DiarySwiper diaries={diaries} />;
+  return <DiarySwiper diaries={diaries.item} />;
 }
