@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import useModal from '@/hooks/useModal';
 
 export default function DiarySubMenu({ postId }: { postId: string }) {
-  console.log('postId', postId);
   const { confirm } = useModal();
   const { push } = useRouter();
   const checkAndDeleteDiaryWithId = async () => {
