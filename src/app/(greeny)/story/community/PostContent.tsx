@@ -1,10 +1,13 @@
 import postStyles from '@greeny/story/community/Post.module.scss';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { Form } from '@greeny/story/community/PostForm';
 
 type Props = {
-  post?: { title: string; content: string };
+  register: UseFormRegister<Form>;
+  errors: FieldErrors<Form>;
 };
 
-export default function PostContent({ post }: Props) {
+export default function PostContent({ register, errors }: Props) {
   return (
     <>
       <div>
@@ -12,7 +15,19 @@ export default function PostContent({ post }: Props) {
           제목
           <span className={postStyles.required_mark}>*</span>
         </label>
-        <input type="text" name="title" id="title" placeholder="제목을 입력해주세요." defaultValue={post?.title ?? ''} minLength={2} required />
+        <input
+          type="text"
+          id="title"
+          placeholder="제목을 입력해주세요."
+          {...register('title', {
+            required: { value: true, message: '제목을 입력해주세요.' },
+            minLength: { value: 2, message: '제목을 2글자 이상 입력해주세요.' },
+            validate: (value) => {
+              if (value.trim().length < 2) return '제목을 2글자 이상 입력해주세요.';
+            },
+          })}
+        />
+        {errors.title && <div className={postStyles.error}>{errors.title.message}</div>}
       </div>
 
       <div>
@@ -20,7 +35,20 @@ export default function PostContent({ post }: Props) {
           상세 내용
           <span className={postStyles.required_mark}>*</span>
         </label>
-        <textarea rows={5} className={postStyles.description} name="content" id="content" placeholder="상세 내용을 입력해주세요." defaultValue={post?.content ?? ''} minLength={2} required></textarea>
+        <textarea
+          rows={5}
+          className={postStyles.description}
+          id="content"
+          placeholder="상세 내용을 입력해주세요."
+          {...register('content', {
+            required: { value: true, message: '상세 내용을 입력해주세요.' },
+            minLength: { value: 2, message: '상세 내용을 2글자 이상 입력해주세요.' },
+            validate: (value) => {
+              if (value.trim().length < 2) return '상세 내용을 2글자 이상 입력해주세요.';
+            },
+          })}
+        ></textarea>
+        {errors.content && <div className={postStyles.error}>{errors.content.message}</div>}
       </div>
     </>
   );

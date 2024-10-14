@@ -303,9 +303,11 @@ $tablet_size: 768px;
 
 // ReplyInput
 .reply_form {
-  position: fixed;
+  position: static;
+  width: 100%;
+  margin-top: 2rem;
+
   min-width: 31rem;
-  width: calc(100% - 4.8rem);
   bottom: 6rem;
   padding: 1rem 0 1.5rem;
   background-color: white;
@@ -313,6 +315,10 @@ $tablet_size: 768px;
   gap: 1.2rem;
   font-size: 1.2rem;
   z-index: 10;
+  @include commonMixin.mobile {
+    position: fixed;
+    width: calc(100% - 4.8rem);
+  }
 
   textarea {
     padding: 13px 18px;
@@ -333,12 +339,6 @@ $tablet_size: 768px;
       vertical-align: top;
     }
   }
-}
-
-.reply_form.reply_form_over_threshold {
-  position: static;
-  width: 100%;
-  margin-top: 2rem;
 }
 
 // ReplyModify
@@ -381,13 +381,18 @@ $tablet_size: 768px;
   }
 
   .btn_reset {
-    height: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
     position: absolute;
     top: 50%;
     right: 1.2rem;
     transform: translateY(-50%);
 
     img {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       vertical-align: top;
     }
   }
@@ -408,6 +413,7 @@ $tablet_size: 768px;
 // SubMenu
 .sub_menu_container {
   position: relative;
+  z-index: 7;
   .sub_menu {
     display: block;
     height: 1.4rem;
@@ -415,6 +421,14 @@ $tablet_size: 768px;
       vertical-align: top;
     }
   }
+}
+.sub_menu_bg {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 // ImageSlider
@@ -490,7 +504,7 @@ $tablet_size: 768px;
 .dropdown_container {
   position: absolute;
   width: max-content;
-  z-index: 5;
+  z-index: 200;
   top: 2rem;
   right: 0;
   padding: 0.2rem 0.6rem;
@@ -500,27 +514,23 @@ $tablet_size: 768px;
   background-color: var(--color-white);
 
   .dropdown_option {
-    button,
-    a {
-      display: inline-block;
-      padding: 0.8rem 1.15rem;
-    }
     font: {
       size: 1rem;
       weight: var(--font-semibold);
     }
-  }
-
-  .dropdown_option:not(:last-child)::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 0.1rem;
-    background-color: var(--color-gray-50);
-  }
-
-  .dropdown_option_red {
-    color: var(--color-error);
+    button {
+      padding: 0.8rem 1.15rem;
+    }
+    &.dropdown_option_red {
+      color: var(--color-error);
+    }
+    &:not(:last-child)::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0.1rem;
+      background-color: var(--color-gray-50);
+    }
   }
 }
 
