@@ -19,7 +19,7 @@ export async function generateMetadata({ searchParams: { keyword } }: { searchPa
   };
 }
 
-export default function Diaries({ searchParams }: { searchParams: { keyword: string } }) {
+export default function Diaries({ searchParams }: { searchParams: { keyword?: string } }) {
   return (
     <>
       <div className={styles.title_search_container}>

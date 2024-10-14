@@ -1,16 +1,14 @@
-import styles from '@greeny/story/Community.module.scss';
 import postStyles from '@greeny/story/community/Post.module.scss';
 import UserProfile from '@components/UserProfile';
 import PostInfo from '@greeny/story/PostInfo';
-import ReplyList from '@greeny/story/community/ReplyList';
-import ReplyInput from '@greeny/story/community/ReplyInput';
 import ImageSlider from '@greeny/story/ImageSlider';
 import { fetchPost } from '@/app/api/fetch/postFetch';
-import SubMenuContainer from './SubMenuContainer';
+import SubMenuContainer from '@greeny/story/community/[id]/SubMenuContainer';
 import { auth } from '@/auth';
 import { PostRes } from '@/types/post';
 import { Metadata, ResolvingMetadata } from 'next';
 import PostLayout from '@greeny/story/PostLayout';
+import ReplyContainer from '@greeny/story/community/ReplyContainer';
 
 export const revalidate = 0;
 
@@ -37,7 +35,11 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
   };
 }
 
-export default async function PostDetail({ params: { id } }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+};
+
+export default async function PostDetail({ params: { id } }: Props) {
   const post: PostRes = await fetchPost(id);
   const session = await auth();
   const isWriter = Number(session?.user?.id) === post.user._id;
@@ -48,16 +50,13 @@ export default async function PostDetail({ params: { id } }: { params: { id: str
         <section className={postStyles.content}>
           <h1 className={postStyles.title}>{post.title}</h1>
           <div className={postStyles.info}>
-            {isWriter ? <UserProfile user={post.user} fontStyle="sm_medium" component={<SubMenuContainer />} /> : <UserProfile user={post.user} fontStyle="sm_medium" />}
+            <UserProfile user={post.user} fontStyle="sm_medium" component={isWriter ? <SubMenuContainer postId={id} /> : null} />
           </div>
           <pre>{post.content}</pre>
           {post.image.length > 0 && <ImageSlider images={post.image} />}
-          <PostInfo post={post} isLoggedin={!!session} />
+          <PostInfo post={post} />
         </section>
-        <section className={styles.reply}>
-          <ReplyList postId={id} />
-          <ReplyInput postId={id} isLoggedin={!!session} />
-        </section>
+        <ReplyContainer postId={id} />
       </article>
     </PostLayout>
   );

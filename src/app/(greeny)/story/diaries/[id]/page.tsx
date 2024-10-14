@@ -6,7 +6,7 @@ import { formatAgo } from '@/utils/date';
 import DiaryImageSlider from '@greeny/story/diaries/[id]/DiaryImageSlider';
 import { auth } from '@/auth';
 import DiarySubMenu from '@greeny/story/diaries/[id]/DiarySubMenu';
-import FollowBtn from './FollowBtn';
+import FollowBtn from '@greeny/story/diaries/[id]/FollowBtn';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DiaryRes } from '@/types/post';
@@ -36,12 +36,16 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
   };
 }
 
-export default async function DiaryDetail({ params: { id } }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+};
+
+export default async function DiaryDetail({ params: { id } }: Props) {
   const diary: DiaryRes = await fetchDiary(id);
-  const session = await auth();
   const plantDetail = await fetchPlant(diary.product_id.toString());
-  const bookmarkId = plantDetail.myBookmarkId;
   const plant = diary.product;
+  const bookmarkId = plantDetail.myBookmarkId;
+  const session = await auth();
   const isMyPlant = Number(session?.user?.id) === diary.seller_id;
   const isWriter = Number(session?.user?.id) === diary.user._id;
 
@@ -57,8 +61,8 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
               <>
                 <p style={{ color: 'var(--color-gray-10)', fontSize: 12, fontWeight: 'var(--font-regular)', marginLeft: 6 }}>{formatAgo(diary.createdAt)}</p>
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
-                  <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} content={diary.content} isLoggedIn={!!session} />
-                  {isWriter && <DiarySubMenu />}
+                  <Like number={diary.bookmarks} targetId={id} bookmarkId={diary.myBookmarkId} content={diary.content} />
+                  {isWriter && <DiarySubMenu postId={id} />}
                 </div>
               </>
             }
@@ -93,9 +97,9 @@ export default async function DiaryDetail({ params: { id } }: { params: { id: st
                 <div className={diaryDetailStyles.plant_scientific_name}>{plantDetail.scientificName}</div>
               </div>
             </Link>
-            {!isMyPlant && <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} isLoggedIn={!!session} />}
+            {!isMyPlant && <FollowBtn plantId={diary.product_id} bookmarkId={bookmarkId} />}
           </div>
-          <div>{plantDetail.content}</div>
+          <div>{plantDetail.introduction}</div>
         </div>
       </article>
     </PostLayout>
