@@ -6,7 +6,7 @@
 
 ## 팀 소개
 
-|                                                      **이경민(팀장)**                                                      |                                                             **노지원**                                                              |                                                  **신민철**                                                   |
+|                                                   **이경민(팀장)**                                                   |                                                             **노지원**                                                              |                                                  **신민철**                                                   |
 | :------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
 | <img width="180" alt="baduck" src="https://github.com/user-attachments/assets/2134800a-67c0-4a93-9bf9-5abfe73279df"> | <img width="180" alt="no_supply_profile_img" src="https://github.com/user-attachments/assets/bad008fa-6f51-48b8-89b0-144881052996"> | <img width="180" alt="mincheol.shin_profile_img" src="https://avatars.githubusercontent.com/u/110030523?v=4"> |
 |                                      [🔗 kyungmim](https://github.com/kyungmim)                                      |                                           [🔗 no-support](https://github.com/no-support)                                            |                             [🔗 shin-mincheol](https://github.com/shin-mincheol)                              |
@@ -47,8 +47,7 @@
 
 🌿**Greeny**는 **내 식물의 성장 기록과 다른 식물의 여정을 함께하는, 식물 애호가들을 위한 소셜 네트워크**입니다.
 
-> 식물 백과를 통해 다양한 **식물들의 키우는 방법과 정보**를 손쉽게 확인할 수 있습니다. 식물을 등록하여 여러분의 식물을 자랑해주세요. <br/>
-> **식물 일기**를 작성해 소중한 기억들을 기록하고, 추억들을 **다른 식집사분들과 나누어보세요.** <br/>
+> 식물 백과를 통해 다양한 **식물들의 키우는 방법과 정보**를 손쉽게 확인할 수 있습니다. 식물을 등록하여 여러분의 식물을 자랑해주세요. <br/> > **식물 일기**를 작성해 소중한 기억들을 기록하고, 추억들을 **다른 식집사분들과 나누어보세요.** <br/>
 > 또한, 커뮤니티를 통해 **다른 식집사분들과 정보를 공유**하며 더 많은 가드닝 팁과 노하우를 얻어보세요!
 
 <br/>
@@ -110,6 +109,10 @@
     <td class="tg-0pky">Swiper</td>
     <td class="tg-0pky">meta 태그와 페이지별 타이틀을 위해 사용</td>
   </tr>
+  <tr>
+    <td class="tg-0pky">lodash.isequal</td>
+    <td class="tg-0pky">캐싱된 데이터가 있을 경우 이를 먼저 반환하고, 이후 fetch된 데이터와 캐싱된 데이터를 비교함. </br>이때, 객체의 깊은 비교를 위해 lodash.isequal 라이브러리를 사용하여 차이가 있는 경우 새 데이터를 반환</td>
+  </tr>
 </tbody>
 </table>
 
@@ -119,45 +122,66 @@
 
 ### 홈
 
-배너, 추천 식물, 다른 식집사분들의 일기, 게시글들을 한 눈에 확인해 보세요.
-|홈 메인|
-|:-:|
-|<img width="240px;" src="https://github.com/user-attachments/assets/0355f4ef-d94c-49ba-8a9e-910badad726d">|
+추천 식물, 다른 식집사분들의 일기, 게시글들을 한 눈에 확인할 수 있습니다.</br>
+식집사 테스트를 통해 나에게 맞는 식물을 확인할 수 있습니다.
+|홈 메인|식집사 테스트|
+|:-:|:-:|
+|<img width="240px;" src="https://github.com/user-attachments/assets/0355f4ef-d94c-49ba-8a9e-910badad726d">|<img width="240px;" src="https://github.com/user-attachments/assets/d083ac34-05a5-4023-923c-61eba7b52a9c">|
+
+|                                                     웹                                                     |
+| :--------------------------------------------------------------------------------------------------------: |
+| <img width="640px;" src="https://github.com/user-attachments/assets/699f1560-34e7-4767-87a9-98ad894f3675"> |
 
 ### 식물 백과
 
 식물 백과를 통해 다양한 식물의 정보들과 가드닝 정보를 확인할 수 있습니다.
-|식물 백과|
-|:-:|
-|<img width="240px;" src="https://github.com/user-attachments/assets/e649c9d1-a8aa-4dcb-8c11-516dddda710e">|
+|식물 백과|웹|
+|:-:|:-:|
+|<img width="240px;" src="https://github.com/user-attachments/assets/e649c9d1-a8aa-4dcb-8c11-516dddda710e">|<img width="640px;" src="https://github.com/user-attachments/assets/dc70bbae-ec83-41b3-b666-e69b7bcebf8f">|
 
 ### 마이 페이지
 
 내 식물과 게시글들을 확인할 수 있습니다. <br/>
-팔로우한 식물과 식집사를 관리할 수 있고 좋아요한 게시글들을 확인할 수 있습니다.
-|팔로우한 식물 및 좋아요한 게시글 확인|식물 팔로우 취소|
+관찰중인 식물과 식집사를 관리할 수 있고 좋아요한 게시글들을 확인할 수 있습니다.
+|관찰중인 식물,<br/> 좋아요한 게시글|관찰 식물 관리|
 |:-:|:-:|
 |<img width="240px;" src="https://github.com/user-attachments/assets/6ff1ec7f-c703-4e56-8ff5-bb825604196c">|<img width="240px;" src="https://github.com/user-attachments/assets/dd15ef77-2893-4f3b-867e-c4c9f7deacb9">|
 
+|                                                     웹                                                     |
+| :--------------------------------------------------------------------------------------------------------: |
+| <img width="640px;" src="https://github.com/user-attachments/assets/246c7332-55f6-4108-8d65-cd376f561f3a"> |
+
 ### 나의 식물
 
-나의 식물을 등록하고 식물과 함께한 활동을 일기에 기록하고 추억할 수 있습니다. <br/>
-작성된 일기는 식물 이야기에 등록되어 다른 식집사분들과 소중한 기억들을 공유할 수 있습니다.
-|식물 등록|나의 식물 일기 상세|일기 작성|
+내가 키우는 식물을 등록하고, 식물과 함께한 활동을 일기로 남겨 추억할 수 있습니다. <br/>
+작성된 일기는 식물 이야기로 공유되어 소중한 기억을 나눌 수 있습니다.
+|식물 등록|식물 정보/일기|일기 작성|
 |:-:|:-:|:-:|
-|<img width="240px;" src="https://github.com/user-attachments/assets/d2edb67d-f16b-46ee-a64a-0328bff4bcf0">|<img width="240px;" src="https://github.com/user-attachments/assets/0453695f-2b3b-4595-869c-6450d54a1788">|<img width="240px;" src="https://github.com/user-attachments/assets/12cf4936-7ef3-47e1-89d4-9e16739a264d">|
+|<img width="240px;" src="https://github.com/user-attachments/assets/2f0f69ee-0445-4f9a-b7f2-d8057384279b">|<img width="240px;" src="https://github.com/user-attachments/assets/0453695f-2b3b-4595-869c-6450d54a1788">|<img width="240px;" src="https://github.com/user-attachments/assets/7bf02584-2c26-40f5-b81a-41db6f255c92">|
+
+|                                                     웹                                                     |
+| :--------------------------------------------------------------------------------------------------------: |
+| <img width="640px;" src="https://github.com/user-attachments/assets/dc1d0b7c-5ae3-41b2-83ab-9cc0f3305ed0"> |
 
 ### 식물 이야기
 
-다른 식집사분들의 활동들을 확인할 수 있고 관심있는 식물을 팔로우하여 그 식물의 성장 과정을 관찰해나갈 수 있습니다.
-|일기 상세 페이지|식물 팔로우|
+다른 식집사분들의 활동들을 확인할 수 있고, 관심있는 식물을 팔로우하여 그 식물의 성장 과정을 관찰해나갈 수 있습니다.
+|일기 메인/상세 페이지|식물 관찰하기|
 |:-:|:-:|
 |<img width="240px;" src="https://github.com/user-attachments/assets/faa6fda1-6127-4c2a-993d-fea0ad41f637">|<img width="240px;" src="https://github.com/user-attachments/assets/d73ded7a-92e0-45eb-94a1-08ec09804176">|
 
-커뮤니티를 통해 정보를 공유할 수 있습니다.
-| 게시글 상세 페이지 | 댓글 등록/수정/삭제 | 게시글 등록/삭제 |
+|                                                     웹                                                     |
+| :--------------------------------------------------------------------------------------------------------: |
+| <img width="640px;" src="https://github.com/user-attachments/assets/ce30c2cd-da68-436a-a489-fd866e66d571"> |
+
+커뮤니티를 통해 다른 식집사분들과 소통하고 정보를 공유할 수 있습니다.
+| 게시글 상세 페이지 | 게시글 등록 | 게시글 수정/삭제 |
 | :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
-| <img width="240px;" src="https://github.com/user-attachments/assets/9b39e8fa-1723-414c-8e20-35cf95e9ee66"> | <img width="240px;" src="https://github.com/user-attachments/assets/0a6b0270-4e02-480c-85d6-78eae5a581a0"> | <img width="240px;" src="https://github.com/user-attachments/assets/2e9a1b7b-6c9e-4c93-ad1c-ee75fd040c31"> |
+| <img width="240px;" src="https://github.com/user-attachments/assets/9b39e8fa-1723-414c-8e20-35cf95e9ee66"> | <img width="240px;" src="https://github.com/user-attachments/assets/1a0502e0-dc98-4a18-bc84-8074b7155b0a"> | <img width="240px;" src="https://github.com/user-attachments/assets/02a7f8f5-2c82-4567-956f-0f239e0c9864"> |
+
+|                                            댓글 등록/수정/삭제                                             |                                                     웹                                                     |
+| :--------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
+| <img width="240px;" src="https://github.com/user-attachments/assets/8c648ae9-7c23-4e49-a83a-32901559d5fd"> | <img width="640px;" src="https://github.com/user-attachments/assets/74b16acc-e2ea-403c-b63b-fbb296cec23d"> |
 
 <br />
 
@@ -183,8 +207,8 @@
 │  └─ 📁 ISSUE_TEMPLATE
 │     └─ 📄 basic-issue-template.md -------- GitHub Issue 템플릿
 └─ 📁 src
-    ├─ 📄 auth.ts
-    ├─ 📄 middleware.ts
+    ├─ 📄 auth.ts -------------------------- Next Auth 관련
+    ├─ 📄 middleware.ts -------------------- 미들웨어
     ├─ 📁 app
     │  ├─ 📁 (greeny)
     │  │  ├─ 📁 (home) --------------------- 홈 페이지
@@ -196,7 +220,7 @@
     │  │  │  └─ 📁 [id] -------------------- 식물 상세 페이지
     │  │  │      ├─ 📁 diaryEdit ----------- 식물 일기 페이지
     │  │  │      ├─ 📁 diaryNew ------------ 식물 일기 등록 페이지
-    │  │  │      └─ 📁 edit ---------------- 식물 일기 수정 페이지
+    │  │  │      └─ 📁 edit ---------------- 식물 정보 수정 페이지
     │  │  ├─ 📁 profile -------------------- 프로필 페이지
     │  │  │  ├─ 📁 bookmark ---------------- 북마크 목록 페이지
     │  │  │  ├─ 📁 detail ------------------ 프로필 상세 페이지
@@ -211,15 +235,17 @@
     │  │      │      └─ 📁 edit ------------ 커뮤니티 게시글 수정 페이지
     │  │      └─ 📁 diaries ---------------- 식물 일기 메인 페이지
     │  │          └─ 📁 [id] --------------- 식물 일기 상세 페이지
-    │  ├─ 📁 (user)
+    │  ├─ 📁 (no_layout)
+    │  │  ├─ 📁 event ---------------------- 이벤트 페이지
     │  │  ├─ 📁 login ---------------------- 로그인 페이지
     │  │  └─ 📁 signup --------------------- 회원가입 페이지
     │  ├─ 📁 api
-    │  │  ├─ 📁 actions -------------------- 서버 액션 함수
+    │  │  ├─ 📁 actions -------------------- 서버 액션 fetch API
     │  │  ├─ 📁 auth ----------------------- auth 관련
-    │  │  └─ 📁 fetch ---------------------- fetch 함수
-    │  └─ 📁 data -------------------------- 식물 정보 데이터
+    │  │  └─ 📁 fetch ---------------------- 일반 fetch API
+    │  └─ 📁 data -------------------------- 식물 정보, 이벤트 데이터
     ├─ 📁 components ----------------------- 컴포넌트
+    ├─ 📁 context -------------------------- Context API 설정
     ├─ 📁 hooks ---------------------------- 커스텀 훅
     ├─ 📁 styles --------------------------- CSS 초기화
     ├─ 📁 types ---------------------------- typescript 타입
@@ -228,11 +254,11 @@
 
 ## 5. 역할 분담
 
-![역할분담](https://github.com/user-attachments/assets/81f76712-f292-426a-ad26-b79bfb565a2c)
+![역할분담](https://github.com/user-attachments/assets/0a636b31-62f4-432e-b37b-e0d4b09c953f)
 
 ## 6. 플로우 차트
 
-![플로우차트](https://github.com/user-attachments/assets/88ec72e8-cb34-4e8d-9322-c495f2031397)
+![플로우차트](https://github.com/user-attachments/assets/9ed808fe-4bfe-441e-a40f-c5f13ad453e9)
 
 ## 7. 트러블 슈팅
 
@@ -246,11 +272,11 @@
 
 ## 8. 리팩터링 계획
 
-### 웹 반응형 디자인
+### 웹 반응형 디자인 (2024.09.16 완료)
 
-본 프로젝트는 앱을 주요 플랫폼으로 설정하고 있으나, 웹 사용자의 접근성을 고려하여 반응형 웹 디자인을 구현예정입니다.
+본 프로젝트는 앱을 주요 플랫폼으로 설정하고 있으나, 웹 사용자의 접근성을 고려하여 웹 웹 디자인을 구현예정입니다.
 
-### 성향 검사 및 식물 추천 페이지
+### 성향 검사 및 식물 추천 페이지 (2024.10.01 완료)
 
 초기 기획 리스트에 포함된 주요 기능 중 하나인 성향 검사 및 식물 추천 페이지는 메인 기능 리스트에서 후순위로 밀려 시간 제약으로 인해 리팩토링 리스트에 추가되었습니다.
 
