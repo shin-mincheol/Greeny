@@ -91,11 +91,11 @@
 <tbody>
    <tr>
     <td class="tg-0pky">React Calendar / React Datepicker</td>
-    <td class="tg-0pky">비동기 데이터 요청과 관리를 간단하고 효율적으로 처리하기 위해 사용</td>
+    <td class="tg-0pky">달력과 날짜 선택 기능을 구현하기 위함. 프로젝트와 통일성있는 UI로 편리하게 커스텀할 수 있어서 사용</td>
   </tr>
   <tr>
     <td class="tg-0pky">React Hook Form</td>
-    <td class="tg-0pky">HTTP 요청과 응답 처리를 보다 단순하고 직관적으로 처리하기 위해 사용</td>
+    <td class="tg-0pky">폼의 입력값 관리, 유효성 검사와 그에 따른 에러 처리를 편리하게 할 수 있고 비제어 컴포넌트 방식이어서 성능에 이점이 있기 때문에 사용</td>
   </tr>
   <tr>
     <td class="tg-0pky">Husky</td>
@@ -107,7 +107,7 @@
   </tr>
   <tr>
     <td class="tg-0pky">Swiper</td>
-    <td class="tg-0pky">meta 태그와 페이지별 타이틀을 위해 사용</td>
+    <td class="tg-0pky">여러 방식의 이미지 슬라이더 구현에 편리함이 있어서 사용</td>
   </tr>
   <tr>
     <td class="tg-0pky">lodash.isequal</td>
